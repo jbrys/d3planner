@@ -11,7 +11,7 @@
             }
         },
 
-         "glove": {
+         "hands": {
            "attackspeed": {
                 "min": "6",
                 "max": "10"
@@ -19,13 +19,13 @@
         }
     },
     "secondary": {
-        "helm": {
+        "head": {
             "resist": {
                 "min": "626",
                 "max": "750"
             }
         },
-        "helm": {
+        "head": {
             "goldfind": {
                 "min": "626",
                 "max": "750"
