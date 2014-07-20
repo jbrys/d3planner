@@ -1,21 +1,23 @@
 {
     "items": {
         "Andariel's Visage": {
-            "primary": [
-                {
-                    "elemental": {
-                        "min": "15",
-                        "max": "20"
-                    },
-                    "as": {
-                        "min": "5",
-                        "max": "7"
-                    }
+            "primary": {
+                "elemental": {
+                    "min": "15",
+                    "max": "20"
+                },
+                "as": {
+                    "min": "5",
+                    "max": "7"
                 }
-            ],
-            "secondary": [],
-            "legendary": []
+            },
+            "secondary": {},
+            "legendary": {}
         },
-        "Blind Faith": {}
+        "Blind Faith": {
+            "primary": {},
+            "secondary": {},
+            "legendary": {}
+        }
     }
 }

@@ -10,12 +10,20 @@
         var item = _slots[slot].items[item_name];
 
         if(!item.joined){
-            $.each(_affix.primary, function(key,value){
-                stat = value[slot];
-                if(stat){
-                    alert(stat.max);
-                    alert(stat.min);
-                }
+            $.each(_affix.primary[slot], function(stat,value){
+                if(item.primary)
+                    item.primary[stat] = value;
+
+            });
+            item.joined = true;
+        }
+
+        $("#"+slot+" .affix .primary select").empty();
+        if(item.primary) {
+            $("#"+slot+" .affix .primary select").append($("<option></option>").text(""));
+            $.each(item.primary, function(stat,value){
+                $("#"+slot+" .affix .primary select")
+                    .append($("<option></option>").text(stat));
             });
         }
     }
@@ -29,6 +37,9 @@
             var slot = slot_div.id;
             $.getJSON("${base}json/"+slot, function(data) {
                 _slots[slot] = data;
+                $("#"+slot+" .item")
+                         .append($("<option></option>")
+                            .text(""));
                 $.each(data.items, function(key, item) {
                     $("#"+slot+" .item")
                          .append($("<option></option>")
@@ -40,7 +51,12 @@
 </script>
 <div class="slot" id="head">
     <select class="item"></select>
-    <div>
-        <select class="affix"></select>
+    <div class="affix">
+        <div class="primary">
+            <select class="1"></select><br>
+            <select class="2"></select><br>
+            <select class="3"></select><br>
+            <select class="4"></select><br>
+        </div>
     </div>
 </div>
