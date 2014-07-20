@@ -1,0 +1,36 @@
+{
+    "primary": {
+        "main": {
+            "head": {
+                "min": "626",
+                "max": "750"
+            }
+        },
+        "vitality": {
+            "head": {
+                "min": "626",
+                "max": "750"
+            }
+        },
+        "attackspeed": {
+            "glove": {
+                "min": "6",
+                "max": "10"
+            }
+        }
+    },
+    "secondary": {
+        "resist": {
+            "helm": {
+                "min": "626",
+                "max": "750"
+            }
+        },
+        "goldfind": {
+            "helm": {
+                "min": "626",
+                "max": "750"
+            }
+        }
+    }
+}
