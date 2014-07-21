@@ -1,0 +1,16 @@
+.slot{
+    width: 400px;
+   display:inline-block;
+}
+
+.affix select, .item {
+    width: 300px;
+}
+
+.chosen-container-multi .chosen-choices li.search-field input[type=text]{
+    height: auto !important;
+}
+
+.equipment_row {
+    text-align: center;
+}

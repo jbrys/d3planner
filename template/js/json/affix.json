@@ -10,9 +10,8 @@
                 "max": "750"
             }
         },
-
-         "hands": {
-           "attackspeed": {
+        "hands": {
+            "attackspeed": {
                 "min": "6",
                 "max": "10"
             }

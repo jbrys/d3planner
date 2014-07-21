@@ -26,6 +26,7 @@
                     .append($("<option></option>").text(stat));
             });
         }
+        $("#"+slot+ " .chosen-select").trigger("chosen:updated");
     }
 
     $(document).ready(function(){
@@ -45,18 +46,153 @@
                          .append($("<option></option>")
                             .text(key));
                 });
+                $("#"+slot+ " .chosen-select").trigger("chosen:updated");
             });
         });
+        $(".chosen-select").chosen();
     });
 </script>
-<div class="slot" id="head">
-    <select class="item"></select>
-    <div class="affix">
-        <div class="primary">
-            <select class="1"></select><br>
-            <select class="2"></select><br>
-            <select class="3"></select><br>
-            <select class="4"></select><br>
+<div class="equipment_row">
+    <div class="slot" id="head">
+        head
+        <br>
+        <select class="item chosen-select"></select>
+        <div class="affix">
+            <div class="primary">
+                <select multiple class="chosen-select"></select>
+            </div>
+        </div>
+    </div>
+    <div class="slot" id="shoulders">
+        shoulders
+        <br>
+        <select class="item chosen-select"></select>
+        <div class="affix">
+            <div class="primary">
+                <select multiple class="chosen-select"></select>
+            </div>
+        </div>
+    </div>
+    <div class="slot" id="neck">
+        neck
+        <br>
+        <select class="item chosen-select"></select>
+        <div class="affix">
+            <div class="primary">
+                <select multiple class="chosen-select"></select>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="clear: both;"></div>
+<div class="equipment_row">
+    <div class="slot" id="hands">
+        hands
+        <br>
+        <select class="item chosen-select"></select>
+        <div class="affix">
+            <div class="primary">
+                <select multiple class="chosen-select"></select>
+            </div>
+        </div>
+    </div>
+    <div class="slot" id="chest">
+        chest
+        <br>
+        <select class="item chosen-select"></select>
+        <div class="affix">
+            <div class="primary">
+                <select multiple class="chosen-select"></select>
+            </div>
+        </div>
+    </div>
+    <div class="slot" id="wrists">
+        wrists
+        <br>
+        <select class="item chosen-select"></select>
+        <div class="affix">
+            <div class="primary">
+                <select multiple class="chosen-select"></select>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="clear: both;"></div>
+<div class="equipment_row">
+    <div class="slot" id="lfinger">
+        finger
+        <br>
+        <select class="item chosen-select"></select>
+        <div class="affix">
+            <div class="primary">
+                <select multiple class="chosen-select"></select>
+            </div>
+        </div>
+    </div>
+    <div class="slot" id="waist">
+        waist
+        <br>
+        <select class="item chosen-select"></select>
+        <div class="affix">
+            <div class="primary">
+                <select multiple class="chosen-select"></select>
+            </div>
+        </div>
+    </div>
+    <div class="slot" id="rfinger">
+        finger
+        <br>
+        <select class="item chosen-select"></select>
+        <div class="affix">
+            <div class="primary">
+                <select multiple class="chosen-select"></select>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="clear: both;"></div>
+<div class="equipment_row">
+    <div class="slot" id="mainhand">
+        mainhand
+        <br>
+        <select class="item chosen-select"></select>
+        <div class="affix">
+            <div class="primary">
+                <select multiple class="chosen-select"></select>
+            </div>
+        </div>
+    </div>
+    <div class="slot" id="legs">
+        legs
+        <br>
+        <select class="item chosen-select"></select>
+        <div class="affix">
+            <div class="primary">
+                <select multiple class="chosen-select"></select>
+            </div>
+        </div>
+    </div>
+    <div class="slot" id="offhand">
+        offhand
+        <br>
+        <select class="item chosen-select"></select>
+        <div class="affix">
+            <div class="primary">
+                <select multiple class="chosen-select"></select>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="clear: both;"></div>
+<div class="equipment_row">
+    <div class="slot" id="feet">
+        feet
+        <br>
+        <select class="item chosen-select"></select>
+        <div class="affix">
+            <div class="primary">
+                <select multiple class="chosen-select"></select>
+            </div>
         </div>
     </div>
 </div>
