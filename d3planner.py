@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import cherrypy
 import ConfigParser
 from host import Host
