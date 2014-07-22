@@ -2,10 +2,12 @@
 <script type="text/javascript">
     var _affix;
     var _slots = {};
+    var _valid_slots = ["head"];
+    var _char = {};
 
     function item_change(){
         var ddl = $(this);
-        var slot = ddl.parent().prop("id");
+        var slot = ddl.parents(".slot").prop("id");
         var item_name = ddl.children("option:selected").text();
         var item = _slots[slot].items[item_name];
 
@@ -28,58 +30,131 @@
         }
         $("#"+slot+ " .chosen-select").trigger("chosen:updated");
     }
-
+    function clear_slot(item_ddl){
+        item_ddl.empty();
+        item_ddl.append($("<option></option>").text(""));
+    }
+    function load_slot(slot, item_ddl, group){
+        $.getJSON("${base}json/"+slot, function(data) {
+            _slots[slot] = data;
+            if (item_ddl.hasClass("group")){
+                parent_item = $("<optgroup></optgroup>").attr("label",slot);
+                item_ddl.append(parent_item);
+            }
+            else{
+                parent_item = item_ddl;
+            }
+            $.each(data.items, function(key, item) {
+                parent_item.append($("<option></option>").text(key));
+            });
+        });
+    }
+    function load_ddl(item_ddl){
+        clear_slot(item_ddl);
+        $.each(item_ddl.attr("class").split(/\s+/), function(i, slot){
+            if($.inArray(slot, _valid_slots) > -1){
+                load_slot(slot, item_ddl, false);
+            }
+        });
+        item_ddl.parent().children(".chosen-select").trigger("chosen:updated");
+    }
     $(document).ready(function(){
         $(".item").change(item_change);
         $.getJSON("${base}json/affix", function(affix) {
             _affix = affix;
         });
-        $(".slot").each(function(i, slot_div){
-            var slot = slot_div.id;
-            $.getJSON("${base}json/"+slot, function(data) {
-                _slots[slot] = data;
-                $("#"+slot+" .item")
-                         .append($("<option></option>")
-                            .text(""));
-                $.each(data.items, function(key, item) {
-                    $("#"+slot+" .item")
-                         .append($("<option></option>")
-                            .text(key));
-                });
-                $("#"+slot+ " .chosen-select").trigger("chosen:updated");
-            });
+        $(".item").each(function(i, item_ddl){
+            load_ddl($(item_ddl));
         });
-        $(".chosen-select").chosen();
+
+        $(".edit_button a").click(function(){
+            $(this)
+                .parents(".view").hide()
+                .parents(".slot").children(".edit").show()
+                .find(".chosen-select").chosen();
+            return false;
+        });
+        $(".cancel_button a").click(function(){
+            $(this)
+                .parents(".edit").hide()
+                .parents(".slot").children(".view").show();
+            return false;
+        });
+        $(".save_button a").click(function(){
+            $(this)
+                .parents(".edit").hide()
+                .parents(".slot").children(".view").show();
+            return false;
+        });
     });
 </script>
 <div class="equipment_row">
     <div class="slot" id="shoulders">
         shoulders
         <br>
-        <select class="item chosen-select"></select>
-        <div class="affix">
-            <div class="primary">
-                <select multiple class="chosen-select"></select>
+        <div class="edit">
+            <select class="item shoulders chosen-select"></select>
+            <div class="affix">
+                <div class="primary">
+                    <select multiple class="chosen-select"></select>
+                </div>
+            </div>
+            <div class="buttons">
+                <div class="save_button"><a href="#">save</a></div>
+                <div class="cancel_button"><a href="#">cancel</a></div>
+            </div>
+        </div>
+        <div class="view">
+            <div class="name"></div>
+            <div class="affixes"></div>
+            <div class="buttons">
+                <div class="edit_button"><a href="#">edit</a></div>
             </div>
         </div>
     </div>
     <div class="slot" id="head">
         head
         <br>
-        <select class="item chosen-select"></select>
-        <div class="affix">
-            <div class="primary">
-                <select multiple class="chosen-select"></select>
+        <div class="edit">
+            <select class="item head chosen-select"></select>
+            <div class="affix">
+                <div class="primary">
+                    <select multiple class="chosen-select"></select>
+                </div>
+            </div>
+            <div class="buttons">
+                <div class="save_button"><a href="#">save</a></div>
+                <div class="cancel_button"><a href="#">cancel</a></div>
+            </div>
+        </div>
+        <div class="view">
+            <div class="name"></div>
+            <div class="affixes"></div>
+            <div class="buttons">
+                <div class="edit_button"><a href="#">edit</a></div>
             </div>
         </div>
     </div>
     <div class="slot" id="neck">
         neck
         <br>
-        <select class="item chosen-select"></select>
-        <div class="affix">
-            <div class="primary">
-                <select multiple class="chosen-select"></select>
+        <div class="edit">
+            <select class="item neck chosen-select"></select>
+            <div class="affix">
+                <div class="primary">
+                    <select multiple class="chosen-select"></select>
+                </div>
+            </div>
+            <div class="buttons">
+                <div class="save_button"><a href="#">save</a></div>
+                <div class="cancel_button"><a href="#">cancel</a></div>
+            </div>
+        </div>
+        <div class="view">
+            <div class="name"></div>
+            <div class="affixes"></div>
+            <div class="buttons">
+                <div class="edit_button"><a href="#">edit</a></div>
             </div>
         </div>
     </div>
@@ -89,30 +164,69 @@
     <div class="slot" id="hands">
         hands
         <br>
-        <select class="item chosen-select"></select>
-        <div class="affix">
-            <div class="primary">
-                <select multiple class="chosen-select"></select>
+        <div class="edit">
+            <select class="item hands chosen-select"></select>
+            <div class="affix">
+                <div class="primary">
+                    <select multiple class="chosen-select"></select>
+                </div>
+            </div>
+            <div class="buttons">
+                <div class="save_button"><a href="#">save</a></div>
+                <div class="cancel_button"><a href="#">cancel</a></div>
+            </div>
+        </div>
+        <div class="view">
+            <div class="name"></div>
+            <div class="affixes"></div>
+            <div class="buttons">
+                <div class="edit_button"><a href="#">edit</a></div>
             </div>
         </div>
     </div>
     <div class="slot" id="chest">
         chest
         <br>
-        <select class="item chosen-select"></select>
-        <div class="affix">
-            <div class="primary">
-                <select multiple class="chosen-select"></select>
+        <div class="edit">
+            <select class="item chest chosen-select"></select>
+            <div class="affix">
+                <div class="primary">
+                    <select multiple class="chosen-select"></select>
+                </div>
+            </div>
+            <div class="buttons">
+                <div class="save_button"><a href="#">save</a></div>
+                <div class="cancel_button"><a href="#">cancel</a></div>
+            </div>
+        </div>
+        <div class="view">
+            <div class="name"></div>
+            <div class="affixes"></div>
+            <div class="buttons">
+                <div class="edit_button"><a href="#">edit</a></div>
             </div>
         </div>
     </div>
     <div class="slot" id="wrists">
         wrists
         <br>
-        <select class="item chosen-select"></select>
-        <div class="affix">
-            <div class="primary">
-                <select multiple class="chosen-select"></select>
+        <div class="edit">
+            <select class="item wrists chosen-select"></select>
+            <div class="affix">
+                <div class="primary">
+                    <select multiple class="chosen-select"></select>
+                </div>
+            </div>
+            <div class="buttons">
+                <div class="save_button"><a href="#">save</a></div>
+                <div class="cancel_button"><a href="#">cancel</a></div>
+            </div>
+        </div>
+        <div class="view">
+            <div class="name"></div>
+            <div class="affixes"></div>
+            <div class="buttons">
+                <div class="edit_button"><a href="#">edit</a></div>
             </div>
         </div>
     </div>
@@ -122,30 +236,69 @@
     <div class="slot" id="lfinger">
         finger
         <br>
-        <select class="item chosen-select"></select>
-        <div class="affix">
-            <div class="primary">
-                <select multiple class="chosen-select"></select>
+        <div class="edit">
+            <select class="item finger chosen-select"></select>
+            <div class="affix">
+                <div class="primary">
+                    <select multiple class="chosen-select"></select>
+                </div>
+            </div>
+            <div class="buttons">
+                <div class="save_button"><a href="#">save</a></div>
+                <div class="cancel_button"><a href="#">cancel</a></div>
+            </div>
+        </div>
+        <div class="view">
+            <div class="name"></div>
+            <div class="affixes"></div>
+            <div class="buttons">
+                <div class="edit_button"><a href="#">edit</a></div>
             </div>
         </div>
     </div>
     <div class="slot" id="waist">
         waist
         <br>
-        <select class="item chosen-select"></select>
-        <div class="affix">
-            <div class="primary">
-                <select multiple class="chosen-select"></select>
+        <div class="edit">
+            <select class="item waist chosen-select"></select>
+            <div class="affix">
+                <div class="primary">
+                    <select multiple class="chosen-select"></select>
+                </div>
+            </div>
+            <div class="buttons">
+                <div class="save_button"><a href="#">save</a></div>
+                <div class="cancel_button"><a href="#">cancel</a></div>
+            </div>
+        </div>
+        <div class="view">
+            <div class="name"></div>
+            <div class="affixes"></div>
+            <div class="buttons">
+                <div class="edit_button"><a href="#">edit</a></div>
             </div>
         </div>
     </div>
     <div class="slot" id="rfinger">
         finger
         <br>
-        <select class="item chosen-select"></select>
-        <div class="affix">
-            <div class="primary">
-                <select multiple class="chosen-select"></select>
+        <div class="edit">
+            <select class="item finger chosen-select"></select>
+            <div class="affix">
+                <div class="primary">
+                    <select multiple class="chosen-select"></select>
+                </div>
+            </div>
+            <div class="buttons">
+                <div class="save_button"><a href="#">save</a></div>
+                <div class="cancel_button"><a href="#">cancel</a></div>
+            </div>
+        </div>
+        <div class="view">
+            <div class="name"></div>
+            <div class="affixes"></div>
+            <div class="buttons">
+                <div class="edit_button"><a href="#">edit</a></div>
             </div>
         </div>
     </div>
@@ -155,30 +308,69 @@
     <div class="slot" id="mainhand">
         mainhand
         <br>
-        <select class="item chosen-select"></select>
-        <div class="affix">
-            <div class="primary">
-                <select multiple class="chosen-select"></select>
+        <div class="edit">
+            <select class="item group onehand twohand chosen-select"></select>
+            <div class="affix">
+                <div class="primary">
+                    <select multiple class="chosen-select"></select>
+                </div>
+            </div>
+            <div class="buttons">
+                <div class="save_button"><a href="#">save</a></div>
+                <div class="cancel_button"><a href="#">cancel</a></div>
+            </div>
+        </div>
+        <div class="view">
+            <div class="name"></div>
+            <div class="affixes"></div>
+            <div class="buttons">
+                <div class="edit_button"><a href="#">edit</a></div>
             </div>
         </div>
     </div>
     <div class="slot" id="legs">
         legs
         <br>
-        <select class="item chosen-select"></select>
-        <div class="affix">
-            <div class="primary">
-                <select multiple class="chosen-select"></select>
+        <div class="edit">
+            <select class="item legs chosen-select"></select>
+            <div class="affix">
+                <div class="primary">
+                    <select multiple class="chosen-select"></select>
+                </div>
+            </div>
+            <div class="buttons">
+                <div class="save_button"><a href="#">save</a></div>
+                <div class="cancel_button"><a href="#">cancel</a></div>
+            </div>
+        </div>
+        <div class="view">
+            <div class="name"></div>
+            <div class="affixes"></div>
+            <div class="buttons">
+                <div class="edit_button"><a href="#">edit</a></div>
             </div>
         </div>
     </div>
     <div class="slot" id="offhand">
         offhand
         <br>
-        <select class="item chosen-select"></select>
-        <div class="affix">
-            <div class="primary">
-                <select multiple class="chosen-select"></select>
+        <div class="edit">
+            <select class="item group shield mojo source quiver cshield chosen-select"></select>
+            <div class="affix">
+                <div class="primary">
+                    <select multiple class="chosen-select"></select>
+                </div>
+            </div>
+            <div class="buttons">
+                <div class="save_button"><a href="#">save</a></div>
+                <div class="cancel_button"><a href="#">cancel</a></div>
+            </div>
+        </div>
+        <div class="view">
+            <div class="name"></div>
+            <div class="affixes"></div>
+            <div class="buttons">
+                <div class="edit_button"><a href="#">edit</a></div>
             </div>
         </div>
     </div>
@@ -188,10 +380,23 @@
     <div class="slot" id="feet">
         feet
         <br>
-        <select class="item chosen-select"></select>
-        <div class="affix">
-            <div class="primary">
-                <select multiple class="chosen-select"></select>
+        <div class="edit">
+            <select class="item feet chosen-select"></select>
+            <div class="affix">
+                <div class="primary">
+                    <select multiple class="chosen-select"></select>
+                </div>
+            </div>
+            <div class="buttons">
+                <div class="save_button"><a href="#">save</a></div>
+                <div class="cancel_button"><a href="#">cancel</a></div>
+            </div>
+        </div>
+        <div class="view">
+            <div class="name"></div>
+            <div class="affixes"></div>
+            <div class="buttons">
+                <div class="edit_button"><a href="#">edit</a></div>
             </div>
         </div>
     </div>

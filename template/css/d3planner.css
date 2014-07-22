@@ -1,9 +1,12 @@
 .slot{
     width: 400px;
-   display:inline-block;
+    display: inline-block;
+    vertical-align: top;
 }
-
-.affix select, .item {
+.slot .buttons {
+    display:inline-block;
+}
+.affix select, .item, .slot .buttons {
     width: 300px;
 }
 
@@ -13,4 +16,16 @@
 
 .equipment_row {
     text-align: center;
+}
+
+.slot .edit {
+    display: none;
+}
+.slot .edit_button {
+}
+.slot .save_button {
+    float: left;
+}
+.slot .cancel_button {
+    float: right;
 }
