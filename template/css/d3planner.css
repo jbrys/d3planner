@@ -1,21 +1,45 @@
+.paperdoll {
+    min-width: 620px;
+    max-width: 1220;
+    width: 100%;
+    text-align: center;
+    display:inline-block;
+}
+
+.border {
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+}
+
+.center_contents {
+    text-align: center;
+    display:inline-block;
+    width: 100%;
+}
+
 .slot{
-    width: 400px;
+    max-width: 400px;
+    min-width: 200px;
+    width: 32%;
     display: inline-block;
     vertical-align: top;
 }
 .slot .buttons {
     display:inline-block;
 }
-.affix select, .item, .slot .buttons {
+.affix select, .edit, {
     width: 300px;
 }
-
+.slot .buttons, .item, .affix select {
+    max-width: 300px;
+    min-width: 200px;
+}
 .chosen-container-multi .chosen-choices li.search-field input[type=text]{
     height: auto !important;
 }
 
 .equipment_row {
-    text-align: center;
 }
 
 .slot .edit {
