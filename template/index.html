@@ -22,17 +22,17 @@
 
         $("#"+slot+" .affix .primary select").empty();
         if(item.primary) {
-            $("#"+slot+" .affix .primary select").append($("<option></option>").text(""));
+            $("#"+slot+" .affix .primary select").append($("<option></option>").html(""));
             $.each(item.primary, function(stat,value){
                 $("#"+slot+" .affix .primary select")
-                    .append($("<option></option>").text(stat));
+                    .append($("<option></option>").html(stat));
             });
         }
         $("#"+slot+ " .chosen-select").trigger("chosen:updated");
     }
     function clear_slot(item_ddl){
         item_ddl.empty();
-        item_ddl.append($("<option></option>").text(""));
+        item_ddl.append($("<option></option>").html(""));
     }
     function load_slot(slot, item_ddl, group){
         $.getJSON("${base}json/"+slot, function(data) {
@@ -45,7 +45,7 @@
                 parent_item = item_ddl;
             }
             $.each(data.items, function(key, item) {
-                parent_item.append($("<option></option>").text(key));
+                parent_item.append($("<option></option>").html(key));
             });
         });
     }
@@ -58,6 +58,29 @@
         });
         item_ddl.parent().children(".chosen-select").trigger("chosen:updated");
     }
+
+    function update_char(){
+        $.each(_char, function(slot,item){
+            slot_div = $("#"+slot);
+            slot_div.find(".name").html(item.name);
+            affixes_div = slot_div.find(".view .affixes");
+
+            affixes_div.empty();
+            $.each(item.affixes.primary, function(index,affix){
+                affix_div = $("#templates .affix").clone(true,true);
+
+                affix_div.children(".type").html(affix.name);
+                affix_div.children(".value")
+                    .attr("min", affix.min)
+                    .attr("max", affix.max)
+                    .attr("val", affix.val)
+                    .html(affix.max);
+
+                affixes_div.append(affix_div).append($("<div style='clear: both;'></div>"));
+            });
+        });
+    }
+
     $(document).ready(function(){
         $(".item").change(item_change);
         $.getJSON("${base}json/affix", function(affix) {
@@ -81,6 +104,30 @@
             return false;
         });
         $(".save_button a").click(function(){
+            var slot_div = $(this).parents(".slot");
+            var slot = slot_div.attr("id");
+            var item_name = slot_div.find(".item option:selected").text();
+            var item = _slots[slot].items[item_name];
+
+            _char[slot] = {};
+            _char[slot].name = item_name;
+
+            _char[slot].affixes = {};
+            _char[slot].affixes.primary = [];
+
+            slot_div.find(".primary option:selected").each(function(index, affix_node){
+                affix_name = $(affix_node).text();
+                affix_data = item.primary[affix_name]
+                affix = {};
+                affix.name = affix_name;
+                affix.min = affix_data.min;
+                affix.max = affix_data.max;
+                affix.val = affix_data.max;
+
+                _char[slot].affixes.primary.push(affix);
+            });
+            update_char();
+
             $(this)
                 .parents(".edit").hide()
                 .parents(".slot").children(".view").show();
@@ -88,6 +135,13 @@
         });
     });
 </script>
+<div id="templates" style="display:none;">
+    <div class="affix">
+        <span class="type"></span><span class="value"></span>
+    </div>
+</div>
+
+
 <div class ="center_contents">
     <div class="paperdoll">
         <div class="equipment_row">

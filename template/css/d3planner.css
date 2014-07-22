@@ -19,6 +19,7 @@
 }
 
 .slot{
+    min-height: 60px;
     max-width: 400px;
     min-width: 200px;
     width: 32%;
@@ -52,4 +53,15 @@
 }
 .slot .cancel_button {
     float: right;
+}
+
+.slot .view {
+    display: inline-block;
+}
+
+.affix .value{
+    float: right;
+}
+.affix .type{
+    float: left;
 }
