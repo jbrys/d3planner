@@ -80,6 +80,7 @@
                 affixes_div.append(affix_div).append($("<div style='clear: both;'></div>"));
             });
         });
+        $.cookie('d3planner', _char);
     }
 
     function edit_affix(){
@@ -99,19 +100,24 @@
                 slide : on_slider
             });
         }
+        else{
+            $.cookie('d3planner', _char);
+        }
     }
 
-function on_slider(event, ui) {
-    var affix_div = $(this).parents(".affix");
-    var affix = $(this).parents(".affix").find(".type").text();
-    var slot_div = affix_div.parents(".slot");
-    var slot = slot_div.attr("id");
+    function on_slider(event, ui) {
+        var affix_div = $(this).parents(".affix");
+        var affix = $(this).parents(".affix").find(".type").text();
+        var slot_div = affix_div.parents(".slot");
+        var slot = slot_div.attr("id");
 
-    _char[slot].affixes.primary[affix].val = ui.value;
-    affix_div.find(".value").attr("val", ui.value).children().text(ui.value);
-}
+        _char[slot].affixes.primary[affix].val = ui.value;
+        affix_div.find(".value").attr("val", ui.value).children().text(ui.value);
+    }
 
     $(document).ready(function(){
+        $.cookie.json = true;
+        $("#debug").click(function(){$("#debug_output").html(JSON.stringify(_char));});
         $(".item").change(item_change);
         $.getJSON("${base}json/affix", function(affix) {
             _affix = affix;
@@ -163,8 +169,15 @@ function on_slider(event, ui) {
                 .parents(".slot").children(".view").show();
             return false;
         });
+        if($.cookie('d3planner')){
+            _char = $.cookie('d3planner');
+            update_char();
+        }
     });
 </script>
+
+<a id="debug" href="#">debug</a>
+<div id="debug_output"></div>
 <div id="templates" style="display:none;">
     <div class="affix">
 
