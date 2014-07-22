@@ -74,12 +74,42 @@
                     .attr("min", affix.min)
                     .attr("max", affix.max)
                     .attr("val", affix.val)
-                    .html(affix.max);
+                    .html($("<a href='#'>"+affix.val+"</a>")
+                        .click(edit_affix));
 
                 affixes_div.append(affix_div).append($("<div style='clear: both;'></div>"));
             });
         });
     }
+
+    function edit_affix(){
+        var affix_div = $(this).parents(".affix");
+        var edit_div = affix_div.find(".edit_affix");
+        edit_div.toggle();
+        if(edit_div.is(':visible')){
+            var value_div = affix_div.children(".value");
+            var min = parseInt(value_div.attr("min"));
+            var max = parseInt(value_div.attr("max"));
+            var val = parseInt(value_div.attr("val"));
+
+            affix_div.find(".slider").slider({
+                value : val,
+                min : min,
+                max : max,
+                slide : on_slider
+            });
+        }
+    }
+
+function on_slider(event, ui) {
+    var affix_div = $(this).parents(".affix");
+    var affix = $(this).parents(".affix").find(".type").text();
+    var slot_div = affix_div.parents(".slot");
+    var slot = slot_div.attr("id");
+
+    _char[slot].affixes.primary[affix].val = ui.value;
+    affix_div.find(".value").attr("val", ui.value).children().text(ui.value);
+}
 
     $(document).ready(function(){
         $(".item").change(item_change);
@@ -113,7 +143,7 @@
             _char[slot].name = item_name;
 
             _char[slot].affixes = {};
-            _char[slot].affixes.primary = [];
+            _char[slot].affixes.primary = {};
 
             slot_div.find(".primary option:selected").each(function(index, affix_node){
                 affix_name = $(affix_node).text();
@@ -124,7 +154,7 @@
                 affix.max = affix_data.max;
                 affix.val = affix_data.max;
 
-                _char[slot].affixes.primary.push(affix);
+                _char[slot].affixes.primary[affix_name] = affix;
             });
             update_char();
 
@@ -137,7 +167,11 @@
 </script>
 <div id="templates" style="display:none;">
     <div class="affix">
+
         <span class="type"></span><span class="value"></span>
+        <div class="edit_affix" style="display: none;">&nbsp;
+            <div class="slider"></div>
+        </div>
     </div>
 </div>
 
