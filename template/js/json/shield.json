@@ -1,0 +1,14 @@
+{
+    "items": {
+        "Hallowed Barricade": {
+            "primary": {
+                "Holy skills deal {0}% more damage":{
+                    "min" : 15,
+                    "max" : 20
+                }
+            },
+            "secondary": {},
+            "legendary": {}
+        }
+    }
+}

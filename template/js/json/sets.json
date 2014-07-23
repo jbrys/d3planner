@@ -2,11 +2,11 @@
     "items": {
         "Andariel's Visage": {
             "primary": {
-                "Elemental skills deal {0}% more damage": {
+                "elemental": {
                     "min": 15,
                     "max": 20
                 },
-                "Attack Speed": {
+                "as": {
                     "min": 5,
                     "max": 7
                 }
@@ -14,7 +14,7 @@
             "secondary": {},
             "legendary": {}
         },
-        "Helm of Akkhan": {
+        "Blind Faith": {
             "primary": {},
             "secondary": {},
             "legendary": {}

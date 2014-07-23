@@ -1,0 +1,14 @@
+{
+    "items": {
+        "Mara's Kaleidoscope": {
+            "primary": {},
+            "secondary": {},
+            "legendary": {
+                "Prevent all Poison damage taken and heal yourself for {0}% of the amount prevented.": {
+                    "min": 10,
+                    "max": 15
+                }
+            }
+        }
+    }
+}

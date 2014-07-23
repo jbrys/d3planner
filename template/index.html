@@ -2,17 +2,21 @@
 <script type="text/javascript">
     var _affix;
     var _slots = {};
-    var _valid_slots = ["head"];
+    var _valid_slots = ["shoulders", "head", "neck",
+                        "hands", "chest", "wrists",
+                        "finger", "waist",
+                        "twohand", "legs", "shield",
+                        "feet"];
     var _char = {};
 
     function item_change(){
         var ddl = $(this);
         var slot = ddl.parents(".slot").prop("id");
-        var item_name = ddl.children("option:selected").text();
+        var item_name = ddl.find("option:selected").text();
         var item = _slots[slot].items[item_name];
 
         if(!item.joined){
-            $.each(_affix.primary[slot], function(stat,value){
+            $.each(_affix.primary[item.cat], function(stat,value){
                 if(item.primary)
                     item.primary[stat] = value;
 
@@ -34,19 +38,30 @@
         item_ddl.empty();
         item_ddl.append($("<option></option>").html(""));
     }
-    function load_slot(slot, item_ddl, group){
-        $.getJSON("${base}json/"+slot, function(data) {
-            _slots[slot] = data;
+    function load_slot(cat, item_ddl, group){
+        var slot = item_ddl.parents(".slot").prop("id");
+
+        $.getJSON("${base}json/"+cat, function(data) {
+
             if (item_ddl.hasClass("group")){
-                parent_item = $("<optgroup></optgroup>").attr("label",slot);
+                parent_item = $("<optgroup></optgroup>").attr("label",cat);
                 item_ddl.append(parent_item);
             }
             else{
                 parent_item = item_ddl;
             }
+
             $.each(data.items, function(key, item) {
+                item.cat = cat;
                 parent_item.append($("<option></option>").html(key));
             });
+
+
+			if(_slots[slot])
+				$.extend(_slots[slot].items, data.items);
+			else
+				_slots[slot] = data;
+
         });
     }
     function load_ddl(item_ddl){
@@ -61,26 +76,43 @@
 
     function update_char(){
         $.each(_char, function(slot,item){
-            slot_div = $("#"+slot);
+            var slot_div = $("#"+slot);
             slot_div.find(".name").html(item.name);
-            affixes_div = slot_div.find(".view .affixes");
+            var affixes_div = slot_div.find(".view .affixes");
 
             affixes_div.empty();
             $.each(item.affixes.primary, function(index,affix){
-                affix_div = $("#templates .affix").clone(true,true);
+                var affix_div = $("#templates .affix").clone(true,true);
+                var display_val = affix.val/Math.pow(10 ,(affix.scale) || 0);
 
-                affix_div.children(".type").html(affix.name);
-                affix_div.children(".value")
+                affix_div.find(".type").html(affix.name.replace("{0}", display_val)).attr("affix", affix.name);
+                affix_div.find(".value")
                     .attr("min", affix.min)
                     .attr("max", affix.max)
                     .attr("val", affix.val)
-                    .html($("<a href='#'>"+affix.val+"</a>")
-                        .click(edit_affix));
+                    .attr("step", affix.step)
+                    .attr("scale", affix.scale)
+                    .find("a")
+                        .click(edit_affix);
 
                 affixes_div.append(affix_div).append($("<div style='clear: both;'></div>"));
             });
         });
-        $.cookie('d3planner', _char);
+        save_cookie();
+    }
+
+    function save_cookie(){
+        $.each(_char, function(slot, data){
+            $.cookie('d3planner_'+slot, data);
+        });
+    }
+    function load_cookie(){
+        $(".slot").each(function(){
+            var slot = $(this).attr("id");
+            var cookie_name = 'd3planner_'+slot;
+            if($.cookie(cookie_name))
+                _char[slot] = $.cookie(cookie_name);
+        });
     }
 
     function edit_affix(){
@@ -88,36 +120,46 @@
         var edit_div = affix_div.find(".edit_affix");
         edit_div.toggle();
         if(edit_div.is(':visible')){
-            var value_div = affix_div.children(".value");
+            var value_div = affix_div.find(".value");
             var min = parseInt(value_div.attr("min"));
             var max = parseInt(value_div.attr("max"));
             var val = parseInt(value_div.attr("val"));
+            var step = parseInt(value_div.attr("step") || 1);
 
             affix_div.find(".slider").slider({
                 value : val,
                 min : min,
                 max : max,
+                step : step,
                 slide : on_slider
             });
         }
         else{
-            $.cookie('d3planner', _char);
+            save_cookie();
         }
     }
 
     function on_slider(event, ui) {
         var affix_div = $(this).parents(".affix");
-        var affix = $(this).parents(".affix").find(".type").text();
+        var affix = $(this).parents(".affix").find(".type").attr("affix");
         var slot_div = affix_div.parents(".slot");
         var slot = slot_div.attr("id");
 
+        var value_div = affix_div.find(".value");
+        var val = parseInt(ui.value);
+        var scale = parseInt(value_div.attr("scale"));
+
+        var display_val = val/Math.pow(10, scale || 0);
+
         _char[slot].affixes.primary[affix].val = ui.value;
-        affix_div.find(".value").attr("val", ui.value).children().text(ui.value);
+
+        affix_div.find(".type").html(affix.replace("{0}", display_val)).attr("affix", affix);
+        affix_div.find(".value").attr("val", val);
     }
 
     $(document).ready(function(){
         $.cookie.json = true;
-        $("#debug").click(function(){$("#debug_output").html(JSON.stringify(_char));});
+        $("#debug").click(function(){$("#debug_output").html(JSON.stringify(_slots));});
         $(".item").change(item_change);
         $.getJSON("${base}json/affix", function(affix) {
             _affix = affix;
@@ -159,6 +201,8 @@
                 affix.min = affix_data.min;
                 affix.max = affix_data.max;
                 affix.val = affix_data.max;
+                affix.step = affix_data.step;
+                affix.scale = affix_data.scale;
 
                 _char[slot].affixes.primary[affix_name] = affix;
             });
@@ -169,10 +213,8 @@
                 .parents(".slot").children(".view").show();
             return false;
         });
-        if($.cookie('d3planner')){
-            _char = $.cookie('d3planner');
-            update_char();
-        }
+        load_cookie();
+        update_char();
     });
 </script>
 
@@ -180,9 +222,11 @@
 <div id="debug_output"></div>
 <div id="templates" style="display:none;">
     <div class="affix">
-
-        <span class="type"></span><span class="value"></span>
-        <div class="edit_affix" style="display: none;">&nbsp;
+        <div class="view_affix">
+            <span class="type"></span><span class="value"><a href="#">e</a></span>
+        </div>
+        <div class="edit_affix" style="display: none;">
+            <br>
             <div class="slider"></div>
         </div>
     </div>

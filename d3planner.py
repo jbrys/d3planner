@@ -41,7 +41,6 @@ for section in default_config_values.keys():
 
 for option in default_config_values[section].keys():
     if not config.has_option(section, option):
-        print option
         config.set(section, option, str(default_config_values[section][option]))
         save = True
 

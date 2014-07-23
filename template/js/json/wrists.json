@@ -1,0 +1,18 @@
+{
+   "items":{
+      "Reaper's Wraps":{
+         "primary":{
+
+         },
+         "secondary":{
+
+         },
+         "legendary":{
+            "Health globes restore {0}% of your primary resource.":{
+               "min":25,
+               "max":30
+            }
+         }
+      }
+   }
+}

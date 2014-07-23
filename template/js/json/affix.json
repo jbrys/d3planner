@@ -1,34 +1,272 @@
 {
-    "primary": {
-        "head": {
-            "main": {
-                "min": 626,
-                "max": 750
-            },
-            "vitality": {
-                "min": 626,
-                "max": 750
-            }
-        },
-        "hands": {
-            "attackspeed": {
-                "min": 6,
-                "max": 10
-            }
-        }
-    },
-    "secondary": {
-        "head": {
-            "resist": {
-                "min": 626,
-                "max": 750
-            }
-        },
-        "head": {
-            "goldfind": {
-                "min": 626,
-                "max": 750
-            }
-        }
-    }
+   "primary":{
+      "head":{
+         "+{0} Main Stat":{
+            "min":626,
+            "max":750
+         },
+         "+{0} Vitality":{
+            "min":626,
+            "max":750
+         },
+         "Critical Hit Chance Increased by {0}%":{
+            "min":45,
+            "max":60,
+            "step":5,
+            "scale":1
+         },
+         "+{0} Socket":{
+            "min":1,
+            "max":1
+         }
+      },
+      "shoulders":{
+         "+{0} Main Stat":{
+            "min":416,
+            "max":500
+         },
+         "+{0} Resistance to All Elements":{
+            "min":91,
+            "max":100
+         },
+         "Reduces cooldown of all skills by {0}%":{
+            "min":6,
+            "max":8
+         },
+         "Increases Heaven's Fury damage by {0}%":{
+            "min":10,
+            "max":15
+         }
+      },
+      "neck":{
+         "+{0} Main Stat":{
+            "min":626,
+            "max":750
+         },
+         "+{0} Vitality":{
+            "min":626,
+            "max":750
+         },
+         "Critical Hit Chance Increased by {0}%":{
+            "min":80,
+            "max":100,
+            "step":5,
+            "scale":1
+         },
+         "+{0} Socket":{
+            "min":1,
+            "max":1
+         },
+         "Elemental skills deal {0}% more damage":{
+            "min":15,
+            "max":20
+         },
+         "Reduces cooldown of all skills by {0}%":{
+            "min":6,
+            "max":8
+         }
+      },
+      "hands":{
+         "+{0} Main Stat":{
+            "min":626,
+            "max":750
+         },
+         "+{0} Vitality":{
+            "min":626,
+            "max":750
+         },
+         "Critical Hit Chance Increased by {0}%":{
+            "min":80,
+            "max":100,
+            "step":5,
+            "scale":1
+         },
+         "Critical Hit Damage Increased by {0}%":{
+            "min":25,
+            "max":50
+         },
+         "Elemental skills deal {0}% more damage":{
+            "min":15,
+            "max":20
+         },
+         "Reduces cooldown of all skills by {0}%":{
+            "min":6,
+            "max":8
+         },
+         "Attack Speed Increased by {0}%":{
+            "min":5,
+            "max":7
+         }
+      },
+      "chest":{
+         "Increases Heaven's Fury damage by {0}%":{
+            "min":10,
+            "max":15
+         },
+         "+{0} Main Stat":{
+            "min":416,
+            "max":500
+         },
+         "+{0} Vitality":{
+            "min":416,
+            "max":500
+         },
+         "+{0} Socket":{
+            "min":1,
+            "max":3
+         }
+      },
+      "wrists":{
+         "+{0} Main Stat":{
+            "min":416,
+            "max":500
+         },
+         "+{0} Vitality":{
+            "min":416,
+            "max":500
+         },
+         "Critical Hit Chance Increased by {0}%":{
+            "min":40,
+            "max":60,
+            "step":5,
+            "scale":1
+         },
+         "Elemental skills deal {0}% more damage":{
+            "min":15,
+            "max":20
+         }
+      },
+      "finger":{
+         "+{0} Main Stat":{
+            "min":416,
+            "max":500
+         },
+         "+{0} Vitality":{
+            "min":416,
+            "max":500
+         },
+         "Critical Hit Damage Increased by {0}%":{
+            "min":25,
+            "max":50
+         },
+         "Max Damage":{
+            "min":0,
+            "max":160
+         },
+         "Min Damage":{
+            "min":0,
+            "max":75
+         },
+         "Attack Speed Increased by {0}%":{
+            "min":5,
+            "max":7
+         }
+      },
+      "waist":{
+         "+{0} Main Stat":{
+            "min":416,
+            "max":500
+         },
+         "+{0} Vitality":{
+            "min":416,
+            "max":500
+         },
+         "{0}% Life":{
+            "min":10,
+            "max":15
+         },
+         "+{0} Resistance to All Elements":{
+            "min":91,
+            "max":100
+         }
+      },
+      "twohand":{
+         "Max Damage":{
+            "min":0,
+            "max":1788
+         },
+         "Min Damage":{
+            "min":0,
+            "max":1439
+         },
+         "+{0} Main Stat":{
+            "min":946,
+            "max":1125
+         },
+         "Reduces cooldown of all skills by {0}%":{
+            "min":6,
+            "max":10
+         },
+         "+{0} Socket":{
+            "min":1,
+            "max":1
+         }
+      },
+      "legs":{
+         "+{0} Main Stat":{
+            "min":416,
+            "max":500
+         },
+         "+{0} Vitality":{
+            "min":416,
+            "max":500
+         },
+         "+{0} Socket":{
+            "min":1,
+            "max":2
+         },
+         "+{0} Resistance to All Elements":{
+            "min":91,
+            "max":100
+         }
+      },
+      "shield":{
+         "+{0} Main Stat":{
+            "min":626,
+            "max":750
+         },
+         "+{0} Vitality":{
+            "min":626,
+            "max":750
+         },
+         "Critical Hit Chance Increased by {0}%":{
+            "min":80,
+            "max":100,
+            "step":5,
+            "scale":1
+         }
+      },
+      "feet":{
+         "+{0} Main Stat":{
+            "min":416,
+            "max":500
+         },
+         "+{0} Vitality":{
+            "min":416,
+            "max":500
+         },
+         "+{0} Resistance to All Elements":{
+            "min":91,
+            "max":100
+         },
+         "{0}% Increased Movement Speed":{
+            "min":10,
+            "max":12
+         }
+      }
+   },
+   "secondary":{
+      "head":{
+         "Single Resist":{
+            "min":626,
+            "max":750
+         }
+      },
+      "head":{
+         "Gold Find":{
+            "min":626,
+            "max":750
+         }
+      }
+   }
 }
