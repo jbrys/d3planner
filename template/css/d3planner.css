@@ -25,6 +25,9 @@
     width: 32%;
     display: inline-block;
     vertical-align: top;
+
+    background-color: grey;
+    margin: 5 5 5 5;
 }
 .slot .buttons {
     display:inline-block;
@@ -35,6 +38,9 @@
 .slot .buttons, .item, .affix select {
     max-width: 300px;
     min-width: 200px;
+}
+.item, .affix select {
+    width: 100%;
 }
 .chosen-container-multi .chosen-choices li.search-field input[type=text]{
     height: auto !important;
@@ -64,4 +70,13 @@
 }
 .affix .type{
     float: left;
+}
+
+.bottom_spacer {
+    height: 200px;
+}
+
+.view .name{
+    font-weight: bold;
+    display: inline-block;
 }

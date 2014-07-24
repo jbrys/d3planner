@@ -92,7 +92,7 @@
                     .attr("val", affix.val)
                     .attr("step", affix.step)
                     .attr("scale", affix.scale)
-                    .find("a")
+                    .find(".edit_affix_button")
                         .click(edit_affix);
 
                 affixes_div.append(affix_div).append($("<div style='clear: both;'></div>"));
@@ -137,6 +137,7 @@
         else{
             save_cookie();
         }
+        return false;
     }
 
     function on_slider(event, ui) {
@@ -168,20 +169,20 @@
             load_ddl($(item_ddl));
         });
 
-        $(".edit_button a").click(function(){
+        $(".edit_button").click(function(){
             $(this)
                 .parents(".view").hide()
                 .parents(".slot").children(".edit").show()
                 .find(".chosen-select").chosen();
             return false;
         });
-        $(".cancel_button a").click(function(){
+        $(".cancel_button").click(function(){
             $(this)
                 .parents(".edit").hide()
                 .parents(".slot").children(".view").show();
             return false;
         });
-        $(".save_button a").click(function(){
+        $(".save_button").click(function(){
             var slot_div = $(this).parents(".slot");
             var slot = slot_div.attr("id");
             var item_name = slot_div.find(".item option:selected").text();
@@ -223,7 +224,7 @@
 <div id="templates" style="display:none;">
     <div class="affix">
         <div class="view_affix">
-            <span class="type"></span><span class="value"><a href="#">e</a></span>
+            <span class="type"></span><span class="value"><span class="ui-icon ui-icon-gear edit_affix_button"></span></span>
         </div>
         <div class="edit_affix" style="display: none;">
             <br>
@@ -247,16 +248,14 @@
                         </div>
                     </div>
                     <div class="buttons">
-                        <div class="save_button"><a href="#">save</a></div>
-                        <div class="cancel_button"><a href="#">cancel</a></div>
+                        <span class="ui-icon ui-icon-check save_button"></span>
+                        <span class="ui-icon ui-icon-close cancel_button"></span>
                     </div>
                 </div>
                 <div class="view">
-                    <div class="name"></div>
+                    <div><div class="name"></div><span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
+                    <div style="clear: both;"></div>
                     <div class="affixes"></div>
-                    <div class="buttons">
-                        <div class="edit_button"><a href="#">edit</a></div>
-                    </div>
                 </div>
             </div>
             <div class="slot" id="head">
@@ -270,16 +269,14 @@
                         </div>
                     </div>
                     <div class="buttons">
-                        <div class="save_button"><a href="#">save</a></div>
-                        <div class="cancel_button"><a href="#">cancel</a></div>
+                        <span class="ui-icon ui-icon-check save_button"></span>
+                        <span class="ui-icon ui-icon-close cancel_button"></span>
                     </div>
                 </div>
                 <div class="view">
-                    <div class="name"></div>
+                    <div><div class="name"></div><span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
+                    <div style="clear: both;"></div>
                     <div class="affixes"></div>
-                    <div class="buttons">
-                        <div class="edit_button"><a href="#">edit</a></div>
-                    </div>
                 </div>
             </div>
             <div class="slot" id="neck">
@@ -293,16 +290,14 @@
                         </div>
                     </div>
                     <div class="buttons">
-                        <div class="save_button"><a href="#">save</a></div>
+                        <span class="ui-icon ui-icon-check save_button"></span>
                         <div class="cancel_button"><a href="#">cancel</a></div>
                     </div>
                 </div>
                 <div class="view">
-                    <div class="name"></div>
+                    <div><div class="name"></div><span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
+                    <div style="clear: both;"></div>
                     <div class="affixes"></div>
-                    <div class="buttons">
-                        <div class="edit_button"><a href="#">edit</a></div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -319,16 +314,14 @@
                         </div>
                     </div>
                     <div class="buttons">
-                        <div class="save_button"><a href="#">save</a></div>
+                        <span class="ui-icon ui-icon-check save_button"></span>
                         <div class="cancel_button"><a href="#">cancel</a></div>
                     </div>
                 </div>
                 <div class="view">
-                    <div class="name"></div>
+                    <div><div class="name"></div><span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
+                    <div style="clear: both;"></div>
                     <div class="affixes"></div>
-                    <div class="buttons">
-                        <div class="edit_button"><a href="#">edit</a></div>
-                    </div>
                 </div>
             </div>
             <div class="slot" id="chest">
@@ -342,16 +335,14 @@
                         </div>
                     </div>
                     <div class="buttons">
-                        <div class="save_button"><a href="#">save</a></div>
+                        <span class="ui-icon ui-icon-check save_button"></span>
                         <div class="cancel_button"><a href="#">cancel</a></div>
                     </div>
                 </div>
                 <div class="view">
-                    <div class="name"></div>
+                    <div><div class="name"></div><span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
+                    <div style="clear: both;"></div>
                     <div class="affixes"></div>
-                    <div class="buttons">
-                        <div class="edit_button"><a href="#">edit</a></div>
-                    </div>
                 </div>
             </div>
             <div class="slot" id="wrists">
@@ -365,16 +356,14 @@
                         </div>
                     </div>
                     <div class="buttons">
-                        <div class="save_button"><a href="#">save</a></div>
+                        <span class="ui-icon ui-icon-check save_button"></span>
                         <div class="cancel_button"><a href="#">cancel</a></div>
                     </div>
                 </div>
                 <div class="view">
-                    <div class="name"></div>
+                    <div><div class="name"></div><span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
+                    <div style="clear: both;"></div>
                     <div class="affixes"></div>
-                    <div class="buttons">
-                        <div class="edit_button"><a href="#">edit</a></div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -391,16 +380,14 @@
                         </div>
                     </div>
                     <div class="buttons">
-                        <div class="save_button"><a href="#">save</a></div>
+                        <span class="ui-icon ui-icon-check save_button"></span>
                         <div class="cancel_button"><a href="#">cancel</a></div>
                     </div>
                 </div>
                 <div class="view">
-                    <div class="name"></div>
+                    <div><div class="name"></div><span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
+                    <div style="clear: both;"></div>
                     <div class="affixes"></div>
-                    <div class="buttons">
-                        <div class="edit_button"><a href="#">edit</a></div>
-                    </div>
                 </div>
             </div>
             <div class="slot" id="waist">
@@ -414,16 +401,14 @@
                         </div>
                     </div>
                     <div class="buttons">
-                        <div class="save_button"><a href="#">save</a></div>
+                        <span class="ui-icon ui-icon-check save_button"></span>
                         <div class="cancel_button"><a href="#">cancel</a></div>
                     </div>
                 </div>
                 <div class="view">
-                    <div class="name"></div>
+                    <div><div class="name"></div><span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
+                    <div style="clear: both;"></div>
                     <div class="affixes"></div>
-                    <div class="buttons">
-                        <div class="edit_button"><a href="#">edit</a></div>
-                    </div>
                 </div>
             </div>
             <div class="slot" id="rfinger">
@@ -437,16 +422,14 @@
                         </div>
                     </div>
                     <div class="buttons">
-                        <div class="save_button"><a href="#">save</a></div>
+                        <span class="ui-icon ui-icon-check save_button"></span>
                         <div class="cancel_button"><a href="#">cancel</a></div>
                     </div>
                 </div>
                 <div class="view">
-                    <div class="name"></div>
+                    <div><div class="name"></div><span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
+                    <div style="clear: both;"></div>
                     <div class="affixes"></div>
-                    <div class="buttons">
-                        <div class="edit_button"><a href="#">edit</a></div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -463,16 +446,14 @@
                         </div>
                     </div>
                     <div class="buttons">
-                        <div class="save_button"><a href="#">save</a></div>
+                        <span class="ui-icon ui-icon-check save_button"></span>
                         <div class="cancel_button"><a href="#">cancel</a></div>
                     </div>
                 </div>
                 <div class="view">
-                    <div class="name"></div>
+                    <div><div class="name"></div><span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
+                    <div style="clear: both;"></div>
                     <div class="affixes"></div>
-                    <div class="buttons">
-                        <div class="edit_button"><a href="#">edit</a></div>
-                    </div>
                 </div>
             </div>
             <div class="slot" id="legs">
@@ -486,16 +467,14 @@
                         </div>
                     </div>
                     <div class="buttons">
-                        <div class="save_button"><a href="#">save</a></div>
+                        <span class="ui-icon ui-icon-check save_button"></span>
                         <div class="cancel_button"><a href="#">cancel</a></div>
                     </div>
                 </div>
                 <div class="view">
-                    <div class="name"></div>
+                    <div><div class="name"></div><span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
+                    <div style="clear: both;"></div>
                     <div class="affixes"></div>
-                    <div class="buttons">
-                        <div class="edit_button"><a href="#">edit</a></div>
-                    </div>
                 </div>
             </div>
             <div class="slot" id="offhand">
@@ -509,16 +488,14 @@
                         </div>
                     </div>
                     <div class="buttons">
-                        <div class="save_button"><a href="#">save</a></div>
+                        <span class="ui-icon ui-icon-check save_button"></span>
                         <div class="cancel_button"><a href="#">cancel</a></div>
                     </div>
                 </div>
                 <div class="view">
-                    <div class="name"></div>
+                    <div><div class="name"></div><span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
+                    <div style="clear: both;"></div>
                     <div class="affixes"></div>
-                    <div class="buttons">
-                        <div class="edit_button"><a href="#">edit</a></div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -535,16 +512,14 @@
                         </div>
                     </div>
                     <div class="buttons">
-                        <div class="save_button"><a href="#">save</a></div>
+                        <span class="ui-icon ui-icon-check save_button"></span>
                         <div class="cancel_button"><a href="#">cancel</a></div>
                     </div>
                 </div>
                 <div class="view">
-                    <div class="name"></div>
+                    <div><div class="name"></div><span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
+                    <div style="clear: both;"></div>
                     <div class="affixes"></div>
-                    <div class="buttons">
-                        <div class="edit_button"><a href="#">edit</a></div>
-                    </div>
                 </div>
             </div>
         </div>
