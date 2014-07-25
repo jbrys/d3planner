@@ -2,7 +2,7 @@
     "items": {
         "Hallowed Barricade": {
             "primary": {
-                "Holy skills deal {0}% more damage":{
+                "holy_damage":{
                     "min" : 15,
                     "max" : 20
                 }

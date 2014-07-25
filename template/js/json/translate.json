@@ -1,0 +1,84 @@
+﻿{
+   "reapers_wraps_leg":{
+      "template":"Health globes restore {0}% of your primary resource.",
+      "display":"Health globes restore your primary resource."
+   },
+   "fate_of_the_fell_leg":{
+      "display":"Gain two additional rays of Heaven’s Fury."
+   },
+   "holy_damage":{
+      "template":"Holy skills deal {0}% more damage",
+      "display":"Holy skills deal more damage"
+   },
+   "ring_of_royal_grandeur_leg":{
+      "display":"Reduces the number of items needed for set bonuses by 1 (to a minimum of 2)."
+   },
+   "elite_damage":{
+      "template":"Increases damage against elites by {0}%",
+      "display":"Increases damage against elites"
+   },
+   "elemental_damage":{
+      "template":"Elemental skills deal {0}% more damage",
+      "display":"Elemental skills deal more damage"
+   },
+   "attack_speed":{
+      "template":"Attack Speed Increased by {0}%",
+      "display":"Attack Speed Increased"
+   },
+   "maras_kaleidoscope_leg":{
+      "template":"Prevent all Poison damage taken and heal yourself for the amount prevented.",
+      "display":"Prevent all Poison damage taken and heal yourself for {0}% of the amount prevented."
+   },
+   "main_stat":{
+      "template":"+{0} Main Stat",
+      "display":"Main Stat"
+   },
+   "vitality":{
+      "template":"+{0} Vitality",
+      "display":"Vitality"
+   },
+   "critical_hit_chance":{
+      "template":"Critical Hit Chance Increased by {0}%",
+      "display":"Critical Hit Chance Increased."
+   },
+   "socket":{
+      "template":"+{0} Socket(s)",
+      "display":"Socket(s)"
+   },
+   "all_resistance":{
+      "template":"+{0} Resistance to All Elements",
+      "display":"Resistance to All Elements"
+   },
+   "reduced_cooldown":{
+      "template":"Reduces cooldown of all skills by {0}%",
+      "display":"Reduces cooldown of all skills"
+   },
+   "skill_heavens_fury":{
+      "template":"Increases Heaven's Fury damage by {0}%",
+      "display":"Increases Heaven's Fury damage"
+   },
+   "critical_hit_damage":{
+      "template":"Critical Hit Damage Increased by {0}%",
+      "display":"Critical Hit Damage Increased"
+   },
+   "max_damage":{
+      "template":"+{0} Max Damage",
+      "display":"Max Damage"
+   },
+   "min_damage":{
+      "template":"+{0} Min Damage",
+      "display":"Min Damage"
+   },
+   "percent_life":{
+      "template":"{0}% Life",
+      "display":"Life Percent"
+   },
+   "attacks_per_second":{
+      "template":"{0} Attacks Per Second",
+      "display":"Attacks Per Second"
+   },
+   "movement_speed":{
+      "template":"{0}% Increased Movement Speed",
+      "display":"Increased Movement Speed"
+   }
+}

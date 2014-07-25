@@ -4,7 +4,7 @@
             "primary": {},
             "secondary": {},
             "legendary": {
-                "Reduces the number of items needed for set bonuses by 1 (to a minimum of 2).": {
+                "ring_of_royal_grandeur_leg": {
                     "min" : 0,
                     "max" : 0
                 }
@@ -12,11 +12,11 @@
         },
         "Stone of Jordan": {
             "primary": {
-                "Increases damage against elites by {0}%":{
+                "elite_damage":{
                     "min" : 25,
                     "max" : 30
                 },
-                "Elemental skills deal {0}% more damage":{
+                "elemental_damage":{
                     "min" : 15,
                     "max" : 20
                 }

@@ -8,7 +8,7 @@
 
          },
          "legendary":{
-            "Health globes restore {0}% of your primary resource.":{
+            "reapers_wraps_leg:{
                "min":25,
                "max":30
             }

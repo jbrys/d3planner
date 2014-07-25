@@ -2,11 +2,11 @@
     "items": {
         "Andariel's Visage": {
             "primary": {
-                "Elemental skills deal {0}% more damage": {
+                "elemental_damage": {
                     "min": 15,
                     "max": 20
                 },
-                "Attack Speed": {
+                "attack_speed": {
                     "min": 5,
                     "max": 7
                 }

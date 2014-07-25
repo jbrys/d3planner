@@ -8,6 +8,34 @@
                         "twohand", "legs", "shield",
                         "feet"];
     var _char = {};
+    var _translate = {};
+
+    function get_stat_color(min,max,val){
+        return percent_to_color((val-min)/(max-min));
+    }
+
+    function percent_to_color(percent){
+        R=Math.ceil(255*(1-percent));
+        G=Math.floor(255*percent);
+        B=parseInt(0);
+        //alert([R,G,B]);
+        R=R.toString(16);
+        G=G.toString(16);
+        B=B.toString(16);
+        //alert([R,G,B]);
+
+        while(R.length < 2){
+            R = "0"+R;
+        }
+        while(G.length < 2){
+            G = "0"+G;
+        }
+        while(B.length < 2){
+            B = "0"+B;
+        }
+
+        return "#"+R+G+B;
+    }
 
     function item_change(){
         var ddl = $(this);
@@ -29,7 +57,8 @@
             $("#"+slot+" .affix .primary select").append($("<option></option>").html(""));
             $.each(item.primary, function(stat,value){
                 $("#"+slot+" .affix .primary select")
-                    .append($("<option></option>").html(stat));
+
+                    .append($("<option></option>").html(_translate[stat].display).attr("value", stat));
             });
         }
         $("#"+slot+ " .chosen-select").trigger("chosen:updated");
@@ -83,9 +112,11 @@
             affixes_div.empty();
             $.each(item.affixes.primary, function(index,affix){
                 var affix_div = $("#templates .affix").clone(true,true);
-                var display_val = affix.val/Math.pow(10 ,(affix.scale) || 0);
+                var display_val = get_display_value(affix.val, affix.scale);
 
-                affix_div.find(".type").html(affix.name.replace("{0}", display_val)).attr("affix", affix.name);
+                var template = _translate[affix.name].template || _translate[affix.name].display;
+
+                affix_div.find(".type").html(template.replace("{0}", display_val)).attr("affix", affix.name);
                 affix_div.find(".value")
                     .attr("min", affix.min)
                     .attr("max", affix.max)
@@ -140,6 +171,20 @@
         return false;
     }
 
+    function get_display_value(val, scale){
+        var display_val = String(val/Math.pow(10, scale || 0));
+
+        if(scale > 0){
+            if(display_val.indexOf(".") < 0){
+                display_val += ".";
+            }
+            while(display_val.split(".")[1].length < scale){
+                display_val += "0";
+            }
+        }
+        return display_val;
+    }
+
     function on_slider(event, ui) {
         var affix_div = $(this).parents(".affix");
         var affix = $(this).parents(".affix").find(".type").attr("affix");
@@ -150,20 +195,27 @@
         var val = parseInt(ui.value);
         var scale = parseInt(value_div.attr("scale"));
 
-        var display_val = val/Math.pow(10, scale || 0);
+        var template = _translate[affix].template || _translate[affix].display;
 
+        var display_val = get_display_value(val, scale);
         _char[slot].affixes.primary[affix].val = ui.value;
 
-        affix_div.find(".type").html(affix.replace("{0}", display_val)).attr("affix", affix);
+        affix_div.find(".type").html(template.replace("{0}", display_val)).attr("affix", affix);
         affix_div.find(".value").attr("val", val);
     }
 
     $(document).ready(function(){
         $.cookie.json = true;
-        $("#debug").click(function(){$("#debug_output").html(JSON.stringify(_slots));});
+        $("#debug").click(function(){$("#debug_output").html(JSON.stringify(_translate));});
         $(".item").change(item_change);
-        $.getJSON("${base}json/affix", function(affix) {
-            _affix = affix;
+        $.ajaxSetup({
+            async: false
+        });
+        $.getJSON("${base}json/affix", function(data) {
+            _affix = data;
+        });
+        $.getJSON("${base}json/translate", function(data) {
+            _translate = data;
         });
         $(".item").each(function(i, item_ddl){
             load_ddl($(item_ddl));
@@ -195,7 +247,7 @@
             _char[slot].affixes.primary = {};
 
             slot_div.find(".primary option:selected").each(function(index, affix_node){
-                affix_name = $(affix_node).text();
+                affix_name = $(affix_node).attr("value");
                 affix_data = item.primary[affix_name]
                 affix = {};
                 affix.name = affix_name;
@@ -231,6 +283,7 @@
             <div class="slider"></div>
         </div>
     </div>
+    <div class="total_affix"></div>
 </div>
 
 
