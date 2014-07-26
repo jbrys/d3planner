@@ -2,6 +2,7 @@
 <script type="text/javascript">
     var _affix;
     var _slots = {};
+    var _sets;
     var _valid_slots = ["shoulders", "head", "neck",
                         "hands", "chest", "wrists",
                         "finger", "waist",
@@ -19,31 +20,6 @@
 
     var _elements = ["holy_damage"];
 
-    function get_stat_color(min,max,val){
-        return percent_to_color((val-min)/(max-min));
-    }
-
-    function percent_to_color(percent){
-        R=Math.ceil(255*(1-percent));
-        G=Math.floor(255*percent);
-        B=parseInt(0);
-
-        R=R.toString(16);
-        G=G.toString(16);
-        B=B.toString(16);
-
-        while(R.length < 2){
-            R = "0"+R;
-        }
-        while(G.length < 2){
-            G = "0"+G;
-        }
-        while(B.length < 2){
-            B = "0"+B;
-        }
-
-        return "#"+R+G+B;
-    }
     function join_item(item){
         if(!item.joined){
             $.each(_affix.primary[item.cat], function(stat,value){
@@ -113,9 +89,15 @@
 
     function update_char(){
         var totals = jQuery.extend(true, {}, _base_stats);
-
+        var sets = {};
+        var rorg_bonus = false;
         $.each(_char, function(slot,item){
             if(item.name){
+                var item_blob = _slots[slot].items[item.name];
+
+                if(item_blob.set)
+                    sets[item_blob.set] = (sets[item_blob.set] || 0) + 1
+
                 var slot_div = $("#"+slot);
                 slot_div.find(".name").html(item.name);
                 var affixes_div = slot_div.find(".view .affixes");
@@ -123,9 +105,9 @@
                 affixes_div.empty();
                 $.each(item.affixes.primary, function(index,affix){
                     if (affix.name == "socket"){
-                        join_item(_slots[slot].items[item.name]);
-                        $.each(_slots[slot].items[item.name].socket_value || {}, function(affix, value){
-                            totals[affix] = (totals[affix] || 0) + value;
+                        join_item(item_blob);
+                        $.each(item_blob.socket_value || {}, function(socket_affix, value){
+                            totals[socket_affix] = (totals[socket_affix] || 0) + value * affix.val;
                         });
                     }
                     else if (affix.name == "elemental_damage"){
@@ -153,9 +135,39 @@
 
                     affixes_div.append(affix_div).append($("<div style='clear: both;'></div>"));
                 });
+                $.each(item_blob.legendary, function(index,affix){
+                    if(index == "ring_of_royal_grandeur_leg")
+                        rorg_bonus = true;
+                    var legendary_div = $("#templates .legendary_affix").clone(true);
+                    $(".legendary_affixes").append(legendary_div);
+                    legendary_div.html(get_template(index));
+                });
             }
         });
+        _char.sets = sets;
+
+        $.each(sets, function(set_name,count){
+            if (rorg_bonus && count > 1)
+                count++;
+            var append = false;
+            var set_div = $("#templates .set").clone(true);
+            $(".set_bonuses").append(set_div);
+            for(var i = 2; i <= count; i++){
+                set_div.find(".name").text(_translate[set_name].display);
+                var set_bonus = _sets[set_name][i];
+                if(set_bonus){
+                     $.each(set_bonus, function(affix_type, affixes){
+                        $.each(affixes, function(affix, value){
+                            set_div.find("."+affix_type).html(get_template(affix, value));
+                            totals[affix] = (totals[affix] || 0) + value;
+                        });
+                    });
+                }
+            }
+        });
+
         _char.totals = totals;
+
         $(".totals tr").each(function(i,tr){
             tr = $(tr);
             var affix = tr.attr("id");
@@ -167,6 +179,8 @@
         save_cookie();
         calculate_damage();
     }
+
+
 
     function save_cookie(){
         $(".slot").each(function(){
@@ -224,6 +238,17 @@
         return display_val;
     }
 
+    function get_template(affix, value){
+        affix_stuff = _translate[affix] || {};
+        if (value)
+        {
+            return (affix_stuff.template || affix_stuff.display || affix + " {0}").replace("{0}", get_display_value(value, affix_stuff.scale || 0));
+        }
+        else{
+            return (affix_stuff.display || affix);
+        }
+    }
+
     function on_slider(event, ui) {
         var affix_div = $(this).parents(".affix");
         var affix = $(this).parents(".affix").find(".type").attr("affix");
@@ -255,6 +280,9 @@
         });
         $.getJSON("${base}json/translate", function(data) {
             _translate = data;
+        });
+        $.getJSON("${base}json/sets", function(data) {
+            _sets = data;
         });
         $(".item").each(function(i, item_ddl){
             load_ddl($(item_ddl));
@@ -327,7 +355,6 @@
             $("#elemental_dps").html(_translate.elemental_dps.template.replace("{0}",Math.round(sheet_dps*(1+eled/100))));
             $("#elite_dps").html(_translate.elite_dps.template.replace("{0}",Math.round(sheet_dps*(1+elid/100))));
             $("#elemental_elite_dps").html(_translate.elemental_elite_dps.template.replace("{0}",Math.round(sheet_dps*(1+eled/100)*(1+elid/100))));
-
         }
     }
 </script>
@@ -344,7 +371,13 @@
             <div class="slider"></div>
         </div>
     </div>
-    <div class="total_affix"></div>
+    <div class="legendary_affix"></div>
+    <div class="set">
+        <div class="name"></div>
+        <div class="primary"></div>
+        <div class="secondary"></div>
+        <div class="legendary"></div>
+    </div>
 </div>
 
 <table style="width:100%;">
@@ -682,6 +715,7 @@
                     </div>
                     <div style="clear: both;"></div>
                     <div class="equipment_row">
+                        <div class="set_bonuses"></div>
                         <div class="slot" id="feet">
                             feet
                             <br>
@@ -703,6 +737,7 @@
                                 <div class="affixes"></div>
                             </div>
                         </div>
+                        <div class="legendary_affixes"></div>
                     </div>
                 </div>
             </div>

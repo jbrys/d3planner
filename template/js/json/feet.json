@@ -1,15 +1,10 @@
 {
    "items":{
       "Sabatons of Akkhan":{
-         "primary":{
-
-         },
-         "secondary":{
-
-         },
-         "legendary":{
-
-         }
+         "primary": {},
+         "secondary": {},
+         "legendary": {},
+         "set":"akkhan"
       }
    }
 }

@@ -3,7 +3,8 @@
         "Pauldrons of Akkhan": {
             "primary": {},
             "secondary": {},
-            "legendary": {}
+            "legendary": {},
+            "set":"akkhan"
         }
     }
 }

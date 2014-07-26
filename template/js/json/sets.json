@@ -1,23 +1,64 @@
 {
-    "items": {
-        "Andariel's Visage": {
-            "primary": {
-                "elemental": {
-                    "min": 15,
-                    "max": 20
-                },
-                "as": {
-                    "min": 5,
-                    "max": 7
-                }
-            },
-            "secondary": {},
-            "legendary": {}
-        },
-        "Blind Faith": {
-            "primary": {},
-            "secondary": {},
-            "legendary": {}
-        }
-    }
+   "akkhan":{
+      "2":{
+         "primary":{
+            "main_stat":500
+         },
+         "secondary":{
+
+         },
+         "legendary":{
+
+         }
+      },
+      "4":{
+         "primary":{
+
+         },
+         "secondary":{
+
+         },
+         "legendary":{
+            "akkhan_4":{
+
+            }
+         }
+      },
+      "6":{
+         "primary":{
+
+         },
+         "secondary":{
+
+         },
+         "legendary":{
+            "akkhan_6": false
+         }
+      }
+   },
+   "captain_crimson":{
+      "2":{
+         "primary":{
+            "reduced_cooldown": 10
+         },
+         "secondary":{
+            "life_per_second": 2000
+         },
+         "legendary":{
+
+         }
+      },
+      "3":{
+         "primary":{
+            "all_resistance": 50,
+            "resource_cost": 10
+         },
+         "secondary":{
+
+         },
+         "legendary":{
+
+         }
+      }
+   }
 }

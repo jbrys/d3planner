@@ -99,6 +99,9 @@
          }
       },
       "chest":{
+         "socket_value" : {
+            "main_stat" : 220
+         },
          "skill_heavens_fury":{
             "min":10,
             "max":15
@@ -212,6 +215,9 @@
          }
       },
       "legs":{
+         "socket_value" : {
+            "main_stat" : 280
+         },
          "main_stat":{
             "min":416,
             "max":500

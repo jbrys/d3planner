@@ -18,7 +18,7 @@
     width: 100%;
 }
 
-.slot{
+.slot, .set_bonuses, .legendary_affixes{
     min-height: 60px;
     max-width: 400px;
     min-width: 200px;
@@ -83,4 +83,8 @@
 
 .totals {
     vertical-align: top;
+}
+
+.set .name {
+    font-weight: bold;
 }

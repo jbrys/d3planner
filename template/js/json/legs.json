@@ -3,7 +3,8 @@
         "Captain Crimson's Thrust": {
             "primary": {},
             "secondary": {},
-            "legendary": {}
+            "legendary": {},
+            "set":"captain_crimson"
         }
     }
 }

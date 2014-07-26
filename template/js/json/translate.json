@@ -100,5 +100,15 @@
    "elemental_elite_dps":{
       "template":"Elemental Elite DPS {0}",
       "display":"Elemental Elite DPS"
+   },
+   "resource_cost":{
+        "template":"Reduces all resource costs by {0}%",
+        "display":"Reduces all resource costs"
+   },
+   "akkhan":{
+        "display":"Armor of Akkhan"
+   },
+   "captain_crimson":{
+        "display":"Captain Crimson's Trimmings"
    }
 }

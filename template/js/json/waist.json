@@ -3,7 +3,8 @@
         "Captain Crimson's Silk Girdle": {
             "primary": {},
             "secondary": {},
-            "legendary": {}
+            "legendary": {},
+            "set":"captain_crimson"
         }
     }
 }
