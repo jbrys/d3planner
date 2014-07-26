@@ -42,9 +42,9 @@
         if(item.primary) {
             $("#"+slot+" .affix .primary select").append($("<option></option>").html(""));
             $.each(item.primary, function(stat,value){
-                $("#"+slot+" .affix .primary select")
-
-                    .append($("<option></option>").html(_translate[stat].display).attr("value", stat));
+                if(_translate[stat])
+                    $("#"+slot+" .affix .primary select")
+                        .append($("<option></option>").html(_translate[stat].display).attr("value", stat));
             });
         }
         $("#"+slot+ " .chosen-select").trigger("chosen:updated");
