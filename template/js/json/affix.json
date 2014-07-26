@@ -181,13 +181,16 @@
          }
       },
       "twohand":{
+         "socket_value" : {
+            "critical_hit_damage" : 125
+         },
          "max_damage":{
             "min":0,
-            "max":1788
+            "max":2586
          },
          "min_damage":{
             "min":0,
-            "max":1439
+            "max":2168
          },
          "main_stat":{
             "min":946,

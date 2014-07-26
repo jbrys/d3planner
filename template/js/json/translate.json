@@ -39,7 +39,9 @@
    },
    "critical_hit_chance":{
       "template":"Critical Hit Chance Increased by {0}%",
-      "display":"Critical Hit Chance Increased."
+      "display":"Critical Hit Chance Increased.",
+      "step":5,
+      "scale":1
    },
    "socket":{
       "template":"+{0} Socket(s)",
@@ -75,10 +77,28 @@
    },
    "attacks_per_second":{
       "template":"{0} Attacks Per Second",
-      "display":"Attacks Per Second"
+      "display":"Attacks Per Second",
+      "step":1,
+      "scale":2
    },
    "movement_speed":{
       "template":"{0}% Increased Movement Speed",
       "display":"Increased Movement Speed"
+   },
+   "sheet_dps":{
+      "template":"Sheet DPS {0}",
+      "display":"Sheet DPS"
+   },
+   "elemental_dps":{
+      "template":"Elemental DPS {0}",
+      "display":"Elemental DPS"
+   },
+   "elite_dps":{
+      "template":"Elite DPS {0}",
+      "display":"Elite DPS"
+   },
+   "elemental_elite_dps":{
+      "template":"Elemental Elite DPS {0}",
+      "display":"Elemental Elite DPS"
    }
 }

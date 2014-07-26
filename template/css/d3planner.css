@@ -80,3 +80,7 @@
     font-weight: bold;
     display: inline-block;
 }
+
+.totals {
+    vertical-align: top;
+}
