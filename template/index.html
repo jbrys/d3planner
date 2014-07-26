@@ -91,6 +91,10 @@
         var totals = jQuery.extend(true, {}, _base_stats);
         var sets = {};
         var rorg_bonus = false;
+
+        $(".legendary_affixes").empty();
+        $(".set_bonuses").empty();
+
         $.each(_char, function(slot,item){
             if(item.name){
                 var item_blob = _slots[slot].items[item.name];
@@ -158,7 +162,10 @@
                 if(set_bonus){
                      $.each(set_bonus, function(affix_type, affixes){
                         $.each(affixes, function(affix, value){
-                            set_div.find("."+affix_type).html(get_template(affix, value));
+                            affix_div = $("#templates .set_affix").clone();
+                            affix_div.html(get_template(affix, value));
+                            set_div.find("."+affix_type).append(affix_div);
+
                             totals[affix] = (totals[affix] || 0) + value;
                         });
                     });
@@ -240,8 +247,7 @@
 
     function get_template(affix, value){
         affix_stuff = _translate[affix] || {};
-        if (value)
-        {
+        if (value){
             return (affix_stuff.template || affix_stuff.display || affix + " {0}").replace("{0}", get_display_value(value, affix_stuff.scale || 0));
         }
         else{
@@ -372,6 +378,7 @@
         </div>
     </div>
     <div class="legendary_affix"></div>
+    <div class="set_affix"></div>
     <div class="set">
         <div class="name"></div>
         <div class="primary"></div>

@@ -26,8 +26,8 @@
       "display":"Attack Speed Increased"
    },
    "maras_kaleidoscope_leg":{
-      "template":"Prevent all Poison damage taken and heal yourself for the amount prevented.",
-      "display":"Prevent all Poison damage taken and heal yourself for {0}% of the amount prevented."
+      "template":"Prevent all Poison damage taken and heal yourself for {0}% of the amount prevented.",
+      "display":"Prevent all Poison damage taken and heal yourself for the amount prevented."
    },
    "main_stat":{
       "template":"+{0} Main Stat",
@@ -110,5 +110,11 @@
    },
    "captain_crimson":{
         "display":"Captain Crimson's Trimmings"
+   },
+   "akkhan_4":{
+        "display":"Reduce the cost of all abilities by 50% while Akarat's Champion is active."
+   },
+   "akkhan_6":{
+        "display":"Reduce the cooldown of Akarat's Champion by 50%."
    }
 }
