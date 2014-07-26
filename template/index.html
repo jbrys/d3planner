@@ -352,7 +352,10 @@
             var chd = _char.totals.critical_hit_damage || 0;
             var eled = _char.totals.holy_damage || 0;
             var elid = _char.totals.elite_damage || 0;
-            var aps = (_char.totals.attacks_per_second || 1)  / Math.pow(10, _translate.attacks_per_second.scale || 0);
+            var aps = (_char.totals.attacks_per_second || 100) / Math.pow(10, _translate.attacks_per_second.scale || 0);
+
+            alert([max,min,ms,as,chc,chd,eled,elid,aps]);
+            alert(_char.totals.attacks_per_second);
 
             var sheet_dps = ((max+min)/2)*(1+ms/100)*(1+as/100)*(aps)*(1+chc/100*chd/100);
 
