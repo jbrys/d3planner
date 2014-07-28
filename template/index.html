@@ -58,7 +58,7 @@
             $.each(item.primary, function(stat,value){
                 if(_translate[stat])
                     $("#"+slot+" .affix .primary select")
-                        .append($("<option></option>").html(_translate[stat].display).attr("value", stat));
+                        .append($("<option></option>").html(get_template(stat)).attr("value", stat));
             });
         }
         $("#"+slot+ " .chosen-select").trigger("chosen:updated");
@@ -137,11 +137,8 @@
                         totals[affix.name] = (totals[affix.name] || 0) + affix.val;
                     }
                     var affix_div = $("#templates .affix").clone(true,true);
-                    var display_val = get_display_value(affix.val, affix.scale);
 
-                    var template = _translate[affix.name].template || _translate[affix.name].display;
-
-                    affix_div.find(".type").html(template.replace("{0}", display_val)).attr("affix", affix.name);
+                    affix_div.find(".type").html(get_template(affix.name, affix.val)).attr("affix", affix.name);
                     affix_div.find(".value")
                         .attr("min", affix.min)
                         .attr("max", affix.max)
@@ -171,7 +168,7 @@
             var set_div = $("#templates .set").clone(true);
             $(".set_bonuses").append(set_div);
             for(var i = 2; i <= count; i++){
-                set_div.find(".name").text(_translate[set_name].display);
+                set_div.find(".name").text(get_template(set_name));
                 var set_bonus = _sets[set_name][i];
                 if(set_bonus){
                      $.each(set_bonus, function(affix_type, affixes){
@@ -205,7 +202,7 @@
             var value = _char.totals[affix] || 0;
             var scale = _translate[affix].scale || 0;
 
-            tr.children().html(_translate[affix].template.replace("{0}",get_display_value(value, scale)));
+            tr.children().html(get_template(affix, value));
         });
 	}
 
@@ -268,12 +265,9 @@
         var val = parseInt(ui.value);
         var scale = parseInt(value_div.attr("scale"));
 
-        var template = _translate[affix].template || _translate[affix].display;
-
-        var display_val = get_display_value(val, scale);
         _char[slot].affixes.primary[affix].val = ui.value;
 
-        affix_div.find(".type").html(template.replace("{0}", display_val)).attr("affix", affix);
+        affix_div.find(".type").html(get_template(affix,val)).attr("affix", affix);
         affix_div.find(".value").attr("val", val);
     }
 
