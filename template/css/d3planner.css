@@ -32,9 +32,6 @@
 .slot .buttons {
     display:inline-block;
 }
-.affix select, .edit, {
-    width: 300px;
-}
 .slot .buttons, .item, .affix select {
     max-width: 300px;
     min-width: 200px;
@@ -83,8 +80,13 @@
 
 .totals {
     vertical-align: top;
+    white-space: nowrap;
 }
 
 .set .name {
     font-weight: bold;
 }
+
+.damage table { width:100%; }
+.label { text-align: left; }
+.value { text-align: right; float: right; }

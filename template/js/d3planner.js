@@ -10,6 +10,12 @@ if (!String.prototype.format) {
   };
 }
 
+if (!Array.prototype.max) {
+	Array.prototype.max = function( array ){
+		return Math.max.apply( Math, array );
+	};
+}
+
 function save_to_cookie(char){
     $.each(char, function(slot, data){
         $.cookie('d3planner_'+slot, data);
@@ -68,10 +74,10 @@ function calculate_crit_damage(values, defaults, base_damage){
         if (!base_damage)
             base_damage = calculate_base_damage(values,defaults);
 
-        chd = values.chd || defaults.chd;
+        chd = 1+((values.chd || defaults.chd)/100);
 
-        //alert(["base_damage*(chd/100)",chd,base_damage*(chd/100)]);
-        return base_damage*(chd/100)
+        //alert(["base_damage*chd",base_damage,chd,base_damage*(chd/100)]);
+        return base_damage*chd
     }
 }
 function calculate_mean_damage(values, defaults, crit_damage){
@@ -97,4 +103,20 @@ function calculate_dps(values, defaults, mean_damage){
         //alert(["mean_damage*(1+as/100)*(aps)",mean_damage*(1+as/100)*(aps)]);
         return mean_damage*(1+as/100)*(aps);
     }
+}
+
+function format_number(number, precision, commas){
+	number = Math.round(number*Math.pow(10,precision))/Math.pow(10,precision);
+	string_value = number.toString();
+	if(precision > 0){
+		if(string_value.indexOf(".") < 0)
+			string_value += ".0";
+		while(string_value.split(".")[1].length < precision){
+			string_value += "0";
+		}
+	}
+	if(commas)
+		string_value = string_value.split(".")[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (string_value.split(".")[1] ? "."+string_value.split(".")[1] : "");
+
+	return string_value;
 }

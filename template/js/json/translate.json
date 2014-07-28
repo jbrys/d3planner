@@ -8,7 +8,13 @@
    },
    "holy_damage":{
       "template":"Holy skills deal {0}% more damage",
-      "display":"Holy skills deal more damage"
+      "display":"Holy skills deal more damage",
+      "dropdown":"Holy"
+   },
+   "fire_damage":{
+      "template":"Fire skills deal {0}% more damage",
+      "display":"Fire skills deal more damage",
+      "dropdown":"Fire"
    },
    "ring_of_royal_grandeur_leg":{
       "display":"Reduces the number of items needed for set bonuses by 1 (to a minimum of 2)."
