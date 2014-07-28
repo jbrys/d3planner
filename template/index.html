@@ -18,6 +18,18 @@
         "critical_hit_chance" : 50
     }
 
+    var _defaults = {
+        "max": 2,
+        "min": 3,
+        "ms": 217,
+        "as": 0,
+        "chc": 5,
+        "chd": 50,
+        "eled": 0,
+        "elid": 0,
+        "aps": 1
+    };
+
     var _elements = ["holy_damage"];
 
     function join_item(item){
@@ -183,27 +195,8 @@
 
             tr.children().html(_translate[affix].template.replace("{0}",get_display_value(value, scale)));
         });
-        save_cookie();
+        save_to_cookie(_char);
         calculate_damage();
-    }
-
-
-
-    function save_cookie(){
-        $(".slot").each(function(){
-            var slot = $(this).attr("id");
-            var data = _char[slot];
-            if (data)
-                $.cookie('d3planner_'+slot, data);
-        });
-    }
-    function load_cookie(){
-        $(".slot").each(function(){
-            var slot = $(this).attr("id");
-            var cookie_name = 'd3planner_'+slot;
-            if($.cookie(cookie_name))
-                _char[slot] = $.cookie(cookie_name);
-        });
     }
 
     function edit_affix(){
@@ -339,414 +332,476 @@
                 .parents(".slot").children(".view").show();
             return false;
         });
-        load_cookie();
+        load_from_cookie(_char);
         update_char();
     });
     function calculate_damage(){
         if (_char && _char.totals){
-            var max = _char.totals.max_damage || 0;
-            var min = _char.totals.min_damage || 0;
-            var ms = _char.totals.main_stat || 0;
-            var as = _char.totals.attack_speed || 0;
-            var chc = (_char.totals.critical_hit_chance || 0)  / Math.pow(10, _translate.critical_hit_chance.scale || 0);
-            var chd = _char.totals.critical_hit_damage || 0;
-            var eled = _char.totals.holy_damage || 0;
-            var elid = _char.totals.elite_damage || 0;
-            var aps = (_char.totals.attacks_per_second || 100) / Math.pow(10, _translate.attacks_per_second.scale || 0);
+            var values = {
+                max: _char.totals.max_damage/Math.pow(10, _translate.max_damage.scale || 0),
+                min: _char.totals.min_damage/Math.pow(10, _translate.min_damage.scale || 0),
+                ms: _char.totals.main_stat/Math.pow(10, _translate.main_stat.scale || 0),
+                as: _char.totals.attack_speed/Math.pow(10, _translate.attack_speed.scale || 0),
+                chc: _char.totals.critical_hit_chance/Math.pow(10, _translate.critical_hit_chance.scale || 0),
+                chd: _char.totals.critical_hit_damage/Math.pow(10, _translate.critical_hit_damage.scale || 0),
+                eled: _char.totals.holy_damage/Math.pow(10, _translate.holy_damage.scale || 0),
+                elid: _char.totals.elite_damage/Math.pow(10, _translate.elite_damage.scale || 0),
+                aps: _char.totals.attacks_per_second/Math.pow(10, _translate.attacks_per_second.scale || 0)
+            };
 
-            var sheet_dps = ((max+min)/2)*(1+ms/100)*(1+as/100)*(aps)*(1+chc/100*chd/100);
+            var sheet_dps = calculate_dps(values, _defaults);
+            //var sheet_dps = ((max+min)/2)*(1+ms/100)*(1+as/100)*(aps)*(1+chc/100*chd/100);
 
-            $("#sheet_dps").html(_translate.sheet_dps.template.replace("{0}",Math.round(sheet_dps)));
-            $("#elemental_dps").html(_translate.elemental_dps.template.replace("{0}",Math.round(sheet_dps*(1+eled/100))));
-            $("#elite_dps").html(_translate.elite_dps.template.replace("{0}",Math.round(sheet_dps*(1+elid/100))));
-            $("#elemental_elite_dps").html(_translate.elemental_elite_dps.template.replace("{0}",Math.round(sheet_dps*(1+eled/100)*(1+elid/100))));
+            $("#sheet_dps").html(
+                _translate.sheet_dps.template.replace("{0}",Math.round(sheet_dps)));
+            $("#elemental_dps").html(
+                _translate.elemental_dps.template.replace("{0}",Math.round(sheet_dps*(1+(values.eled||_defaults.eled)/100))));
+            $("#elite_dps").html(
+                _translate.elite_dps.template.replace("{0}",Math.round(sheet_dps*(1+(values.elid||_defaults.elid)/100))));
+            $("#elemental_elite_dps").html(
+                _translate.elemental_elite_dps.template.replace("{0}",Math.round(sheet_dps*(1+(values.eled||_defaults.eled)/100)*(1+(values.elid||_defaults.elid)/100))));
         }
     }
+
 </script>
 
 <a id="debug" href="#">debug</a>
 <div id="debug_output"></div>
 <div id="templates" style="display:none;">
-    <div class="affix">
-        <div class="view_affix">
-            <span class="type"></span><span class="value"><span class="ui-icon ui-icon-gear edit_affix_button"></span></span>
-        </div>
-        <div class="edit_affix" style="display: none;">
-            <br>
-            <div class="slider"></div>
-        </div>
-    </div>
-    <div class="legendary_affix"></div>
-    <div class="set_affix"></div>
-    <div class="set">
-        <div class="name"></div>
-        <div class="primary"></div>
-        <div class="secondary"></div>
-        <div class="legendary"></div>
-    </div>
+	<div class="affix">
+		<div class="view_affix">
+			<span class="type"></span><span class="value"><span
+				class="ui-icon ui-icon-gear edit_affix_button"></span></span>
+		</div>
+		<div class="edit_affix" style="display: none;">
+			<br>
+
+			<div class="slider"></div>
+		</div>
+	</div>
+	<div class="legendary_affix"></div>
+	<div class="set_affix"></div>
+	<div class="set">
+		<div class="name"></div>
+		<div class="primary"></div>
+		<div class="secondary"></div>
+		<div class="legendary"></div>
+	</div>
 </div>
 
 <table style="width:100%;">
-    <tr>
-        <td style="vertical-align:top;">
-            <div class="totals">
-                <table>
-                    <tr id="main_stat">
-                        <td>
+<tr>
+<td style="vertical-align:top;">
+	<div class="totals">
+		<table>
+			<tr id="main_stat">
+				<td>
 
-                        </td>
-                    </tr>
-                    <tr id="vitality">
-                        <td>
+				</td>
+			</tr>
+			<tr id="vitality">
+				<td>
 
-                        </td>
-                    </tr>
-                    <tr id="attack_speed">
-                        <td>
+				</td>
+			</tr>
+			<tr id="attack_speed">
+				<td>
 
-                        </td>
-                    </tr>
-                    <tr id="critical_hit_chance">
-                        <td>
+				</td>
+			</tr>
+			<tr id="critical_hit_chance">
+				<td>
 
-                        </td>
-                    </tr>
-                    <tr id="critical_hit_damage">
-                        <td>
+				</td>
+			</tr>
+			<tr id="critical_hit_damage">
+				<td>
 
-                        </td>
-                    </tr>
-                    <tr id="holy_damage">
-                        <td>
+				</td>
+			</tr>
+			<tr id="holy_damage">
+				<td>
 
-                        </td>
-                    </tr>
-                    <tr id="elite_damage">
-                        <td>
+				</td>
+			</tr>
+			<tr id="elite_damage">
+				<td>
 
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div class="damage">
-                <table>
-                    <tr id="sheet_dps">
-                        <td>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="damage">
+		<table>
+			<tr id="sheet_dps">
+				<td>
 
-                        </td>
-                    </tr>
-                    <tr id="elemental_dps">
-                        <td>
+				</td>
+			</tr>
+			<tr id="elemental_dps">
+				<td>
 
-                        </td>
-                    </tr>
-                    <tr id="elite_dps">
-                        <td>
+				</td>
+			</tr>
+			<tr id="elite_dps">
+				<td>
 
-                        </td>
-                    </tr>
-                    <tr id="elemental_elite_dps">
-                        <td>
+				</td>
+			</tr>
+			<tr id="elemental_elite_dps">
+				<td>
 
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </td>
-        <td>
-            <div class ="center_contents">
-                <div class="paperdoll">
-                    <div class="equipment_row">
-                        <div class="slot" id="shoulders">
-                            shoulders
-                            <br>
-                            <div class="edit">
-                                <select class="item shoulders chosen-select"></select>
-                                <div class="affix">
-                                    <div class="primary">
-                                        <select multiple class="chosen-select"></select>
-                                    </div>
-                                </div>
-                                <div class="buttons">
-                                    <span class="ui-icon ui-icon-check save_button"></span>
-                                    <span class="ui-icon ui-icon-close cancel_button"></span>
-                                </div>
-                            </div>
-                            <div class="view">
-                                <div><div class="name"></div><span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
-                                <div style="clear: both;"></div>
-                                <div class="affixes"></div>
-                            </div>
-                        </div>
-                        <div class="slot" id="head">
-                            head
-                            <br>
-                            <div class="edit">
-                                <select class="item head chosen-select"></select>
-                                <div class="affix">
-                                    <div class="primary">
-                                        <select multiple class="chosen-select"></select>
-                                    </div>
-                                </div>
-                                <div class="buttons">
-                                    <span class="ui-icon ui-icon-check save_button"></span>
-                                    <span class="ui-icon ui-icon-close cancel_button"></span>
-                                </div>
-                            </div>
-                            <div class="view">
-                                <div><div class="name"></div><span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
-                                <div style="clear: both;"></div>
-                                <div class="affixes"></div>
-                            </div>
-                        </div>
-                        <div class="slot" id="neck">
-                            neck
-                            <br>
-                            <div class="edit">
-                                <select class="item neck chosen-select"></select>
-                                <div class="affix">
-                                    <div class="primary">
-                                        <select multiple class="chosen-select"></select>
-                                    </div>
-                                </div>
-                                <div class="buttons">
-                                    <span class="ui-icon ui-icon-check save_button"></span>
-                                    <span class="ui-icon ui-icon-close cancel_button"></span>
-                                </div>
-                            </div>
-                            <div class="view">
-                                <div><div class="name"></div><span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
-                                <div style="clear: both;"></div>
-                                <div class="affixes"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="clear: both;"></div>
-                    <div class="equipment_row">
-                        <div class="slot" id="hands">
-                            hands
-                            <br>
-                            <div class="edit">
-                                <select class="item hands chosen-select"></select>
-                                <div class="affix">
-                                    <div class="primary">
-                                        <select multiple class="chosen-select"></select>
-                                    </div>
-                                </div>
-                                <div class="buttons">
-                                    <span class="ui-icon ui-icon-check save_button"></span>
-                                    <span class="ui-icon ui-icon-close cancel_button"></span>
-                                </div>
-                            </div>
-                            <div class="view">
-                                <div><div class="name"></div><span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
-                                <div style="clear: both;"></div>
-                                <div class="affixes"></div>
-                            </div>
-                        </div>
-                        <div class="slot" id="chest">
-                            chest
-                            <br>
-                            <div class="edit">
-                                <select class="item chest chosen-select"></select>
-                                <div class="affix">
-                                    <div class="primary">
-                                        <select multiple class="chosen-select"></select>
-                                    </div>
-                                </div>
-                                <div class="buttons">
-                                    <span class="ui-icon ui-icon-check save_button"></span>
-                                    <span class="ui-icon ui-icon-close cancel_button"></span>
-                                </div>
-                            </div>
-                            <div class="view">
-                                <div><div class="name"></div><span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
-                                <div style="clear: both;"></div>
-                                <div class="affixes"></div>
-                            </div>
-                        </div>
-                        <div class="slot" id="wrists">
-                            wrists
-                            <br>
-                            <div class="edit">
-                                <select class="item wrists chosen-select"></select>
-                                <div class="affix">
-                                    <div class="primary">
-                                        <select multiple class="chosen-select"></select>
-                                    </div>
-                                </div>
-                                <div class="buttons">
-                                    <span class="ui-icon ui-icon-check save_button"></span>
-                                    <span class="ui-icon ui-icon-close cancel_button"></span>
-                                </div>
-                            </div>
-                            <div class="view">
-                                <div><div class="name"></div><span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
-                                <div style="clear: both;"></div>
-                                <div class="affixes"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="clear: both;"></div>
-                    <div class="equipment_row">
-                        <div class="slot" id="lfinger">
-                            finger
-                            <br>
-                            <div class="edit">
-                                <select class="item finger chosen-select"></select>
-                                <div class="affix">
-                                    <div class="primary">
-                                        <select multiple class="chosen-select"></select>
-                                    </div>
-                                </div>
-                                <div class="buttons">
-                                    <span class="ui-icon ui-icon-check save_button"></span>
-                                    <span class="ui-icon ui-icon-close cancel_button"></span>
-                                </div>
-                            </div>
-                            <div class="view">
-                                <div><div class="name"></div><span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
-                                <div style="clear: both;"></div>
-                                <div class="affixes"></div>
-                            </div>
-                        </div>
-                        <div class="slot" id="waist">
-                            waist
-                            <br>
-                            <div class="edit">
-                                <select class="item waist chosen-select"></select>
-                                <div class="affix">
-                                    <div class="primary">
-                                        <select multiple class="chosen-select"></select>
-                                    </div>
-                                </div>
-                                <div class="buttons">
-                                    <span class="ui-icon ui-icon-check save_button"></span>
-                                    <span class="ui-icon ui-icon-close cancel_button"></span>
-                                </div>
-                            </div>
-                            <div class="view">
-                                <div><div class="name"></div><span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
-                                <div style="clear: both;"></div>
-                                <div class="affixes"></div>
-                            </div>
-                        </div>
-                        <div class="slot" id="rfinger">
-                            finger
-                            <br>
-                            <div class="edit">
-                                <select class="item finger chosen-select"></select>
-                                <div class="affix">
-                                    <div class="primary">
-                                        <select multiple class="chosen-select"></select>
-                                    </div>
-                                </div>
-                                <div class="buttons">
-                                    <span class="ui-icon ui-icon-check save_button"></span>
-                                    <span class="ui-icon ui-icon-close cancel_button"></span>
-                                </div>
-                            </div>
-                            <div class="view">
-                                <div><div class="name"></div><span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
-                                <div style="clear: both;"></div>
-                                <div class="affixes"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="clear: both;"></div>
-                    <div class="equipment_row">
-                        <div class="slot" id="mainhand">
-                            mainhand
-                            <br>
-                            <div class="edit">
-                                <select class="item group onehand twohand chosen-select"></select>
-                                <div class="affix">
-                                    <div class="primary">
-                                        <select multiple class="chosen-select"></select>
-                                    </div>
-                                </div>
-                                <div class="buttons">
-                                    <span class="ui-icon ui-icon-check save_button"></span>
-                                    <span class="ui-icon ui-icon-close cancel_button"></span>
-                                </div>
-                            </div>
-                            <div class="view">
-                                <div><div class="name"></div><span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
-                                <div style="clear: both;"></div>
-                                <div class="affixes"></div>
-                            </div>
-                        </div>
-                        <div class="slot" id="legs">
-                            legs
-                            <br>
-                            <div class="edit">
-                                <select class="item legs chosen-select"></select>
-                                <div class="affix">
-                                    <div class="primary">
-                                        <select multiple class="chosen-select"></select>
-                                    </div>
-                                </div>
-                                <div class="buttons">
-                                    <span class="ui-icon ui-icon-check save_button"></span>
-                                    <span class="ui-icon ui-icon-close cancel_button"></span>
-                                </div>
-                            </div>
-                            <div class="view">
-                                <div><div class="name"></div><span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
-                                <div style="clear: both;"></div>
-                                <div class="affixes"></div>
-                            </div>
-                        </div>
-                        <div class="slot" id="offhand">
-                            offhand
-                            <br>
-                            <div class="edit">
-                                <select class="item group shield mojo source quiver cshield chosen-select"></select>
-                                <div class="affix">
-                                    <div class="primary">
-                                        <select multiple class="chosen-select"></select>
-                                    </div>
-                                </div>
-                                <div class="buttons">
-                                    <span class="ui-icon ui-icon-check save_button"></span>
-                                    <span class="ui-icon ui-icon-close cancel_button"></span>
-                                </div>
-                            </div>
-                            <div class="view">
-                                <div><div class="name"></div><span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
-                                <div style="clear: both;"></div>
-                                <div class="affixes"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="clear: both;"></div>
-                    <div class="equipment_row">
-                        <div class="set_bonuses"></div>
-                        <div class="slot" id="feet">
-                            feet
-                            <br>
-                            <div class="edit">
-                                <select class="item feet chosen-select"></select>
-                                <div class="affix">
-                                    <div class="primary">
-                                        <select multiple class="chosen-select"></select>
-                                    </div>
-                                </div>
-                                <div class="buttons">
-                                    <span class="ui-icon ui-icon-check save_button"></span>
-                                    <span class="ui-icon ui-icon-close cancel_button"></span>
-                                </div>
-                            </div>
-                            <div class="view">
-                                <div><div class="name"></div><span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
-                                <div style="clear: both;"></div>
-                                <div class="affixes"></div>
-                            </div>
-                        </div>
-                        <div class="legendary_affixes"></div>
-                    </div>
-                </div>
-            </div>
-        </td>
-    </tr>
+				</td>
+			</tr>
+		</table>
+	</div>
+</td>
+<td>
+<div class="center_contents">
+<div class="paperdoll">
+<div class="equipment_row">
+	<div class="slot" id="shoulders">
+		shoulders
+		<br>
+
+		<div class="edit">
+			<select class="item shoulders chosen-select"></select>
+
+			<div class="affix">
+				<div class="primary">
+					<select multiple class="chosen-select"></select>
+				</div>
+			</div>
+			<div class="buttons">
+				<span class="ui-icon ui-icon-check save_button"></span>
+				<span class="ui-icon ui-icon-close cancel_button"></span>
+			</div>
+		</div>
+		<div class="view">
+			<div>
+				<div class="name"></div>
+				<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
+			<div style="clear: both;"></div>
+			<div class="affixes"></div>
+		</div>
+	</div>
+	<div class="slot" id="head">
+		head
+		<br>
+
+		<div class="edit">
+			<select class="item head chosen-select"></select>
+
+			<div class="affix">
+				<div class="primary">
+					<select multiple class="chosen-select"></select>
+				</div>
+			</div>
+			<div class="buttons">
+				<span class="ui-icon ui-icon-check save_button"></span>
+				<span class="ui-icon ui-icon-close cancel_button"></span>
+			</div>
+		</div>
+		<div class="view">
+			<div>
+				<div class="name"></div>
+				<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
+			<div style="clear: both;"></div>
+			<div class="affixes"></div>
+		</div>
+	</div>
+	<div class="slot" id="neck">
+		neck
+		<br>
+
+		<div class="edit">
+			<select class="item neck chosen-select"></select>
+
+			<div class="affix">
+				<div class="primary">
+					<select multiple class="chosen-select"></select>
+				</div>
+			</div>
+			<div class="buttons">
+				<span class="ui-icon ui-icon-check save_button"></span>
+				<span class="ui-icon ui-icon-close cancel_button"></span>
+			</div>
+		</div>
+		<div class="view">
+			<div>
+				<div class="name"></div>
+				<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
+			<div style="clear: both;"></div>
+			<div class="affixes"></div>
+		</div>
+	</div>
+</div>
+<div style="clear: both;"></div>
+<div class="equipment_row">
+	<div class="slot" id="hands">
+		hands
+		<br>
+
+		<div class="edit">
+			<select class="item hands chosen-select"></select>
+
+			<div class="affix">
+				<div class="primary">
+					<select multiple class="chosen-select"></select>
+				</div>
+			</div>
+			<div class="buttons">
+				<span class="ui-icon ui-icon-check save_button"></span>
+				<span class="ui-icon ui-icon-close cancel_button"></span>
+			</div>
+		</div>
+		<div class="view">
+			<div>
+				<div class="name"></div>
+				<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
+			<div style="clear: both;"></div>
+			<div class="affixes"></div>
+		</div>
+	</div>
+	<div class="slot" id="chest">
+		chest
+		<br>
+
+		<div class="edit">
+			<select class="item chest chosen-select"></select>
+
+			<div class="affix">
+				<div class="primary">
+					<select multiple class="chosen-select"></select>
+				</div>
+			</div>
+			<div class="buttons">
+				<span class="ui-icon ui-icon-check save_button"></span>
+				<span class="ui-icon ui-icon-close cancel_button"></span>
+			</div>
+		</div>
+		<div class="view">
+			<div>
+				<div class="name"></div>
+				<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
+			<div style="clear: both;"></div>
+			<div class="affixes"></div>
+		</div>
+	</div>
+	<div class="slot" id="wrists">
+		wrists
+		<br>
+
+		<div class="edit">
+			<select class="item wrists chosen-select"></select>
+
+			<div class="affix">
+				<div class="primary">
+					<select multiple class="chosen-select"></select>
+				</div>
+			</div>
+			<div class="buttons">
+				<span class="ui-icon ui-icon-check save_button"></span>
+				<span class="ui-icon ui-icon-close cancel_button"></span>
+			</div>
+		</div>
+		<div class="view">
+			<div>
+				<div class="name"></div>
+				<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
+			<div style="clear: both;"></div>
+			<div class="affixes"></div>
+		</div>
+	</div>
+</div>
+<div style="clear: both;"></div>
+<div class="equipment_row">
+	<div class="slot" id="lfinger">
+		finger
+		<br>
+
+		<div class="edit">
+			<select class="item finger chosen-select"></select>
+
+			<div class="affix">
+				<div class="primary">
+					<select multiple class="chosen-select"></select>
+				</div>
+			</div>
+			<div class="buttons">
+				<span class="ui-icon ui-icon-check save_button"></span>
+				<span class="ui-icon ui-icon-close cancel_button"></span>
+			</div>
+		</div>
+		<div class="view">
+			<div>
+				<div class="name"></div>
+				<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
+			<div style="clear: both;"></div>
+			<div class="affixes"></div>
+		</div>
+	</div>
+	<div class="slot" id="waist">
+		waist
+		<br>
+
+		<div class="edit">
+			<select class="item waist chosen-select"></select>
+
+			<div class="affix">
+				<div class="primary">
+					<select multiple class="chosen-select"></select>
+				</div>
+			</div>
+			<div class="buttons">
+				<span class="ui-icon ui-icon-check save_button"></span>
+				<span class="ui-icon ui-icon-close cancel_button"></span>
+			</div>
+		</div>
+		<div class="view">
+			<div>
+				<div class="name"></div>
+				<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
+			<div style="clear: both;"></div>
+			<div class="affixes"></div>
+		</div>
+	</div>
+	<div class="slot" id="rfinger">
+		finger
+		<br>
+
+		<div class="edit">
+			<select class="item finger chosen-select"></select>
+
+			<div class="affix">
+				<div class="primary">
+					<select multiple class="chosen-select"></select>
+				</div>
+			</div>
+			<div class="buttons">
+				<span class="ui-icon ui-icon-check save_button"></span>
+				<span class="ui-icon ui-icon-close cancel_button"></span>
+			</div>
+		</div>
+		<div class="view">
+			<div>
+				<div class="name"></div>
+				<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
+			<div style="clear: both;"></div>
+			<div class="affixes"></div>
+		</div>
+	</div>
+</div>
+<div style="clear: both;"></div>
+<div class="equipment_row">
+	<div class="slot" id="mainhand">
+		mainhand
+		<br>
+
+		<div class="edit">
+			<select class="item group onehand twohand chosen-select"></select>
+
+			<div class="affix">
+				<div class="primary">
+					<select multiple class="chosen-select"></select>
+				</div>
+			</div>
+			<div class="buttons">
+				<span class="ui-icon ui-icon-check save_button"></span>
+				<span class="ui-icon ui-icon-close cancel_button"></span>
+			</div>
+		</div>
+		<div class="view">
+			<div>
+				<div class="name"></div>
+				<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
+			<div style="clear: both;"></div>
+			<div class="affixes"></div>
+		</div>
+	</div>
+	<div class="slot" id="legs">
+		legs
+		<br>
+
+		<div class="edit">
+			<select class="item legs chosen-select"></select>
+
+			<div class="affix">
+				<div class="primary">
+					<select multiple class="chosen-select"></select>
+				</div>
+			</div>
+			<div class="buttons">
+				<span class="ui-icon ui-icon-check save_button"></span>
+				<span class="ui-icon ui-icon-close cancel_button"></span>
+			</div>
+		</div>
+		<div class="view">
+			<div>
+				<div class="name"></div>
+				<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
+			<div style="clear: both;"></div>
+			<div class="affixes"></div>
+		</div>
+	</div>
+	<div class="slot" id="offhand">
+		offhand
+		<br>
+
+		<div class="edit">
+			<select class="item group shield mojo source quiver cshield chosen-select"></select>
+
+			<div class="affix">
+				<div class="primary">
+					<select multiple class="chosen-select"></select>
+				</div>
+			</div>
+			<div class="buttons">
+				<span class="ui-icon ui-icon-check save_button"></span>
+				<span class="ui-icon ui-icon-close cancel_button"></span>
+			</div>
+		</div>
+		<div class="view">
+			<div>
+				<div class="name"></div>
+				<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
+			<div style="clear: both;"></div>
+			<div class="affixes"></div>
+		</div>
+	</div>
+</div>
+<div style="clear: both;"></div>
+<div class="equipment_row">
+	<div class="set_bonuses"></div>
+	<div class="slot" id="feet">
+		feet
+		<br>
+
+		<div class="edit">
+			<select class="item feet chosen-select"></select>
+
+			<div class="affix">
+				<div class="primary">
+					<select multiple class="chosen-select"></select>
+				</div>
+			</div>
+			<div class="buttons">
+				<span class="ui-icon ui-icon-check save_button"></span>
+				<span class="ui-icon ui-icon-close cancel_button"></span>
+			</div>
+		</div>
+		<div class="view">
+			<div>
+				<div class="name"></div>
+				<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
+			<div style="clear: both;"></div>
+			<div class="affixes"></div>
+		</div>
+	</div>
+	<div class="legendary_affixes"></div>
+</div>
+</div>
+</div>
+</td>
+</tr>
 </table>
