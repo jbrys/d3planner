@@ -349,11 +349,11 @@
     function populate_values(){
 
     	var best_element = {
-    		val: -1
+    		type: "elemental_damage",
+    		val: _char.totals["elemental_damage"]
     	};
-    	var elements = $.merge(["elemental_damage"], _elements);
 
-    	$.each(elements, function(i, element){
+    	$.each(_elements, function(i, element){
 			if (_char.totals[element] > best_element.val){
 				best_element.type = element;
 				best_element.val = _char.totals[element];
@@ -400,8 +400,8 @@
 			var eled = 1+((_char.totals[element] || 0)/100);
 			var elid = 1+((_values.elid || _defaults.elid)/100);
 
-			var base_min = calculate_base_damage(_values, _defaults, _values.min)*(percent/100);
-			var base_max = calculate_base_damage(_values, _defaults, _values.max)*(percent/100);
+			var base_min = calculate_base_damage(_values, _defaults, _values.min || _defaults.min)*(percent/100);
+			var base_max = calculate_base_damage(_values, _defaults, _values.max || _defaults.max)*(percent/100);
 			var crit_min = calculate_crit_damage(_values, _defaults, base_min);
 			var crit_max = calculate_crit_damage(_values, _defaults, base_max);
 
