@@ -215,12 +215,13 @@
     function edit_button(){
 		var slot_div = $(this).parents(".slot");
 		var slot = slot_div.attr("id");
-		var item_name = _char[slot].name;
+		if(_char[slot]){
+			var item_name = _char[slot].name;
 
-		slot_div.find(".item option").filter(function() {
-			return ($(this).text() == item_name);
-		}).prop('selected', true).change();
-
+			slot_div.find(".item option").filter(function() {
+				return ($(this).text() == item_name);
+			}).prop('selected', true).change();
+		}
         $(this)
             .parents(".view").hide()
             .parents(".slot").children(".edit").show()

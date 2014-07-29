@@ -202,8 +202,10 @@ function item_change(){
 
     join_item(item);
 
-	var affixes = Object.keys(_char[slot].affixes.primary);
-
+	var affixes = {};
+	if (_char[slot] && _char[slot].affixes && _char[slot].affixes.primary){
+		affixes = Object.keys(_char[slot].affixes.primary);
+	}
     $("#"+slot+" .affix .primary select").empty();
     if(item.primary) {
         $("#"+slot+" .affix .primary select").append($("<option></option>").html(""));
