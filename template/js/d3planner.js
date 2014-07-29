@@ -36,9 +36,9 @@ function get_stat_color(min,max,val){
 }
 
 function percent_to_color(percent){
-    R=Math.ceil(255*(1-percent));
-    G=Math.floor(255*percent);
-    B=parseInt(0);
+    R=Math.ceil(200*(1-percent));
+    G=Math.floor(100*percent);
+    B=parseInt(64);
     //alert([R,G,B]);
     R=R.toString(16);
     G=G.toString(16);
@@ -54,7 +54,6 @@ function percent_to_color(percent){
     while(B.length < 2){
         B = "0"+B;
     }
-
     return "#"+R+G+B;
 }
 
@@ -119,4 +118,100 @@ function format_number(number, precision, commas){
 		string_value = string_value.split(".")[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (string_value.split(".")[1] ? "."+string_value.split(".")[1] : "");
 
 	return string_value;
+}
+
+function get_display_value(val, scale){
+    var display_val = String(val/Math.pow(10, scale || 0));
+
+    if(scale > 0){
+        if(display_val.indexOf(".") < 0){
+            display_val += ".";
+        }
+        while(display_val.split(".")[1].length < scale){
+            display_val += "0";
+        }
+    }
+    return display_val;
+}
+
+function get_template(affix, value){
+    affix_stuff = _translate[affix] || {};
+    if (value){
+        return (affix_stuff.template || affix_stuff.display || affix + " {0}").replace("{0}", get_display_value(value, affix_stuff.scale || 0));
+    }
+    else{
+        return (affix_stuff.display || affix);
+    }
+}
+
+function clear_slot(item_ddl){
+    item_ddl.empty();
+    item_ddl.append($("<option></option>").html(""));
+}
+function load_slot(cat, item_ddl, group){
+    var slot = item_ddl.parents(".slot").prop("id");
+
+    $.getJSON(_base+"json/"+cat, function(data) {
+        if (item_ddl.hasClass("group")){
+            parent_item = $("<optgroup></optgroup>").attr("label",cat);
+            item_ddl.append(parent_item);
+        }
+        else{
+            parent_item = item_ddl;
+        }
+
+        $.each(data.items, function(key, item) {
+            item.cat = cat;
+            parent_item.append($("<option></option>").html(key));
+        });
+
+        if(_slots[slot])
+            $.extend(_slots[slot].items, data.items);
+        else
+            _slots[slot] = data;
+
+    });
+}
+function load_ddl(item_ddl){
+    clear_slot(item_ddl);
+    $.each(item_ddl.attr("class").split(/\s+/), function(i, slot){
+        if($.inArray(slot, _valid_slots) > -1){
+            load_slot(slot, item_ddl, false);
+        }
+    });
+    item_ddl.parent().children(".chosen-select").trigger("chosen:updated");
+}
+
+function join_item(item){
+
+    if(item && !item.joined){
+        $.each(_affix.primary[item.cat], function(stat,value){
+            if(item.primary)
+                item.primary[stat] = value;
+        });
+        item.socket_value = _affix.primary[item.cat].socket_value;
+        item.joined = true;
+    }
+}
+
+function item_change(){
+    var ddl = $(this);
+    var slot = ddl.parents(".slot").prop("id");
+    var item_name = ddl.find("option:selected").text();
+    var item = _slots[slot].items[item_name];
+
+    join_item(item);
+
+	var affixes = Object.keys(_char[slot].affixes.primary);
+
+    $("#"+slot+" .affix .primary select").empty();
+    if(item.primary) {
+        $("#"+slot+" .affix .primary select").append($("<option></option>").html(""));
+        $.each(item.primary, function(stat,value){
+            if(_translate[stat])
+                $("#"+slot+" .affix .primary select")
+                    .append($("<option></option>").html(get_template(stat)).attr("value", stat).attr("selected", $.inArray(stat, affixes) >=0));
+        });
+    }
+    $("#"+slot+ " .chosen-select").trigger("chosen:updated");
 }

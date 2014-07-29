@@ -122,5 +122,8 @@
    },
    "akkhan_6":{
         "display":"Reduce the cooldown of Akarat's Champion by 50%."
+   },
+   "perfection":{
+        "template":"{0}% Perfect"
    }
 }

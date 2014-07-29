@@ -10,14 +10,12 @@
                         "feet"];
     var _char = {};
     var _translate = {};
-
     var _base_stats = {
         "main_stat" : 217,
         "vitality" : 147,
         "critical_hit_damage" : 50,
         "critical_hit_chance" : 50
     }
-
     var _defaults = {
         "max": 2,
         "min": 3,
@@ -29,77 +27,8 @@
         "elid": 0,
         "aps": 1
     };
-
 	var _values;
-
     var _elements = ["holy_damage","fire_damage"];
-
-    function join_item(item){
-        if(!item.joined){
-            $.each(_affix.primary[item.cat], function(stat,value){
-                if(item.primary)
-                    item.primary[stat] = value;
-            });
-            item.socket_value = _affix.primary[item.cat].socket_value;
-            item.joined = true;
-        }
-    }
-    function item_change(){
-        var ddl = $(this);
-        var slot = ddl.parents(".slot").prop("id");
-        var item_name = ddl.find("option:selected").text();
-        var item = _slots[slot].items[item_name];
-
-        join_item(item);
-
-        $("#"+slot+" .affix .primary select").empty();
-        if(item.primary) {
-            $("#"+slot+" .affix .primary select").append($("<option></option>").html(""));
-            $.each(item.primary, function(stat,value){
-                if(_translate[stat])
-                    $("#"+slot+" .affix .primary select")
-                        .append($("<option></option>").html(get_template(stat)).attr("value", stat));
-            });
-        }
-        $("#"+slot+ " .chosen-select").trigger("chosen:updated");
-    }
-    function clear_slot(item_ddl){
-        item_ddl.empty();
-        item_ddl.append($("<option></option>").html(""));
-    }
-    function load_slot(cat, item_ddl, group){
-        var slot = item_ddl.parents(".slot").prop("id");
-
-        $.getJSON("${base}json/"+cat, function(data) {
-            if (item_ddl.hasClass("group")){
-                parent_item = $("<optgroup></optgroup>").attr("label",cat);
-                item_ddl.append(parent_item);
-            }
-            else{
-                parent_item = item_ddl;
-            }
-
-            $.each(data.items, function(key, item) {
-                item.cat = cat;
-                parent_item.append($("<option></option>").html(key));
-            });
-
-			if(_slots[slot])
-				$.extend(_slots[slot].items, data.items);
-			else
-				_slots[slot] = data;
-
-        });
-    }
-    function load_ddl(item_ddl){
-        clear_slot(item_ddl);
-        $.each(item_ddl.attr("class").split(/\s+/), function(i, slot){
-            if($.inArray(slot, _valid_slots) > -1){
-                load_slot(slot, item_ddl, false);
-            }
-        });
-        item_ddl.parent().children(".chosen-select").trigger("chosen:updated");
-    }
 
     function update_char(){
         var totals = jQuery.extend(true, {}, _base_stats);
@@ -139,14 +68,19 @@
                     var affix_div = $("#templates .affix").clone(true,true);
 
                     affix_div.find(".type").html(get_template(affix.name, affix.val)).attr("affix", affix.name);
-                    affix_div.find(".value")
-                        .attr("min", affix.min)
-                        .attr("max", affix.max)
-                        .attr("val", affix.val)
-                        .attr("step", affix.step)
-                        .attr("scale", affix.scale)
-                        .find(".edit_affix_button")
-                            .click(edit_affix);
+
+					//alert([affix.val-affix.min,affix.max-affix.min,affix.val-affix.min/affix.max-affix.min]);
+
+                    affix_div
+                    	.css("color",percent_to_color((affix.val-affix.min+1)/(affix.max-affix.min+1)))
+                    	.find(".value")
+							.attr("min", affix.min)
+							.attr("max", affix.max)
+							.attr("val", affix.val)
+							.attr("step", affix.step)
+							.attr("scale", affix.scale)
+							.find(".edit_affix_button")
+								.click(edit_affix);
 
                     affixes_div.append(affix_div).append($("<div style='clear: both;'></div>"));
                 });
@@ -157,6 +91,7 @@
                     $(".legendary_affixes").append(legendary_div);
                     legendary_div.html(get_template(index));
                 });
+                calculate_perfection(slot);
             }
         });
         _char.sets = sets;
@@ -199,10 +134,12 @@
         $(".totals tr").each(function(i,tr){
             tr = $(tr);
             var affix = tr.attr("id");
-            var value = _char.totals[affix] || 0;
-            var scale = _translate[affix].scale || 0;
+            if(affix){
+				var value = _char.totals[affix] || 0;
+				var scale = _translate[affix].scale || 0;
 
-            tr.children().html(get_template(affix, value));
+				tr.children().html(get_template(affix, value));
+            }
         });
 	}
 
@@ -231,29 +168,30 @@
         return false;
     }
 
-    function get_display_value(val, scale){
-        var display_val = String(val/Math.pow(10, scale || 0));
+	function calculate_perfection(slot){
+		var slot_div = $("#"+slot);
+		var percentages = [];
+		$.each(slot_div.find(".value"), function(i, value_div){
+			value_div = $(value_div);
+            var min = parseInt(value_div.attr("min"));
+            var max = parseInt(value_div.attr("max"));
+            var val = parseInt(value_div.attr("val"));
+            var step = parseInt(value_div.attr("step") || 1);
 
-        if(scale > 0){
-            if(display_val.indexOf(".") < 0){
-                display_val += ".";
-            }
-            while(display_val.split(".")[1].length < scale){
-                display_val += "0";
-            }
-        }
-        return display_val;
-    }
+			percentages.push((val-min+1)/(max-min+1));
+		});
 
-    function get_template(affix, value){
-        affix_stuff = _translate[affix] || {};
-        if (value){
-            return (affix_stuff.template || affix_stuff.display || affix + " {0}").replace("{0}", get_display_value(value, affix_stuff.scale || 0));
-        }
-        else{
-            return (affix_stuff.display || affix);
-        }
-    }
+		if (percentages.length > 0){
+			var perfection = percentages.reduce(function(pv, cv) { return pv + cv; }, 0) / percentages.length
+			slot_div.find(".perfection")
+				.css("color",percent_to_color(perfection))
+				.html(get_template("perfection",format_number(perfection*100,2,false)));
+		}
+		else{
+			slot_div.find(".perfection").empty();
+		}
+
+	}
 
     function on_slider(event, ui) {
         var affix_div = $(this).parents(".affix");
@@ -261,15 +199,77 @@
         var slot_div = affix_div.parents(".slot");
         var slot = slot_div.attr("id");
 
+
         var value_div = affix_div.find(".value");
         var val = parseInt(ui.value);
+		var min = parseInt(value_div.attr("min"));
+		var max = parseInt(value_div.attr("max"));
         var scale = parseInt(value_div.attr("scale"));
 
         _char[slot].affixes.primary[affix].val = ui.value;
 
         affix_div.find(".type").html(get_template(affix,val)).attr("affix", affix);
         affix_div.find(".value").attr("val", val);
+        affix_div.css("color",percent_to_color((val-min+1)/(max-min+1)))
     }
+    function edit_button(){
+		var slot_div = $(this).parents(".slot");
+		var slot = slot_div.attr("id");
+		var item_name = _char[slot].name;
+
+		slot_div.find(".item option").filter(function() {
+			return ($(this).text() == item_name);
+		}).prop('selected', true).change();
+
+        $(this)
+            .parents(".view").hide()
+            .parents(".slot").children(".edit").show()
+            .find(".chosen-select").chosen();
+        return false;
+    }
+	function cancel_button(){
+		$(this)
+            .parents(".edit").hide()
+			.parents(".slot").children(".view").show();
+		return false;
+	}
+	function save_button(){
+		var slot_div = $(this).parents(".slot");
+		var slot = slot_div.attr("id");
+		var item_name = slot_div.find(".item option:selected").text();
+		var item = _slots[slot].items[item_name];
+
+		var old_affixes = {};
+		if (_char[slot] && _char[slot].affixes && _char[slot].affixes.primary)
+			old_affixes = _char[slot].affixes.primary;
+
+		_char[slot] = {};
+		_char[slot].name = item_name;
+
+		_char[slot].affixes = {};
+		_char[slot].affixes.primary = {};
+
+		slot_div.find(".primary option:selected").each(function(index, affix_node){
+			affix_name = $(affix_node).attr("value");
+			affix_data = item.primary[affix_name]
+			affix = {};
+			affix.name = affix_name;
+			affix.min = affix_data.min;
+			affix.max = affix_data.max;
+			affix.val = old_affixes[affix_name] ? old_affixes[affix_name].val || affix_data.max : affix_data.max;
+			affix.step = affix_data.step;
+			affix.scale = affix_data.scale;
+
+			_char[slot].affixes.primary[affix_name] = affix;
+		});
+		update_char();
+
+		$(this)
+			.parents(".edit").hide()
+			.parents(".slot").children(".view").show();
+		return false;
+	}
+
 
     $(document).ready(function(){
         $.cookie.json = true;
@@ -291,51 +291,9 @@
             load_ddl($(item_ddl));
         });
 
-        $(".edit_button").click(function(){
-            $(this)
-                .parents(".view").hide()
-                .parents(".slot").children(".edit").show()
-                .find(".chosen-select").chosen();
-            return false;
-        });
-        $(".cancel_button").click(function(){
-            $(this)
-                .parents(".edit").hide()
-                .parents(".slot").children(".view").show();
-            return false;
-        });
-        $(".save_button").click(function(){
-            var slot_div = $(this).parents(".slot");
-            var slot = slot_div.attr("id");
-            var item_name = slot_div.find(".item option:selected").text();
-            var item = _slots[slot].items[item_name];
-
-            _char[slot] = {};
-            _char[slot].name = item_name;
-
-            _char[slot].affixes = {};
-            _char[slot].affixes.primary = {};
-
-            slot_div.find(".primary option:selected").each(function(index, affix_node){
-                affix_name = $(affix_node).attr("value");
-                affix_data = item.primary[affix_name]
-                affix = {};
-                affix.name = affix_name;
-                affix.min = affix_data.min;
-                affix.max = affix_data.max;
-                affix.val = affix_data.max;
-                affix.step = affix_data.step;
-                affix.scale = affix_data.scale;
-
-                _char[slot].affixes.primary[affix_name] = affix;
-            });
-            update_char();
-
-            $(this)
-                .parents(".edit").hide()
-                .parents(".slot").children(".view").show();
-            return false;
-		});
+        $(".edit_button").click(edit_button);
+        $(".cancel_button").click(cancel_button);
+        $(".save_button").click(save_button);
 		$.each(_elements, function(i, element){
 			$("#skill_element").append("<option value='{0}'>{1}</option>".format(element,_translate[element].dropdown));
 		});
@@ -454,9 +412,12 @@
 
 <table style="width:100%;">
 	<tr>
-		<td style="vertical-align:top;">
+		<td class="data">
 			<div class="totals">
 				<table>
+					<thead><tr><td>
+						Offensive Stats
+					</td></tr></thead>
 					<tr id="main_stat">
 						<td>
 
@@ -506,6 +467,9 @@
 			</div>
 			<div class="damage">
 				<table>
+					<thead><tr><td>
+						Damage Stats
+					</td></tr></thead>
 					<tr id="sheet_dps">
 						<td>
 							<span class="label"></span><span class="value"></span>
@@ -536,10 +500,8 @@
 				<div class="slot" id="shoulders">
 					shoulders
 					<br>
-
 					<div class="edit">
 						<select class="item shoulders chosen-select"></select>
-
 						<div class="affix">
 							<div class="primary">
 								<select multiple class="chosen-select"></select>
@@ -557,11 +519,14 @@
 						<div style="clear: both;"></div>
 						<div class="affixes"></div>
 					</div>
+					<div class="stats">
+						<div class="perfection"></div>
+						<div class="dps_contribution"></div>
+					</div>
 				</div>
 				<div class="slot" id="head">
 					head
 					<br>
-
 					<div class="edit">
 						<select class="item head chosen-select"></select>
 
@@ -581,6 +546,10 @@
 							<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
 						<div style="clear: both;"></div>
 						<div class="affixes"></div>
+					</div>
+					<div class="stats">
+						<div class="perfection"></div>
+						<div class="dps_contribution"></div>
 					</div>
 				</div>
 				<div class="slot" id="neck">
@@ -606,6 +575,10 @@
 							<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
 						<div style="clear: both;"></div>
 						<div class="affixes"></div>
+					</div>
+					<div class="stats">
+						<div class="perfection"></div>
+						<div class="dps_contribution"></div>
 					</div>
 				</div>
 			</div>
@@ -635,6 +608,10 @@
 						<div style="clear: both;"></div>
 						<div class="affixes"></div>
 					</div>
+					<div class="stats">
+						<div class="perfection"></div>
+						<div class="dps_contribution"></div>
+					</div>
 				</div>
 				<div class="slot" id="chest">
 					chest
@@ -660,6 +637,10 @@
 						<div style="clear: both;"></div>
 						<div class="affixes"></div>
 					</div>
+					<div class="stats">
+						<div class="perfection"></div>
+						<div class="dps_contribution"></div>
+					</div>
 				</div>
 				<div class="slot" id="wrists">
 					wrists
@@ -684,6 +665,10 @@
 							<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
 						<div style="clear: both;"></div>
 						<div class="affixes"></div>
+					</div>
+					<div class="stats">
+						<div class="perfection"></div>
+						<div class="dps_contribution"></div>
 					</div>
 				</div>
 			</div>
@@ -713,6 +698,10 @@
 						<div style="clear: both;"></div>
 						<div class="affixes"></div>
 					</div>
+					<div class="stats">
+						<div class="perfection"></div>
+						<div class="dps_contribution"></div>
+					</div>
 				</div>
 				<div class="slot" id="waist">
 					waist
@@ -738,6 +727,10 @@
 						<div style="clear: both;"></div>
 						<div class="affixes"></div>
 					</div>
+					<div class="stats">
+						<div class="perfection"></div>
+						<div class="dps_contribution"></div>
+					</div>
 				</div>
 				<div class="slot" id="rfinger">
 					finger
@@ -762,6 +755,10 @@
 							<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
 						<div style="clear: both;"></div>
 						<div class="affixes"></div>
+					</div>
+					<div class="stats">
+						<div class="perfection"></div>
+						<div class="dps_contribution"></div>
 					</div>
 				</div>
 			</div>
@@ -791,6 +788,10 @@
 						<div style="clear: both;"></div>
 						<div class="affixes"></div>
 					</div>
+					<div class="stats">
+						<div class="perfection"></div>
+						<div class="dps_contribution"></div>
+					</div>
 				</div>
 				<div class="slot" id="legs">
 					legs
@@ -816,6 +817,10 @@
 						<div style="clear: both;"></div>
 						<div class="affixes"></div>
 					</div>
+					<div class="stats">
+						<div class="perfection"></div>
+						<div class="dps_contribution"></div>
+					</div>
 				</div>
 				<div class="slot" id="offhand">
 					offhand
@@ -840,6 +845,10 @@
 							<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
 						<div style="clear: both;"></div>
 						<div class="affixes"></div>
+					</div>
+					<div class="stats">
+						<div class="perfection"></div>
+						<div class="dps_contribution"></div>
 					</div>
 				</div>
 			</div>
@@ -870,6 +879,10 @@
 						<div style="clear: both;"></div>
 						<div class="affixes"></div>
 					</div>
+					<div class="stats">
+						<div class="perfection"></div>
+						<div class="dps_contribution"></div>
+					</div>
 				</div>
 				<div class="legendary_affixes"></div>
 			</div>
@@ -881,60 +894,65 @@
 		<td colspan="2">
 			<div id="skill_damage">
 				<table>
-					<tr>
+					<thead>
 						<td>
 
 						</td>
-						<td>
+						<td></td>
+						<td colspan="3">
 							<span class="label header">Damage</span>
 						</td>
-						<td>
+						<td colspan="3">
 							<span class="label header">Crit Damage</span>
 						</td>
-					</tr>
+					</thead>
 					<tr>
 						<td>
-							<span class="label">Skill Damage (%)</span><input id="skill_percent" type="text" value="100" style="width:60px;"/>
+							<span class="label">Skill Damage</span>&nbsp;<input id="skill_percent" type="text" value="100" style="width:60px;"/>%
 							<select id="skill_element" class="chosen-select" style="width:80px;"></select>
 						</td>
+						<td></td>
 						<td>
-							<span id="min"></span>-<span id="max"></span>
+							<span id="min" class="min"></span></td><td>-</td><td><span id="max" class="max"></span>
 						</td>
 						<td>
-							<span id="c_min"></span>-<span id="c_max"></span>
+							<span id="c_min" class="min"></span></td><td>-</td><td><span id="c_max" class="max"></span>
 						</td>
 					</tr>
 					<tr>
+						<td></td>
 						<td>
 							<span class="label">Elemental</span>
 						</td>
 						<td>
-							<span id="ele_min"></span>-<span id="ele_max"></span>
+							<span id="ele_min" class="min"></span></td><td>-</td><td><span id="ele_max" class="max"></span>
 						</td>
 						<td>
-							<span id="ele_c_min"></span>-<span id="ele_c_max"></span>
+							<span id="ele_c_min" class="min"></span></td><td>-</td><td><span id="ele_c_max" class="max"></span>
 						</td>
 					</tr>
 					<tr>
+						<td></td>
 						<td>
 							<span class="label">Elite</span>
 						</td>
 						<td>
-							<span id="eli_min"></span>-<span id="eli_max"></span>
+							<span id="eli_min" class="min"></span></td><td>-</td><td><span id="eli_max" class="max"></span>
 						</td>
 						<td>
-							<span id="eli_c_min"></span>-<span id="eli_c_max"></span>
+							<span id="eli_c_min" class="min"></span></td><td>-</td><td><span id="eli_c_max" class="max"></span>
 						</td>
 					</tr>
 					<tr>
+						<td></td>
 						<td>
 							<span class="label">Elemental Elite</span>
 						</td>
 						<td>
-							<span id="ele_eli_min"></span>-<span id="ele_eli_max"></span>
+							<span id="ele_eli_min" class="min"></span></td><td>-</td><td><span id="ele_eli_max" class="max"></span>
 						</td>
 						<td>
-							<span id="ele_eli_c_min"></span>-<span id="ele_eli_c_max"></span>
+							<span id="ele_eli_c_min" class="min"></span></td><td>-</td><td><span id="ele_eli_c_max" class="max"></span>
 						</td>
 					</tr>
 				</table>

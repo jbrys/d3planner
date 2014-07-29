@@ -1,6 +1,6 @@
 .paperdoll {
-    min-width: 620px;
-    max-width: 1220;
+    min-width: 324px;
+    max-width: 966px;
     width: 100%;
     text-align: center;
     display:inline-block;
@@ -20,73 +20,53 @@
 
 .slot, .set_bonuses, .legendary_affixes{
     min-height: 60px;
-    max-width: 400px;
-    min-width: 200px;
+    max-width: 320px;
+    min-width: 290px;
     width: 32%;
     display: inline-block;
     vertical-align: top;
-
-    background-color: grey;
-    margin: 5 5 5 5;
+    background-color: LightGray;
+    margin: 2px 0 2px 0;
+    padding: 5px 5px 5px 5px;
 }
-.slot .buttons {
-    display:inline-block;
-}
+.slot .buttons {display:inline-block;}
 .slot .buttons, .item, .affix select {
     max-width: 300px;
     min-width: 200px;
 }
-.item, .affix select {
-    width: 100%;
-}
-.chosen-container-multi .chosen-choices li.search-field input[type=text]{
-    height: auto !important;
-}
+.item, .affix select {    width: 100%;}
+.chosen-container-multi .chosen-choices li.search-field input[type=text]{height: auto !important;}
 
-.equipment_row {
-}
+.slot .edit {display: none;}
+.slot .save_button {float: left;}
+.slot .cancel_button {float: right;}
+.slot .perfection { padding: 5px 0 0 0; font-weight: bold;}
+.affix .value{float: right;}
+.affix .type{float: left;}
 
-.slot .edit {
-    display: none;
-}
-.slot .edit_button {
-}
-.slot .save_button {
-    float: left;
-}
-.slot .cancel_button {
-    float: right;
-}
-
-.slot .view {
-    display: inline-block;
-}
-
-.affix .value{
-    float: right;
-}
-.affix .type{
-    float: left;
-}
-
-.bottom_spacer {
-    height: 200px;
-}
+.bottom_spacer {height: 200px;}
 
 .view .name{
     font-weight: bold;
     display: inline-block;
 }
 
-.totals {
+.data {
     vertical-align: top;
     white-space: nowrap;
+    width: 280px;
 }
 
-.set .name {
-    font-weight: bold;
-}
 
+.set .name {font-weight: bold;}
 .damage table { width:100%; }
 .label { text-align: left; }
 .value { text-align: right; float: right; }
+table thead td { font-weight: bold; padding: 10px 0 0 0;}
+.legendary_affix, .set_affix {padding: 5px 0 0 0;}
+
+#skill_damage thead td { text-align: center; }
+#skill_damage td { padding: 3px 10px 0 0; text-align: right;}
+#skill_damage .min, #skill_damage .max { }
+#skill_damage .min { font-size: 14px; }
+#skill_damage .max { font-weight: 600; }
