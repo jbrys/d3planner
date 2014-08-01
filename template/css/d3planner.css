@@ -70,3 +70,6 @@ table thead td { font-weight: bold; padding: 10px 0 0 0;}
 #skill_damage .min, #skill_damage .max { }
 #skill_damage .min { font-size: 14px; }
 #skill_damage .max { font-weight: 600; }
+
+.import { position: absolute; width: 100%; top: 0; left: 0; height: 25px; display: none; }
+.import #character_list, .import #import_end { display: none; }

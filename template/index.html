@@ -10,6 +10,7 @@
                         "feet"];
     var _char = {};
     var _translate = {};
+    var _bnet_translate = {};
     var _base_stats = {
         "main_stat" : 217,
         "vitality" : 147,
@@ -324,6 +325,9 @@
         $.getJSON("${base}json/translate", function(data) {
             _translate = data;
         });
+        $.getJSON("${base}json/bnet_translate", function(data) {
+            _bnet_translate = data;
+        });
         $.getJSON("${base}json/sets", function(data) {
             _sets = data;
         });
@@ -334,6 +338,9 @@
         $(".edit_button").click(edit_button);
         $(".cancel_button").click(cancel_button);
         $(".save_button").click(save_button);
+        $("#import_begin").click(import_begin);
+        $("#import_end").click(import_end);
+        $("#fetch").click(fetch);
 		$.each(_elements, function(i, element){
 			$("#skill_element").append("<option value='{0}'>{1}</option>".format(element,_translate[element].dropdown));
 		});
@@ -423,6 +430,46 @@
 			$("#ele_eli_c_max").text(format_number(crit_max*eled*elid,0,true));
 		}
 	}
+	function import_begin(){
+		$(".import #character_list, .import #import_end").hide().empty();
+		$(".import").show();
+	}
+	function fetch(){
+		var matches = /([a-z]+)[#\-](\d{4})/i.exec($(".import #bid").val());
+		if(matches && matches.length == 3){
+			var profile_url = _base+"bnet_profile/{0}/{1}/".format(matches[1],matches[2])
+			$.getJSON(profile_url, function(data){
+				$.each(data.heroes, function(i, hero){
+					$("#character_list")
+						.append("<option value='{0}'>{1}</option>".format(hero.id,hero.name));
+				});
+				$(".import #character_list, .import #import_end").show();
+			});
+		}
+	}
+	function import_end(){
+		$(".import").hide();
+		var matches = /([a-z]+)[#\-](\d{4})/i.exec($(".import #bid").val());
+		var hero_id = $("#character_list").val();
+		var character_profile_url = _base+"character_profile/{0}/{1}/{2}".format(matches[1],matches[2],hero_id)
+		$.getJSON(character_profile_url, function(c_data){
+			$.each(c_data.items, function(slot, i_data){
+				slot = _bnet_translate[slot] || slot;
+				var item_name =  _bnet_translate[i_data.name] || i_data.name;
+				item_blob = _slots[slot].items[item_name];
+
+				_char[slot] = {};
+				if(item_blob){
+					_char[slot].name = item_name;
+					_char[slot].affixes = {};
+					_char[slot].affixes.primary = {};
+				}
+			});
+			save_to_cookie(_char);
+			update_char();
+		});
+		$(".import").hide();
+	}
 </script>
 
 <a id="debug" href="#">debug</a>
@@ -450,6 +497,16 @@
 </div>
 
 <table style="width:100%;">
+	<tr>
+		<td colspan="2"><input type="button" id="import_begin" value="import"/>
+		<div class="import">
+			<input type="text" id="bid" value=""/>
+			<input type="button" id="fetch" value="fetch"/>
+			<select id="character_list"></select>
+			<input type="button" id="import_end" value="import"/>
+		</div>
+	</td>
+	</tr>
 	<tr>
 		<td class="data">
 			<div class="totals">
