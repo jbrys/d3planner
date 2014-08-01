@@ -43,5 +43,5 @@ class Host(object):
 
 	@cherrypy.expose
 	def item_details(self, item_id):
-		url = "http://us.battle.net//api/d3/data/item/{0}".format(item_id)
+		url = "http://us.battle.net/api/d3/data/item/{0}".format(item_id)
 		return urllib.urlopen(url)

@@ -46,9 +46,12 @@
             if(item.name){
                 var item_blob = _slots[slot].items[item.name];
 
-                if(item_blob.set)
+                slot_div.addClass("legendary");
+                if(item_blob.set){
                     sets[item_blob.set] = (sets[item_blob.set] || 0) + 1
-
+                    slot_div.addClass("set");
+                    slot_div.removeClass("legendary");
+				}
                 var affixes_div = slot_div.find(".view .affixes");
 
                 affixes_div.empty();
@@ -405,8 +408,8 @@
 			var eled = 1+((_char.totals[element] || 0)/100);
 			var elid = 1+((_values.elite_damage || _defaults.elite_damage)/100);
 
-			var base_min = calculate_base_damage(_values, _defaults, _values.min || _defaults.min)*(percent/100);
-			var base_max = calculate_base_damage(_values, _defaults, _values.max || _defaults.max)*(percent/100);
+			var base_min = calculate_base_damage(_values, _defaults, _values.min_damage || _defaults.min_damage)*(percent/100);
+			var base_max = calculate_base_damage(_values, _defaults, _values.max_damage || _defaults.max_damage)*(percent/100);
 			var crit_min = calculate_crit_damage(_values, _defaults, base_min);
 			var crit_max = calculate_crit_damage(_values, _defaults, base_max);
 
@@ -987,7 +990,7 @@
 			</div>
 			<div style="clear: both;"></div>
 			<div class="equipment_row">
-				<div class="set_bonuses"></div>
+				<div class="set_bonuses set"></div>
 				<div class="slot" id="feet">
 					feet
 					<br>
@@ -1017,7 +1020,7 @@
 						<div class="dps_loss"></div>
 					</div>
 				</div>
-				<div class="legendary_affixes"></div>
+				<div class="legendary_affixes legendary"></div>
 			</div>
 			</div>
 			</div>
@@ -1028,16 +1031,18 @@
 			<div id="skill_damage">
 				<table>
 					<thead>
-						<td>
+						<tr>
+							<td>
 
-						</td>
-						<td></td>
-						<td colspan="3">
-							<span class="label header">Damage</span>
-						</td>
-						<td colspan="3">
-							<span class="label header">Crit Damage</span>
-						</td>
+							</td>
+							<td></td>
+							<td colspan="3">
+								<span class="label header">Damage</span>
+							</td>
+							<td colspan="3">
+								<span class="label header">Crit Damage</span>
+							</td>
+						</tr>
 					</thead>
 					<tr>
 						<td>
