@@ -184,7 +184,6 @@ function load_ddl(item_ddl){
 }
 
 function join_item(item){
-
     if(item && !item.joined){
         $.each(_affix.primary[item.cat], function(stat,value){
             if(item.primary)

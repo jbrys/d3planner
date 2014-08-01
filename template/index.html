@@ -1,5 +1,6 @@
 <%inherit file="/base.html"/>
 <script type="text/javascript">
+	var _debug = false;
     var _affix;
     var _slots = {};
     var _sets;
@@ -40,35 +41,35 @@
         $(".set_bonuses").empty();
 
         $.each(_char, function(slot,item){
+            var slot_div = $("#"+slot);
+            slot_div.find(".name").html(item.name || "");
             if(item.name){
                 var item_blob = _slots[slot].items[item.name];
 
                 if(item_blob.set)
                     sets[item_blob.set] = (sets[item_blob.set] || 0) + 1
 
-                var slot_div = $("#"+slot);
-                slot_div.find(".name").html(item.name);
                 var affixes_div = slot_div.find(".view .affixes");
 
                 affixes_div.empty();
-                $.each(item.affixes.primary, function(index,affix){
-                    if (affix.name == "socket"){
+                $.each(item.affixes.primary, function(affix_name,affix){
+                    if (affix_name == "socket"){
                         join_item(item_blob);
                         $.each(item_blob.socket_value || {}, function(socket_affix, value){
                             totals[socket_affix] = (totals[socket_affix] || 0) + value * affix.val;
                         });
                     }
                     else{
-                    	if (affix.name == "elemental_damage"){
+                    	if (affix_name == "elemental_damage"){
 							$.each(_elements, function(i, element){
 								totals[element] = (totals[element] || 0) + affix.val;
 							});
 						}
-                        totals[affix.name] = (totals[affix.name] || 0) + affix.val;
+                        totals[affix_name] = (totals[affix_name] || 0) + affix.val;
                     }
                     var affix_div = $("#templates .affix").clone(true,true);
 
-                    affix_div.find(".type").html(get_template(affix.name, affix.val)).attr("affix", affix.name);
+                    affix_div.find(".type").html(get_template(affix_name, affix.val)).attr("affix", affix_name);
 
 					//alert([affix.val-affix.min,affix.max-affix.min,affix.val-affix.min/affix.max-affix.min]);
 
@@ -314,7 +315,7 @@
 
     $(document).ready(function(){
         $.cookie.json = true;
-        $("#debug").click(function(){$("#debug_output").html(JSON.stringify(_translate));});
+        $("#debug").click(function(){_debug=true;});
         $(".item").change(item_change);
         $.ajaxSetup({
             async: false
@@ -453,16 +454,48 @@
 		var hero_id = $("#character_list").val();
 		var character_profile_url = _base+"character_profile/{0}/{1}/{2}".format(matches[1],matches[2],hero_id)
 		$.getJSON(character_profile_url, function(c_data){
-			$.each(c_data.items, function(slot, i_data){
+			$.each(c_data.items, function(slot, item){
 				slot = _bnet_translate[slot] || slot;
-				var item_name =  _bnet_translate[i_data.name] || i_data.name;
+				var item_name =  _bnet_translate[item.name] || item.name;
 				item_blob = _slots[slot].items[item_name];
 
 				_char[slot] = {};
 				if(item_blob){
+					join_item(item_blob);
 					_char[slot].name = item_name;
 					_char[slot].affixes = {};
 					_char[slot].affixes.primary = {};
+					var item_url = _base+"item_details/{0}".format(item.tooltipParams.replace("item/",""));
+					$.getJSON(item_url, function(i_data){
+						$.each(i_data.attributesRaw, function(key,value){
+							var value = (value.min+value.max)/2;
+							translate_data = _bnet_translate[key.split("#")[0]] || _bnet_translate[key];
+							if(translate_data){
+								var scale = translate_data.scale || 0;
+								affixes = translate_data.name;
+								value = value*Math.pow(10,scale);
+								$.each(affixes, function(i, affix){
+									if(item_blob.primary[affix]){
+										if(!_char[slot].affixes.primary[affix]){
+											_char[slot].affixes.primary[affix] = $.extend(true, {},item_blob.primary[affix]);
+										}
+										scale = _char[slot].affixes.primary[affix].scale || 0;
+										value = Math.round(value*Math.pow(10,scale));
+										if(affix == "max_damage"||affix == "min_damage"){
+											debug([slot,affix,value,_char[slot].affixes.primary[affix].val]);
+											debug(JSON.stringify(i_data.attributesRaw[key]));
+										}
+										_char[slot].affixes.primary[affix].val =
+											(_char[slot].affixes.primary[affix].val || 0) + value
+									}
+								});
+							}
+							else{
+
+							}
+						});
+					});
+					debug("-----");
 				}
 			});
 			save_to_cookie(_char);
@@ -470,10 +503,14 @@
 		});
 		$(".import").hide();
 	}
+	function debug(data){
+		if(_debug){
+			$("#debug_output").append("<div>{0}<div>".format(data));
+		}
+	}
 </script>
 
 <a id="debug" href="#">debug</a>
-<div id="debug_output"></div>
 <div id="templates" style="display:none;">
 	<div class="affix">
 		<div class="view_affix">
@@ -1056,3 +1093,5 @@
 		</td>
 	</tr>
 </table>
+
+<div id="debug_output"></div>
