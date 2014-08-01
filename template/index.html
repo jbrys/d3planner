@@ -17,15 +17,15 @@
         "critical_hit_chance" : 50
     }
     var _defaults = {
-        "max": 3,
-        "min": 2,
-        "ms": 217,
-        "as": 0,
-        "chc": 5,
-        "chd": 50,
-        "eled": 0,
-        "elid": 0,
-        "aps": 1
+        "max_damage": 3,
+        "min_damage": 2,
+        "main_stat": 217,
+        "attack_speed": 0,
+        "critical_hit_chance": 5,
+        "critical_hit_damage": 50,
+        "element_damage": 0,
+        "elite_damage": 0,
+        "attacks_per_second": 1
     };
 	var _values;
     var _elements = ["holy_damage","fire_damage"];
@@ -91,7 +91,6 @@
                     $(".legendary_affixes").append(legendary_div);
                     legendary_div.html(get_template(index));
                 });
-                calculate_perfection(slot);
             }
         });
         _char.sets = sets;
@@ -126,6 +125,9 @@
         calculate_totals();
         calculate_damage();
         skill_damage();
+        $(".slot").each(function(i, slot_div){
+        	calculate_perfection($(slot_div).attr("id"));
+        });
     }
 
 	function calculate_totals(){
@@ -186,11 +188,49 @@
 			slot_div.find(".perfection")
 				.css("color",percent_to_color(perfection))
 				.html(get_template("perfection",format_number(perfection*100,2,false)));
+
+			if (perfection < 1){
+				var dps_loss = calculate_dps_loss(slot);
+
+				slot_div.find(".dps_loss")
+						.css("color",percent_to_color(perfection))
+						.html(get_template("dps_loss",format_number(dps_loss,0,false)));
+			}
+			else{
+				slot_div.find(".dps_loss").empty();
+			}
 		}
 		else{
 			slot_div.find(".perfection").empty();
 		}
+	}
 
+	function scale_to_real(value, scale){
+		return value/Math.pow(10, scale || 0);
+	}
+
+	function calculate_dps_loss(slot){
+		populate_values();
+		perfect_values = jQuery.extend(true, {}, _values);
+
+		var slot_div = $("#"+slot);
+		$.each(slot_div.find(".view_affix"), function(i, affix_div){
+			var affix = $(affix_div).find(".type").attr("affix");
+
+			if(perfect_values[affix]){
+				value_div = $(affix_div).find(".value");
+				var min = parseInt(value_div.attr("min"));
+				var max = parseInt(value_div.attr("max"));
+				var val = parseInt(value_div.attr("val"));
+				var scl = parseInt(value_div.attr("scale"));
+
+				perfect_values[affix] += scale_to_real(max-val,scl);
+			}
+			else if(perfect_values.element = affix){
+				perfect_values.elemental_damage
+			}
+		});
+		return calculate_dps(perfect_values,_defaults)-calculate_dps(_values,_defaults);
 	}
 
     function on_slider(event, ui) {
@@ -198,7 +238,6 @@
         var affix = $(this).parents(".affix").find(".type").attr("affix");
         var slot_div = affix_div.parents(".slot");
         var slot = slot_div.attr("id");
-
 
         var value_div = affix_div.find(".value");
         var val = parseInt(ui.value);
@@ -306,7 +345,6 @@
 		update_char();
     });
     function populate_values(){
-
     	var best_element = {
     		type: "elemental_damage",
     		val: _char.totals["elemental_damage"]
@@ -320,22 +358,22 @@
     	});
 
 		_values = {
-			max: _char.totals.max_damage/Math.pow(10, _translate.max_damage.scale || 0),
-			min: _char.totals.min_damage/Math.pow(10, _translate.min_damage.scale || 0),
-			ms: _char.totals.main_stat/Math.pow(10, _translate.main_stat.scale || 0),
-			as: _char.totals.attack_speed/Math.pow(10, _translate.attack_speed.scale || 0),
-			chc: _char.totals.critical_hit_chance/Math.pow(10, _translate.critical_hit_chance.scale || 0),
-			chd: _char.totals.critical_hit_damage/Math.pow(10, _translate.critical_hit_damage.scale || 0),
-			eled: best_element.val/Math.pow(10, _translate[best_element.type].scale || 0),
-			elid: _char.totals.elite_damage/Math.pow(10, _translate.elite_damage.scale || 0),
-			aps: _char.totals.attacks_per_second/Math.pow(10, _translate.attacks_per_second.scale || 0),
+			max_damage: _char.totals.max_damage/Math.pow(10, _translate.max_damage.scale || 0),
+			min_damage: _char.totals.min_damage/Math.pow(10, _translate.min_damage.scale || 0),
+			main_stat: _char.totals.main_stat/Math.pow(10, _translate.main_stat.scale || 0),
+			attack_speed: _char.totals.attack_speed/Math.pow(10, _translate.attack_speed.scale || 0),
+			critical_hit_chance: _char.totals.critical_hit_chance/Math.pow(10, _translate.critical_hit_chance.scale || 0),
+			critical_hit_damage: _char.totals.critical_hit_damage/Math.pow(10, _translate.critical_hit_damage.scale || 0),
+			element_damage: best_element.val/Math.pow(10, _translate[best_element.type].scale || 0),
+			elite_damage: _char.totals.elite_damage/Math.pow(10, _translate.elite_damage.scale || 0),
+			attacks_per_second: _char.totals.attacks_per_second/Math.pow(10, _translate.attacks_per_second.scale || 0),
 			element: best_element.type
 		};
     }
     function calculate_damage(){
         if (_char && _char.totals){
-			var eled = 1+((_values.eled || _defaults.eled)/100);
-			var elid = 1+((_values.elid || _defaults.elid)/100);
+			var eled = 1+((_values.element_damage || _defaults.element_damage)/100);
+			var elid = 1+((_values.elite_damage || _defaults.elite_damage)/100);
 
             var sheet_dps = calculate_dps(_values, _defaults);
             //var sheet_dps = ((max+min)/2)*(1+ms/100)*(1+as/100)*(aps)*(1+chc/100*chd/100);
@@ -357,7 +395,7 @@
 		if(percent > 0)
 		{
 			var eled = 1+((_char.totals[element] || 0)/100);
-			var elid = 1+((_values.elid || _defaults.elid)/100);
+			var elid = 1+((_values.elite_damage || _defaults.elite_damage)/100);
 
 			var base_min = calculate_base_damage(_values, _defaults, _values.min || _defaults.min)*(percent/100);
 			var base_max = calculate_base_damage(_values, _defaults, _values.max || _defaults.max)*(percent/100);
@@ -522,7 +560,7 @@
 					</div>
 					<div class="stats">
 						<div class="perfection"></div>
-						<div class="dps_contribution"></div>
+						<div class="dps_loss"></div>
 					</div>
 				</div>
 				<div class="slot" id="head">
@@ -550,7 +588,7 @@
 					</div>
 					<div class="stats">
 						<div class="perfection"></div>
-						<div class="dps_contribution"></div>
+						<div class="dps_loss"></div>
 					</div>
 				</div>
 				<div class="slot" id="neck">
@@ -579,7 +617,7 @@
 					</div>
 					<div class="stats">
 						<div class="perfection"></div>
-						<div class="dps_contribution"></div>
+						<div class="dps_loss"></div>
 					</div>
 				</div>
 			</div>
@@ -611,7 +649,7 @@
 					</div>
 					<div class="stats">
 						<div class="perfection"></div>
-						<div class="dps_contribution"></div>
+						<div class="dps_loss"></div>
 					</div>
 				</div>
 				<div class="slot" id="chest">
@@ -640,7 +678,7 @@
 					</div>
 					<div class="stats">
 						<div class="perfection"></div>
-						<div class="dps_contribution"></div>
+						<div class="dps_loss"></div>
 					</div>
 				</div>
 				<div class="slot" id="wrists">
@@ -669,7 +707,7 @@
 					</div>
 					<div class="stats">
 						<div class="perfection"></div>
-						<div class="dps_contribution"></div>
+						<div class="dps_loss"></div>
 					</div>
 				</div>
 			</div>
@@ -701,7 +739,7 @@
 					</div>
 					<div class="stats">
 						<div class="perfection"></div>
-						<div class="dps_contribution"></div>
+						<div class="dps_loss"></div>
 					</div>
 				</div>
 				<div class="slot" id="waist">
@@ -730,7 +768,7 @@
 					</div>
 					<div class="stats">
 						<div class="perfection"></div>
-						<div class="dps_contribution"></div>
+						<div class="dps_loss"></div>
 					</div>
 				</div>
 				<div class="slot" id="rfinger">
@@ -759,7 +797,7 @@
 					</div>
 					<div class="stats">
 						<div class="perfection"></div>
-						<div class="dps_contribution"></div>
+						<div class="dps_loss"></div>
 					</div>
 				</div>
 			</div>
@@ -791,7 +829,7 @@
 					</div>
 					<div class="stats">
 						<div class="perfection"></div>
-						<div class="dps_contribution"></div>
+						<div class="dps_loss"></div>
 					</div>
 				</div>
 				<div class="slot" id="legs">
@@ -820,7 +858,7 @@
 					</div>
 					<div class="stats">
 						<div class="perfection"></div>
-						<div class="dps_contribution"></div>
+						<div class="dps_loss"></div>
 					</div>
 				</div>
 				<div class="slot" id="offhand">
@@ -849,7 +887,7 @@
 					</div>
 					<div class="stats">
 						<div class="perfection"></div>
-						<div class="dps_contribution"></div>
+						<div class="dps_loss"></div>
 					</div>
 				</div>
 			</div>
@@ -882,7 +920,7 @@
 					</div>
 					<div class="stats">
 						<div class="perfection"></div>
-						<div class="dps_contribution"></div>
+						<div class="dps_loss"></div>
 					</div>
 				</div>
 				<div class="legendary_affixes"></div>
