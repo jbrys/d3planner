@@ -18,7 +18,7 @@ if (!Array.prototype.max) {
 
 function save_to_cookie(char){
     $.each(char, function(slot, data){
-        $.cookie('d3planner_'+slot, data);
+        $.cookie('d3planner_'+slot, data, { path: _base });
     });
 }
 
