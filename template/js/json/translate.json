@@ -132,6 +132,41 @@
    },
    "tooltip":{
    		"template":"<span class='tooltip' title='{1}'>{0}</span>"
+   },
+   "barbarian":{
+        "display":"Barbarian",
+        "dropdown":"Barbarian"
+   },
+   "crusader" : {
+        "display":"Crusader",
+        "dropdown":"Crusader"
+   },
+   "demon_hunter" : {
+        "display":"Demon Hunter",
+		"dropdown":"Demon Hunter"
+   },
+   "monk" : {
+        "display":"Monk",
+        "dropdown":"Monk"
+   },
+   "witch_doctor" : {
+        "display":"Witch Doctor",
+        "dropdown":"Witch Doctor"
+   },
+   "wizard" : {
+        "display":"Wizard",
+        "dropdown":"Wizard"
+   },
+   "strength":{
+      "template":"+{0} Strength",
+      "display":"Strength"
+   },
+   "intelligence":{
+      "template":"+{0} Intelligence",
+      "display":"Intelligence"
+   },
+   "dexterity":{
+      "template":"+{0} Dexterity",
+      "display":"Dexterity"
    }
-
 }
