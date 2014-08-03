@@ -57,3 +57,4 @@ target/
 
 d3planner.cfg
 .idea/
+.DS_Store

@@ -8,23 +8,28 @@
    },
    "holy_damage":{
       "template":"Holy skills deal {0}% more damage",
-      "display":"Holy skills deal more damage"
+      "display":"Holy skills deal more damage",
+      "dropdown": "Holy"
    },
    "lightning_damage":{
       "template":"Lightning skills deal {0}% more damage.",
-      "display":"Lightning skills deal more damage."
+      "display":"Lightning skills deal more damage.",
+      "dropdown": "Lightning"
    },
    "cold_damage":{
       "template":"Cold skills deal {0}% more damage.",
-      "display":"Cold skills deal more damage."
+      "display":"Cold skills deal more damage.",
+      "dropdown": "Cold"
    },
    "fire_damage":{
       "template":"Fire skills deal {0}% more damage.",
-      "display":"Fire skills deal more damage."
+      "display":"Fire skills deal more damage.",
+      "dropdown": "Fire"
    },
    "arcane_damage":{
       "template":"Arcane skills deal {0}% more damage.",
-      "display":"Arcane skills deal more damage."
+      "display":"Arcane skills deal more damage.",
+      "dropdown": "Arcane"
    },
    "ring_of_royal_grandeur_leg":{
       "display":"Reduces the number of items needed for set bonuses by 1 (to a minimum of 2)."
