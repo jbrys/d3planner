@@ -457,5 +457,16 @@
    },
    "zunimassa_4":{
          "display": "Your Fetish Army lasts until they die."
+   },
+   "perfection":{
+        "template":"{0}% Perfect"
+   },
+   "dps_loss":{
+   		"template":"{0} DPS Lost",
+   		"tooltip":"The DPS lost due to imperfect affix values."
+   },
+   "tooltip":{
+   		"template":"<span class='tooltip' title='{1}'>{0}</span>"
    }
+
 }

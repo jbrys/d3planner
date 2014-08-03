@@ -60,11 +60,10 @@ function percent_to_color(percent){
 function calculate_base_damage(values, defaults, damage){
     if (defaults && values){
         if (!damage)
-            damage = ((values.max || defaults.max)+(values.min || defaults.min))/2;
+            damage = ((values.max_damage || defaults.max_damage)+(values.min_damage || defaults.min_damage))/2;
 
-        ms = values.ms || defaults.ms;
+        ms = values.main_stat || defaults.main_stat;
 
-        //alert(["damage*(1+ms/100)",damage,ms,damage*(1+ms/100)]);
         return damage*(1+ms/100);
     }
 }
@@ -73,9 +72,8 @@ function calculate_crit_damage(values, defaults, base_damage){
         if (!base_damage)
             base_damage = calculate_base_damage(values,defaults);
 
-        chd = 1+((values.chd || defaults.chd)/100);
+        chd = 1+((values.critical_hit_damage || defaults.critical_hit_chance)/100);
 
-        //alert(["base_damage*chd",base_damage,chd,base_damage*(chd/100)]);
         return base_damage*chd
     }
 }
@@ -84,10 +82,9 @@ function calculate_mean_damage(values, defaults, crit_damage){
         if (!crit_damage)
             base_damage = calculate_base_damage(values,defaults);
 
-        chd = values.chd || defaults.chd;
-        chc = values.chc || defaults.chc;
+        chd = values.critical_hit_damage || defaults.critical_hit_damage;
+        chc = values.critical_hit_chance || defaults.critical_hit_chance;
 
-        //alert(["base_damage*(1+chc/100*chd/100)",chc,chd,base_damage*(1+chc/100*chd/100)]);
         return base_damage*(1+chc/100*chd/100);
     }
 }
@@ -96,16 +93,15 @@ function calculate_dps(values, defaults, mean_damage){
         if (!mean_damage)
             mean_damage = calculate_mean_damage(values,defaults);
 
-        as = values.as || defaults.as;
-        aps = values.aps || defaults.aps;
+        as = values.attack_speed || defaults.attack_speed;
+        aps = values.attacks_per_second || defaults.attacks_per_second;
 
-        //alert(["mean_damage*(1+as/100)*(aps)",mean_damage*(1+as/100)*(aps)]);
         return mean_damage*(1+as/100)*(aps);
     }
 }
 
 function format_number(number, precision, commas){
-	number = Math.round(number*Math.pow(10,precision))/Math.pow(10,precision);
+	number = Math.round(number*Math.pow(10,precision)/Math.pow(10,precision));
 	string_value = number.toString();
 	if(precision > 0){
 		if(string_value.indexOf(".") < 0)
@@ -136,12 +132,17 @@ function get_display_value(val, scale){
 
 function get_template(affix, value){
     affix_stuff = _translate[affix] || {};
+    var output;
     if (value){
-        return (affix_stuff.template || affix_stuff.display || affix + " {0}").replace("{0}", get_display_value(value, affix_stuff.scale || 0));
+        output = (affix_stuff.template || affix_stuff.display || affix + " {0}").replace("{0}", get_display_value(value, affix_stuff.scale || 0));
     }
     else{
-        return (affix_stuff.display || affix);
+        output = (affix_stuff.display || affix);
     }
+    if(affix_stuff.tooltip){
+    	output = _translate.tooltip.template.format(output,affix_stuff.tooltip);
+    }
+    return output;
 }
 
 function clear_slot(item_ddl){
@@ -183,7 +184,6 @@ function load_ddl(item_ddl){
 }
 
 function join_item(item){
-
     if(item && !item.joined){
         $.each(_affix.primary[item.cat], function(stat,value){
             if(item.primary)
