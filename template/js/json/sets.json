@@ -2,7 +2,8 @@
    "akkhan":{
       "2":{
          "primary":{
-            "main_stat":500
+            "main_stat":500,
+            "todo":"change to strength"
          },
          "secondary":{
 
@@ -34,7 +35,7 @@
          }
       }
    },
-   "captain_crimson":{
+   "captain_crimson_t":{
       "2":{
          "primary":{
             "reduced_cooldown": 10
@@ -58,5 +59,1190 @@
 
          }
       }
+   },
+   "asheara_u":{
+      "2":{
+         "primary":{
+            "all_resistance": 30
+         },
+         "secondary":{
+         
+         },
+         "legendary":{
+
+         }
+      },
+      "3":{
+         "primary":{
+          
+         },
+         "secondary":{
+
+         },
+         "legendary":{
+            "asheara_u_3a": false,
+            "asheara_u_3b": false
+         }
+      }
+   },
+   "asheara_v":{
+      "2":{
+         "primary":{
+            "all_resistance": 100
+         },
+         "secondary":{
+         
+         },
+         "legendary":{
+
+         }
+      },
+      "3":{
+         "primary":{
+            "life_percent": 20
+          
+         },
+         "secondary":{
+
+         },
+         "legendary":{
+
+         },
+      "4":{
+         "primary":{
+          
+         },
+         "secondary":{
+
+         },
+         "legendary":{
+            "asheara_v_4": false
+
+         },
+   "aughild_a":{
+      "2":{
+         "primary":{
+            "reduced_damage_melee": 7,
+            "reduced_damage_ranged": 7
+         },
+         "secondary":{
+         
+         },
+         "legendary":{
+
+         }
+      },
+      "3":{
+         "primary":{
+          "reduced_damage_elite": 15,
+          "elite_damage": 15
+         },
+         "secondary":{
+
+         },
+         "legendary":{
+
+         }
+
+         }
+      }
+   },
+   "aughild_v":{
+      "2":{
+         "primary":{
+            "reduced_damage_melee": 2
+         },
+         "secondary":{
+         
+         },
+         "legendary":{
+
+         }
+      },
+      "3":{
+         "primary":{
+          "reduced_damage_ranged": 2
+         },
+         "secondary":{
+
+         },
+         "legendary":{
+
+         }
+
+         }
+      }
+   },
+   "bastions":{
+      "2":{
+         "primary":{
+            
+         },
+         "secondary":{
+         
+         },
+         "legendary":{
+            "bastions_2": false
+         }
+      }
+   },
+   "blackthorne":{
+      "2":{
+         "primary":{
+            "vitality": 250,
+            "elite_damage": 10
+         },
+         "secondary":{
+         
+         },
+         "legendary":{
+
+         },
+      "3":{
+         "primary":{
+         "reduced_damage_elite": 10
+         },
+         "secondary":{
+         "extra_gold": 25
+         },
+         "legendary":{
+
+         },
+      "4":{
+         "primary":{
+      
+         },
+         "secondary":{
+       
+         },
+      "legendary":{
+         "blackthorne": false
+
+         }
+      }
+   },
+   "born_c":{
+      "2":{
+         "primary":{
+            "life_percent": 15
+         },
+         "secondary":{
+            "bonus_exp": 20
+         
+         },
+         "legendary":{
+
+         },
+      "3":{
+         "primary":{
+         "reduced_cooldown": 10
+         },
+         "secondary":{
+         
+         },
+         "legendary":{
+
+         }
+
+      }
+   },
+   "born_d":{
+      "2":{
+         "primary":{
+            "life_percent": 2
+         },
+         "secondary":{
+            "add_exp": 20
+         
+         },
+         "legendary":{
+
+         }
+
+      }
+   },
+   "bul-kathos":{
+      "2":{
+         "primary":{
+            "main_stat": 250,
+            "todo":"change to strength",
+            "max_fury": 10
+         },
+         "secondary":{
+         
+         },
+         "legendary":{
+            "bul-kathos_2": false
+         }
+
+      }
+   },
+   "cain_d":{
+      "2":{
+         "primary":{
+            "attack_speed": 8
+         },
+         "secondary":{
+            
+         },
+         "legendary":{
+
+         },
+      "3":{
+         "primary":{
+         
+         },
+         "secondary":{
+            "bonus_exp": 50,
+            "magic_find": 50
+         },
+         "legendary":{
+
+         }
+
+      }
+   },
+   "cain_f":{
+      "2":{
+         "primary":{
+            "attack_speed": 2
+         },
+         "secondary":{
+            
+         },
+         "legendary":{
+
+         },
+      },
+      "3":{
+         "primary":{
+         
+         },
+         "secondary":{
+            "bonus_exp": 30,
+            "magic_find": 10
+         },
+         "legendary":{
+
+         }
+
+      }
+   },
+   "captain_crimson_f":{
+      "2":{
+         "primary":{
+         
+         },
+         "secondary":{
+            "life_per_second": 20
+         },
+         "legendary":{
+
+         }
+      },
+      "3":{
+         "primary":{
+            "all_resistance": 20
+         },
+         "secondary":{
+
+         },
+         "legendary":{
+
+         }
+      }
+   },
+   "chantodo":{
+      "2":{
+         "primary":{
+            "main_stat": 250,
+            "todo":"change to int",
+            "reduced_damage_elite": 10
+         },
+         "secondary":{
+         
+         },
+         "legendary":{
+            "chantodo_2": false
+         }
+
+      }
+   },
+   "danetta":{
+      "2":{
+         "primary":{
+            "thorns_fire": 6000
+         },
+         "secondary":{
+         
+         },
+         "legendary":{
+         
+         }
+
+      }
+   },
+   "demon_hide":{
+      "2":{
+         "primary":{
+            "thorns_fire": 6000
+         },
+         "secondary":{
+         
+         },
+         "legendary":{
+         
+         }
+
+      },
+      "3":{
+         "primary":{
+            "area_damage": 25
+         },
+         "secondary":{
+         
+         },
+         "legendary":{
+         
+         }
+
+      },
+      "4":{
+         "primary":{
+            "demon_damage": 15
+         },
+         "secondary":{
+         
+         },
+         "legendary":{
+            "demon_hide_4": false
+         }
+
+      }
+   },
+   "demon_skin":{
+      "2":{
+         "primary":{
+            "thorns_fire": 999
+         },
+         "secondary":{
+         
+         },
+         "legendary":{
+         
+         }
+
+      },
+      "3":{
+         "primary":{
+            
+         },
+         "secondary":{
+            "fear": 1.1
+         },
+         "legendary":{
+         
+         }
+
+      },
+      "4":{
+         "primary":{
+            "demon_damage": 3
+         },
+         "secondary":{
+         
+         },
+         "legendary":{
+            "demon_hide_4": false
+         }
+
+      }
+   },
+   "marauder":{
+      "2":{
+         "primary":{
+            "main_stat": 500
+         },
+         "secondary":{
+         
+         },
+         "legendary":{
+         
+         }
+
+      },
+      "4":{
+         "primary":{
+            
+         },
+         "secondary":{
+         
+         },
+         "legendary":{
+            "marauder_4": false
+         }
+
+      }
+   },
+   "endless_walk":{
+      "2":{
+         "primary":{
+            "vitality": 250,
+            "critical_hit_damage": 50
+         },
+         "secondary":{
+         
+         },
+         "legendary":{
+         
+         }
+
+      }
+   },
+   "marauder":{
+      "2":{
+         "primary":{
+            "main_stat": 500
+         },
+         "secondary":{
+         
+         },
+         "legendary":{
+         
+         }
+
+      },
+      "4":{
+         "primary":{
+            
+         },
+         "secondary":{
+         
+         },
+         "legendary":{
+            "marauder_4": false
+         }
+
+      },
+      "6":{
+         "primary":{
+            
+         },
+         "secondary":{
+         
+         },
+         "legendary":{
+            "marauder_6": false
+         }
+
+      }
+   },
+   "firebird":{
+      "2":{
+         "primary":{
+            "main_stat": 500
+         },
+         "secondary":{
+         
+         },
+         "legendary":{
+         
+         }
+
+      },
+      "4":{
+         "primary":{
+            
+         },
+         "secondary":{
+         
+         },
+         "legendary":{
+            "firebird_4": false
+         }
+
+      },
+      "6":{
+         "primary":{
+            
+         },
+         "secondary":{
+         
+         },
+         "legendary":{
+            "firebird_6": false
+         }
+
+      }
+   },
+   "guardian_c":{
+      "2":{
+         "primary":{
+            "vitality": 110
+         },
+         "secondary":{
+            "life_per_second": 130
+         },
+         "legendary":{
+         
+         }
+
+      }
+   },
+   "guardian_j":{
+      "2":{
+         "primary":{
+            "vitality": 250
+         },
+         "secondary":{
+            "life_per_second": 2000
+         },
+         "legendary":{
+         
+         }
+
+      },
+      "3":{
+         "primary":{
+            "movement_speed": 15
+         },
+         "secondary":{
+            
+         },
+         "legendary":{
+         
+         }
+
+      }
+   },
+   "hallowed_d":{
+      "2":{
+         "primary":{
+            "all_resistance": 40,
+            "attack_speed": 5
+         },
+         "secondary":{
+          
+         },
+         "legendary":{
+         
+         }
+
+      }
+   },
+   "hallowed_p":{
+      "2":{
+         "primary":{
+            "all_resistance": 100,
+            "attack_speed": 10
+         },
+         "secondary":{
+          
+         },
+         "legendary":{
+         
+         }
+
+      }
+   },
+   "helltooth":{
+      "2":{
+         "primary":{
+            "main_stat":500
+         },
+         "secondary":{
+          
+         },
+         "legendary":{
+         
+         }
+
+      },
+      "4":{
+         "primary":{
+            
+         },
+         "secondary":{
+          
+         },
+         "legendary":{
+            "helltooth_4": false
+         }
+
+      },
+      "6":{
+         "primary":{
+         
+         },
+         "secondary":{
+          
+         },
+         "legendary":{
+            "helltooth_6": false
+         }
+
+      }
+   },
+   "immortal_king":{
+         "2":{
+            "primary":{
+               "max_fury": 10,
+               "all_resistance": 100
+            },
+            "secondary":{
+             
+            },
+            "legendary":{
+            
+            }
+
+         },
+         "3":{
+            "primary":{
+               "life_per_fury": 289
+            },
+            "secondary":{
+             
+            },
+            "legendary":{
+               "immortal_king_3": false
+            }
+
+         },
+         "4":{
+            "primary":{
+            
+            },
+            "secondary":{
+             
+            },
+            "legendary":{
+               "immortal_king_4": false
+            }
+
+         }
+   },
+   "inna":{
+         "2":{
+            "primary":{
+               "main_stat": 250,
+               "todo":"change to dex",
+               "life_per_fury": 124
+            },
+            "secondary":{
+             
+            },
+            "legendary":{
+            
+            }
+
+         },
+         "3":{
+            "primary":{
+               
+            },
+            "secondary":{
+             
+            },
+            "legendary":{
+               "inna_3a": false,
+               "inna_3b": false
+            }
+
+         },
+         "4":{
+            "primary":{
+            
+            },
+            "secondary":{
+             
+            },
+            "legendary":{
+               "inna_4": false
+            }
+
+         }
+   },
+   "istavan":{
+      "2":{
+         "primary":{
+            
+         },
+         "secondary":{
+          
+         },
+         "legendary":{
+            "istavan_2": false
+         }
+
+      }
+   },
+   "legacy":{
+      "2":{
+         "primary":{
+           "magic_find": 15 
+         },
+         "secondary":{
+            "extra_gold": 15
+         },
+         "legendary":{
+            "legacy_2": false
+         }
+
+      }
+   },
+   "manajuma":{
+      "2":{
+         "primary":{
+           "main_stat": 250,
+           "mana_per_kill": 30
+         },
+         "secondary":{
+            
+         },
+         "legendary":{
+            "manajuma_2": false
+         }
+
+      }
+   },
+   "might":{
+         "2":{
+            "primary":{
+             
+            },
+            "secondary":{
+             
+            },
+            "legendary":{
+               "might_2": false
+            }
+
+         },
+         
+         "4":{
+            "primary":{
+            
+            },
+            "secondary":{
+             
+            },
+            "legendary":{
+               "might_4": false
+            }
+
+         }
+   },
+   "monkey_king":{
+         "2":{
+            "primary":{
+             
+            },
+            "secondary":{
+             
+            },
+            "legendary":{
+               "monkey_king_2": false
+            }
+
+         },
+         
+         "4":{
+            "primary":{
+            
+            },
+            "secondary":{
+             
+            },
+            "legendary":{
+               "monkey_king_4": false
+            }
+
+         }
+   },
+   "natalya":{
+         "2":{
+            "primary":{
+               "main_stat": 250,
+               "todo":"change to dex",
+               "max_discipline": 10
+            },
+            "secondary":{
+             
+            },
+            "legendary":{
+            
+            }
+
+         },
+         "3":{
+            "primary":{
+               "critical_hit_chance": 7,
+               "max_discipline": 10
+            },
+            "secondary":{
+             
+            },
+            "legendary":{
+               
+            }
+
+         },
+         "4":{
+            "primary":{
+            
+            },
+            "secondary":{
+             
+            },
+            "legendary":{
+               "inna_4": false
+            }
+
+         }
+   },
+   "thousand_storms":{
+      "2":{
+         "primary":{
+            "main_stat":500,
+            "todo": "change to dex"
+         },
+         "secondary":{
+          
+         },
+         "legendary":{
+         
+         }
+
+      },
+      "4":{
+         "primary":{
+            "lightning_sills": 15
+         },
+         "secondary":{
+          
+         },
+         "legendary":{
+            
+         }
+
+      },
+      "6":{
+         "primary":{
+         
+         },
+         "secondary":{
+          
+         },
+         "legendary":{
+            "thousand_storms_6": false
+         }
+
+      }
+   },
+   "jade_harvester":{
+      "2":{
+         "primary":{
+            "main_stat":500,
+            "todo": "change to int"
+         },
+         "secondary":{
+          
+         },
+         "legendary":{
+         
+         }
+
+      },
+      "4":{
+         "primary":{
+         
+         },
+         "secondary":{
+          
+         },
+         "legendary":{
+            "jade_harvester_4": false
+         }
+
+      },
+      "6":{
+         "primary":{
+         
+         },
+         "secondary":{
+          
+         },
+         "legendary":{
+            "jade_harvester_6": false
+         }
+
+      }
+   },
+   "sage_j":{
+         "2":{
+            "primary":{
+               "main_stat": 250,
+               "vitality": 250,
+               "todo": "change to str, dex, int"
+            },
+            "secondary":{
+             
+            },
+            "legendary":{
+            
+            }
+
+         },
+         
+         "3":{
+            "primary":{
+            
+            },
+            "secondary":{
+             
+            },
+            "legendary":{
+               "sage_j_3": false
+            }
+
+         }
+   },
+   "sage_j":{
+         "2":{
+            "primary":{
+               "main_stat": 35,
+               "vitality": 35,
+               "todo": "change to str, dex, int"
+            },
+            "secondary":{
+             
+            },
+            "legendary":{
+            
+            }
+
+         }
+   },
+   "shenlong":{
+         "2":{
+            "primary":{
+               "main_stat": 250
+            },
+            "secondary":{
+             
+            },
+            "legendary":{
+               "shenlong_2a": false,
+               "shenlong_2b": false
+            }
+
+         }
+   },
+   "tal_rasha":{
+      "2":{
+         "primary":{
+            "cold_damage": 5,
+            "fire_damage": 5,
+            "lightning_damage": 5,
+            "arcane_damage": 5
+         },
+         "secondary":{
+          
+         },
+         "legendary":{
+         
+         }
+
+      },
+      "3":{
+         "primary":{
+            "all_resistance": 100
+         },
+         "secondary":{
+          
+         },
+         "legendary":{
+            "tal_rasha_3": false
+         }
+
+      },
+      "4":{
+         "primary":{
+         
+         },
+         "secondary":{
+          
+         },
+         "legendary":{
+            "tal_rasha_4": false
+         }
+
+      }
+   },
+   "raekor":{
+      "2":{
+         "primary":{
+            "vitality": 500
+         },
+         "secondary":{
+          
+         },
+         "legendary":{
+         
+         }
+
+      },
+      "4":{
+         "primary":{
+            "main_stat": 500,
+            "todo": "change to strength"
+         },
+         "secondary":{
+          
+         },
+         "legendary":{
+            
+         }
+
+      },
+      "5":{
+         "primary":{
+         
+         },
+         "secondary":{
+          
+         },
+         "legendary":{
+            "raekor_6": false
+         }
+
+      }
+   },
+   "shadow_mantle":{
+      "2":{
+         "primary":{
+            
+         },
+         "secondary":{
+          
+         },
+         "legendary":{
+            "shadow_mantle_2": false
+         }
+
+      },
+      "4":{
+         "primary":{
+            
+         },
+         "secondary":{
+          
+         },
+         "legendary":{
+            "shadow_mantle_4": false 
+         }
+
+      }
+
+      
+   },
+   "invoker":{
+      "2":{
+         "primary":{
+            
+         },
+         "secondary":{
+            "thorns": 4000
+         },
+         "legendary":{
+            
+         }
+
+      },
+      "4":{
+         "primary":{
+            
+         },
+         "secondary":{
+          
+         },
+         "legendary":{
+            "invoker_4": false 
+         }
+
+      }
+
+      
+   },
+   "vyr":{
+      "2":{
+         "primary":{
+            "main_stat": 500,
+            "todo": "change to int"
+         },
+         "secondary":{
+            
+         },
+         "legendary":{
+            
+         }
+
+      },
+      "4":{
+         "primary":{
+            
+         },
+         "secondary":{
+          
+         },
+         "legendary":{
+            "vyr_4": false 
+         }
+
+      }
+
+      
+   },
+   "zunimassa":{
+      "2":{
+         "primary":{
+            "main_stat": 250,
+            "todo": "change to int",
+            "mana_per_kill": 30
+         },
+         "secondary":{
+            
+         },
+         "legendary":{
+            
+         }
+
+      },
+      "3":{
+         "primary":{
+            "all_resistance": 75,
+            "mana_per_second": 7.5
+         },
+         "secondary":{
+          
+         },
+         "legendary":{
+             
+         }
+
+
+      },
+      "4":{
+         "primary":{
+            
+         },
+         "secondary":{
+          
+         },
+         "legendary":{
+           "zunimassa_4": false  
+         }
+      
    }
 }
