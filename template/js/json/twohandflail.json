@@ -1,0 +1,12 @@
+{
+	"base":"twohand",
+    "items": {
+        "Fate of the Fell": {
+            "primary": {},
+            "secondary": {},
+            "legendary": {
+                "fate_of_the_fell_leg": {}
+            }
+        }
+    }
+}

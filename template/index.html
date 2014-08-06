@@ -1,19 +1,31 @@
 <%inherit file="/base.html"/>
 <script type="text/javascript">
-	var _debug = false;
+	var _debug = true;
     var _affix;
     var _slots = {};
     var _sets;
-    var _valid_slots = ["shoulders", "head", "neck",
-                        "hands", "chest", "wrists",
-                        "finger", "waist",
-                        "twohand", "legs", "shield",
-                        "feet"];
+    var _valid_slots = [
+    	"shoulders", "head", "neck",
+		"hands", "chest", "wrists",
+		"finger", "waist",
+		"twohand", "legs", "shield",
+		"feet"];
+
+    var _cookies = [
+    	"shoulders", "head", "neck",
+        "hands", "chest", "wrists",
+        "lfinger", "waist", "rfinger",
+        "mainhand", "legs", "offhand",
+        "feet",
+        "settings", "skills"];
+
+	var _stats = ["strength","dexterity","intelligence"];
     var _char = {};
     var _translate = {};
     var _bnet_translate = {};
     var _base_stats = {
         "main_stat" : 217,
+        "off_stat" : 77,
         "vitality" : 147,
         "critical_hit_damage" : 50,
         "critical_hit_chance" : 50
@@ -21,7 +33,9 @@
     var _defaults = {
         "max_damage": 3,
         "min_damage": 2,
-        "main_stat": 217,
+        "strength": 217,
+        "intelligence" : 217,
+        "dexterity" : 217,
         "attack_speed": 0,
         "critical_hit_chance": 5,
         "critical_hit_damage": 50,
@@ -31,108 +45,123 @@
     };
 	var _values;
     var _elements = ["holy_damage","fire_damage"];
+	var _classes;
 
     function update_char(){
-        var totals = jQuery.extend(true, {}, _base_stats);
-        var sets = {};
-        var rorg_bonus = false;
+    	if(_char && _char.settings && _char.settings.class){
+    		if($("#class_list").val() != _char.settings.class)
+    			$("#class_list").val(_char.settings.class).trigger("chosen:updated").change();
 
-        $(".legendary_affixes").empty();
-        $(".set_bonuses").empty();
+			var totals = jQuery.extend(true, {}, _base_stats);
+			$.each(_stats, function(i, stat){
+				totals[stat] = get_char_affix("main_stat") == stat ? totals.main_stat : totals.off_stat;
+			});
+			var sets = {};
+			var rorg_bonus = false;
 
-        $.each(_char, function(slot,item){
-            var slot_div = $("#"+slot);
-            slot_div.find(".name").html(item.name || "");
-            if(item.name){
-                var item_blob = _slots[slot].items[item.name];
+			$(".legendary_affixes").empty();
+			$(".set_bonuses").empty();
 
-                slot_div.addClass("legendary");
-                if(item_blob.set){
-                    sets[item_blob.set] = (sets[item_blob.set] || 0) + 1
-                    slot_div.addClass("set");
-                    slot_div.removeClass("legendary");
-				}
-                var affixes_div = slot_div.find(".view .affixes");
+			$.each(_char, function(slot, item){
+				var slot_div = $("#"+slot);
+				if(item.name){
+					var item_blob = _slots[slot].items[item.name];
 
-                affixes_div.empty();
-                $.each(item.affixes.primary, function(affix_name,affix){
-                    if (affix_name == "socket"){
-                        join_item(item_blob);
-                        $.each(item_blob.socket_value || {}, function(socket_affix, value){
-                            totals[socket_affix] = (totals[socket_affix] || 0) + value * affix.val;
-                        });
-                    }
-                    else{
-                    	if (affix_name == "elemental_damage"){
-							$.each(_elements, function(i, element){
-								totals[element] = (totals[element] || 0) + affix.val;
+					if(!item_blob){
+						_char[slot] = {};
+						return;
+					}
+					slot_div.find(".name").html(item.name || "");
+
+					slot_div.addClass("legendary");
+					if(item_blob.set){
+						sets[item_blob.set] = (sets[item_blob.set] || 0) + 1
+						slot_div.addClass("set");
+						slot_div.removeClass("legendary");
+					}
+					var affixes_div = slot_div.find(".view .affixes");
+
+					affixes_div.empty();
+					$.each(item.affixes.primary, function(affix_name,affix){
+						affix_name = get_char_affix(affix_name)
+						if (affix_name == "socket"){
+							join_item(item_blob);
+							$.each(item_blob.socket_value || {}, function(socket_affix, value){
+								socket_affix = get_char_affix(socket_affix)
+								totals[socket_affix] = (totals[socket_affix] || 0) + value * affix.val;
 							});
 						}
-                        totals[affix_name] = (totals[affix_name] || 0) + affix.val;
-                    }
-                    var affix_div = $("#templates .affix").clone(true,true);
+						else{
+							if (affix_name == "elemental_damage"){
+								$.each(_elements, function(i, element){
+									totals[element] = (totals[element] || 0) + affix.val;
+								});
+							}
+							totals[affix_name] = (totals[affix_name] || 0) + affix.val;
+						}
+						var affix_div = $("#templates .affix").clone(true,true);
 
-                    affix_div.find(".type").html(get_template(affix_name, affix.val)).attr("affix", affix_name);
+						affix_div.find(".type").html(get_template(affix_name, affix.val)).attr("affix", affix_name);
 
-					//alert([affix.val-affix.min,affix.max-affix.min,affix.val-affix.min/affix.max-affix.min]);
+						affix_div
+							.css("color",percent_to_color((affix.val-affix.min+1)/(affix.max-affix.min+1)))
+							.find(".value")
+								.attr("min", affix.min)
+								.attr("max", affix.max)
+								.attr("val", affix.val)
+								.attr("step", affix.step)
+								.attr("scale", affix.scale)
+								.find(".edit_affix_button")
+									.click(edit_affix);
 
-                    affix_div
-                    	.css("color",percent_to_color((affix.val-affix.min+1)/(affix.max-affix.min+1)))
-                    	.find(".value")
-							.attr("min", affix.min)
-							.attr("max", affix.max)
-							.attr("val", affix.val)
-							.attr("step", affix.step)
-							.attr("scale", affix.scale)
-							.find(".edit_affix_button")
-								.click(edit_affix);
+						affixes_div.append(affix_div).append($("<div style='clear: both;'></div>"));
+					});
+					$.each(item_blob.legendary, function(index,affix){
+						if(index == "ring_of_royal_grandeur_leg")
+							rorg_bonus = true;
+						var legendary_div = $("#templates .legendary_affix").clone(true);
+						$(".legendary_affixes").append(legendary_div);
+						legendary_div.html(get_template(index));
+					});
+				}
+			});
+			_char.sets = sets;
 
-                    affixes_div.append(affix_div).append($("<div style='clear: both;'></div>"));
-                });
-                $.each(item_blob.legendary, function(index,affix){
-                    if(index == "ring_of_royal_grandeur_leg")
-                        rorg_bonus = true;
-                    var legendary_div = $("#templates .legendary_affix").clone(true);
-                    $(".legendary_affixes").append(legendary_div);
-                    legendary_div.html(get_template(index));
-                });
-            }
-        });
-        _char.sets = sets;
+			$.each(sets, function(set_name,count){
+				if (rorg_bonus && count > 1)
+					count++;
+				var append = false;
+				var set_div = $("#templates .set").clone(true);
+				$(".set_bonuses").append(set_div);
+				for(var i = 2; i <= count; i++){
+					set_div.find(".name").text(get_template(set_name));
+					var set_bonus = _sets[set_name][i];
+					if(set_bonus){
+						 $.each(set_bonus, function(affix_type, affixes){
+							$.each(affixes, function(affix, value){
+								affix_div = $("#templates .set_affix").clone();
+								affix_div.html(get_template(affix, value));
+								set_div.find("."+affix_type).append(affix_div);
 
-        $.each(sets, function(set_name,count){
-            if (rorg_bonus && count > 1)
-                count++;
-            var append = false;
-            var set_div = $("#templates .set").clone(true);
-            $(".set_bonuses").append(set_div);
-            for(var i = 2; i <= count; i++){
-                set_div.find(".name").text(get_template(set_name));
-                var set_bonus = _sets[set_name][i];
-                if(set_bonus){
-                     $.each(set_bonus, function(affix_type, affixes){
-                        $.each(affixes, function(affix, value){
-                            affix_div = $("#templates .set_affix").clone();
-                            affix_div.html(get_template(affix, value));
-                            set_div.find("."+affix_type).append(affix_div);
+								affix = get_char_affix(affix)
+								totals[affix] = (totals[affix] || 0) + value;
+							});
+						});
+					}
+				}
+			});
 
-                            totals[affix] = (totals[affix] || 0) + value;
-                        });
-                    });
-                }
-            }
-        });
+			_char.totals = totals;
 
-        _char.totals = totals;
-
-        save_to_cookie(_char);
-        populate_values();
-        calculate_totals();
-        calculate_damage();
-        skill_damage();
-        $(".slot").each(function(i, slot_div){
-        	calculate_perfection($(slot_div).attr("id"));
-        });
+			save_to_cookie(_char);
+			populate_values();
+			calculate_totals();
+			calculate_damage();
+			skill_damage();
+			$(".slot").each(function(i, slot_div){
+				calculate_perfection($(slot_div).attr("id"));
+			});
+		}
     }
 
 	function calculate_totals(){
@@ -318,8 +347,6 @@
 
     $(document).ready(function(){
         $.cookie.json = true;
-        $("#debug").click(function(){_debug=true;});
-        $(".item").change(item_change);
         $.ajaxSetup({
             async: false
         });
@@ -335,15 +362,20 @@
         $.getJSON("${base}json/sets", function(data) {
             _sets = data;
         });
-        $(".item").each(function(i, item_ddl){
-            load_ddl($(item_ddl));
+        $.getJSON("${base}json/classes", function(data) {
+            _classes = data;
         });
+        $("#debug").click(function(){_debug=true;});
+        $(".item").change(item_change);
 
         $(".edit_button").click(edit_button);
         $(".cancel_button").click(cancel_button);
         $(".save_button").click(save_button);
         $("#import_begin").click(import_begin);
         $("#import_end").click(import_end);
+        $(".rune").change(rune_change);
+        $(".passive").change(passive_change);
+        $(".active").change(active_change);
         $("#fetch").click(fetch);
 		$.each(_elements, function(i, element){
 			$("#skill_element").append("<option value='{0}'>{1}</option>".format(element,_translate[element].dropdown));
@@ -352,9 +384,34 @@
 		$("#skill_element").change(skill_damage);
 		$("#skill_element").chosen({disable_search:true});
 
+		$("#class_list").append("<option value='{0}'>{1}</option>".format("", ""));
+		$.each(_classes, function(class_name, details){
+			$("#class_list").append("<option value='{0}'>{1}</option>".format(class_name, _translate[class_name].dropdown));
+		});
+
+		$("#class_list").change(class_change);
+		$("#class_list").chosen({disable_search:true});
+
 		load_from_cookie(_char);
 		update_char();
     });
+
+    function class_change(){
+    	if(!_char.settings)
+    		_char.settings = {};
+
+    	_char.settings.class = $(this).val();
+    	save_to_cookie(_char);
+
+		_classes[_char.settings.class].class_specific_slots
+
+        $(".item").each(function(i, item_ddl){
+            load_ddl($(item_ddl));
+        });
+        load_skills();
+    	update_char();
+    }
+
     function populate_values(){
     	var best_element = {
     		type: "elemental_damage",
@@ -368,10 +425,12 @@
 			}
     	});
 
+		var main_stat = _classes[_char.settings.class].translate["main_stat"];
+
 		_values = {
 			max_damage: _char.totals.max_damage/Math.pow(10, _translate.max_damage.scale || 0),
 			min_damage: _char.totals.min_damage/Math.pow(10, _translate.min_damage.scale || 0),
-			main_stat: _char.totals.main_stat/Math.pow(10, _translate.main_stat.scale || 0),
+			main_stat: _char.totals[main_stat]/Math.pow(10, _translate[main_stat].scale || 0),
 			attack_speed: _char.totals.attack_speed/Math.pow(10, _translate.attack_speed.scale || 0),
 			critical_hit_chance: _char.totals.critical_hit_chance/Math.pow(10, _translate.critical_hit_chance.scale || 0),
 			critical_hit_damage: _char.totals.critical_hit_damage/Math.pow(10, _translate.critical_hit_damage.scale || 0),
@@ -434,86 +493,115 @@
 			$("#ele_eli_c_max").text(format_number(crit_max*eled*elid,0,true));
 		}
 	}
-	function import_begin(){
-		$(".import #character_list, .import #import_end").hide().empty();
-		$(".import").show();
-	}
-	function fetch(){
-		var matches = /([a-z]+)[#\-](\d{4})/i.exec($(".import #bid").val());
-		if(matches && matches.length == 3){
-			var profile_url = _base+"bnet_profile/{0}/{1}/".format(matches[1],matches[2])
-			$.getJSON(profile_url, function(data){
-				$.each(data.heroes, function(i, hero){
-					$("#character_list")
-						.append("<option value='{0}'>{1}</option>".format(hero.id,hero.name));
-				});
-				$(".import #character_list, .import #import_end").show();
-			});
-		}
-	}
-	function import_end(){
-		$(".import").hide();
-		var matches = /([a-z]+)[#\-](\d{4})/i.exec($(".import #bid").val());
-		var hero_id = $("#character_list").val();
-		var character_profile_url = _base+"character_profile/{0}/{1}/{2}".format(matches[1],matches[2],hero_id)
-		$.getJSON(character_profile_url, function(c_data){
-			$.each(c_data.items, function(slot, item){
-				slot = _bnet_translate[slot] || slot;
-				var item_name =  _bnet_translate[item.name] || item.name;
-				item_blob = _slots[slot].items[item_name];
 
-				_char[slot] = {};
-				if(item_blob){
-					join_item(item_blob);
-					_char[slot].name = item_name;
-					_char[slot].affixes = {};
-					_char[slot].affixes.primary = {};
-					var item_url = _base+"item_details/{0}".format(item.tooltipParams.replace("item/",""));
-					$.getJSON(item_url, function(i_data){
-						$.each(i_data.attributesRaw, function(key,value){
-							var value = (value.min+value.max)/2;
-							translate_data = _bnet_translate[key.split("#")[0]] || _bnet_translate[key];
-							if(translate_data){
-								var scale = translate_data.scale || 0;
-								affixes = translate_data.name;
-								value = value*Math.pow(10,scale);
-								$.each(affixes, function(i, affix){
-									if(item_blob.primary[affix]){
-										if(!_char[slot].affixes.primary[affix]){
-											_char[slot].affixes.primary[affix] = $.extend(true, {},item_blob.primary[affix]);
-										}
-										scale = _char[slot].affixes.primary[affix].scale || 0;
-										value = Math.round(value*Math.pow(10,scale));
-										if(affix == "max_damage"||affix == "min_damage"){
-											debug([slot,affix,value,_char[slot].affixes.primary[affix].val]);
-											debug(JSON.stringify(i_data.attributesRaw[key]));
-										}
-										_char[slot].affixes.primary[affix].val =
-											(_char[slot].affixes.primary[affix].val || 0) + value
-									}
-								});
-							}
-							else{
-
-							}
-						});
-					});
-					debug("-----");
-				}
-			});
-			save_to_cookie(_char);
-			update_char();
-		});
-		$(".import").hide();
-	}
 	function debug(data){
 		if(_debug){
 			$("#debug_output").append("<div>{0}<div>".format(data));
 		}
 	}
+
+	function rune_change(){
+		rune_ddl = $(this);
+		var index = parseInt(rune_ddl.attr("id").replace("rune-",""));
+		var rune = rune_ddl.val();
+		var previous_rune = _char.skills.rune[index];
+		_char.skills.rune[index] = rune;
+
+		if(!rune)
+			_char.skills.rune[index] = null;
+
+		save_to_cookie(_char);
+		update_char();
+	}
+	function passive_change(){
+		var passive_ddl = $(this);
+		var index = parseInt(passive_ddl.attr("id").replace("passive-",""));
+		var previous_passive = _char.skills.passive[index];
+		var current_passive = passive_ddl.val();
+		_char.skills.passive[index] = current_passive;
+
+		passive_ddl.siblings(".passive").children("option[value='"+previous_passive+"']").attr("disabled",false);
+		if(current_passive)
+			passive_ddl.siblings(".passive").children("option[value='"+current_passive+"']").attr("disabled",true);
+		else
+			_char.skills.passive[index] = null;
+
+		save_to_cookie(_char);
+		update_char();
+	}
+	function active_change(){
+		active_ddl = $(this);
+		var index = parseInt(active_ddl.attr("id").replace("active-",""));
+		var rune_ddl = $("#rune-"+index);
+		var previous_active = _char.skills.active[index];
+		var current_active = active_ddl.val();
+		_char.skills.active[index] = current_active;
+
+		active_ddl.parent().siblings().find("option[value='"+previous_active+"']").attr("disabled",false);
+		if(current_active){
+			active_ddl.parent().siblings().find("option[value='"+current_active+"']").attr("disabled",true);
+			rune_ddl.append("<option value='{0}'>{1}</option>".format("",""));
+			$.each(_classes[_char.settings.class].skills.active[current_active].runes, function(rune, data){
+				rune_ddl
+					.append("<option {2} {3} value='{0}'>{1}</option>"
+					.format(
+						rune,
+						rune,
+						_char.skills.rune.length >= index && _char.skills.rune[index] == rune ? "selected" : "",
+						$.inArray(rune, _char.skills.rune) >= 0 && _char.skills.rune[index] != rune ? "disabled" : ""
+					));
+			});
+		}
+		else{
+			rune_ddl.empty();
+			_char.skills.active[index] = null;
+		}
+
+		save_to_cookie(_char);
+		update_char();
+	}
+
+	function load_skills(){
+		if(_char && _char.settings && _char.settings.class){
+			if(!_char.skills)
+				_char.skills = { "passive": [,,,,], "active": [,,,,,,], "rune": [,,,,,,]}
+
+			debug(JSON.stringify(_char.skills));
+
+			$(".passive").each(function(i, skill_select){
+				skill_select = $(skill_select);
+				skill_select.empty();
+				skill_select.append("<option value='{0}'>{1}</option>".format("",""));
+				$.each(_classes[_char.settings.class].skills.passive, function(skill, skill_data){
+					skill_select
+						.append("<option {2} {3} value='{0}'>{1}</option>"
+						.format(
+							skill,
+							skill,
+							_char.skills.passive.length >= i && _char.skills.passive[i] == skill ? "selected" : "",
+							$.inArray(skill, _char.skills.passive) >= 0 && _char.skills.passive[i] != skill ? "disabled" : ""
+						));
+				});
+			});
+			$(".active").each(function(i, skill_select){
+				skill_select = $(skill_select);
+				skill_select.empty();
+				skill_select.append("<option value='{0}'>{1}</option>".format("",""));
+				$.each(_classes[_char.settings.class].skills.active, function(skill, skill_data){
+					skill_select
+						.append("<option {2} {3} value='{0}'>{1}</option>"
+						.format(
+							skill,
+							skill,
+							_char.skills.active.length >= i && _char.skills.active[i] == skill ? "selected" : "",
+							$.inArray(skill, _char.skills.active) >= 0 && _char.skills.active[i] != skill ? "disabled" : ""
+						));
+				});
+			}).change();
+		}
+	}
 </script>
 
-<a id="debug" href="#">debug</a>
 <div id="templates" style="display:none;">
 	<div class="affix">
 		<div class="view_affix">
@@ -534,18 +622,27 @@
 		<div class="secondary"></div>
 		<div class="legendary"></div>
 	</div>
+	<div class="active_skill">
+		<span class="label"></span>
+		<input type="checkbox" />
+	</div>
 </div>
 
 <table style="width:100%;">
 	<tr>
-		<td colspan="2"><input type="button" id="import_begin" value="import"/>
-		<div class="import">
-			<input type="text" id="bid" value=""/>
-			<input type="button" id="fetch" value="fetch"/>
-			<select id="character_list"></select>
-			<input type="button" id="import_end" value="import"/>
-		</div>
-	</td>
+		<td colspan="2">
+			<span>
+				<input type="button" id="import_begin" value="import"/>
+				<span class="import">
+					<input type="text" id="bid" value=""/>
+					<input type="button" id="fetch" value="fetch"/>
+					<select id="character_list"></select>
+					<input type="button" id="import_end" value="import"/>
+				</span>
+
+				<select id="class_list"></select>
+			</span>
+		</td>
 	</tr>
 	<tr>
 		<td class="data">
@@ -554,7 +651,17 @@
 					<thead><tr><td>
 						Offensive Stats
 					</td></tr></thead>
-					<tr id="main_stat">
+					<tr id="strength">
+						<td>
+
+						</td>
+					</tr>
+					<tr id="dexterity">
+						<td>
+
+						</td>
+					</tr>
+					<tr id="intelligence">
 						<td>
 
 						</td>
@@ -626,6 +733,16 @@
 							<span class="label"></span><span class="value"></span>
 						</td>
 					</tr>
+				</table>
+			</div>
+			<div class="stat_amounts">
+
+			</div>
+			<div id="active_skills">
+				<table>
+					<thead><tr><td>
+						Active Skills
+					</td></tr></thead>
 				</table>
 			</div>
 		</td>
@@ -989,44 +1106,98 @@
 				</div>
 			</div>
 			<div style="clear: both;"></div>
-			<div class="equipment_row">
-				<div class="set_bonuses set"></div>
-				<div class="slot" id="feet">
-					feet
-					<br>
+				<div class="equipment_row">
+					<div class="set_bonuses set"></div>
+					<div class="slot" id="feet">
+						feet
+						<br>
 
-					<div class="edit">
-						<select class="item feet chosen-select"></select>
+						<div class="edit">
+							<select class="item feet chosen-select"></select>
 
-						<div class="affix">
-							<div class="primary">
-								<select multiple class="chosen-select"></select>
+							<div class="affix">
+								<div class="primary">
+									<select multiple class="chosen-select"></select>
+								</div>
+							</div>
+							<div class="buttons">
+								<span class="ui-icon ui-icon-check save_button"></span>
+								<span class="ui-icon ui-icon-close cancel_button"></span>
 							</div>
 						</div>
-						<div class="buttons">
-							<span class="ui-icon ui-icon-check save_button"></span>
-							<span class="ui-icon ui-icon-close cancel_button"></span>
+						<div class="view">
+							<div>
+								<div class="name"></div>
+								<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
+							<div style="clear: both;"></div>
+							<div class="affixes"></div>
+						</div>
+						<div class="stats">
+							<div class="perfection"></div>
+							<div class="dps_loss"></div>
 						</div>
 					</div>
-					<div class="view">
-						<div>
-							<div class="name"></div>
-							<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
-						<div style="clear: both;"></div>
-						<div class="affixes"></div>
-					</div>
-					<div class="stats">
-						<div class="perfection"></div>
-						<div class="dps_loss"></div>
-					</div>
+					<div class="legendary_affixes legendary"></div>
 				</div>
-				<div class="legendary_affixes legendary"></div>
-			</div>
 			</div>
 			</div>
 		</td>
 	</tr>
-	<tr>
+	<tr class="skills">
+		<td colspan="2">
+			<select id="passive-0" class="skill passive"></select>
+			<select id="passive-1" class="skill passive"></select>
+			<select id="passive-2" class="skill passive"></select>
+			<select id="passive-3" class="skill passive"></select>
+		</td>
+	</tr>
+	<tr  class="skills">
+		<td colspan="2">
+			<table>
+				<tr>
+					<td>
+						<select id="active-0" class="skill active"></select>
+					</td>
+					<td>
+						<select id="active-1" class="skill active"></select>
+					</td>
+					<td>
+						<select id="active-2" class="skill active"></select>
+					</td>
+					<td>
+						<select id="active-3" class="skill active"></select>
+					</td>
+					<td>
+						<select id="active-4" class="skill active"></select>
+					</td>
+					<td>
+						<select id="active-5" class="skill active"></select>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<select id="rune-0" class="skill rune"></select>
+					</td>
+					<td>
+						<select id="rune-1" class="skill rune"></select>
+					</td>
+					<td>
+						<select id="rune-2" class="skill rune"></select>
+					</td>
+					<td>
+						<select id="rune-3" class="skill rune"></select>
+					</td>
+					<td>
+						<select id="rune-4" class="skill rune"></select>
+					</td>
+					<td>
+						<select id="rune-5" class="skill rune"></select>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr style="display: none;">
 		<td colspan="2">
 			<div id="skill_damage">
 				<table>
@@ -1099,4 +1270,5 @@
 	</tr>
 </table>
 
+<a id="debug" href="#">debug</a>
 <div id="debug_output"></div>

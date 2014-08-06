@@ -96,7 +96,7 @@
       },
       "chest":{
          "socket_value" : {
-            "main_stat" : 280
+            "main_stat" : 220
          },
          "skill_heavens_fury":{
             "min":10,
@@ -181,7 +181,7 @@
       },
       "twohand":{
          "socket_value" : {
-            "critical_hit_damage" : 130
+            "critical_hit_damage" : 125
          },
          "max_damage":{
             "min":0,

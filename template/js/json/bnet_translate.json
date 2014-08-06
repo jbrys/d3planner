@@ -5,6 +5,12 @@
 	"mainHand":"mainhand",
 	"offHand":"offhand",
 	"bracers":"wrists",
+	"barbarian":"barbarian",
+	"crusader":"crusader",
+	"demon-hunter":"demon_hunter",
+	"monk":"monk",
+	"witch-doctor":"witch_doctor",
+	"wizard":"wizard",
 	"Strength_Item":{
 		"name":["main_stat"]
 	},
