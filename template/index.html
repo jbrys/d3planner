@@ -393,6 +393,8 @@
 
     $(document).ready(function(){
         $.cookie.json = true;
+        _debug = $.cookie('d3planner_debug');
+        $("#debug").click(function(){_debug=!_debug;$.cookie('d3planner_debug',_debug);});
         $.ajaxSetup({
             async: false
         });
@@ -411,7 +413,6 @@
         $.getJSON("${base}json/classes", function(data) {
             _classes = data;
         });
-        $("#debug").click(function(){_debug=true;});
         $(".item").change(item_change);
 
         $(".edit_button").click(edit_button);
@@ -430,6 +431,7 @@
 		$("#skill_percent").keyup(skill_damage);
 		$("#skill_element").change(skill_damage);
 		$("#skill_element").chosen({disable_search:true});
+		$(".skill").chosen({disable_search:true});
 
 		$("#class_list").append("<option value='{0}'>{1}</option>".format("", ""));
 		$.each(_classes, function(class_name, details){
@@ -584,7 +586,7 @@
 		if(rune){
 			var skill_blob = _classes[_char.settings.class].skills.active[skill];
 			var active_blob = _classes[_char.settings.class].skills.active[skill].active
-						|| _classes[_char.settings.class].skills.active[skill].rune[rune].active;
+						|| _classes[_char.settings.class].skills.active[skill].runes[rune].active;
 			if (active_blob)
 				activator_change(rune, index, true);
 		}
@@ -635,6 +637,7 @@
 			_char.skills.active[index] = null;
 		}
 
+		rune_ddl.trigger("chosen:updated");
 		rune_ddl.change();
 		save_to_cookie(_char);
 		update_char();
@@ -657,6 +660,7 @@
 							_char.skills.passive.length >= i && _char.skills.passive[i] == skill,
 							$.inArray(skill, _char.skills.passive) >= 0 && _char.skills.passive[i] != skill));
 				});
+				skill_select.trigger("chosen:updated");
 			});
 			$(".active").each(function(i, skill_select){
 				skill_select = $(skill_select);
@@ -670,6 +674,7 @@
 							_char.skills.active.length >= i && _char.skills.active[i] == skill,
 							$.inArray(skill, _char.skills.active) >= 0 && _char.skills.active[i] != skill));
 				});
+				skill_select.trigger("chosen:updated");
 			}).change();
 		}
 	}
@@ -1218,56 +1223,56 @@
 	</tr>
 	<tr class="skills">
 		<td colspan="2">
-			<select id="passive-0" class="skill passive"></select>
-			<select id="passive-1" class="skill passive"></select>
-			<select id="passive-2" class="skill passive"></select>
-			<select id="passive-3" class="skill passive"></select>
+			Passives
 		</td>
 	</tr>
-	<tr  class="skills">
+	<tr class="skills passives">
 		<td colspan="2">
-			<table>
-				<tr>
-					<td>
-						<select id="active-0" class="skill active"></select>
-					</td>
-					<td>
-						<select id="active-1" class="skill active"></select>
-					</td>
-					<td>
-						<select id="active-2" class="skill active"></select>
-					</td>
-					<td>
-						<select id="active-3" class="skill active"></select>
-					</td>
-					<td>
-						<select id="active-4" class="skill active"></select>
-					</td>
-					<td>
-						<select id="active-5" class="skill active"></select>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<select id="rune-0" class="skill rune"></select>
-					</td>
-					<td>
-						<select id="rune-1" class="skill rune"></select>
-					</td>
-					<td>
-						<select id="rune-2" class="skill rune"></select>
-					</td>
-					<td>
-						<select id="rune-3" class="skill rune"></select>
-					</td>
-					<td>
-						<select id="rune-4" class="skill rune"></select>
-					</td>
-					<td>
-						<select id="rune-5" class="skill rune"></select>
-					</td>
-				</tr>
-			</table>
+			<div>
+			<select id="passive-0" class="skill passive"></select>
+			</div>
+			<div>
+			<select id="passive-1" class="skill passive"></select>
+			</div>
+			<div>
+			<select id="passive-2" class="skill passive"></select>
+			</div>
+			<div>
+			<select id="passive-3" class="skill passive"></select>
+			</div>
+		</td>
+	</tr>
+	<tr class="skills">
+		<td colspan="2">
+			Skills
+		</td>
+	</tr>
+	<tr  class="skills actives">
+		<td colspan="2">
+			<div>
+			<select id="active-0" class="skill active"></select>
+			<select id="rune-0" class="skill rune"></select>
+			</div>
+			<div>
+			<select id="active-1" class="skill active"></select>
+			<select id="rune-1" class="skill rune"></select>
+			</div>
+			<div>
+			<select id="active-2" class="skill active"></select>
+			<select id="rune-2" class="skill rune"></select>
+			</div>
+			<div>
+			<select id="active-3" class="skill active"></select>
+			<select id="rune-3" class="skill rune"></select>
+			</div>
+			<div>
+			<select id="active-4" class="skill active"></select>
+			<select id="rune-4" class="skill rune"></select>
+			</div>
+			<div>
+			<select id="active-5" class="skill active"></select>
+			<select id="rune-5" class="skill rune"></select>
+			</div>
 		</td>
 	</tr>
 	<tr style="display: none;">

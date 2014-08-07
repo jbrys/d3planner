@@ -307,7 +307,6 @@ function import_end(){
 }
 
 function simplify(statement, values){
-	debug(["statement",JSON.stringify(statement)]);
 	if(typeof(statement) == typeof({}))
 	{
 		var keys = Object.keys(statement);
@@ -315,9 +314,7 @@ function simplify(statement, values){
 			var key = Object.keys(statement)[i];
 			if(values[key]){
 				if(statement[key]){
-					debug(values[key]);
 					values[key] = simplify(statement[key], values);
-					debug(values[key]);
 				}
 			}
 			else{
