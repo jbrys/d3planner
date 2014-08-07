@@ -1,10 +1,424 @@
 {
-    "items": {
-        "Breastplate of Akkhan": {
-            "primary": {},
-            "secondary": {},
-            "legendary": {},
-            "set":"akkhan"
-        }
-    }
+  
+   "Raekor's Heart":{
+      "set":"raekor",
+      "primary":{
+
+      },
+      "legendary":{
+
+      },
+      "secondary":{
+
+      }
+   },
+   "Blackthorne's Surcoat":{
+      "set":"blackthorne",
+      "primary":{
+
+      },
+      "legendary":{
+
+      },
+      "secondary":{
+
+      }
+   },
+   "Blackthorne's Jousting Mail":{
+      "set":"blackthorne",
+      "primary":{
+      	"life_per_hit":{
+            "max":1980,
+            "min":1551
+         }
+
+      },
+      "legendary":{
+         
+      },
+      "secondary":{
+
+      }
+   },
+   "Raekor's Burden":{
+      "set":"raekor",
+      "primary":{
+
+      },
+      "legendary":{
+
+      },
+      "secondary":{
+
+      }
+   },
+   "Shi Mizu's Haori":{
+      "primary":{
+
+      },
+      "legendary":{
+         "shi_mizus_haori_leg":{
+            "max":25,
+            "min":20
+         }
+      },
+      "secondary":{
+
+      }
+   },
+   "Goldskin":{
+      "primary":{
+
+      },
+      "legendary":{
+         "goldskin_leg":false
+      },
+      "secondary":{
+
+      }
+   },
+   "Natalya's Embrace":{
+      "set":"natalya",
+      "primary":{
+
+      },
+      "legendary":{
+
+      },
+      "secondary":{
+
+      }
+   },
+   "Helltooth Tunic":{
+      "set":"heltooth",
+      "primary":{
+
+      },
+      "legendary":{
+
+      },
+      "secondary":{
+
+      }
+   },
+   "Tal Rasha's Relentless Pursuit":{
+      "set":"tal_rasha",
+      "primary":{
+      	"attack_speed":{
+            "max":6,
+            "min":5
+         }
+      },
+      "legendary":{
+         
+      },
+      "secondary":{
+
+      }
+   },
+   "Born's Frozen Soul":{
+      "set":"born_c",
+      "primary":{
+
+      },
+      "legendary":{
+
+      },
+      "secondary":{
+
+      }
+   },
+   "Born's Heart of Steel":{
+      "set":"born_d",
+      "primary":{
+
+      },
+      "legendary":{
+
+      },
+      "secondary":{
+
+      }
+   },
+   "Demon's Marrow":{
+      "set":"demon_hide",
+      "primary":{
+
+      },
+      "legendary":{
+
+      },
+      "secondary":{
+
+      }
+   },
+   "The Cloak of the Garwulf":{
+      "primary":{
+
+      },
+      "legendary":{
+         "the_cloak_of_the_garwulf_leg":false
+      },
+      "secondary":{
+
+      }
+   },
+   "Marauder's Carapace":{
+      "set":"marauder",
+      "primary":{
+
+      },
+      "legendary":{
+
+      },
+      "secondary":{
+
+      }
+   },
+   "Mantle of the Rydraelm":{
+      "primary":{
+
+      },
+      "legendary":{
+         
+      },
+      "secondary":{
+
+      }
+   },
+   "Aughild's Dominion":{
+      "set":"aughild_v",
+      "primary":{
+
+      },
+      "legendary":{
+
+      },
+      "secondary":{
+
+      }
+   },
+   "Jade Harvester's Peace":{
+      "set":"jade_harvester",
+      "primary":{
+
+      },
+      "legendary":{
+
+      },
+      "secondary":{
+
+      }
+   },
+   "Tyrael's Might":{
+      "primary":{
+      	"movement_speed": 12
+      },
+      "legendary":{
+         "demon_damage":{
+            "max":20,
+            "min":10
+         }
+      },
+      "secondary":{
+
+      }
+   },
+   "Chaingmail":{
+      "primary":{
+
+      },
+      "legendary":{
+         "chaingmail_leg": false
+      },
+      "secondary":{
+
+      }
+   },
+   "The Shadow's Bane":{
+      "set":"shadow_mantle",
+      "primary":{
+
+      },
+      "legendary":{
+
+      },
+      "secondary":{
+
+      }
+   },
+   "Firebird's Breast":{
+      "set":"firebird",
+      "primary":{
+
+      },
+      "legendary":{
+
+      },
+      "secondary":{
+
+      }
+   },
+   "Breastplate of Akkhan":{
+      "set":"akkhan",
+      "primary":{
+
+      },
+      "legendary":{
+
+      },
+      "secondary":{
+
+      }
+   },
+   "Heart of the Crashing Wave":{
+      "set":"thousand_storms",
+      "primary":{
+
+      },
+      "legendary":{
+
+      },
+      "secondary":{
+
+      }
+   },
+   "Immortal King's Eternal Reign":{
+      "set":"immortal_king",
+      "primary":{
+
+      },
+      "legendary":{
+
+      },
+      "secondary":{
+
+      }
+   },
+   "Demon's Heart":{
+      "set":"demon_skin",
+      "primary":{
+
+      },
+      "legendary":{
+
+      },
+      "secondary":{
+
+      }
+   },
+   "Cloak Of Deception":{
+      "primary":{
+
+      },
+      "legendary":{
+         "cloak_of_deception_leg":false
+      },
+      "secondary":{
+
+      }
+   },
+   "Vyr's Astonishing Aura":{
+      "set": "vyr",
+      "primary":{
+      	"critical_hit_chance":{
+            "max":2,
+            "min":1
+         }
+      },
+      "legendary":{
+         
+      },
+      "secondary":{
+
+      }
+   },
+   "Beckon Sail":{
+      "primary":{
+
+      },
+      "legendary":{
+         "beckon_sail_leg":false
+      },
+      "secondary":{
+
+      }
+   },
+   "Aughild's Rule":{
+      "set":"aughild_a",
+      "primary":{
+
+      },
+      "legendary":{
+
+      },
+      "secondary":{
+
+      }
+   },
+   "Cindercoat":{
+      "primary":{
+      	"fire_damage":{
+      		"min":23,
+      		"max":30
+      	}
+      },
+      "legendary":{
+         "cindercoat_leg":{
+            "max":30,
+            "min":23
+         }
+      },
+      "secondary":{
+
+      }
+   },
+   "Inna's Vast Expanse":{
+      "set":"inna",
+      "primary":{
+
+      },
+      "legendary":{
+
+      },
+      "secondary":{
+
+      }
+   },
+   "Cape of the Dark Night":{
+      "primary":{
+
+      },
+      "legendary":{
+         "cape_of_the_dark_night_leg":false
+      },
+      "secondary":{
+
+      }
+   },
+   "Armor of the Kind Regent":{
+      "primary":{
+
+      },
+      "legendary":{
+         "armor_of_the_kind_regent_leg":false
+      },
+      "secondary":{
+
+      }
+   },
+   "Blackfeather":{
+      "primary":{
+
+      },
+      "legendary":{
+         "blackfeather_leg":{
+            "max":800,
+            "min":600
+         }
+      },
+      "secondary":{
+
+      }
+   }
 }
