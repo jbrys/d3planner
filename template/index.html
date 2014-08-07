@@ -90,6 +90,7 @@
 								socket_affix = get_char_affix(socket_affix)
 								totals[socket_affix] = (totals[socket_affix] || 0) + value * affix.val;
 							});
+							totals[affix_name] = (totals[affix_name] || 0) + affix.val;
 						}
 						else{
 							if (affix_name == "elemental_damage"){
@@ -147,6 +148,19 @@
 								totals[affix] = (totals[affix] || 0) + value;
 							});
 						});
+					}
+				}
+			});
+			debug(JSON.stringify(totals));
+			$.each(_char.skills.passive, function(i, passive){
+				if(passive){
+					debug(passive);
+					if(_classes[_char.settings.class]
+						&& _classes[_char.settings.class].skills
+						&& _classes[_char.settings.class].skills.passive
+						&& _classes[_char.settings.class].skills.passive[passive]){
+						//
+						simplify(_classes[_char.settings.class].skills.passive[passive],totals);
 					}
 				}
 			});
@@ -251,6 +265,9 @@
 		$.each(slot_div.find(".view_affix"), function(i, affix_div){
 			var affix = $(affix_div).find(".type").attr("affix");
 
+			if (get_char_affix("main_stat") === affix)
+				affix = "main_stat";
+
 			if(perfect_values[affix]){
 				value_div = $(affix_div).find(".value");
 				var min = parseInt(value_div.attr("min"));
@@ -260,7 +277,7 @@
 
 				perfect_values[affix] += scale_to_real(max-val,scl);
 			}
-			else if(perfect_values.element = affix){
+			else if(perfect_values.element == affix){
 				perfect_values.elemental_damage
 			}
 		});
@@ -496,7 +513,7 @@
 
 	function debug(data){
 		if(_debug){
-			$("#debug_output").append("<div>{0}<div>".format(data));
+			$("#debug_output").prepend("<div>{0}<div>".format(data));
 		}
 	}
 
@@ -540,16 +557,13 @@
 		active_ddl.parent().siblings().find("option[value='"+previous_active+"']").attr("disabled",false);
 		if(current_active){
 			active_ddl.parent().siblings().find("option[value='"+current_active+"']").attr("disabled",true);
-			rune_ddl.append("<option value='{0}'>{1}</option>".format("",""));
+			rune_ddl.append(createOption(""));
 			$.each(_classes[_char.settings.class].skills.active[current_active].runes, function(rune, data){
 				rune_ddl
-					.append("<option {2} {3} value='{0}'>{1}</option>"
-					.format(
+					.append(createOption(
 						rune,
 						rune,
-						_char.skills.rune.length >= index && _char.skills.rune[index] == rune ? "selected" : "",
-						$.inArray(rune, _char.skills.rune) >= 0 && _char.skills.rune[index] != rune ? "disabled" : ""
-					));
+						_char.skills.rune.length >= index && _char.skills.rune[index] == rune ? "selected" : ""));
 			});
 		}
 		else{
@@ -566,21 +580,17 @@
 			if(!_char.skills)
 				_char.skills = { "passive": [,,,,], "active": [,,,,,,], "rune": [,,,,,,]}
 
-			debug(JSON.stringify(_char.skills));
-
 			$(".passive").each(function(i, skill_select){
 				skill_select = $(skill_select);
 				skill_select.empty();
-				skill_select.append("<option value='{0}'>{1}</option>".format("",""));
+				skill_select.append(createOption(""));
 				$.each(_classes[_char.settings.class].skills.passive, function(skill, skill_data){
 					skill_select
-						.append("<option {2} {3} value='{0}'>{1}</option>"
-						.format(
+						.append(createOption(
 							skill,
 							skill,
-							_char.skills.passive.length >= i && _char.skills.passive[i] == skill ? "selected" : "",
-							$.inArray(skill, _char.skills.passive) >= 0 && _char.skills.passive[i] != skill ? "disabled" : ""
-						));
+							_char.skills.passive.length >= i && _char.skills.passive[i] == skill,
+							$.inArray(skill, _char.skills.passive) >= 0 && _char.skills.passive[i] != skill));
 				});
 			});
 			$(".active").each(function(i, skill_select){
@@ -589,13 +599,11 @@
 				skill_select.append("<option value='{0}'>{1}</option>".format("",""));
 				$.each(_classes[_char.settings.class].skills.active, function(skill, skill_data){
 					skill_select
-						.append("<option {2} {3} value='{0}'>{1}</option>"
-						.format(
+						.append(createOption(
 							skill,
 							skill,
-							_char.skills.active.length >= i && _char.skills.active[i] == skill ? "selected" : "",
-							$.inArray(skill, _char.skills.active) >= 0 && _char.skills.active[i] != skill ? "disabled" : ""
-						));
+							_char.skills.active.length >= i && _char.skills.active[i] == skill,
+							$.inArray(skill, _char.skills.active) >= 0 && _char.skills.active[i] != skill));
 				});
 			}).change();
 		}

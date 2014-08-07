@@ -80,7 +80,7 @@
       "template":"Reduces cooldown of all skills by {0}%",
       "display":"Reduces cooldown of all skills"
    },
-   "skill_heavens_fury":{
+   "heavens_fury_damage":{
       "template":"Increases Heaven's Fury damage by {0}%",
       "display":"Increases Heaven's Fury damage"
    },

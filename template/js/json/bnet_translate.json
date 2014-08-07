@@ -29,7 +29,7 @@
 		"scale":2
 	},
 	"Power_Damage_Percent_Bonus#X1_Crusader_HeavensFury3":{
-		"name":["skill_heavens_fury"],
+		"name":["heavens_fury_damage"],
 		"scale":2
 	},
 	"Movement_Scalar":{

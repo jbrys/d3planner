@@ -199,7 +199,6 @@ function load_ddl(item_ddl){
 }
 
 function join_item(item){
-	debug(JSON.stringify(item));
     if(item && !item.joined){
     	var primary_affixes = _affix.primary[item.base];
         $.each(primary_affixes, function(stat,value){
@@ -264,7 +263,6 @@ function import_end(){
 		$.each(c_data.items, function(slot, item){
 			slot = _bnet_translate[slot] || slot;
 			var item_name =  _bnet_translate[item.name] || item.name;
-			debug(JSON.stringify(slot));
 			item_blob = _slots[slot].items[item_name];
 
 			_char[slot] = {};
@@ -289,17 +287,13 @@ function import_end(){
 									}
 									scale = _char[slot].affixes.primary[affix].scale || 0;
 									value = Math.round(value*Math.pow(10,scale));
-									if(affix == "max_damage"||affix == "min_damage"){
-										debug([slot,affix,value,_char[slot].affixes.primary[affix].val]);
-										debug(JSON.stringify(i_data.attributesRaw[key]));
-									}
 									_char[slot].affixes.primary[affix].val =
 										(_char[slot].affixes.primary[affix].val || 0) + value
 								}
 							});
 						}
 						else{
-
+							debug(["unable to translate",key,JSON.stringify(value)]);
 						}
 					});
 				});
@@ -321,8 +315,9 @@ function simplify(statement, values){
 			var key = Object.keys(statement)[i];
 			if(values[key]){
 				if(statement[key]){
+					debug(values[key]);
 					values[key] = simplify(statement[key], values);
-					debug(JSON.stringify(values));
+					debug(values[key]);
 				}
 			}
 			else{
@@ -354,4 +349,16 @@ function simplify(statement, values){
 function IsNumeric(input)
 {
    return (input - 0) == input && input.length > 0;
+}
+
+function createOption(text, value, selected, disabled){
+	if (value === undefined) value = null;
+	if (selected === undefined) selected = false;
+	if (disabled === undefined) disabled = false;
+
+	return $("<option></option>")
+				.text(text)
+				.attr("value",value)
+				.attr("selected",selected)
+				.attr("disabled",disabled);
 }
