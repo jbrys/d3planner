@@ -34,6 +34,39 @@
    "ring_of_royal_grandeur_leg":{
       "display":"Reduces the number of items needed for set bonuses by 1 (to a minimum of 2)."
    },
+   "shi_mizus_haori_leg":{
+      "template":"While below {0}% life, all attacks are guaranteed Critical Hits.",
+      "display": "While below life, all attacks are guaranteed Critical Hits."
+   },
+   "goldskin_leg":{
+      "display":"Chance for enemies to drop gold when you hit them."
+   },
+   "the_cloak_of_the_garwulf_leg":{
+      "display":"Companion - Wolf Companion now summons 3 wolves."
+   },
+   "chaingmail_leg":{
+      "display":"After earning a survivial bonus, quickly heal to full Life."
+   },
+   "cloak_of_deception_leg":{
+      "display":"Enemy missiles sometimes pass through you harmlessly."
+   },
+   "beckon_sail_leg":{
+      "display":"Automatically cast Smoke Screen when you fall below 25% Life. This effect may occur once every 30 seconds."
+   },
+   "cindercoat_leg":{
+      "template": "Reduce the resource cost of Fire Skills by {0}%",
+      "display": "Reduce the resource cost of Fire Skills"
+   },
+   "cape_of_the_dark_night_leg":{
+      "display": "Automatically drop Caltrops when you are hit. This effect may only occur once every 6 seconds."
+   },
+   "armor_of_the_kind_regent_leg":{
+      "display": "Smite will now also be cast at a second nearby enemy."
+   },
+   "blackfeather_leg":{
+      "template": "Dodging or getting hit by a ranged attack automatically shoots a homing rocket back at the attacker for {0}% weapon damage as Physical.",
+      "display": "Dodging or getting hit by a ranged attack automatically shoots a homing rocket back at the attacker for weapon damage as Physical."
+   },
    "elite_damage":{
       "template":"Increases damage against elites by {0}%",
       "display":"Increases damage against elites"
@@ -169,6 +202,10 @@
    "life_per_spirit":{
          "template":"Gain {0} Life per Spirit Spent (Monk Only)",
          "display":"Gain Life per Spirit Spent (Monk Only)"   
+   },
+   "life_per_hit":{
+         "template":"{0} Life per Hit",
+         "display":"Life per Hit"  
    },
    "mana_per_kill":{
          "template":"Grants {0} Mana per Kill (Witch Doctor Only)",
@@ -467,11 +504,11 @@
         "template":"{0}% Perfect"
    },
    "dps_loss":{
-   		"template":"{0} DPS Lost",
-   		"tooltip":"The DPS lost due to imperfect affix values."
+        "template":"{0} DPS Lost",
+        "tooltip":"The DPS lost due to imperfect affix values."
    },
    "tooltip":{
-   		"template":"<span class='tooltip' title='{1}'>{0}</span>"
+        "template":"<span class='tooltip' title='{1}'>{0}</span>"
    },
    "barbarian":{
         "display":"Barbarian",
@@ -483,7 +520,7 @@
    },
    "demon_hunter" : {
         "display":"Demon Hunter",
-		"dropdown":"Demon Hunter"
+     "dropdown":"Demon Hunter"
    },
    "monk" : {
         "display":"Monk",
@@ -493,7 +530,7 @@
         "display":"Witch Doctor",
         "dropdown":"Witch Doctor"
    },
-   "wizard" : {
+  "wizard" : {
         "display":"Wizard",
         "dropdown":"Wizard"
    },
@@ -508,5 +545,5 @@
    "dexterity":{
       "template":"+{0} Dexterity",
       "display":"Dexterity"
-   }
+    }
 }
