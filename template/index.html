@@ -164,6 +164,35 @@
 					}
 				}
 			});
+			$.each(_char.skills.active, function(i, active){
+				if(active){
+					debug(active);
+					if(_classes[_char.settings.class]
+						&& _classes[_char.settings.class].skills
+						&& _classes[_char.settings.class].skills.active
+						&& _classes[_char.settings.class].skills.active[active]){
+						//
+						var rune = _char.skills.rune[i];
+						var activated = _char.skills.activated[i];
+						var skill_blob;
+						var rune_blob = null;
+						if(activated){
+							if(rune)
+								rune_blob = _classes[_char.settings.class].skills.active[active].runes[rune].active
+							skill_blob = _classes[_char.settings.class].skills.active[active].active;
+						}
+						else{
+							if(rune)
+								rune_blob = _classes[_char.settings.class].skills.active[active].runes[rune].passive
+							skill_blob = _classes[_char.settings.class].skills.active[active].passive;
+						}
+						if(rune_blob || skill_blob){
+							debug(JSON.stringify(rune_blob || skill_blob));
+							simplify(rune_blob || skill_blob,totals);
+						}
+					}
+				}
+			});
 
 			_char.totals = totals;
 
@@ -394,6 +423,7 @@
         $(".passive").change(passive_change);
         $(".active").change(active_change);
         $("#fetch").click(fetch);
+        $(".active_skill input").click(activated_change);
 		$.each(_elements, function(i, element){
 			$("#skill_element").append("<option value='{0}'>{1}</option>".format(element,_translate[element].dropdown));
 		});
@@ -517,16 +547,50 @@
 		}
 	}
 
+	function activator_change(rune, index, show){
+		if(show){
+			active_skill_template = $("#templates .active_skill").clone(true,true);
+			$("#active_skills").append(active_skill_template);
+			active_skill_template
+				.addClass(rune)
+				.attr("index",index)
+				.find(".label")
+					.attr("rune",rune)
+					.text(get_template(rune));
+		}
+		else{
+			$("#active_skills ."+rune).remove();
+		}
+	}
+
+	function activated_change(){
+		skill_chk = $(this);
+		var index = parseInt(skill_chk.parent().attr("index"));
+		_char.skills.activated[index] = skill_chk.is(':checked');
+		save_to_cookie(_char);
+		update_char();
+	}
+
 	function rune_change(){
 		rune_ddl = $(this);
 		var index = parseInt(rune_ddl.attr("id").replace("rune-",""));
 		var rune = rune_ddl.val();
+		var skill = _char.skills.active[index];
 		var previous_rune = _char.skills.rune[index];
 		_char.skills.rune[index] = rune;
 
-		if(!rune)
-			_char.skills.rune[index] = null;
+		activator_change(previous_rune, index, false);
 
+		if(rune){
+			var skill_blob = _classes[_char.settings.class].skills.active[skill];
+			var active_blob = _classes[_char.settings.class].skills.active[skill].active
+						|| _classes[_char.settings.class].skills.active[skill].rune[rune].active;
+			if (active_blob)
+				activator_change(rune, index, true);
+		}
+		else{
+			_char.skills.rune[index] = null;
+		}
 		save_to_cookie(_char);
 		update_char();
 	}
@@ -571,6 +635,7 @@
 			_char.skills.active[index] = null;
 		}
 
+		rune_ddl.change();
 		save_to_cookie(_char);
 		update_char();
 	}
@@ -578,7 +643,7 @@
 	function load_skills(){
 		if(_char && _char.settings && _char.settings.class){
 			if(!_char.skills)
-				_char.skills = { "passive": [,,,,], "active": [,,,,,,], "rune": [,,,,,,]}
+				_char.skills = { "passive": [,,,,], "active": [,,,,,,], "rune": [,,,,,,], "activated": [,,,,,,] }
 
 			$(".passive").each(function(i, skill_select){
 				skill_select = $(skill_select);
