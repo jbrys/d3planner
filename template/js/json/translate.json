@@ -37,7 +37,8 @@
    },
    "arcane_damage":{
       "template":"Arcane skills deal {0}% more damage.",
-      "display":"Arcane skills deal more damage."
+      "display":"Arcane skills deal more damage.",
+      "dropdown": "Arcane"
    },
    "physical_damage":{
       "template":"Physical skills deal {0}% more damage.",
