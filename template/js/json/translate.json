@@ -8,23 +8,28 @@
    },
    "holy_damage":{
       "template":"Holy skills deal {0}% more damage",
-      "display":"Holy skills deal more damage"
+      "display":"Holy skills deal more damage",
+      "dropdown":"Holy"
    },
    "lightning_damage":{
       "template":"Lightning skills deal {0}% more damage.",
-      "display":"Lightning skills deal more damage."
+      "display":"Lightning skills deal more damage.",
+      "dropdown":"Lightning"
    },
    "cold_damage":{
       "template":"Cold skills deal {0}% more damage.",
-      "display":"Cold skills deal more damage."
+      "display":"Cold skills deal more damage.",
+      "dropdown": "Cold"
    },
    "fire_damage":{
       "template":"Fire skills deal {0}% more damage.",
-      "display":"Fire skills deal more damage."
+      "display":"Fire skills deal more damage.",
+      "dropdown": "Fire"
    },
    "poison_damage":{
       "template":"Poison skills deal {0}% more damage.",
-      "display":"Poison skills deal more damage."
+      "display":"Poison skills deal more damage.",
+      "dropdown": "Poison"
    },
    "fire_damage_taken":{
       "template":"{0}% more Fire damage taken.",
@@ -590,5 +595,51 @@
    },
    "zunimassa_4":{
          "display": "Your Fetish Army lasts until they die."
-   }
+  },
+   "perfection":{
+      "template":"{0}% Perfect"
+   },
+   "dps_loss":{
+         "template":"{0} DPS Lost",
+   "tooltip":"The DPS lost due to imperfect affix values."
+    },
+   "tooltip":{
+         "template":"<span class='tooltip' title='{1}'>{0}</span>"
+     },
+   "barbarian":{
+      "display":"Barbarian",
+      "dropdown":"Barbarian"
+   },
+   "crusader" : {
+           "display":"Crusader",
+           "dropdown":"Crusader"
+   },
+   "demon_hunter" : {
+        "display":"Demon Hunter",
+        "dropdown":"Demon Hunter"
+   },
+   "monk" : {
+        "display":"Monk",
+        "dropdown":"Monk"
+   },
+   "witch_doctor" : {
+        "display":"Witch Doctor",
+        "dropdown":"Witch Doctor"
+   },
+  "wizard" : {
+        "display":"Wizard",
+        "dropdown":"Wizard"
+   },
+   "strength":{
+      "template":"+{0} Strength",
+      "display":"Strength"
+   },
+   "intelligence":{
+      "template":"+{0} Intelligence",
+      "display":"Intelligence"
+   },
+   "dexterity":{
+      "template":"+{0} Dexterity",
+      "display":"Dexterity"
+    }
 }
