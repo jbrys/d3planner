@@ -288,11 +288,13 @@
 
 	function calculate_dps_loss(slot){
 		populate_values();
-		perfect_values = jQuery.extend(true, {}, _values);
+		var perfect_values = jQuery.extend(true, {}, _values);
 
 		var slot_div = $("#"+slot);
 		$.each(slot_div.find(".view_affix"), function(i, affix_div){
 			var affix = $(affix_div).find(".type").attr("affix");
+
+			if(affix == _classes[_char.settings.class].main_stat) affix = "main_stat";
 
 			if(perfect_values[affix]){
 				value_div = $(affix_div).find(".value");
