@@ -8,28 +8,23 @@
    },
    "holy_damage":{
       "template":"Holy skills deal {0}% more damage",
-      "display":"Holy skills deal more damage",
-      "dropdown": "Holy"
+      "display":"Holy skills deal more damage"
    },
    "lightning_damage":{
       "template":"Lightning skills deal {0}% more damage.",
-      "display":"Lightning skills deal more damage.",
-      "dropdown": "Lightning"
+      "display":"Lightning skills deal more damage."
    },
    "cold_damage":{
       "template":"Cold skills deal {0}% more damage.",
-      "display":"Cold skills deal more damage.",
-      "dropdown": "Cold"
+      "display":"Cold skills deal more damage."
    },
    "fire_damage":{
       "template":"Fire skills deal {0}% more damage.",
-      "display":"Fire skills deal more damage.",
-      "dropdown": "Fire"
+      "display":"Fire skills deal more damage."
    },
    "arcane_damage":{
       "template":"Arcane skills deal {0}% more damage.",
-      "display":"Arcane skills deal more damage.",
-      "dropdown": "Arcane"
+      "display":"Arcane skills deal more damage."
    },
    "ring_of_royal_grandeur_leg":{
       "display":"Reduces the number of items needed for set bonuses by 1 (to a minimum of 2)."
@@ -66,6 +61,10 @@
    "blackfeather_leg":{
       "template": "Dodging or getting hit by a ranged attack automatically shoots a homing rocket back at the attacker for {0}% weapon damage as Physical.",
       "display": "Dodging or getting hit by a ranged attack automatically shoots a homing rocket back at the attacker for weapon damage as Physical."
+   },
+   "dark_mages_shade_leg":{
+      "template": "Automatically cast Diamond Skin when you fall below 35% Life. This effect may occur once every {0} seconds.",
+      "display": "Automatically cast Diamond Skin when you fall below 35% Life. This effect may occur once every seconds.",
    },
    "elite_damage":{
       "template":"Increases damage against elites by {0}%",
@@ -499,51 +498,5 @@
    },
    "zunimassa_4":{
          "display": "Your Fetish Army lasts until they die."
-   },
-   "perfection":{
-        "template":"{0}% Perfect"
-   },
-   "dps_loss":{
-        "template":"{0} DPS Lost",
-        "tooltip":"The DPS lost due to imperfect affix values."
-   },
-   "tooltip":{
-        "template":"<span class='tooltip' title='{1}'>{0}</span>"
-   },
-   "barbarian":{
-        "display":"Barbarian",
-        "dropdown":"Barbarian"
-   },
-   "crusader" : {
-        "display":"Crusader",
-        "dropdown":"Crusader"
-   },
-   "demon_hunter" : {
-        "display":"Demon Hunter",
-     "dropdown":"Demon Hunter"
-   },
-   "monk" : {
-        "display":"Monk",
-        "dropdown":"Monk"
-   },
-   "witch_doctor" : {
-        "display":"Witch Doctor",
-        "dropdown":"Witch Doctor"
-   },
-  "wizard" : {
-        "display":"Wizard",
-        "dropdown":"Wizard"
-   },
-   "strength":{
-      "template":"+{0} Strength",
-      "display":"Strength"
-   },
-   "intelligence":{
-      "template":"+{0} Intelligence",
-      "display":"Intelligence"
-   },
-   "dexterity":{
-      "template":"+{0} Dexterity",
-      "display":"Dexterity"
-    }
+   }
 }
