@@ -46,6 +46,7 @@
 	var _values;
     var _elements = ["holy_damage","fire_damage"];
 	var _classes;
+	var _groups;
 
     function update_char(){
     	if(_char && _char.settings && _char.settings.class){
@@ -54,7 +55,7 @@
 
 			var totals = jQuery.extend(true, {}, _base_stats);
 			$.each(_stats, function(i, stat){
-				totals[stat] = get_char_affix("main_stat") == stat ? totals.main_stat : totals.off_stat;
+				totals[stat] = _classes[_char.settings.class].main_stat == stat ? totals.main_stat : totals.off_stat;
 			});
 			var sets = {};
 			var rorg_bonus = false;
@@ -75,7 +76,7 @@
 
 					slot_div.addClass("legendary");
 					if(item_blob.set){
-						sets[item_blob.set] = (sets[item_blob.set] || 0) + 1
+						sets[item_blob.set] = (sets[item_blob.set] || 0) + 1;
 						slot_div.addClass("set");
 						slot_div.removeClass("legendary");
 					}
@@ -83,11 +84,11 @@
 
 					affixes_div.empty();
 					$.each(item.affixes.primary, function(affix_name,affix){
-						affix_name = get_char_affix(affix_name)
 						if (affix_name == "socket"){
 							join_item(item_blob);
 							$.each(item_blob.socket_value || {}, function(socket_affix, value){
-								socket_affix = get_char_affix(socket_affix)
+								socket_affix =
+									socket_affix == "main_stat" ? _classes[_char.settings.class].main_stat : socket_affix;
 								totals[socket_affix] = (totals[socket_affix] || 0) + value * affix.val;
 							});
 							totals[affix_name] = (totals[affix_name] || 0) + affix.val;
@@ -144,7 +145,6 @@
 								affix_div.html(get_template(affix, value));
 								set_div.find("."+affix_type).append(affix_div);
 
-								affix = get_char_affix(affix)
 								totals[affix] = (totals[affix] || 0) + value;
 							});
 						});
@@ -294,9 +294,6 @@
 		$.each(slot_div.find(".view_affix"), function(i, affix_div){
 			var affix = $(affix_div).find(".type").attr("affix");
 
-			if (get_char_affix("main_stat") === affix)
-				affix = "main_stat";
-
 			if(perfect_values[affix]){
 				value_div = $(affix_div).find(".value");
 				var min = parseInt(value_div.attr("min"));
@@ -413,6 +410,9 @@
         $.getJSON("${base}json/classes", function(data) {
             _classes = data;
         });
+        $.getJSON("${base}json/affix_groups", function(data) {
+            _groups = data;
+        });
         $(".item").change(item_change);
 
         $(".edit_button").click(edit_button);
@@ -474,7 +474,7 @@
 			}
     	});
 
-		var main_stat = _classes[_char.settings.class].translate["main_stat"];
+		var main_stat = _classes[_char.settings.class].main_stat;
 
 		_values = {
 			max_damage: _char.totals.max_damage/Math.pow(10, _translate.max_damage.scale || 0),

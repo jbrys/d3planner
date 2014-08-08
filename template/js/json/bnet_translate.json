@@ -12,7 +12,7 @@
 	"witch-doctor":"witch_doctor",
 	"wizard":"wizard",
 	"Strength_Item":{
-		"name":["main_stat"]
+		"name":["strength"]
 	},
 	"Vitality_Item":{
 		"name":["vitality"]

@@ -130,7 +130,6 @@ function get_display_value(val, scale){
 }
 
 function get_template(affix, value){
-	affix = get_char_affix(affix);
     affix_stuff = _translate[affix] || {};
     var output;
     if (value){
@@ -226,9 +225,19 @@ function item_change(){
     if(item.primary) {
         $("#"+slot+" .affix .primary select").append($("<option></option>").html(""));
         $.each(item.primary, function(stat,value){
-            if(_translate[stat])
-                $("#"+slot+" .affix .primary select")
-                    .append($("<option></option>").html(get_template(stat)).attr("value", stat).attr("selected", $.inArray(stat, affixes) >=0));
+            if(_translate[stat]){
+            	var parent_item = $("#"+slot+" .affix .primary select");
+            	var group = _groups[stat] || "other";
+            	if(group){
+					if(!parent_item.find("."+group).length){
+						parent_item.append(createOptionGroup(group,get_template(group)));
+					}
+					parent_item = parent_item.find("."+group);
+            	}
+				parent_item
+					.append(createOption(get_template(stat),stat,$.inArray(stat, affixes) >=0));
+					//.append($("<option></option>").html(get_template(stat)).attr("value", stat).attr("selected", $.inArray(stat, affixes) >=0));
+			}
         });
     }
     $("#"+slot+ " .chosen-select").trigger("chosen:updated");
@@ -358,4 +367,11 @@ function createOption(text, value, selected, disabled){
 				.attr("value",value)
 				.attr("selected",selected)
 				.attr("disabled",disabled);
+}
+function createOptionGroup(class_name, text){
+	if (text === undefined) text = class_name;
+
+	return $("<optgroup></optgroup>")
+				.attr("label",text)
+				.attr("class",class_name);
 }

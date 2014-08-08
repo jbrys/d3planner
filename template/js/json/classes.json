@@ -1,15 +1,11 @@
 {
 	"barbarian":{
-		"translate": {
-			"main_stat": "strength"
-		},
+		"main_stat": "strength",
 		"class_specific_slots":{
 		}
 	},
 	"crusader":{
-		"translate": {
-			"main_stat": "strength"
-		},
+		"main_stat": "strength",
 		"class_specific_slots":{
 			"mainhand":["flail","twohandflail"],
 			"offhand" :["cshield"]
@@ -78,31 +74,23 @@
 		}
 	},
 	"demon_hunter":{
-		"translate": {
-			"main_stat": "dexterity"
-		},
+		"main_stat": "dexterity",
 		"class_specific_slots":{
 		}
 	},
 	"monk":{
-		"translate": {
-			"main_stat": "dexterity"
-		},
+		"main_stat": "dexterity",
 		"class_specific_slots":{
 		}
 	},
 	"witch_doctor":{
-		"translate": {
-			"main_stat": "intelligence"
-		},
+		"main_stat": "intelligence",
 		"class_specific_slots":{
 			"offhand":["mojo"]
 		}
 	},
 	"wizard":{
-		"translate": {
-			"main_stat": "intelligence"
-		},
+		"main_stat": "intelligence",
 		"class_specific_slots":{
 			"offhand":["source"]
 		}

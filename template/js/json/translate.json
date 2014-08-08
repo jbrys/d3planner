@@ -88,7 +88,6 @@
       "display":"Prevent all Poison damage taken and heal yourself for the amount prevented."
    },
    "main_stat":{
-      "template":"+{0} Main Stat",
       "display":"Main Stat"
    },
    "vitality":{

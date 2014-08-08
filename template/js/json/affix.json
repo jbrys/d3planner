@@ -1,7 +1,15 @@
 {
    "primary":{
       "head":{
-         "main_stat":{
+         "intelligence":{
+            "min":626,
+            "max":750
+         },
+         "dexterity":{
+            "min":626,
+            "max":750
+         },
+         "strength":{
             "min":626,
             "max":750
          },
@@ -61,7 +69,15 @@
          }
       },
       "shoulders":{
-         "main_stat":{
+         "intelligence":{
+            "min":416,
+            "max":500
+         },
+         "dexterity":{
+            "min":416,
+            "max":500
+         },
+         "strength":{
             "min":416,
             "max":500
          },
@@ -131,7 +147,15 @@
             "min":120,
             "max":160
          },
-         "main_stat":{
+         "intelligence":{
+            "min":626,
+            "max":750
+         },
+         "dexterity":{
+            "min":626,
+            "max":750
+         },
+         "strength":{
             "min":626,
             "max":750
          },
@@ -199,7 +223,15 @@
             "min":91,
             "max":100
          },
-         "main_stat":{
+         "intelligence":{
+            "min":626,
+            "max":750
+         },
+         "dexterity":{
+            "min":626,
+            "max":750
+         },
+         "strength":{
             "min":626,
             "max":750
          },
@@ -250,7 +282,15 @@
             "min":10,
             "max":15
          },
-         "main_stat":{
+         "intelligence":{
+            "min":416,
+            "max":500
+         },
+         "dexterity":{
+            "min":416,
+            "max":500
+         },
+         "strength":{
             "min":416,
             "max":500
          },
@@ -296,7 +336,15 @@
          }
       },
       "wrists":{
-         "main_stat":{
+         "intelligence":{
+            "min":416,
+            "max":500
+         },
+         "dexterity":{
+            "min":416,
+            "max":500
+         },
+         "strength":{
             "min":416,
             "max":500
          },
@@ -332,7 +380,15 @@
          }
       },
       "finger":{
-         "main_stat":{
+         "intelligence":{
+            "min":416,
+            "max":500
+         },
+         "dexterity":{
+            "min":416,
+            "max":500
+         },
+         "strength":{
             "min":416,
             "max":500
          },
@@ -397,7 +453,15 @@
          }
       },
       "waist":{
-         "main_stat":{
+         "intelligence":{
+            "min":416,
+            "max":500
+         },
+         "dexterity":{
+            "min":416,
+            "max":500
+         },
+         "strength":{
             "min":416,
             "max":500
          },
@@ -450,7 +514,15 @@
             "min":0,
             "max":2168
          },
-         "main_stat":{
+         "intelligence":{
+            "min":946,
+            "max":1125
+         },
+         "dexterity":{
+            "min":946,
+            "max":1125
+         },
+         "strength":{
             "min":946,
             "max":1125
          },
@@ -481,7 +553,15 @@
             "min":0,
             "max":2168
          },
-         "main_stat":{
+         "intelligence":{
+            "min":946,
+            "max":1125
+         },
+         "dexterity":{
+            "min":946,
+            "max":1125
+         },
+         "strength":{
             "min":946,
             "max":1125
          },
@@ -504,7 +584,15 @@
          "socket_value":{
             "main_stat":280
          },
-         "main_stat":{
+         "intelligence":{
+            "min":416,
+            "max":500
+         },
+         "dexterity":{
+            "min":416,
+            "max":500
+         },
+         "strength":{
             "min":416,
             "max":500
          },
@@ -546,7 +634,15 @@
          }
       },
       "shield":{
-         "main_stat":{
+         "intelligence":{
+            "min":626,
+            "max":750
+         },
+         "dexterity":{
+            "min":626,
+            "max":750
+         },
+         "strength":{
             "min":626,
             "max":750
          },
@@ -594,7 +690,15 @@
          }
       },
       "feet":{
-         "main_stat":{
+         "intelligence":{
+            "min":416,
+            "max":500
+         },
+         "dexterity":{
+            "min":416,
+            "max":500
+         },
+         "strength":{
             "min":416,
             "max":500
          },
