@@ -87,7 +87,6 @@
       "display":"Prevent all Poison damage taken and heal yourself for the amount prevented."
    },
    "main_stat":{
-      "template":"+{0} Main Stat",
       "display":"Main Stat"
    },
    "vitality":{
@@ -112,7 +111,7 @@
       "template":"Reduces cooldown of all skills by {0}%",
       "display":"Reduces cooldown of all skills"
    },
-   "skill_heavens_fury":{
+   "heavens_fury_damage":{
       "template":"Increases Heaven's Fury damage by {0}%",
       "display":"Increases Heaven's Fury damage"
    },

@@ -81,3 +81,7 @@ table thead td { font-weight: bold; padding: 10px 0 0 0;}
 
 /* skills */
 .skills tr { width: 100%; }
+.skills select{ width: 100%; }
+.skills.passives>td>div {width: 24%; display: inline-block;}
+.skills.actives>td>div {width: 16%; display: inline-block;}
+.skills.actives>td>div.selected {border-width: 2px 2px 0 2px; border-style: solid;}

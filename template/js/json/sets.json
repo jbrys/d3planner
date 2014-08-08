@@ -2,8 +2,7 @@
    "akkhan":{
       "2":{
          "primary":{
-            "main_stat":500,
-            "todo":"change to strength"
+            "strength":500
          },
          "secondary":{},
          "legendary":{}
@@ -183,8 +182,7 @@
    "bul-kathos":{
       "2":{
          "primary":{
-            "main_stat":250,
-            "todo":"change to strength",
+            "strength":250,
             "max_fury":10
          },
          "secondary":{},
@@ -246,8 +244,7 @@
    "chantodo":{
       "2":{
          "primary":{
-            "main_stat":250,
-            "todo":"change to int",
+            "intelligence":250,
             "reduced_damage_elite":10
          },
          "secondary":{},
@@ -488,8 +485,7 @@
    "inna":{
       "2":{
          "primary":{
-            "main_stat":250,
-            "todo":"change to dex",
+            "dexterity":250,
             "life_per_fury":124
          },
          "secondary":{},
@@ -580,8 +576,7 @@
    "natalya":{
       "2":{
          "primary":{
-            "main_stat":250,
-            "todo":"change to dex",
+            "dexterity":250,
             "max_discipline":10
          },
          "secondary":{},
@@ -606,8 +601,7 @@
    "thousand_storms":{
       "2":{
          "primary":{
-            "main_stat":500,
-            "todo":"change to dex"
+            "dexterity":500
          },
          "secondary":{},
          "legendary":{}
@@ -630,8 +624,7 @@
    "jade_harvester":{
       "2":{
          "primary":{
-            "main_stat":500,
-            "todo":"change to int"
+            "intelligence":500
          },
          "secondary":{},
          "legendary":{}
@@ -654,9 +647,10 @@
    "sage_j":{
       "2":{
          "primary":{
-            "main_stat":250,
-            "vitality":250,
-            "todo":"change to str, dex, int"
+            "intelligence":250,
+            "strength":250,
+            "dexterity":250,
+            "vitality":250
          },
          "secondary":{},
          "legendary":{}
@@ -672,9 +666,10 @@
    "sage_j":{
       "2":{
          "primary":{
-            "main_stat":35,
-            "vitality":35,
-            "todo":"change to str, dex, int"
+            "intelligence":35,
+            "dexterity":35,
+            "strength":35,
+            "vitality":35
          },
          "secondary":{},
          "legendary":{}
@@ -730,8 +725,7 @@
       },
       "4":{
          "primary":{
-            "main_stat":500,
-            "todo":"change to strength"
+            "strength":500
          },
          "secondary":{},
          "legendary":{}
@@ -779,8 +773,7 @@
    "vyr":{
       "2":{
          "primary":{
-            "main_stat":500,
-            "todo":"change to int"
+            "intelligence":500
          },
          "secondary":{},
          "legendary":{}
@@ -796,8 +789,7 @@
    "zunimassa":{
       "2":{
          "primary":{
-            "main_stat":250,
-            "todo":"change to int",
+            "intelligence":250,
             "mana_per_kill":30
          },
          "secondary":{},

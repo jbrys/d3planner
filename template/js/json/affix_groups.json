@@ -1,0 +1,11 @@
+{
+	"strength":"main_stat",
+	"intelligence":"main_stat",
+	"dexterity":"main_stat",
+	"fire_damage":"elemental_damage",
+	"holy_damage":"elemental_damage",
+	"cold_damage":"elemental_damage",
+	"arcane_damage":"elemental_damage",
+	"physical_damage":"elemental_damage",
+	"lightning_damage":"elemental_damage"
+}

@@ -130,7 +130,6 @@ function get_display_value(val, scale){
 }
 
 function get_template(affix, value){
-	affix = get_char_affix(affix);
     affix_stuff = _translate[affix] || {};
     var output;
     if (value){
@@ -199,7 +198,6 @@ function load_ddl(item_ddl){
 }
 
 function join_item(item){
-	debug(JSON.stringify(item));
     if(item && !item.joined){
     	var primary_affixes = _affix.primary[item.base];
         $.each(primary_affixes, function(stat,value){
@@ -227,9 +225,19 @@ function item_change(){
     if(item.primary) {
         $("#"+slot+" .affix .primary select").append($("<option></option>").html(""));
         $.each(item.primary, function(stat,value){
-            if(_translate[stat])
-                $("#"+slot+" .affix .primary select")
-                    .append($("<option></option>").html(get_template(stat)).attr("value", stat).attr("selected", $.inArray(stat, affixes) >=0));
+            if(_translate[stat]){
+            	var parent_item = $("#"+slot+" .affix .primary select");
+            	var group = _groups[stat] || "other";
+            	if(group){
+					if(!parent_item.find("."+group).length){
+						parent_item.append(createOptionGroup(group,get_template(group)));
+					}
+					parent_item = parent_item.find("."+group);
+            	}
+				parent_item
+					.append(createOption(get_template(stat),stat,$.inArray(stat, affixes) >=0));
+					//.append($("<option></option>").html(get_template(stat)).attr("value", stat).attr("selected", $.inArray(stat, affixes) >=0));
+			}
         });
     }
     $("#"+slot+ " .chosen-select").trigger("chosen:updated");
@@ -264,7 +272,6 @@ function import_end(){
 		$.each(c_data.items, function(slot, item){
 			slot = _bnet_translate[slot] || slot;
 			var item_name =  _bnet_translate[item.name] || item.name;
-			debug(JSON.stringify(slot));
 			item_blob = _slots[slot].items[item_name];
 
 			_char[slot] = {};
@@ -289,17 +296,13 @@ function import_end(){
 									}
 									scale = _char[slot].affixes.primary[affix].scale || 0;
 									value = Math.round(value*Math.pow(10,scale));
-									if(affix == "max_damage"||affix == "min_damage"){
-										debug([slot,affix,value,_char[slot].affixes.primary[affix].val]);
-										debug(JSON.stringify(i_data.attributesRaw[key]));
-									}
 									_char[slot].affixes.primary[affix].val =
 										(_char[slot].affixes.primary[affix].val || 0) + value
 								}
 							});
 						}
 						else{
-
+							debug(["unable to translate",key,JSON.stringify(value)]);
 						}
 					});
 				});
@@ -313,7 +316,6 @@ function import_end(){
 }
 
 function simplify(statement, values){
-	debug(["statement",JSON.stringify(statement)]);
 	if(typeof(statement) == typeof({}))
 	{
 		var keys = Object.keys(statement);
@@ -322,7 +324,6 @@ function simplify(statement, values){
 			if(values[key]){
 				if(statement[key]){
 					values[key] = simplify(statement[key], values);
-					debug(JSON.stringify(values));
 				}
 			}
 			else{
@@ -354,4 +355,23 @@ function simplify(statement, values){
 function IsNumeric(input)
 {
    return (input - 0) == input && input.length > 0;
+}
+
+function createOption(text, value, selected, disabled){
+	if (value === undefined) value = null;
+	if (selected === undefined) selected = false;
+	if (disabled === undefined) disabled = false;
+
+	return $("<option></option>")
+				.text(text)
+				.attr("value",value)
+				.attr("selected",selected)
+				.attr("disabled",disabled);
+}
+function createOptionGroup(class_name, text){
+	if (text === undefined) text = class_name;
+
+	return $("<optgroup></optgroup>")
+				.attr("label",text)
+				.attr("class",class_name);
 }

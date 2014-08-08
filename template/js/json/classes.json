@@ -1,15 +1,11 @@
 {
 	"barbarian":{
-		"translate": {
-			"main_stat": "strength"
-		},
+		"main_stat": "strength",
 		"class_specific_slots":{
 		}
 	},
 	"crusader":{
-		"translate": {
-			"main_stat": "strength"
-		},
+		"main_stat": "strength",
 		"class_specific_slots":{
 			"mainhand":["flail","twohandflail"],
 			"offhand" :["cshield"]
@@ -52,41 +48,49 @@
 							"active":{
 								"critical_hit_damage":{
 									"add" : ["critical_hit_damage", 100]
+								},
+								"attack_speed":{
+									"add" : ["attack_speed", 15]
 								}
 							}
 						}
 					}
-
+				},
+				"heavens_fury":{
+					"cooldown": 20,
+					"duration": 6,
+					"damage":1710,
+					"element":"holy_damage",
+					"runes":{
+						"heavens_fury_fires_of_heaven":{
+							"cooldown": false,
+							"duration": false,
+							"damage":960,
+							"cost":40
+						}
+					}
 				}
 			}
 		}
 	},
 	"demon_hunter":{
-		"translate": {
-			"main_stat": "dexterity"
-		},
+		"main_stat": "dexterity",
 		"class_specific_slots":{
 		}
 	},
 	"monk":{
-		"translate": {
-			"main_stat": "dexterity"
-		},
+		"main_stat": "dexterity",
 		"class_specific_slots":{
 		}
 	},
 	"witch_doctor":{
-		"translate": {
-			"main_stat": "intelligence"
-		},
+		"main_stat": "intelligence",
 		"class_specific_slots":{
 			"offhand":["mojo"]
 		}
 	},
 	"wizard":{
-		"translate": {
-			"main_stat": "intelligence"
-		},
+		"main_stat": "intelligence",
 		"class_specific_slots":{
 			"offhand":["source"]
 		}

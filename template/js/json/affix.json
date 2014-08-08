@@ -1,7 +1,15 @@
 {
    "primary":{
       "head":{
-         "main_stat":{
+         "intelligence":{
+            "min":626,
+            "max":750
+         },
+         "dexterity":{
+            "min":626,
+            "max":750
+         },
+         "strength":{
             "min":626,
             "max":750
          },
@@ -18,10 +26,62 @@
          "socket":{
             "min":1,
             "max":1
+         },
+         "phalanx_damage":{
+            "min":10,
+            "max":15
+         },
+         "sweep_attack_damage":{
+            "max":10,
+            "max":15
+         },
+         "fist_of_the_heavens_damage":{
+            "max":10,
+            "max":15
+         },
+         "percent_life":{
+            "min":10,
+            "max":15
+         },
+         "blessed_hammer_damage":{
+            "max":10,
+            "max":15
+         },
+         "blessed_shield_damage":{
+            "max":10,
+            "max":15
+         },
+         "shield_bash_damage":{
+            "max":10,
+            "max":15
+         },
+         "life_per_hit":{
+            "min":1551,
+            "max":1980
+         },
+         "bonus_armor":{
+            "min":373,
+            "max":595
+         },
+         "life_per_second":{
+            "max":1864,
+            "max":2476
          }
       },
       "shoulders":{
-         "main_stat":{
+         "intelligence":{
+            "min":416,
+            "max":500
+         },
+         "dexterity":{
+            "min":416,
+            "max":500
+         },
+         "strength":{
+            "min":416,
+            "max":500
+         },
+         "vitality":{
             "min":416,
             "max":500
          },
@@ -33,13 +93,69 @@
             "min":6,
             "max":8
          },
-         "skill_heavens_fury":{
+         "heavens_fury_damage":{
             "min":10,
             "max":15
+         },
+         "condemn_damage":{
+            "min":10,
+            "max":15
+         },
+         "bombardment_damage":{
+            "min":10,
+            "max":15
+         },
+         "falling_sword_damage":{
+            "min":10,
+            "max":15
+         },
+         "percent_life":{
+            "min":10,
+            "max":15
+         },
+         "reduced_resource_cost":{
+            "min":5,
+            "max":8
+         },
+         "reduced_cooldown":{
+            "min":5,
+            "max":8
+         },
+         "area_damage":{
+            "min":10,
+            "max":20
+         },
+         "all_resistance":{
+            "min":91,
+            "max":100
+         },
+         "life_per_second":{
+            "min":729,
+            "max":990
+         },
+         "bonus_armor":{
+            "min":373,
+            "max":397
          }
       },
       "neck":{
-         "main_stat":{
+         "minimum_damage":{
+            "min":60,
+            "max":80
+         },
+         "maximum_damage":{
+            "min":120,
+            "max":160
+         },
+         "intelligence":{
+            "min":626,
+            "max":750
+         },
+         "dexterity":{
+            "min":626,
+            "max":750
+         },
+         "strength":{
             "min":626,
             "max":750
          },
@@ -64,10 +180,58 @@
          "reduced_cooldown":{
             "min":6,
             "max":8
+         },
+         "attack_speed":{
+            "min":5,
+            "max":7
+         },
+         "percent_life":{
+            "min":14,
+            "max":18
+         },
+         "reduced_resource_cost":{
+            "min":5,
+            "max":8
+         },
+         "area_damage":{
+            "min":10,
+            "max":20
+         },
+         "critical_hit_damage":{
+            "min":51,
+            "max":100
+         },
+         "reduced_cooldown":{
+            "min":5,
+            "max":8
+         },
+         "life_per_hit":{
+            "min":2276,
+            "max":2971
+         },
+         "life_per_second":{
+            "min":1864,
+            "max":2476
+         },
+         "bonus_armor":{
+            "min":559,
+            "max":595
          }
       },
       "hands":{
-         "main_stat":{
+         "all_resistance":{
+            "min":91,
+            "max":100
+         },
+         "intelligence":{
+            "min":626,
+            "max":750
+         },
+         "dexterity":{
+            "min":626,
+            "max":750
+         },
+         "strength":{
             "min":626,
             "max":750
          },
@@ -86,23 +250,47 @@
             "max":50
          },
          "reduced_cooldown":{
-            "min":6,
+            "min":5,
             "max":8
          },
          "attack_speed":{
             "min":5,
             "max":7
+         },
+         "reduced_resource_cost":{
+            "min":5,
+            "max":8
+         },
+         "life_per_hit":{
+            "min":1551,
+            "max":1980
+         },
+         "life_per_second":{
+            "min":1864,
+            "max":2476
+         },
+         "bonus_armor":{
+            "min":373,
+            "max":397
          }
       },
       "chest":{
-         "socket_value" : {
-            "main_stat" : 220
+         "socket_value":{
+            "main_stat":220
          },
-         "skill_heavens_fury":{
+         "heavens_fury_damage":{
             "min":10,
             "max":15
          },
-         "main_stat":{
+         "intelligence":{
+            "min":416,
+            "max":500
+         },
+         "dexterity":{
+            "min":416,
+            "max":500
+         },
+         "strength":{
             "min":416,
             "max":500
          },
@@ -113,10 +301,50 @@
          "socket":{
             "min":1,
             "max":3
+         },
+         "reduced_damage_from_elites":{
+            "max":10,
+            "max":11
+         },
+         "percent_life":{
+            "min":10,
+            "max":15
+         },
+         "condemn_damage":{
+            "min":10,
+            "max":15
+         },
+         "bombardment_damage":{
+            "min":10,
+            "max":15
+         },
+         "falling_sword_damage":{
+            "min":10,
+            "max":15
+         },
+         "all_resistance":{
+            "min":91,
+            "max":100
+         },
+         "life_per_second":{
+            "min":726,
+            "max":990
+         },
+         "bonus_armor":{
+            "min":373,
+            "max":595
          }
       },
       "wrists":{
-         "main_stat":{
+         "intelligence":{
+            "min":416,
+            "max":500
+         },
+         "dexterity":{
+            "min":416,
+            "max":500
+         },
+         "strength":{
             "min":416,
             "max":500
          },
@@ -133,10 +361,34 @@
          "elemental_damage":{
             "min":15,
             "max":20
+         },
+         "life_per_hit":{
+            "min":1551,
+            "max":1980
+         },
+         "all_resistance":{
+            "min":91,
+            "max":100
+         },
+         "life_per_second":{
+            "min":1864,
+            "max":2476
+         },
+         "bonus_armor":{
+            "min":373,
+            "max":397
          }
       },
       "finger":{
-         "main_stat":{
+         "intelligence":{
+            "min":416,
+            "max":500
+         },
+         "dexterity":{
+            "min":416,
+            "max":500
+         },
+         "strength":{
             "min":416,
             "max":500
          },
@@ -149,20 +401,67 @@
             "max":50
          },
          "max_damage":{
-            "min":0,
+            "min":120,
             "max":160
          },
          "min_damage":{
-            "min":0,
-            "max":75
+            "min":60,
+            "max":80
          },
          "attack_speed":{
             "min":5,
             "max":7
+         },
+         "percent_life":{
+            "min":10,
+            "max":15
+         },
+         "critical_hit_chance":{
+            "min":45,
+            "max":60
+         },
+         "reduced_resource_cost":{
+            "min":5,
+            "max":8
+         },
+         "area_damage":{
+            "min":10,
+            "max":20
+         },
+         "reduced_cooldown":{
+            "min":5,
+            "max":8
+         },
+         "life_per_hit":{
+            "min":1551,
+            "max":1980
+         },
+         "all_resistance":{
+            "min":91,
+            "max":100
+         },
+         "bonus_armor":{
+            "min":373,
+            "max":397
+         },
+         "sockets":{
+            "max":1
+         },
+         "life_per_second":{
+            "min":1864,
+            "max":2476
          }
       },
       "waist":{
-         "main_stat":{
+         "intelligence":{
+            "min":416,
+            "max":500
+         },
+         "dexterity":{
+            "min":416,
+            "max":500
+         },
+         "strength":{
             "min":416,
             "max":500
          },
@@ -177,11 +476,35 @@
          "all_resistance":{
             "min":91,
             "max":100
+         },
+         "bonus_armor":{
+            "min":373,
+            "max":397
+         },
+         "life_per_second":{
+            "min":726,
+            "max":990
+         },
+         "slash_damage":{
+            "min":10,
+            "max":15
+         },
+         "punish_damage":{
+            "min":10,
+            "max":15
+         },
+         "smite_damage":{
+            "min":10,
+            "max":15
+         },
+         "justice_damage":{
+            "min":10,
+            "max":15
          }
       },
       "twohand":{
-         "socket_value" : {
-            "critical_hit_damage" : 125
+         "socket_value":{
+            "critical_hit_damage":125
          },
          "max_damage":{
             "min":0,
@@ -191,7 +514,54 @@
             "min":0,
             "max":2168
          },
-         "main_stat":{
+         "intelligence":{
+            "min":946,
+            "max":1125
+         },
+         "dexterity":{
+            "min":946,
+            "max":1125
+         },
+         "strength":{
+            "min":946,
+            "max":1125
+         },
+         "reduced_cooldown":{
+            "min":6,
+            "max":10
+         },
+         "socket":{
+            "min":1,
+            "max":1
+         },
+         "attacks_per_second":{
+            "min":100,
+            "max":160,
+            "step":1,
+            "scale":2
+         }
+      },
+      "onehand":{
+         "socket_value":{
+            "critical_hit_damage":130
+         },
+         "max_damage":{
+            "min":0,
+            "max":2586
+         },
+         "min_damage":{
+            "min":0,
+            "max":2168
+         },
+         "intelligence":{
+            "min":946,
+            "max":1125
+         },
+         "dexterity":{
+            "min":946,
+            "max":1125
+         },
+         "strength":{
             "min":946,
             "max":1125
          },
@@ -211,10 +581,18 @@
          }
       },
       "legs":{
-         "socket_value" : {
-            "main_stat" : 280
+         "socket_value":{
+            "main_stat":280
          },
-         "main_stat":{
+         "intelligence":{
+            "min":416,
+            "max":500
+         },
+         "dexterity":{
+            "min":416,
+            "max":500
+         },
+         "strength":{
             "min":416,
             "max":500
          },
@@ -229,10 +607,42 @@
          "all_resistance":{
             "min":91,
             "max":100
+         },
+         "slash_damage":{
+            "min":10,
+            "max":15
+         },
+         "punish_damage":{
+            "min":10,
+            "max":15
+         },
+         "smite_damage":{
+            "min":10,
+            "max":15
+         },
+         "justice_damage":{
+            "min":10,
+            "max":15
+         },
+         "life_per_second":{
+            "min":726,
+            "max":990
+         },
+         "bonus_armor":{
+            "min":373,
+            "max":595
          }
       },
       "shield":{
-         "main_stat":{
+         "intelligence":{
+            "min":626,
+            "max":750
+         },
+         "dexterity":{
+            "min":626,
+            "max":750
+         },
+         "strength":{
             "min":626,
             "max":750
          },
@@ -245,10 +655,50 @@
             "max":100,
             "step":5,
             "scale":1
+         },
+         "reduced_damage_from_elites":{
+            "min":10,
+            "max":11
+         },
+         "percent_life":{
+            "min":10,
+            "max":18
+         },
+         "elite_damage":{
+            "min":5,
+            "max":8
+         },
+         "sockets":{
+            "min":1,
+            "max":1
+         },
+         "chance_to_inflict_bleed":{
+            "min":34,
+            "max":39
+         },
+         "bonus_armor":{
+            "min":559,
+            "max":595
+         },
+         "block_chance":{
+            "min":11,
+            "max":11
+         },
+         "life_per_second":{
+            "min":726,
+            "max":990
          }
       },
       "feet":{
-         "main_stat":{
+         "intelligence":{
+            "min":416,
+            "max":500
+         },
+         "dexterity":{
+            "min":416,
+            "max":500
+         },
+         "strength":{
             "min":416,
             "max":500
          },
