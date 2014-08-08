@@ -22,9 +22,25 @@
       "template":"Fire skills deal {0}% more damage.",
       "display":"Fire skills deal more damage."
    },
+   "poison_damage":{
+      "template":"Poison skills deal {0}% more damage.",
+      "display":"Poison skills deal more damage."
+   },
+   "fire_damage_taken":{
+      "template":"{0}% more Fire damage taken.",
+      "display":"more Fire damage taken."
+   },
    "arcane_damage":{
       "template":"Arcane skills deal {0}% more damage.",
       "display":"Arcane skills deal more damage."
+   },
+   "physical_damage":{
+      "template":"Physical skills deal {0}% more damage.",
+      "display":"Physical skills deal more damage."
+   },
+   "block_chance":{
+      "template":"+{0}% Chance to Block",
+      "display":"Chance to Block"
    },
    "ring_of_royal_grandeur_leg":{
       "display":"Reduces the number of items needed for set bonuses by 1 (to a minimum of 2)."
@@ -64,7 +80,76 @@
    },
    "dark_mages_shade_leg":{
       "template": "Automatically cast Diamond Skin when you fall below 35% Life. This effect may occur once every {0} seconds.",
-      "display": "Automatically cast Diamond Skin when you fall below 35% Life. This effect may occur once every seconds.",
+      "display": "Automatically cast Diamond Skin when you fall below 35% Life. This effect may occur once every seconds."
+   },
+   "velvet_camarel_leg":{
+      "template": "Automatically cast Diamond Skin when you fall below 35% Life. This effect may occur once every {0} seconds."
+   },
+   "eye_of_peshkov_leg":{
+      "template": "Reduce the cooldown of Breath of Heaven by {0}",
+      "display": "Reduce the cooldown of Breath of Heaven by 38-50%"
+   },
+   "the_minds_eye_leg":{
+      "template": "Inner Sanctuary increases Spirit Regeneration per second by {0}.",
+      "display": "Inner Sanctuary increases Spirit Regeneration per second."
+   },
+   "quetzalcoatl_leg":{
+      "display": "Locust Swarm and Haunt now deal their damage in half of the normal duration."
+   },
+   "tiklandian_visage_leg":{
+      "template": "Horrify causes you to Fear and Root enemies around you for {0} seconds.",
+      "display": "Horrify causes you to Fear and Root enemies around you."
+   },
+   "andariels_visage_leg":{
+      "template": "Chance on hit to release a Poison Nova that deals {0}% weapon damage as Poison to enemies within 10 yards.",
+      "display": "Chance on hit to release a Poison Nova that deals weapon damage as Poison to enemies within 10 yards."
+   },
+   "the_grin_reaper_leg":{
+      "display": "Chance to summon horrific Mimics when attacking."
+   },
+   "skull_of_resonance_leg":{
+      "display": "Threatening Shout has a chance to Charm enemies and cause them to join your side."
+   },
+   "prides_fall_leg":{
+      "display": "Your resource costs are reduced by 30% after not taking damage for 5 seconds."
+   },
+   "carnevil_leg":{
+      "display": "Your Fetishes shoot a Poison Dart every time you do."
+   },
+   "mask_of_jaram_leg":{
+      "display": "Pets deal 75% more damage."
+   },
+   "the_magistrate_leg":{
+      "display": "Frost Hydra now periodically casts Frost Nova."
+   },
+   "visage_of_giyua_leg":{
+      "display": "Summon a Fetish Army after you kill 2 elites."
+   },
+   "archmages_vicalyke_leg":{
+      "display": "Your Mirror Images have a chance to multiply when killed by enemies."
+   },
+   "tzo_krins_gaze_leg":{
+      "display": "Wave of Light is now cast at your enemy."
+   },
+   "storm_crow_leg":{
+      "template": "{0}% chance to cast a fiery ball when attacking.",
+      "display": "Chance to cast a fiery ball when attacking."
+   },
+   "deathseers_cowl_leg":{
+      "template": "{0}% chance on being hit by an Undead enemy to charm it for 2 seconds.",
+      "display": "chance on being hit by an Undead enemy to charm it for 2 seconds."
+   },
+   "kekegis_unbreakable_spirit_leg":{
+      "template": "Damaging enemies has a chance to grant you an effect that removes the Spirit cost of your abilities for {0} seconds",
+      "display": "Damaging enemies has a chance to grant you an effect that removes the Spirit cost of your abilities"
+   },
+   "the_laws_of_seph_leg":{
+      "template": "Using Blinding Flash restores {0} Spirit.",
+      "display": "Using Blinding Flash restores Spirit."
+   },
+   "gyana_na_kashu_leg":{
+      "template": "Lashing Tail Kick releases a piercing fireball that deals {0} weapon damage as Fire to enemies within 10 yards on impact.",
+      "display": "Lashing Tail Kick releases a piercing fireball that deals weapon damage as Fire to enemies within 10 yards on impact."
    },
    "elite_damage":{
       "template":"Increases damage against elites by {0}%",
@@ -98,6 +183,10 @@
       "display":"Critical Hit Chance Increased.",
       "step":5,
       "scale":1
+   },
+   "blind_chance":{
+      "template":"{0}% chance to Blind on Hit",
+      "display":"Chance to Blind on Hit"
    },
    "socket":{
       "template":"+{0} Socket(s)",
@@ -172,6 +261,10 @@
    "reduced_damage_elite":{
          "template":"Reduces damage from elites by {0}%",
          "display":"Reduces damage from elites"
+   },
+   "reduced_control_impairing":{
+         "template":"Reduces duration of control impairing effects by {0}%",
+         "display":"Reduces duration of control impairing effects"
    },
    "extra_gold":{
          "template":"{0}% Extra Gold from Monsters",
