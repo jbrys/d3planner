@@ -1,548 +1,646 @@
-﻿{
-   "reapers_wraps_leg":{
+﻿{  
+   "reapers_wraps_leg":{  
       "template":"Health globes restore {0}% of your primary resource.",
       "display":"Health globes restore your primary resource."
    },
-   "fate_of_the_fell_leg":{
+   "fate_of_the_fell_leg":{  
       "display":"Gain two additional rays of Heaven’s Fury."
    },
-   "holy_damage":{
+   "holy_damage":{  
       "template":"Holy skills deal {0}% more damage",
       "display":"Holy skills deal more damage",
-      "dropdown": "Holy"
+      "dropdown":"Holy"
    },
-   "lightning_damage":{
+   "lightning_damage":{  
       "template":"Lightning skills deal {0}% more damage.",
       "display":"Lightning skills deal more damage.",
-      "dropdown": "Lightning"
+      "dropdown":"Lightning"
    },
-   "cold_damage":{
+   "cold_damage":{  
       "template":"Cold skills deal {0}% more damage.",
       "display":"Cold skills deal more damage.",
-      "dropdown": "Cold"
+      "dropdown":"Cold"
    },
-   "fire_damage":{
+   "fire_damage":{  
       "template":"Fire skills deal {0}% more damage.",
       "display":"Fire skills deal more damage.",
-      "dropdown": "Fire"
+      "dropdown":"Fire"
    },
-   "arcane_damage":{
+   "poison_damage":{  
+      "template":"Poison skills deal {0}% more damage.",
+      "display":"Poison skills deal more damage.",
+      "dropdown":"Poison"
+   },
+   "fire_damage_taken":{  
+      "template":"{0}% more Fire damage taken.",
+      "display":"more Fire damage taken."
+   },
+   "arcane_damage":{  
       "template":"Arcane skills deal {0}% more damage.",
       "display":"Arcane skills deal more damage.",
-      "dropdown": "Arcane"
+      "dropdown":"Arcane"
    },
-   "ring_of_royal_grandeur_leg":{
+   "physical_damage":{  
+      "template":"Physical skills deal {0}% more damage.",
+      "display":"Physical skills deal more damage."
+   },
+   "block_chance":{  
+      "template":"+{0}% Chance to Block",
+      "display":"Chance to Block"
+   },
+   "ring_of_royal_grandeur_leg":{  
       "display":"Reduces the number of items needed for set bonuses by 1 (to a minimum of 2)."
    },
-   "shi_mizus_haori_leg":{
+   "shi_mizus_haori_leg":{  
       "template":"While below {0}% life, all attacks are guaranteed Critical Hits.",
-      "display": "While below life, all attacks are guaranteed Critical Hits."
+      "display":"While below life, all attacks are guaranteed Critical Hits."
    },
-   "goldskin_leg":{
+   "goldskin_leg":{  
       "display":"Chance for enemies to drop gold when you hit them."
    },
-   "the_cloak_of_the_garwulf_leg":{
+   "the_cloak_of_the_garwulf_leg":{  
       "display":"Companion - Wolf Companion now summons 3 wolves."
    },
-   "chaingmail_leg":{
+   "chaingmail_leg":{  
       "display":"After earning a survivial bonus, quickly heal to full Life."
    },
-   "cloak_of_deception_leg":{
+   "cloak_of_deception_leg":{  
       "display":"Enemy missiles sometimes pass through you harmlessly."
    },
-   "beckon_sail_leg":{
+   "beckon_sail_leg":{  
       "display":"Automatically cast Smoke Screen when you fall below 25% Life. This effect may occur once every 30 seconds."
    },
-   "cindercoat_leg":{
-      "template": "Reduce the resource cost of Fire Skills by {0}%",
-      "display": "Reduce the resource cost of Fire Skills"
+   "cindercoat_leg":{  
+      "template":"Reduce the resource cost of Fire Skills by {0}%",
+      "display":"Reduce the resource cost of Fire Skills"
    },
-   "cape_of_the_dark_night_leg":{
-      "display": "Automatically drop Caltrops when you are hit. This effect may only occur once every 6 seconds."
+   "cape_of_the_dark_night_leg":{  
+      "display":"Automatically drop Caltrops when you are hit. This effect may only occur once every 6 seconds."
    },
-   "armor_of_the_kind_regent_leg":{
-      "display": "Smite will now also be cast at a second nearby enemy."
+   "armor_of_the_kind_regent_leg":{  
+      "display":"Smite will now also be cast at a second nearby enemy."
    },
-   "blackfeather_leg":{
-      "template": "Dodging or getting hit by a ranged attack automatically shoots a homing rocket back at the attacker for {0}% weapon damage as Physical.",
-      "display": "Dodging or getting hit by a ranged attack automatically shoots a homing rocket back at the attacker for weapon damage as Physical."
+   "blackfeather_leg":{  
+      "template":"Dodging or getting hit by a ranged attack automatically shoots a homing rocket back at the attacker for {0}% weapon damage as Physical.",
+      "display":"Dodging or getting hit by a ranged attack automatically shoots a homing rocket back at the attacker for weapon damage as Physical."
    },
-   "elite_damage":{
+   "dark_mages_shade_leg":{  
+      "template":"Automatically cast Diamond Skin when you fall below 35% Life. This effect may occur once every {0} seconds.",
+      "display":"Automatically cast Diamond Skin when you fall below 35% Life. This effect may occur once every seconds."
+   },
+   "velvet_camarel_leg":{  
+      "template":"Automatically cast Diamond Skin when you fall below 35% Life. This effect may occur once every {0} seconds."
+   },
+   "eye_of_peshkov_leg":{  
+      "template":"Reduce the cooldown of Breath of Heaven by {0}",
+      "display":"Reduce the cooldown of Breath of Heaven by 38-50%"
+   },
+   "the_minds_eye_leg":{  
+      "template":"Inner Sanctuary increases Spirit Regeneration per second by {0}.",
+      "display":"Inner Sanctuary increases Spirit Regeneration per second."
+   },
+   "quetzalcoatl_leg":{  
+      "display":"Locust Swarm and Haunt now deal their damage in half of the normal duration."
+   },
+   "tiklandian_visage_leg":{  
+      "template":"Horrify causes you to Fear and Root enemies around you for {0} seconds.",
+      "display":"Horrify causes you to Fear and Root enemies around you."
+   },
+   "andariels_visage_leg":{  
+      "template":"Chance on hit to release a Poison Nova that deals {0}% weapon damage as Poison to enemies within 10 yards.",
+      "display":"Chance on hit to release a Poison Nova that deals weapon damage as Poison to enemies within 10 yards."
+   },
+   "the_grin_reaper_leg":{  
+      "display":"Chance to summon horrific Mimics when attacking."
+   },
+   "skull_of_resonance_leg":{  
+      "display":"Threatening Shout has a chance to Charm enemies and cause them to join your side."
+   },
+   "prides_fall_leg":{  
+      "display":"Your resource costs are reduced by 30% after not taking damage for 5 seconds."
+   },
+   "carnevil_leg":{  
+      "display":"Your Fetishes shoot a Poison Dart every time you do."
+   },
+   "mask_of_jaram_leg":{  
+      "display":"Pets deal 75% more damage."
+   },
+   "the_magistrate_leg":{  
+      "display":"Frost Hydra now periodically casts Frost Nova."
+   },
+   "visage_of_giyua_leg":{  
+      "display":"Summon a Fetish Army after you kill 2 elites."
+   },
+   "archmages_vicalyke_leg":{  
+      "display":"Your Mirror Images have a chance to multiply when killed by enemies."
+   },
+   "tzo_krins_gaze_leg":{  
+      "display":"Wave of Light is now cast at your enemy."
+   },
+   "storm_crow_leg":{  
+      "template":"{0}% chance to cast a fiery ball when attacking.",
+      "display":"Chance to cast a fiery ball when attacking."
+   },
+   "deathseers_cowl_leg":{  
+      "template":"{0}% chance on being hit by an Undead enemy to charm it for 2 seconds.",
+      "display":"chance on being hit by an Undead enemy to charm it for 2 seconds."
+   },
+   "kekegis_unbreakable_spirit_leg":{  
+      "template":"Damaging enemies has a chance to grant you an effect that removes the Spirit cost of your abilities for {0} seconds",
+      "display":"Damaging enemies has a chance to grant you an effect that removes the Spirit cost of your abilities"
+   },
+   "the_laws_of_seph_leg":{  
+      "template":"Using Blinding Flash restores {0} Spirit.",
+      "display":"Using Blinding Flash restores Spirit."
+   },
+   "gyana_na_kashu_leg":{  
+      "template":"Lashing Tail Kick releases a piercing fireball that deals {0} weapon damage as Fire to enemies within 10 yards on impact.",
+      "display":"Lashing Tail Kick releases a piercing fireball that deals weapon damage as Fire to enemies within 10 yards on impact."
+   },
+   "elite_damage":{  
       "template":"Increases damage against elites by {0}%",
       "display":"Increases damage against elites"
    },
-   "demon_damage":{
+   "demon_damage":{  
       "template":"+{0} Damage to Demons",
       "display":"Damage to Demons"
    },
-   "elemental_damage":{
+   "elemental_damage":{  
       "template":"Elemental skills deal {0}% more damage",
       "display":"Elemental skills deal more damage"
    },
-   "attack_speed":{
+   "attack_speed":{  
       "template":"Attack Speed Increased by {0}%",
       "display":"Attack Speed Increased"
    },
-   "maras_kaleidoscope_leg":{
+   "maras_kaleidoscope_leg":{  
       "template":"Prevent all Poison damage taken and heal yourself for {0}% of the amount prevented.",
       "display":"Prevent all Poison damage taken and heal yourself for the amount prevented."
    },
-   "main_stat":{
+   "main_stat":{  
       "display":"Main Stat"
    },
-   "vitality":{
+   "vitality":{  
       "template":"+{0} Vitality",
       "display":"Vitality"
    },
-   "critical_hit_chance":{
+   "critical_hit_chance":{  
       "template":"Critical Hit Chance Increased by {0}%",
       "display":"Critical Hit Chance Increased.",
       "step":5,
       "scale":1
    },
-   "socket":{
+   "blind_chance":{  
+      "template":"{0}% chance to Blind on Hit",
+      "display":"Chance to Blind on Hit"
+   },
+   "socket":{  
       "template":"+{0} Socket(s)",
       "display":"Socket(s)"
    },
-   "all_resistance":{
+   "all_resistance":{  
       "template":"+{0} Resistance to All Elements",
       "display":"Resistance to All Elements"
    },
-   "reduced_cooldown":{
+   "reduced_cooldown":{  
       "template":"Reduces cooldown of all skills by {0}%",
       "display":"Reduces cooldown of all skills"
    },
-   "heavens_fury_damage":{
+   "heavens_fury_damage":{  
       "template":"Increases Heaven's Fury damage by {0}%",
       "display":"Increases Heaven's Fury damage"
    },
-   "critical_hit_damage":{
+   "critical_hit_damage":{  
       "template":"Critical Hit Damage Increased by {0}%",
       "display":"Critical Hit Damage Increased"
    },
-   "max_damage":{
+   "max_damage":{  
       "template":"+{0} Max Damage",
       "display":"Max Damage"
    },
-   "min_damage":{
+   "min_damage":{  
       "template":"+{0} Min Damage",
       "display":"Min Damage"
    },
-   "percent_life":{
+   "percent_life":{  
       "template":"{0}% Life",
       "display":"Life Percent"
    },
-   "attacks_per_second":{
+   "attacks_per_second":{  
       "template":"{0} Attacks Per Second",
       "display":"Attacks Per Second",
       "step":1,
       "scale":2
    },
-   "movement_speed":{
+   "movement_speed":{  
       "template":"{0}% Increased Movement Speed",
       "display":"Increased Movement Speed"
    },
-   "sheet_dps":{
+   "sheet_dps":{  
       "template":"Sheet DPS {0}",
       "display":"Sheet DPS"
    },
-   "elemental_dps":{
+   "elemental_dps":{  
       "template":"Elemental DPS {0}",
       "display":"Elemental DPS"
    },
-   "elite_dps":{
+   "elite_dps":{  
       "template":"Elite DPS {0}",
       "display":"Elite DPS"
    },
-   "elemental_elite_dps":{
+   "elemental_elite_dps":{  
       "template":"Elemental Elite DPS {0}",
       "display":"Elemental Elite DPS"
    },
-   "resource_cost":{
-        "template":"Reduces all resource costs by {0}%",
-        "display":"Reduces all resource costs"
+   "resource_cost":{  
+      "template":"Reduces all resource costs by {0}%",
+      "display":"Reduces all resource costs"
    },
-   "reduced_damage_melee":{
-         "template":"Reduces damage from melee attacks by {0}%",
-         "display":"Reduces damage from melee attacks"
+   "reduced_damage_melee":{  
+      "template":"Reduces damage from melee attacks by {0}%",
+      "display":"Reduces damage from melee attacks"
    },
-   "reduced_damage_ranged":{
-         "template":"Reduces damage from ranged attacks by {0}%",
-         "display":"Reduces damage from ranged attacks"
+   "reduced_damage_ranged":{  
+      "template":"Reduces damage from ranged attacks by {0}%",
+      "display":"Reduces damage from ranged attacks"
    },
-   "reduced_damage_elite":{
-         "template":"Reduces damage from elites by {0}%",
-         "display":"Reduces damage from elites"
+   "reduced_damage_elite":{  
+      "template":"Reduces damage from elites by {0}%",
+      "display":"Reduces damage from elites"
    },
-   "extra_gold":{
-         "template":"{0}% Extra Gold from Monsters",
-         "display":"Extra Gold from Monsters"
+   "reduced_control_impairing":{  
+      "template":"Reduces duration of control impairing effects by {0}%",
+      "display":"Reduces duration of control impairing effects"
    },
-   "bonus_exp":{
-         "template":"Increases Bonus Experience by {0}%",
-         "display":"Increases Bonus Experience"
+   "extra_gold":{  
+      "template":"{0}% Extra Gold from Monsters",
+      "display":"Extra Gold from Monsters"
    },
-   "add_exp":{
-         "template":"Increases Bonus Experience by {0}%",
-         "display":"Increases Bonus Experience"
+   "bonus_exp":{  
+      "template":"Increases Bonus Experience by {0}%",
+      "display":"Increases Bonus Experience"
    },
-   "max_fury":{
-         "template":"+{0} Maximum Fury (Barbarian Only)",
-         "display":"Maximum Fury (Barbarian Only)"
+   "add_exp":{  
+      "template":"Increases Bonus Experience by {0}%",
+      "display":"Increases Bonus Experience"
    },
-   "max_discipline":{
-         "template":"+{0} Maximum Discipline (Demon Hunter Only)",
-         "display":"c7Maximum Discipline (Demon Hunter Only)"
+   "max_fury":{  
+      "template":"+{0} Maximum Fury (Barbarian Only)",
+      "display":"Maximum Fury (Barbarian Only)"
    },
-   "life_per_fury":{
-         "template":"Gain {0} Life per Fury Spent (Barbarian Only)",
-         "display":"Gain Life per Fury Spent (Barbarian Only)"   
+   "max_discipline":{  
+      "template":"+{0} Maximum Discipline (Demon Hunter Only)",
+      "display":"c7Maximum Discipline (Demon Hunter Only)"
    },
-   "life_per_spirit":{
-         "template":"Gain {0} Life per Spirit Spent (Monk Only)",
-         "display":"Gain Life per Spirit Spent (Monk Only)"   
+   "life_per_fury":{  
+      "template":"Gain {0} Life per Fury Spent (Barbarian Only)",
+      "display":"Gain Life per Fury Spent (Barbarian Only)"
    },
-   "life_per_hit":{
-         "template":"{0} Life per Hit",
-         "display":"Life per Hit"  
+   "life_per_spirit":{  
+      "template":"Gain {0} Life per Spirit Spent (Monk Only)",
+      "display":"Gain Life per Spirit Spent (Monk Only)"
    },
-   "mana_per_kill":{
-         "template":"Grants {0} Mana per Kill (Witch Doctor Only)",
-         "display":"Grants Mana per Kill (Witch Doctor Only)"
+   "life_per_hit":{  
+      "template":"{0} Life per Hit",
+      "display":"Life per Hit"
    },
-   "mana_per_second":{
-         "template":"Increases Mana Regeneration by {0} per Second (Witch Doctor Only)",
-         "display":"Increases Mana Regeneration per Second (Witch Doctor Only)"
+   "mana_per_kill":{  
+      "template":"Grants {0} Mana per Kill (Witch Doctor Only)",
+      "display":"Grants Mana per Kill (Witch Doctor Only)"
    },
-   "magic_find":{
-         "template":"{0}% Better Chance of Finding Magical Items",
-         "display":"Increases Bonus Experience"
+   "mana_per_second":{  
+      "template":"Increases Mana Regeneration by {0} per Second (Witch Doctor Only)",
+      "display":"Increases Mana Regeneration per Second (Witch Doctor Only)"
    },
-   "thorns":{
-         "template":"Ranged and melee attackers take {0} damage per hit",
-         "display":"Ranged and melee attackers take damage per hit"
+   "magic_find":{  
+      "template":"{0}% Better Chance of Finding Magical Items",
+      "display":"Increases Bonus Experience"
    },
-   "thorns_fire":{
-         "template":"Ranged and melee attackers take {0} Fire damage per hit",
-         "display":"Ranged and melee attackers take Fire damage per hit"
+   "thorns":{  
+      "template":"Ranged and melee attackers take {0} damage per hit",
+      "display":"Ranged and melee attackers take damage per hit"
    },
-   "area_damage":{
-         "template":"Chance to Deal [0]% Area Damage on Hit",
-         "display":"Chance to Deal Area Damage on Hit"
+   "thorns_fire":{  
+      "template":"Ranged and melee attackers take {0} Fire damage per hit",
+      "display":"Ranged and melee attackers take Fire damage per hit"
    },
-   "fear":{
-         "template":"{0}% Chance to Fear on Hit",
-         "display":"Chance to Fear on Hit"
+   "area_damage":{  
+      "template":"Chance to Deal [0]% Area Damage on Hit",
+      "display":"Chance to Deal Area Damage on Hit"
    },
-   "life_per_sec":{
-         "template":"Regenerates {0} Life per Second",
-         "display":"Regenerates Life per Second"
+   "fear":{  
+      "template":"{0}% Chance to Fear on Hit",
+      "display":"Chance to Fear on Hit"
    },
-   "akkhan":{
-        "display":"Armor of Akkhan"
+   "life_per_sec":{  
+      "template":"Regenerates {0} Life per Second",
+      "display":"Regenerates Life per Second"
    },
-   "asheara_u":{
-         "display":"Asheara's Uniform"
+   "akkhan":{  
+      "display":"Armor of Akkhan"
    },
-   "asheara_v":{
-         "display":"Asheara's Vestments"
+   "asheara_u":{  
+      "display":"Asheara's Uniform"
    },
-   "aughild_a":{
+   "asheara_v":{  
+      "display":"Asheara's Vestments"
+   },
+   "aughild_a":{  
       "display":"Aughild's Authority"
    },
-   "aughild_v":{
+   "aughild_v":{  
       "display":"Aughild's Victory"
    },
-   "bastions":{
+   "bastions":{  
       "display":"Bastions of Will"
    },
-   "blackthorne":{
+   "blackthorne":{  
       "display":"Blackthorne's Battlegear"
    },
-   "born_c":{
-        "display":"Born's Command"
+   "born_c":{  
+      "display":"Born's Command"
    },
-   "born_c":{
-        "display":"Born's Command"
+   "born_c":{  
+      "display":"Born's Command"
    },
-   "bul-kathos":{
-        "display":"Bul-Kathos's Oath"
+   "bul-kathos":{  
+      "display":"Bul-Kathos's Oath"
    },
-   "cain_d":{
-        "display":"Cain's Destiny"
+   "cain_d":{  
+      "display":"Cain's Destiny"
    },
-   "cain_f":{
-         "display": "Cain's Fate"
+   "cain_f":{  
+      "display":"Cain's Fate"
    },
-   "captain_crimson_f":{
-        "display":"Captain Crimson's Finery"
+   "captain_crimson_f":{  
+      "display":"Captain Crimson's Finery"
    },
-   "captain_crimson_t":{
-        "display":"Captain Crimson's Trimmings"
+   "captain_crimson_t":{  
+      "display":"Captain Crimson's Trimmings"
    },
-   "chantodo":{
-        "display":"Chantodo's Resolve"
+   "chantodo":{  
+      "display":"Chantodo's Resolve"
    },
-   "danetta":{
-        "display":"Danetta's Hatred"
+   "danetta":{  
+      "display":"Danetta's Hatred"
    },
-   "demon_hide":{
-        "display":"Demon's Hide"
+   "demon_hide":{  
+      "display":"Demon's Hide"
    },
-   "demon_skin":{
-        "display":"Demon's Skin"
+   "demon_skin":{  
+      "display":"Demon's Skin"
    },
-   "marauder":{
-        "display":"Embodiment of the Marauder"
+   "marauder":{  
+      "display":"Embodiment of the Marauder"
    },
-   "endless_walk":{
-        "display":"Endless Walk"
+   "endless_walk":{  
+      "display":"Endless Walk"
    },
-   "firebird":{
-        "display":"Firebird's Finery"
+   "firebird":{  
+      "display":"Firebird's Finery"
    },
-   "guardian_c":{
-        "display":"Guardian's Contingency"
+   "guardian_c":{  
+      "display":"Guardian's Contingency"
    },
-   "guardian_j":{
-        "display":"Guardian's Jeopardy"
+   "guardian_j":{  
+      "display":"Guardian's Jeopardy"
    },
-   "hallowed_d":{
-        "display":"Hallowed Defenders"
+   "hallowed_d":{  
+      "display":"Hallowed Defenders"
    },
-   "hallowed_p":{
-        "display":"Hallowed Protectors"
+   "hallowed_p":{  
+      "display":"Hallowed Protectors"
    },
-   "helltooth":{
-        "display":"Helltooth Harness"
+   "helltooth":{  
+      "display":"Helltooth Harness"
    },
-   "immortal_king":{
-        "display":"Immortal King's Call"
+   "immortal_king":{  
+      "display":"Immortal King's Call"
    },
-   "inna":{
-        "display":"Inna's Mantra"
+   "inna":{  
+      "display":"Inna's Mantra"
    },
-   "istavan":{
-        "display":"Istvan's Paired Blades"
+   "istavan":{  
+      "display":"Istvan's Paired Blades"
    },
-   "legacy":{
-        "display":"Legacy of Nightmares"
+   "legacy":{  
+      "display":"Legacy of Nightmares"
    },
-   "manajuma":{
-        "display":"Manajuma's Way"
+   "manajuma":{  
+      "display":"Manajuma's Way"
    },
-   "might":{
-        "display":"Might of the Earth"
+   "might":{  
+      "display":"Might of the Earth"
    },
-   "natalya":{
-        "display":"Natalya's Vengeance"
+   "natalya":{  
+      "display":"Natalya's Vengeance"
    },
-   "monkey_king":{
-        "display":"Monkey King's Garb"
+   "monkey_king":{  
+      "display":"Monkey King's Garb"
    },
-   "thousand_storms":{
-        "display":"Raiment of a Thousand Storms"
+   "thousand_storms":{  
+      "display":"Raiment of a Thousand Storms"
    },
-   "jade_harvester":{
-        "display":"Raiment of the Jade Harvester"
+   "jade_harvester":{  
+      "display":"Raiment of the Jade Harvester"
    },
-   "sage_j":{
-        "display":"Sage's Journey"
+   "sage_j":{  
+      "display":"Sage's Journey"
    },
-   "sage_p":{
-        "display":"Sage's Plight"
+   "sage_p":{  
+      "display":"Sage's Plight"
    },
-   "shenlong":{
-        "display":"Shenlong's Spirit"
+   "shenlong":{  
+      "display":"Shenlong's Spirit"
    },
-   "tal_rasha":{
-        "display":"Tal Rasha's Elements"
+   "tal_rasha":{  
+      "display":"Tal Rasha's Elements"
    },
-   "raekor":{
-        "display":"The Legacy of Raekor"
+   "raekor":{  
+      "display":"The Legacy of Raekor"
    },
-   "shadow_mantle":{
-        "display":"The Shadow's Mantle"
+   "shadow_mantle":{  
+      "display":"The Shadow's Mantle"
    },
-   "invoker":{
-        "display":"Thorns of the Invoker"
+   "invoker":{  
+      "display":"Thorns of the Invoker"
    },
-   "vyr":{
-        "display":"Vyr's Amazing Arcana"
+   "vyr":{  
+      "display":"Vyr's Amazing Arcana"
    },
-   "zunimassa":{
-        "display":"Zunimassa's Haunt"
+   "zunimassa":{  
+      "display":"Zunimassa's Haunt"
    },
-   "akkhan_4":{
-        "display":"Reduce the cost of all abilities by 50% while Akarat's Champion is active."
+   "akkhan_4":{  
+      "display":"Reduce the cost of all abilities by 50% while Akarat's Champion is active."
    },
-   "akkhan_6":{
-        "display":"Reduce the cooldown of Akarat's Champion by 50%."
+   "akkhan_6":{  
+      "display":"Reduce the cooldown of Akarat's Champion by 50%."
    },
-    "asheara_u_3a":{
-         "display":"2.50% of Damage Dealt Is Converted to Life"
+   "asheara_u_3a":{  
+      "display":"2.50% of Damage Dealt Is Converted to Life"
    },
-   "asheara_u_3b":{
-         "display":"Ranged and melee attackers take 300 Holy damage per hit."
+   "asheara_u_3b":{  
+      "display":"Ranged and melee attackers take 300 Holy damage per hit."
    },
-   "asheara_v_4":{
-         "display":"Attacks cause your followers to occasionally come to your aid."
+   "asheara_v_4":{  
+      "display":"Attacks cause your followers to occasionally come to your aid."
    },
-   "bastions_2":{
-         "display":"Your resource spenders deal 50% more damage while you are at full resource."
+   "bastions_2":{  
+      "display":"Your resource spenders deal 50% more damage while you are at full resource."
    },
-   "blackthorne_4":{
-         "display":"You are immune to Desecrator, Molten, and Plagued monster ground effects."
+   "blackthorne_4":{  
+      "display":"You are immune to Desecrator, Molten, and Plagued monster ground effects."
    },
-   "bul-kathos_2":{
-         "display": "Chance on attack to Whirlwind furiously for 325% weapon damage as Physical every second for 6 seconds."
+   "bul-kathos_2":{  
+      "display":"Chance on attack to Whirlwind furiously for 325% weapon damage as Physical every second for 6 seconds."
    },
-   "chantodo_2":{
-         "display": "Your shields heal for 25% of their remaining amount when they expire."
+   "chantodo_2":{  
+      "display":"Your shields heal for 25% of their remaining amount when they expire."
    },
-   "demon_hide_4":{
-         "display": "Chance to reflect projectiles when you are hit by enemies"
+   "demon_hide_4":{  
+      "display":"Chance to reflect projectiles when you are hit by enemies"
    },
-   "marauder_4":{
-         "display": "Companion calls all companion types to your side."
+   "marauder_4":{  
+      "display":"Companion calls all companion types to your side."
    },
-   "firebird_4":{
-         "display": "When you die, a meteor falls from the sky and revives you. This effect has a 300 second cooldown."
+   "firebird_4":{  
+      "display":"When you die, a meteor falls from the sky and revives you. This effect has a 300 second cooldown."
    },
-   "firebird_6":{
-         "display": "Enemies killed by Fire damage explode and set nearby enemies on Fire, dealing 300% weapon damage over 5 seconds."
+   "firebird_6":{  
+      "display":"Enemies killed by Fire damage explode and set nearby enemies on Fire, dealing 300% weapon damage over 5 seconds."
    },
-   "helltooth_4":{
-         "display": "Reduces cooldown of Wall of Zombies by 2 seconds. (Witch Doctor Only)"
+   "helltooth_4":{  
+      "display":"Reduces cooldown of Wall of Zombies by 2 seconds. (Witch Doctor Only)"
    },
-   "helltooth_6":{
-         "display": "Wall of Zombies spews acid, dealing 300% weapon damage every second for its entire duration."
+   "helltooth_6":{  
+      "display":"Wall of Zombies spews acid, dealing 300% weapon damage every second for its entire duration."
    },
-   "immortal_king_3":{
-         "display": "Increases Fury Generation by 2 (Barbarian Only)"
+   "immortal_king_3":{  
+      "display":"Increases Fury Generation by 2 (Barbarian Only)"
    },
-   "immortal_king_4":{
-         "display": "Call of the Ancients last until they die."
+   "immortal_king_4":{  
+      "display":"Call of the Ancients last until they die."
    },
-   "inna_3a":{
-         "display": "Increases Spirit Regeneration by 2.00 per Second (Monk Only)"
+   "inna_3a":{  
+      "display":"Increases Spirit Regeneration by 2.00 per Second (Monk Only)"
    },
-   "inna_3b":{
-         "display": "Reduces resource cost of Sweeping Wind by 70 Spirit (Monk Only)"
+   "inna_3b":{  
+      "display":"Reduces resource cost of Sweeping Wind by 70 Spirit (Monk Only)"
    },
-   "inna_4":{
-         "display": "Gain the base effect of all four Mantras at all times."
+   "inna_4":{  
+      "display":"Gain the base effect of all four Mantras at all times."
    },
-   "istavan_2":{
-         "display": "Every time you spend primary resource, you gain 10% increased attack speed for 5 seconds. This effect stacks up to 5 times."
+   "istavan_2":{  
+      "display":"Every time you spend primary resource, you gain 10% increased attack speed for 5 seconds. This effect stacks up to 5 times."
    },
-   "legacy_2":{
-         "display": "This ring sometimes summons a Skeleton when you attack."
+   "legacy_2":{  
+      "display":"This ring sometimes summons a Skeleton when you attack."
    },
-   "manajuma_2":{
-         "display": "You are surrounded by a deadly Poison Cloud."
+   "manajuma_2":{  
+      "display":"You are surrounded by a deadly Poison Cloud."
    },
-   "might_2":{
-         "display": "Reduce the cooldown of Earthquake by 2 seconds every time it kills an enemy."
+   "might_2":{  
+      "display":"Reduce the cooldown of Earthquake by 2 seconds every time it kills an enemy."
    },
-   "might_4":{
-         "display": "Cause an Earthquake when you land after using Leap."
+   "might_4":{  
+      "display":"Cause an Earthquake when you land after using Leap."
    },
-   "monkey_king_2":{
-         "display": "While a Combat Staff is equipped, all damage is increased by 20%"
+   "monkey_king_2":{  
+      "display":"While a Combat Staff is equipped, all damage is increased by 20%"
    },
-   "monkey_king_4":{
-         "display": "Spending 75 Spirit causes a decoy to spawn that taunts nearby enemies and then explodes for 1000% weapon damage as Holy."
+   "monkey_king_4":{  
+      "display":"Spending 75 Spirit causes a decoy to spawn that taunts nearby enemies and then explodes for 1000% weapon damage as Holy."
    },
-   "natalya_4":{
-         "display": "The cooldown of Rain of Vengance is reduced by 1 second for every enemy you kill."
+   "natalya_4":{  
+      "display":"The cooldown of Rain of Vengance is reduced by 1 second for every enemy you kill."
    },
-   "thousand_storms_6":{
-         "display": "Whenever you teleport to an enemy, release Lightning at all nearby enemies for 3000% weapon damage."
+   "thousand_storms_6":{  
+      "display":"Whenever you teleport to an enemy, release Lightning at all nearby enemies for 3000% weapon damage."
    },
-   "jade_harvester_4":{
-         "display": "Increases Mana Regeneration by 20.00 per Second (Witch Doctor Only)"
+   "jade_harvester_4":{  
+      "display":"Increases Mana Regeneration by 20.00 per Second (Witch Doctor Only)"
    },
-   "jade_harvester_6":{
-         "display": "Soul Harvest consumes your damage over time effects on enemies, instantly dealing their remaining damage."
+   "jade_harvester_6":{  
+      "display":"Soul Harvest consumes your damage over time effects on enemies, instantly dealing their remaining damage."
    },
-   "sage_j_3":{
-         "display": "Whenever a Death's Breath drops, a second one will also drop."
+   "sage_j_3":{  
+      "display":"Whenever a Death's Breath drops, a second one will also drop."
    },
-   "shenlong_2a":{
-         "display": "Increases Spirit Regeneration by 1.00 per Second (Monk Only)"
+   "shenlong_2a":{  
+      "display":"Increases Spirit Regeneration by 1.00 per Second (Monk Only)"
    },
-   "shenlong_2b":{
-         "display": "Chance to hurl a ball of pure energy when attacking."
+   "shenlong_2b":{  
+      "display":"Chance to hurl a ball of pure energy when attacking."
    },
-   "tal_rasha_3":{
-         "display": "Increases Arcane Power Regeneration by 2.00 per Second (Wizard Only)"
+   "tal_rasha_3":{  
+      "display":"Increases Arcane Power Regeneration by 2.00 per Second (Wizard Only)"
    },
-   "tal_rasha_4":{
-         "display": "Damaging enemies with Arcane, Cold, Fire or Lightning will cause a Meteor of the same damage type to fall from the sky. There is an 8 second cooldown for each damage type."
+   "tal_rasha_4":{  
+      "display":"Damaging enemies with Arcane, Cold, Fire or Lightning will cause a Meteor of the same damage type to fall from the sky. There is an 8 second cooldown for each damage type."
    },
-   "raekor_6":{
-         "display": "Furious Charge gains the effect of every rune."
+   "raekor_6":{  
+      "display":"Furious Charge gains the effect of every rune."
    },
-   "shadow_mantle_2":{
-         "display": "Automatically cast Smoke Screen when you fall below 25% Life. This effect may occur once every 30 seconds."
+   "shadow_mantle_2":{  
+      "display":"Automatically cast Smoke Screen when you fall below 25% Life. This effect may occur once every 30 seconds."
    },
-   "shadow_mantle_4":{
-         "display": "Reduce all cooldowns by 1 second every time you kill a demon."
+   "shadow_mantle_4":{  
+      "display":"Reduce all cooldowns by 1 second every time you kill a demon."
    },
-   "invoker_4":{
-         "display": "Your Thorns damage now hits all enemies in a 15 yard radius."
+   "invoker_4":{  
+      "display":"Your Thorns damage now hits all enemies in a 15 yard radius."
    },
-   "vyr_4":{
-         "display": "Archon gains the effect of every rune."
+   "vyr_4":{  
+      "display":"Archon gains the effect of every rune."
    },
-   "zunimassa_4":{
-         "display": "Your Fetish Army lasts until they die."
+   "zunimassa_4":{  
+      "display":"Your Fetish Army lasts until they die."
    },
-   "perfection":{
-        "template":"{0}% Perfect"
+   "perfection":{  
+      "template":"{0}% Perfect"
    },
-   "dps_loss":{
-        "template":"{0} DPS Lost",
-        "tooltip":"The DPS lost due to imperfect affix values."
+   "dps_loss":{  
+      "template":"{0} DPS Lost",
+      "tooltip":"The DPS lost due to imperfect affix values."
    },
-   "tooltip":{
-        "template":"<span class='tooltip' title='{1}'>{0}</span>"
+   "tooltip":{  
+      "template":"<span class='tooltip' title='{1}'>{0}</span>"
    },
-   "barbarian":{
-        "display":"Barbarian",
-        "dropdown":"Barbarian"
+   "barbarian":{  
+      "display":"Barbarian",
+      "dropdown":"Barbarian"
    },
-   "crusader" : {
-        "display":"Crusader",
-        "dropdown":"Crusader"
+   "crusader":{  
+      "display":"Crusader",
+      "dropdown":"Crusader"
    },
-   "demon_hunter" : {
-        "display":"Demon Hunter",
-     "dropdown":"Demon Hunter"
+   "demon_hunter":{  
+      "display":"Demon Hunter",
+      "dropdown":"Demon Hunter"
    },
-   "monk" : {
-        "display":"Monk",
-        "dropdown":"Monk"
+   "monk":{  
+      "display":"Monk",
+      "dropdown":"Monk"
    },
-   "witch_doctor" : {
-        "display":"Witch Doctor",
-        "dropdown":"Witch Doctor"
+   "witch_doctor":{  
+      "display":"Witch Doctor",
+      "dropdown":"Witch Doctor"
    },
-  "wizard" : {
-        "display":"Wizard",
-        "dropdown":"Wizard"
+   "wizard":{  
+      "display":"Wizard",
+      "dropdown":"Wizard"
    },
-   "strength":{
+   "strength":{  
       "template":"+{0} Strength",
       "display":"Strength"
    },
-   "intelligence":{
+   "intelligence":{  
       "template":"+{0} Intelligence",
       "display":"Intelligence"
    },
-   "dexterity":{
+   "dexterity":{  
       "template":"+{0} Dexterity",
       "display":"Dexterity"
-    }
+   }
 }
