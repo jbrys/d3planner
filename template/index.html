@@ -710,7 +710,10 @@
 			var skill_damage_values = calculate_skill_damage(skill_damage, elite_damage, elemental_damage, skill_values.duration);
 
 			$.each(skill_damage_values, function(key, value){
-				damage_table.find("."+key).html(format_number(value,0,true));
+				if(value > 0)
+					damage_table.find("."+key).show().html(format_number(value,0,true));
+				else
+					damage_table.find("."+key).hide().html("");
 			});
 		}
 
@@ -756,6 +759,36 @@
 		<span class="data"></span>
 	</div>
 </div>
+
+<%def name="create_slot(id, pieces)">
+<div class="slot" id="${id}">
+	${id}
+	<br>
+	<div class="edit">
+		<select class="item ${' '.join(pieces)} chosen-select"></select>
+		<div class="affix">
+			<div class="primary">
+				<select multiple class="chosen-select"></select>
+			</div>
+		</div>
+		<div class="buttons">
+			<span class="ui-icon ui-icon-check save_button"></span>
+			<span class="ui-icon ui-icon-close cancel_button"></span>
+		</div>
+	</div>
+	<div class="view">
+		<div>
+			<div class="name"></div>
+			<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
+		<div style="clear: both;"></div>
+		<div class="affixes"></div>
+	</div>
+	<div class="stats">
+		<div class="perfection"></div>
+		<div class="dps_loss"></div>
+	</div>
+</div>
+</%def>
 
 <table style="width:100%;">
 	<tr>
@@ -877,395 +910,25 @@
 		</td>
 		<td>
 			<div class="center_contents">
+			<%
+				slots = [{"shoulders":["shoulders"],"head":["head"],"neck":["neck"]},
+						 {"hands":["hands"],"chest":["chest"],"wrists":["wrists"]},
+						 {"lfinger":["finger"],"waist":["waist"],"rfinger":["finger"]},
+						 {"mainhand":["onehand","twohand"],"legs":["legs"],"offhand":["shield"]}]
+			%>
 			<div class="paperdoll">
+			% for row in slots:
 			<div class="equipment_row">
-				<div class="slot" id="shoulders">
-					shoulders
-					<br>
-					<div class="edit">
-						<select class="item shoulders chosen-select"></select>
-						<div class="affix">
-							<div class="primary">
-								<select multiple class="chosen-select"></select>
-							</div>
-						</div>
-						<div class="buttons">
-							<span class="ui-icon ui-icon-check save_button"></span>
-							<span class="ui-icon ui-icon-close cancel_button"></span>
-						</div>
-					</div>
-					<div class="view">
-						<div>
-							<div class="name"></div>
-							<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
-						<div style="clear: both;"></div>
-						<div class="affixes"></div>
-					</div>
-					<div class="stats">
-						<div class="perfection"></div>
-						<div class="dps_loss"></div>
-					</div>
-				</div>
-				<div class="slot" id="head">
-					head
-					<br>
-					<div class="edit">
-						<select class="item head chosen-select"></select>
-
-						<div class="affix">
-							<div class="primary">
-								<select multiple class="chosen-select"></select>
-							</div>
-						</div>
-						<div class="buttons">
-							<span class="ui-icon ui-icon-check save_button"></span>
-							<span class="ui-icon ui-icon-close cancel_button"></span>
-						</div>
-					</div>
-					<div class="view">
-						<div>
-							<div class="name"></div>
-							<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
-						<div style="clear: both;"></div>
-						<div class="affixes"></div>
-					</div>
-					<div class="stats">
-						<div class="perfection"></div>
-						<div class="dps_loss"></div>
-					</div>
-				</div>
-				<div class="slot" id="neck">
-					neck
-					<br>
-
-					<div class="edit">
-						<select class="item neck chosen-select"></select>
-
-						<div class="affix">
-							<div class="primary">
-								<select multiple class="chosen-select"></select>
-							</div>
-						</div>
-						<div class="buttons">
-							<span class="ui-icon ui-icon-check save_button"></span>
-							<span class="ui-icon ui-icon-close cancel_button"></span>
-						</div>
-					</div>
-					<div class="view">
-						<div>
-							<div class="name"></div>
-							<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
-						<div style="clear: both;"></div>
-						<div class="affixes"></div>
-					</div>
-					<div class="stats">
-						<div class="perfection"></div>
-						<div class="dps_loss"></div>
-					</div>
-				</div>
+				% for slot in row:
+				${create_slot(slot, row[slot])}
+				%endfor
 			</div>
 			<div style="clear: both;"></div>
-			<div class="equipment_row">
-				<div class="slot" id="hands">
-					hands
-					<br>
-
-					<div class="edit">
-						<select class="item hands chosen-select"></select>
-
-						<div class="affix">
-							<div class="primary">
-								<select multiple class="chosen-select"></select>
-							</div>
-						</div>
-						<div class="buttons">
-							<span class="ui-icon ui-icon-check save_button"></span>
-							<span class="ui-icon ui-icon-close cancel_button"></span>
-						</div>
-					</div>
-					<div class="view">
-						<div>
-							<div class="name"></div>
-							<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
-						<div style="clear: both;"></div>
-						<div class="affixes"></div>
-					</div>
-					<div class="stats">
-						<div class="perfection"></div>
-						<div class="dps_loss"></div>
-					</div>
-				</div>
-				<div class="slot" id="chest">
-					chest
-					<br>
-
-					<div class="edit">
-						<select class="item chest chosen-select"></select>
-
-						<div class="affix">
-							<div class="primary">
-								<select multiple class="chosen-select"></select>
-							</div>
-						</div>
-						<div class="buttons">
-							<span class="ui-icon ui-icon-check save_button"></span>
-							<span class="ui-icon ui-icon-close cancel_button"></span>
-						</div>
-					</div>
-					<div class="view">
-						<div>
-							<div class="name"></div>
-							<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
-						<div style="clear: both;"></div>
-						<div class="affixes"></div>
-					</div>
-					<div class="stats">
-						<div class="perfection"></div>
-						<div class="dps_loss"></div>
-					</div>
-				</div>
-				<div class="slot" id="wrists">
-					wrists
-					<br>
-
-					<div class="edit">
-						<select class="item wrists chosen-select"></select>
-
-						<div class="affix">
-							<div class="primary">
-								<select multiple class="chosen-select"></select>
-							</div>
-						</div>
-						<div class="buttons">
-							<span class="ui-icon ui-icon-check save_button"></span>
-							<span class="ui-icon ui-icon-close cancel_button"></span>
-						</div>
-					</div>
-					<div class="view">
-						<div>
-							<div class="name"></div>
-							<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
-						<div style="clear: both;"></div>
-						<div class="affixes"></div>
-					</div>
-					<div class="stats">
-						<div class="perfection"></div>
-						<div class="dps_loss"></div>
-					</div>
-				</div>
-			</div>
-			<div style="clear: both;"></div>
-			<div class="equipment_row">
-				<div class="slot" id="lfinger">
-					finger
-					<br>
-
-					<div class="edit">
-						<select class="item finger chosen-select"></select>
-
-						<div class="affix">
-							<div class="primary">
-								<select multiple class="chosen-select"></select>
-							</div>
-						</div>
-						<div class="buttons">
-							<span class="ui-icon ui-icon-check save_button"></span>
-							<span class="ui-icon ui-icon-close cancel_button"></span>
-						</div>
-					</div>
-					<div class="view">
-						<div>
-							<div class="name"></div>
-							<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
-						<div style="clear: both;"></div>
-						<div class="affixes"></div>
-					</div>
-					<div class="stats">
-						<div class="perfection"></div>
-						<div class="dps_loss"></div>
-					</div>
-				</div>
-				<div class="slot" id="waist">
-					waist
-					<br>
-
-					<div class="edit">
-						<select class="item waist chosen-select"></select>
-
-						<div class="affix">
-							<div class="primary">
-								<select multiple class="chosen-select"></select>
-							</div>
-						</div>
-						<div class="buttons">
-							<span class="ui-icon ui-icon-check save_button"></span>
-							<span class="ui-icon ui-icon-close cancel_button"></span>
-						</div>
-					</div>
-					<div class="view">
-						<div>
-							<div class="name"></div>
-							<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
-						<div style="clear: both;"></div>
-						<div class="affixes"></div>
-					</div>
-					<div class="stats">
-						<div class="perfection"></div>
-						<div class="dps_loss"></div>
-					</div>
-				</div>
-				<div class="slot" id="rfinger">
-					finger
-					<br>
-
-					<div class="edit">
-						<select class="item finger chosen-select"></select>
-
-						<div class="affix">
-							<div class="primary">
-								<select multiple class="chosen-select"></select>
-							</div>
-						</div>
-						<div class="buttons">
-							<span class="ui-icon ui-icon-check save_button"></span>
-							<span class="ui-icon ui-icon-close cancel_button"></span>
-						</div>
-					</div>
-					<div class="view">
-						<div>
-							<div class="name"></div>
-							<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
-						<div style="clear: both;"></div>
-						<div class="affixes"></div>
-					</div>
-					<div class="stats">
-						<div class="perfection"></div>
-						<div class="dps_loss"></div>
-					</div>
-				</div>
-			</div>
-			<div style="clear: both;"></div>
-			<div class="equipment_row">
-				<div class="slot" id="mainhand">
-					mainhand
-					<br>
-
-					<div class="edit">
-						<select class="item group onehand twohand chosen-select"></select>
-
-						<div class="affix">
-							<div class="primary">
-								<select multiple class="chosen-select"></select>
-							</div>
-						</div>
-						<div class="buttons">
-							<span class="ui-icon ui-icon-check save_button"></span>
-							<span class="ui-icon ui-icon-close cancel_button"></span>
-						</div>
-					</div>
-					<div class="view">
-						<div>
-							<div class="name"></div>
-							<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
-						<div style="clear: both;"></div>
-						<div class="affixes"></div>
-					</div>
-					<div class="stats">
-						<div class="perfection"></div>
-						<div class="dps_loss"></div>
-					</div>
-				</div>
-				<div class="slot" id="legs">
-					legs
-					<br>
-
-					<div class="edit">
-						<select class="item legs chosen-select"></select>
-
-						<div class="affix">
-							<div class="primary">
-								<select multiple class="chosen-select"></select>
-							</div>
-						</div>
-						<div class="buttons">
-							<span class="ui-icon ui-icon-check save_button"></span>
-							<span class="ui-icon ui-icon-close cancel_button"></span>
-						</div>
-					</div>
-					<div class="view">
-						<div>
-							<div class="name"></div>
-							<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
-						<div style="clear: both;"></div>
-						<div class="affixes"></div>
-					</div>
-					<div class="stats">
-						<div class="perfection"></div>
-						<div class="dps_loss"></div>
-					</div>
-				</div>
-				<div class="slot" id="offhand">
-					offhand
-					<br>
-
-					<div class="edit">
-						<select class="item group shield mojo source quiver cshield chosen-select"></select>
-
-						<div class="affix">
-							<div class="primary">
-								<select multiple class="chosen-select"></select>
-							</div>
-						</div>
-						<div class="buttons">
-							<span class="ui-icon ui-icon-check save_button"></span>
-							<span class="ui-icon ui-icon-close cancel_button"></span>
-						</div>
-					</div>
-					<div class="view">
-						<div>
-							<div class="name"></div>
-							<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
-						<div style="clear: both;"></div>
-						<div class="affixes"></div>
-					</div>
-					<div class="stats">
-						<div class="perfection"></div>
-						<div class="dps_loss"></div>
-					</div>
-				</div>
-			</div>
+			%endfor
 			<div style="clear: both;"></div>
 				<div class="equipment_row">
 					<div class="set_bonuses set"></div>
-					<div class="slot" id="feet">
-						feet
-						<br>
-
-						<div class="edit">
-							<select class="item feet chosen-select"></select>
-
-							<div class="affix">
-								<div class="primary">
-									<select multiple class="chosen-select"></select>
-								</div>
-							</div>
-							<div class="buttons">
-								<span class="ui-icon ui-icon-check save_button"></span>
-								<span class="ui-icon ui-icon-close cancel_button"></span>
-							</div>
-						</div>
-						<div class="view">
-							<div>
-								<div class="name"></div>
-								<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
-							<div style="clear: both;"></div>
-							<div class="affixes"></div>
-						</div>
-						<div class="stats">
-							<div class="perfection"></div>
-							<div class="dps_loss"></div>
-						</div>
-					</div>
+					${create_slot("feet", ["feet"])}
 					<div class="legendary_affixes legendary"></div>
 				</div>
 			</div>
@@ -1279,18 +942,11 @@
 	</tr>
 	<tr class="skills passives">
 		<td colspan="2">
+			% for i in range(0,4):
 			<div>
-			<select id="passive-0" class="skill passive"></select>
+			<select id="passive-${i}" class="skill passive"></select>
 			</div>
-			<div>
-			<select id="passive-1" class="skill passive"></select>
-			</div>
-			<div>
-			<select id="passive-2" class="skill passive"></select>
-			</div>
-			<div>
-			<select id="passive-3" class="skill passive"></select>
-			</div>
+			% endfor
 		</td>
 	</tr>
 	<tr class="skills">
@@ -1302,304 +958,22 @@
 		<td colspan="2">
 			<div id="active_tabs">
 				<ol>
+					% for i in range(0,6):
 					<li>
-						<a id="skill_tab_0" href="#skill_damage_0">
+						<a id="skill_tab_${i}" href="#skill_damage_${i}">
 							<div class="skill">(none)</div>
 							<div class="rune">(none)</div>
 						</a>
 					</li>
-					<li>
-						<a id="skill_tab_1" href="#skill_damage_1">
-							<div class="skill">(none)</div>
-							<div class="rune">(none)</div>
-						</a>
-					</li>
-					<li>
-						<a id="skill_tab_2" href="#skill_damage_2">
-							<div class="skill">(none)</div>
-							<div class="rune">(none)</div>
-						</a>
-					</li>
-					<li>
-						<a id="skill_tab_3" href="#skill_damage_3">
-							<div class="skill">(none)</div>
-							<div class="rune">(none)</div>
-						</a>
-					</li>
-					<li>
-						<a id="skill_tab_4" href="#skill_damage_4">
-							<div class="skill">(none)</div>
-							<div class="rune">(none)</div>
-						</a>
-					</li>
-					<li>
-						<a id="skill_tab_5" href="#skill_damage_5">
-							<div class="skill">(none)</div>
-							<div class="rune">(none)</div>
-						</a>
-					</li>
+					% endfor
 				</ol>
-				<div id="skill_damage_0">
+				% for i in range(0,6):
+				<div id="skill_damage_${i}">
 					<table>
 						<tr>
 							<td style="width:200px; padding-right: 20px;">
-								<select id="active-0" class="skill active"></select><br/>
-								<select id="rune-0" class="skill rune"></select>
-							</td>
-							<td rowspan="2"  class="data_table">
-							</td>
-						</tr>
-						<tr>
-							<td class="damage_table">
-								<table>
-									<tr>
-										<td>
-
-										</td>
-										<th colspan="3" class="header">
-											<span class="label header">Damage</span>
-										</th>
-										<th colspan="3" class="header">
-											<span class="label header">Crit Damage</span>
-										</th>
-									</tr>
-									<tr>
-										<td>
-											<span class="label"></span>
-										</td>
-										<td>
-											<span class="ele_min min"></span></td><td>-</td><td><span class="ele_max max"></span>
-										</td>
-										<td>
-											<span class="ele_c_min min"></span></td><td>-</td><td><span class="ele_c_max max"></span>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<span class="label">Elite</span>
-										</td>
-										<td>
-											<span class="ele_eli_min min"></span></td><td>-</td><td><span class="ele_eli_max max"></span>
-										</td>
-										<td>
-											<span class="ele_eli_c_min min"></span></td><td>-</td><td><span class="ele_eli_c_max max"></span>
-										</td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-					</table>
-				</div>
-				<div id="skill_damage_1">
-					<table>
-						<tr>
-							<td style="width:200px; padding-right: 20px;">
-								<select id="active-1" class="skill active"></select><br/>
-								<select id="rune-1" class="skill rune"></select>
-							</td>
-							<td rowspan="2"  class="data_table">
-							</td>
-						</tr>
-						<tr>
-							<td class="damage_table">
-								<table>
-									<tr>
-										<td>
-
-										</td>
-										<th colspan="3" class="header">
-											<span class="label header">Damage</span>
-										</th>
-										<th colspan="3" class="header">
-											<span class="label header">Crit Damage</span>
-										</th>
-									</tr>
-									<tr>
-										<td>
-											<span class="label"></span>
-										</td>
-										<td>
-											<span class="ele_min min"></span></td><td>-</td><td><span class="ele_max max"></span>
-										</td>
-										<td>
-											<span class="ele_c_min min"></span></td><td>-</td><td><span class="ele_c_max max"></span>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<span class="label">Elite</span>
-										</td>
-										<td>
-											<span class="ele_eli_min min"></span></td><td>-</td><td><span class="ele_eli_max max"></span>
-										</td>
-										<td>
-											<span class="ele_eli_c_min min"></span></td><td>-</td><td><span class="ele_eli_c_max max"></span>
-										</td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-					</table>
-				</div>
-				<div id="skill_damage_2">
-					<table>
-						<tr>
-							<td style="width:200px; padding-right: 20px;">
-								<select id="active-2" class="skill active"></select><br/>
-								<select id="rune-2" class="skill rune"></select>
-							</td>
-							<td rowspan="2"  class="data_table">
-							</td>
-						</tr>
-						<tr>
-							<td class="damage_table">
-								<table>
-									<tr>
-										<td>
-
-										</td>
-										<th colspan="3" class="header">
-											<span class="label header">Damage</span>
-										</th>
-										<th colspan="3" class="header">
-											<span class="label header">Crit Damage</span>
-										</th>
-									</tr>
-									<tr>
-										<td>
-											<span class="label"></span>
-										</td>
-										<td>
-											<span class="ele_min min"></span></td><td>-</td><td><span class="ele_max max"></span>
-										</td>
-										<td>
-											<span class="ele_c_min min"></span></td><td>-</td><td><span class="ele_c_max max"></span>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<span class="label">Elite</span>
-										</td>
-										<td>
-											<span class="ele_eli_min min"></span></td><td>-</td><td><span class="ele_eli_max max"></span>
-										</td>
-										<td>
-											<span class="ele_eli_c_min min"></span></td><td>-</td><td><span class="ele_eli_c_max max"></span>
-										</td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-					</table>
-				</div>
-				<div id="skill_damage_3">
-					<table>
-						<tr>
-							<td style="width:200px; padding-right: 20px;">
-								<select id="active-3" class="skill active"></select><br/>
-								<select id="rune-3" class="skill rune"></select>
-							</td>
-							<td rowspan="2"  class="data_table">
-							</td>
-						</tr>
-						<tr>
-							<td class="damage_table">
-								<table>
-									<tr>
-										<td>
-
-										</td>
-										<th colspan="3" class="header">
-											<span class="label header">Damage</span>
-										</th>
-										<th colspan="3" class="header">
-											<span class="label header">Crit Damage</span>
-										</th>
-									</tr>
-									<tr>
-										<td>
-											<span class="label"></span>
-										</td>
-										<td>
-											<span class="ele_min min"></span></td><td>-</td><td><span class="ele_max max"></span>
-										</td>
-										<td>
-											<span class="ele_c_min min"></span></td><td>-</td><td><span class="ele_c_max max"></span>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<span class="label">Elite</span>
-										</td>
-										<td>
-											<span class="ele_eli_min min"></span></td><td>-</td><td><span class="ele_eli_max max"></span>
-										</td>
-										<td>
-											<span class="ele_eli_c_min min"></span></td><td>-</td><td><span class="ele_eli_c_max max"></span>
-										</td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-					</table>
-				</div>
-				<div id="skill_damage_4">
-					<table>
-						<tr>
-							<td style="width:200px; padding-right: 20px;">
-								<select id="active-4" class="skill active"></select><br/>
-								<select id="rune-4" class="skill rune"></select>
-							</td>
-							<td rowspan="2"  class="data_table">
-							</td>
-						</tr>
-						<tr>
-							<td class="damage_table">
-								<table>
-									<tr>
-										<td>
-
-										</td>
-										<th colspan="3" class="header">
-											<span class="label header">Damage</span>
-										</th>
-										<th colspan="3" class="header">
-											<span class="label header">Crit Damage</span>
-										</th>
-									</tr>
-									<tr>
-										<td>
-											<span class="label"></span>
-										</td>
-										<td>
-											<span class="ele_min min"></span></td><td>-</td><td><span class="ele_max max"></span>
-										</td>
-										<td>
-											<span class="ele_c_min min"></span></td><td>-</td><td><span class="ele_c_max max"></span>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<span class="label">Elite</span>
-										</td>
-										<td>
-											<span class="ele_eli_min min"></span></td><td>-</td><td><span class="ele_eli_max max"></span>
-										</td>
-										<td>
-											<span class="ele_eli_c_min min"></span></td><td>-</td><td><span class="ele_eli_c_max max"></span>
-										</td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-					</table>
-				</div>
-				<div id="skill_damage_5">
-					<table>
-						<tr>
-							<td style="width:200px; padding-right: 20px;">
-								<select id="active-5" class="skill active"></select><br/>
-								<select id="rune-5" class="skill rune"></select>
+								<select id="active-${i}" class="skill active"></select><br/>
+								<select id="rune-${i}" class="skill rune"></select>
 							</td>
 							<td rowspan="2"  class="data_table">
 							</td>
@@ -1663,6 +1037,7 @@
 						</tr>
 					</table>
 				</div>
+				% endfor
 			</div>
 		</td>
 	</tr>
