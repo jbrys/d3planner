@@ -16,10 +16,30 @@
                     "min" : 25,
                     "max" : 30
                 },
-                "elemental_damage":{
-                    "min" : 15,
-                    "max" : 20
-                }
+				 "holy_damage":{
+					"min":15,
+					"max":20
+				 },
+				 "lightning_damage":{
+					"min":15,
+					"max":20
+				 },
+				 "cold_damage":{
+					"min":15,
+					"max":20
+				 },
+				 "fire_damage":{
+					"min":15,
+					"max":20
+				 },
+				 "arcane_damage":{
+					"min":15,
+					"max":20
+				 },
+				 "physical_damage":{
+					"min":15,
+					"max":20
+				 }
             },
             "secondary": {},
             "legendary": {}

@@ -31,6 +31,11 @@
       "display":"Arcane skills deal more damage.",
       "dropdown": "Arcane"
    },
+   "physical_damage":{
+      "template":"Physical skills deal {0}% more damage.",
+      "display":"Physical skills deal more damage.",
+      "dropdown": "Physical"
+   },
    "ring_of_royal_grandeur_leg":{
       "display":"Reduces the number of items needed for set bonuses by 1 (to a minimum of 2)."
    },

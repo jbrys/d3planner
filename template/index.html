@@ -19,7 +19,6 @@
         "feet",
         "settings", "skills"];
 
-	var _stats = ["strength","dexterity","intelligence"];
     var _char = {};
     var _translate = {};
     var _bnet_translate = {};
@@ -39,12 +38,10 @@
         "attack_speed": 0,
         "critical_hit_chance": 5,
         "critical_hit_damage": 50,
-        "element_damage": 0,
         "elite_damage": 0,
         "attacks_per_second": 1
     };
 	var _values;
-    var _elements = ["holy_damage","fire_damage"];
 	var _classes;
 	var _groups;
 
@@ -54,7 +51,7 @@
     			$("#class_list").val(_char.settings.class).trigger("chosen:updated").change();
 
 			var totals = jQuery.extend(true, {}, _base_stats);
-			$.each(_stats, function(i, stat){
+			$.each(_groups.byGroup["main_stat"], function(i, stat){
 				totals[stat] = _classes[_char.settings.class].main_stat == stat ? totals.main_stat : totals.off_stat;
 			});
 			var sets = {};
@@ -95,7 +92,7 @@
 						}
 						else{
 							if (affix_name == "elemental_damage"){
-								$.each(_elements, function(i, element){
+								$.each(_groups.byGroup["elemental_damage"], function(i, element){
 									totals[element] = (totals[element] || 0) + affix.val;
 								});
 							}
@@ -200,7 +197,6 @@
 			populate_values();
 			calculate_totals();
 			calculate_damage();
-			skill_damage();
 			$(".slot").each(function(i, slot_div){
 				calculate_perfection($(slot_div).attr("id"));
 			});
@@ -309,7 +305,7 @@
 				perfect_values.elemental_damage
 			}
 		});
-		return calculate_dps(perfect_values,_defaults)-calculate_dps(_values,_defaults);
+		return calculate_dps(perfect_values)-calculate_dps(_values);
 	}
 
     function on_slider(event, ui) {
@@ -330,7 +326,7 @@
         affix_div.find(".value").attr("val", val);
         affix_div.css("color",percent_to_color((val-min+1)/(max-min+1)))
     }
-    function edit_button(){
+    function slot_edit(){
 		var slot_div = $(this).parents(".slot");
 		var slot = slot_div.attr("id");
 		if(_char[slot]){
@@ -346,13 +342,13 @@
             .find(".chosen-select").chosen();
         return false;
     }
-	function cancel_button(){
+	function slot_cancel(){
 		$(this)
             .parents(".edit").hide()
 			.parents(".slot").children(".view").show();
 		return false;
 	}
-	function save_button(){
+	function slot_save(){
 		var slot_div = $(this).parents(".slot");
 		var slot = slot_div.attr("id");
 		var item_name = slot_div.find(".item option:selected").text();
@@ -414,12 +410,18 @@
         });
         $.getJSON("${base}json/affix_groups", function(data) {
             _groups = data;
+            _groups.byGroup = {};
+            $.each(_groups, function(affix, group){
+            	if(!_groups.byGroup[group])
+            		_groups.byGroup[group] = [];
+            	_groups.byGroup[group].push(affix);
+            });
         });
         $(".item").change(item_change);
 
-        $(".edit_button").click(edit_button);
-        $(".cancel_button").click(cancel_button);
-        $(".save_button").click(save_button);
+        $(".slot .edit_button").click(slot_edit);
+        $(".slot .cancel_button").click(slot_cancel);
+        $(".slot save_button").click(slot_save);
         $("#import_begin").click(import_begin);
         $("#import_end").click(import_end);
         $(".rune").change(rune_change);
@@ -427,13 +429,10 @@
         $(".active").change(active_change);
         $("#fetch").click(fetch);
         $(".active_skill input").click(activated_change);
-		$.each(_elements, function(i, element){
+		$.each(_groups.byGroup["elemental_damage"], function(i, element){
 			$("#skill_element").append("<option value='{0}'>{1}</option>".format(element,_translate[element].dropdown));
 		});
-		$("#skill_percent").keyup(skill_damage);
-		$("#skill_element").change(skill_damage);
-		$("#skill_element").chosen({disable_search:true});
-		$(".skill").chosen({disable_search:true});
+		$(".skills select").append(createOption("")).chosen({disable_search:true, allow_single_deselect:true});
 
 		$("#class_list").append("<option value='{0}'>{1}</option>".format("", ""));
 		$.each(_classes, function(class_name, details){
@@ -442,7 +441,7 @@
 
 		$("#class_list").change(class_change);
 		$("#class_list").chosen({disable_search:true});
-
+		$("#active_tabs").tabs();
 		load_from_cookie(_char);
 		update_char();
     });
@@ -464,45 +463,35 @@
     }
 
     function populate_values(){
-    	var best_element = {
-    		type: "elemental_damage",
-    		val: _char.totals["elemental_damage"]
-    	};
-
-    	$.each(_elements, function(i, element){
-			if (_char.totals[element] > best_element.val){
-				best_element.type = element;
-				best_element.val = _char.totals[element];
-			}
-    	});
-
 		var main_stat = _classes[_char.settings.class].main_stat;
 
 		_values = {
-			max_damage: _char.totals.max_damage/Math.pow(10, _translate.max_damage.scale || 0),
-			min_damage: _char.totals.min_damage/Math.pow(10, _translate.min_damage.scale || 0),
-			main_stat: _char.totals[main_stat]/Math.pow(10, _translate[main_stat].scale || 0),
-			attack_speed: _char.totals.attack_speed/Math.pow(10, _translate.attack_speed.scale || 0),
-			critical_hit_chance: _char.totals.critical_hit_chance/Math.pow(10, _translate.critical_hit_chance.scale || 0),
-			critical_hit_damage: _char.totals.critical_hit_damage/Math.pow(10, _translate.critical_hit_damage.scale || 0),
-			element_damage: best_element.val/Math.pow(10, _translate[best_element.type].scale || 0),
-			elite_damage: _char.totals.elite_damage/Math.pow(10, _translate.elite_damage.scale || 0),
-			attacks_per_second: _char.totals.attacks_per_second/Math.pow(10, _translate.attacks_per_second.scale || 0),
-			element: best_element.type
+			max_damage: (_char.totals.max_damage/Math.pow(10, _translate.max_damage.scale || 0)) | _defaults.max_damage,
+			min_damage: (_char.totals.min_damage/Math.pow(10, _translate.min_damage.scale || 0)) | _defaults.min_damage,
+			main_stat: (_char.totals[main_stat]/Math.pow(10, _translate[main_stat].scale || 0)) | _defaults.main_stat,
+			attack_speed: (_char.totals.attack_speed/Math.pow(10, _translate.attack_speed.scale || 0)) | _defaults.attack_speed,
+			critical_hit_chance: (_char.totals.critical_hit_chance/Math.pow(10, _translate.critical_hit_chance.scale || 0)) || _defaults.critical_hit_chance,
+			critical_hit_damage: (_char.totals.critical_hit_damage/Math.pow(10, _translate.critical_hit_damage.scale || 0)) || _defaults.critical_hit_damage,
+			elite_damage: (_char.totals.elite_damage/Math.pow(10, _translate.elite_damage.scale || 0)) || _defaults.elite_damage,
+			attacks_per_second: (_char.totals.attacks_per_second/Math.pow(10, _translate.attacks_per_second.scale || 0)) || _defaults.attacks_per_second
 		};
+
+    	$.each(_groups.byGroup["elemental_damage"], function(i, element){
+				_values[element] = _char.totals[element] || 0;
+    	});
     }
     function calculate_damage(){
         if (_char && _char.totals){
-			var eled = 1+((_values.element_damage || _defaults.element_damage)/100);
-			var elid = 1+((_values.elite_damage || _defaults.elite_damage)/100);
+			//var eled = 1+(_values.element_damage || _defaults.element_damage)/100);
+			var elid = 1+(_values.elite_damage/100);
 
-            var sheet_dps = calculate_dps(_values, _defaults);
+            var sheet_dps = calculate_dps(_values);
             //var sheet_dps = ((max+min)/2)*(1+ms/100)*(1+as/100)*(aps)*(1+chc/100*chd/100);
 
             $("#sheet_dps .value").html(format_number(sheet_dps,0,true));
-            $("#elemental_dps .value").html(format_number(sheet_dps*eled,0,true));
+            //$("#elemental_dps .value").html(format_number(sheet_dps*eled,0,true));
             $("#elite_dps .value").html(format_number(sheet_dps*elid,0,true));
-            $("#elemental_elite_dps .value").html(format_number(sheet_dps*eled*elid,0,true));
+            //$("#elemental_elite_dps .value").html(format_number(sheet_dps*eled*elid,0,true));
 
             $("#sheet_dps .label").html(get_template("sheet_dps"));
             $("#elemental_dps .label").html(get_template("elemental_dps"));
@@ -510,39 +499,40 @@
             $("#elemental_elite_dps .label").html(get_template("elemental_elite_dps"));
         }
     }
-	function skill_damage(){
-		var percent = parseInt($("#skill_percent").val());
-		var element = $("#skill_element").val();
-		if(percent > 0)
-		{
-			var eled = 1+((_char.totals[element] || 0)/100);
-			var elid = 1+((_values.elite_damage || _defaults.elite_damage)/100);
+	function calculate_skill_damage(damage, elite_damage, elemental_damage, period){
+		var eled = elemental_damage;
+		var elid = elite_damage;
+		var aps = _values.aps;
+		if (period)
+			aps = 1/period;
 
-			var base_min = calculate_base_damage(_values, _defaults, _values.min_damage || _defaults.min_damage)*(percent/100);
-			var base_max = calculate_base_damage(_values, _defaults, _values.max_damage || _defaults.max_damage)*(percent/100);
-			var crit_min = calculate_crit_damage(_values, _defaults, base_min);
-			var crit_max = calculate_crit_damage(_values, _defaults, base_max);
+		var base_min = calculate_base_damage(_values, _values.min_damage)*damage;
+		var base_max = calculate_base_damage(_values, _values.max_damage)*damage;
+		var crit_min = calculate_crit_damage(_values, base_min);
+		var crit_max = calculate_crit_damage(_values, base_max);
+		var mean_min = calculate_mean_damage(_values, base_min);
+		var mean_max = calculate_mean_damage(_values, base_max);
+		var dps = calculate_dps(_values,(mean_min+mean_max)/2,aps);
 
-			$("#min").text(format_number(base_min,0,true));
-			$("#max").text(format_number(base_max,0,true));
-			$("#c_min").text(format_number(crit_min,0,true));
-			$("#c_max").text(format_number(crit_max,0,true));
+		var values = {};
 
-			$("#ele_min").text(format_number(base_min*eled,0,true));
-			$("#ele_max").text(format_number(base_max*eled,0,true));
-			$("#ele_c_min").text(format_number(crit_min*eled,0,true));
-			$("#ele_c_max").text(format_number(crit_max*eled,0,true));
+		values["ele_min"] = base_min*eled;
+		values["ele_max"] = base_max*eled;
+		values["ele_c_min"] = crit_min*eled;
+		values["ele_c_max"] = crit_max*eled;
+		values["ele_m_min"] = mean_min*eled;
+		values["ele_m_max"] = mean_max*eled;
+		values["ele_dps"] = dps*eled;
 
-			$("#eli_min").text(format_number(base_min*elid,0,true));
-			$("#eli_max").text(format_number(base_max*elid,0,true));
-			$("#eli_c_min").text(format_number(crit_min*elid,0,true));
-			$("#eli_c_max").text(format_number(crit_max*elid,0,true));
+		values["ele_eli_min"] = base_min*eled*elid;
+		values["ele_eli_max"] = base_max*eled*elid;
+		values["ele_eli_c_min"] = crit_min*eled*elid;
+		values["ele_eli_c_max"] = crit_max*eled*elid;
+		values["ele_eli_m_min"] = mean_min*eled*elid;
+		values["ele_eli_m_max"] = mean_max*eled*elid;
+		values["ele_eli_dps"] = dps*eled*elid;
 
-			$("#ele_eli_min").text(format_number(base_min*eled*elid,0,true));
-			$("#ele_eli_max").text(format_number(base_max*eled*elid,0,true));
-			$("#ele_eli_c_min").text(format_number(crit_min*eled*elid,0,true));
-			$("#ele_eli_c_max").text(format_number(crit_max*eled*elid,0,true));
-		}
+		return values;
 	}
 
 	function debug(data){
@@ -584,8 +574,10 @@
 		_char.skills.rune[index] = rune;
 
 		activator_change(previous_rune, index, false);
+		$("#skill_tab_"+index+" .rune").html("&nbsp;");
 
 		if(rune){
+			$("#skill_tab_"+index+" .rune").html(get_template(rune));
 			var skill_blob = _classes[_char.settings.class].skills.active[skill];
 			var active_blob = _classes[_char.settings.class].skills.active[skill].active
 						|| _classes[_char.settings.class].skills.active[skill].runes[rune].active;
@@ -597,6 +589,7 @@
 		}
 		save_to_cookie(_char);
 		update_char();
+		update_skill_panel(index);
 	}
 	function passive_change(){
 		var passive_ddl = $(this);
@@ -605,14 +598,15 @@
 		var current_passive = passive_ddl.val();
 		_char.skills.passive[index] = current_passive;
 
-		passive_ddl.siblings(".passive").children("option[value='"+previous_passive+"']").attr("disabled",false);
+		$(".passives option[value='"+previous_passive+"']").attr("disabled",false);
 		if(current_passive)
-			passive_ddl.siblings(".passive").children("option[value='"+current_passive+"']").attr("disabled",true);
+			$(".passives").find("option[value='"+current_passive+"']:not(:selected)").attr("disabled",true);
 		else
 			_char.skills.passive[index] = null;
 
 		save_to_cookie(_char);
 		update_char();
+		$(".passive").trigger("chosen:updated");
 	}
 	function active_change(){
 		active_ddl = $(this);
@@ -622,25 +616,28 @@
 		var current_active = active_ddl.val();
 		_char.skills.active[index] = current_active;
 
-		active_ddl.parent().siblings().find("option[value='"+previous_active+"']").attr("disabled",false);
+		rune_ddl.empty();
+		$("#skill_tab_"+index+" .skill").html(get_template("none"));
+		$("#active_tabs option[value='"+previous_active+"']").attr("disabled",false);
 		if(current_active){
-			active_ddl.parent().siblings().find("option[value='"+current_active+"']").attr("disabled",true);
-			rune_ddl.append(createOption(""));
+			$("#skill_tab_"+index+" .skill").html(get_template(current_active))
+			$("#active_tabs").find("option[value='"+current_active+"']:not(:selected)").attr("disabled",true);
+			rune_ddl.append(createOption("","",!_char.skills.rune[index]));
 			$.each(_classes[_char.settings.class].skills.active[current_active].runes, function(rune, data){
 				rune_ddl
 					.append(createOption(
 						rune,
 						rune,
-						_char.skills.rune.length >= index && _char.skills.rune[index] == rune ? "selected" : ""));
+						_char.skills.rune[index] == rune));
 			});
 		}
 		else{
-			rune_ddl.empty();
 			_char.skills.active[index] = null;
 		}
 
 		rune_ddl.trigger("chosen:updated");
 		rune_ddl.change();
+		$("#active_tabs option").trigger("chosen:updated");
 		save_to_cookie(_char);
 		update_char();
 	}
@@ -650,35 +647,83 @@
 			if(!_char.skills)
 				_char.skills = { "passive": [,,,,], "active": [,,,,,,], "rune": [,,,,,,], "activated": [,,,,,,] }
 
-			$(".passive").each(function(i, skill_select){
-				skill_select = $(skill_select);
-				skill_select.empty();
-				skill_select.append(createOption(""));
-				$.each(_classes[_char.settings.class].skills.passive, function(skill, skill_data){
-					skill_select
-						.append(createOption(
-							skill,
-							skill,
-							_char.skills.passive.length >= i && _char.skills.passive[i] == skill,
-							$.inArray(skill, _char.skills.passive) >= 0 && _char.skills.passive[i] != skill));
-				});
-				skill_select.trigger("chosen:updated");
+			$.each(_classes[_char.settings.class].skills.passive, function(skill, skill_data){
+				$(".skill.passive")
+					.append(createOption(skill,get_template(skill)));
 			});
-			$(".active").each(function(i, skill_select){
-				skill_select = $(skill_select);
-				skill_select.empty();
-				skill_select.append("<option value='{0}'>{1}</option>".format("",""));
-				$.each(_classes[_char.settings.class].skills.active, function(skill, skill_data){
-					skill_select
-						.append(createOption(
-							skill,
-							skill,
-							_char.skills.active.length >= i && _char.skills.active[i] == skill,
-							$.inArray(skill, _char.skills.active) >= 0 && _char.skills.active[i] != skill));
-				});
-				skill_select.trigger("chosen:updated");
+			$(".skill.passive").each(function(){
+				$(this).val(_char.skills.passive[$(this).attr("id").replace("passive-","")]);
 			}).change();
+
+			$.each(_classes[_char.settings.class].skills.active, function(skill, skill_data){
+				$(".skill.active")
+					.append(createOption(skill,get_template(skill)));
+			});
+			$(".skill.active").each(function(){
+				$(this).val(_char.skills.active[$(this).attr("id").replace("active-","")]);
+			}).change();
+			$(".skill.rune").each(function(){
+				$(this).val(_char.skills.rune[$(this).attr("id").replace("rune-","")]);
+			}).change();
+			$(".skill").trigger("chosen:updated");
+			$(".passive").trigger("chosen:updated");
+			$(".skill select").trigger("chosen:updated");
 		}
+	}
+
+	function update_skill_panel(index){
+		populate_values();
+		var skill_div = $("#skill_damage_"+index);
+		var damage_table = skill_div.find(".damage_table").toggle(false);
+		var data_table = skill_div.find(".data_table");
+		data_table.empty();
+
+		var skill = _char.skills.active[index];
+		var rune = _char.skills.rune[index];
+
+		var skill_blob = _classes[_char.settings.class].skills.active[skill];
+		if(!skill_blob)
+			return;
+
+		var rune_blob = skill_blob.runes[rune] || {};
+
+		var skill_values = {
+			"cooldown":false,
+			"damage":false,
+			"duration": false,
+			"element": false
+		};
+
+		$.each(skill_values, function(key, value){
+			if (rune_blob[key] === false || rune_blob[key])
+				skill_values[key] = rune_blob[key];
+			else if (skill_blob[key])
+				skill_values[key] = skill_blob[key];
+		});
+
+		damage_table.toggle(skill_values.damage !== false);
+		if(skill_values.damage){
+			var elemental_damage = 1+_values[skill_values.element]/100;
+			var elite_damage 	 = 1+_values.elite_damage/100;
+			var skill_damage	 = skill_values.damage/100;
+
+			var skill_damage_values = calculate_skill_damage(skill_damage, elite_damage, elemental_damage, skill_values.duration);
+
+			$.each(skill_damage_values, function(key, value){
+				damage_table.find("."+key).html(format_number(value,0,true));
+			});
+		}
+
+		$.each(skill_values, function(key, value){
+			if(value > 0){
+				var skill_info = $("#templates .skill_info").clone(true,true);
+				data_table.append(skill_info);
+				skill_info.find(".label").html(get_template(key));
+				skill_info.find(".data").html(format_number(value,2,false));
+			}
+		});
+
+		return skill_values;
 	}
 </script>
 
@@ -706,6 +751,10 @@
 		<span class="label"></span>
 		<input type="checkbox" />
 	</div>
+	<div class="skill_info">
+		<span class="label"></span>
+		<span class="data"></span>
+	</div>
 </div>
 
 <table style="width:100%;">
@@ -728,9 +777,9 @@
 		<td class="data">
 			<div class="totals">
 				<table>
-					<thead><tr><td>
+					<thead><tr><th>
 						Offensive Stats
-					</td></tr></thead>
+					</th></tr></thead>
 					<tr id="strength">
 						<td>
 
@@ -790,9 +839,9 @@
 			</div>
 			<div class="damage">
 				<table>
-					<thead><tr><td>
+					<thead><tr><th>
 						Damage Stats
-					</td></tr></thead>
+					</th></tr></thead>
 					<tr id="sheet_dps">
 						<td>
 							<span class="label"></span><span class="value"></span>
@@ -820,9 +869,9 @@
 			</div>
 			<div id="active_skills">
 				<table>
-					<thead><tr><td>
+					<thead><tr><th>
 						Active Skills
-					</td></tr></thead>
+					</th></tr></thead>
 				</table>
 			</div>
 		</td>
@@ -1251,100 +1300,369 @@
 	</tr>
 	<tr  class="skills actives">
 		<td colspan="2">
-			<div>
-			<select id="active-0" class="skill active"></select>
-			<select id="rune-0" class="skill rune"></select>
-			</div>
-			<div>
-			<select id="active-1" class="skill active"></select>
-			<select id="rune-1" class="skill rune"></select>
-			</div>
-			<div>
-			<select id="active-2" class="skill active"></select>
-			<select id="rune-2" class="skill rune"></select>
-			</div>
-			<div>
-			<select id="active-3" class="skill active"></select>
-			<select id="rune-3" class="skill rune"></select>
-			</div>
-			<div>
-			<select id="active-4" class="skill active"></select>
-			<select id="rune-4" class="skill rune"></select>
-			</div>
-			<div>
-			<select id="active-5" class="skill active"></select>
-			<select id="rune-5" class="skill rune"></select>
-			</div>
-		</td>
-	</tr>
-	<tr style="display: none;">
-		<td colspan="2">
-			<div id="skill_damage">
-				<table>
-					<thead>
+			<div id="active_tabs">
+				<ol>
+					<li>
+						<a id="skill_tab_0" href="#skill_damage_0">
+							<div class="skill">(none)</div>
+							<div class="rune">(none)</div>
+						</a>
+					</li>
+					<li>
+						<a id="skill_tab_1" href="#skill_damage_1">
+							<div class="skill">(none)</div>
+							<div class="rune">(none)</div>
+						</a>
+					</li>
+					<li>
+						<a id="skill_tab_2" href="#skill_damage_2">
+							<div class="skill">(none)</div>
+							<div class="rune">(none)</div>
+						</a>
+					</li>
+					<li>
+						<a id="skill_tab_3" href="#skill_damage_3">
+							<div class="skill">(none)</div>
+							<div class="rune">(none)</div>
+						</a>
+					</li>
+					<li>
+						<a id="skill_tab_4" href="#skill_damage_4">
+							<div class="skill">(none)</div>
+							<div class="rune">(none)</div>
+						</a>
+					</li>
+					<li>
+						<a id="skill_tab_5" href="#skill_damage_5">
+							<div class="skill">(none)</div>
+							<div class="rune">(none)</div>
+						</a>
+					</li>
+				</ol>
+				<div id="skill_damage_0">
+					<table>
 						<tr>
-							<td>
-
+							<td style="width:200px; padding-right: 20px;">
+								<select id="active-0" class="skill active"></select><br/>
+								<select id="rune-0" class="skill rune"></select>
 							</td>
-							<td></td>
-							<td colspan="3">
-								<span class="label header">Damage</span>
-							</td>
-							<td colspan="3">
-								<span class="label header">Crit Damage</span>
+							<td rowspan="2"  class="data_table">
 							</td>
 						</tr>
-					</thead>
-					<tr>
-						<td>
-							<span class="label">Skill Damage</span>&nbsp;<input id="skill_percent" type="text" value="100" style="width:60px;"/>%
-							<select id="skill_element" class="chosen-select" style="width:80px;"></select>
-						</td>
-						<td></td>
-						<td>
-							<span id="min" class="min"></span></td><td>-</td><td><span id="max" class="max"></span>
-						</td>
-						<td>
-							<span id="c_min" class="min"></span></td><td>-</td><td><span id="c_max" class="max"></span>
-						</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td>
-							<span class="label">Elemental</span>
-						</td>
-						<td>
-							<span id="ele_min" class="min"></span></td><td>-</td><td><span id="ele_max" class="max"></span>
-						</td>
-						<td>
-							<span id="ele_c_min" class="min"></span></td><td>-</td><td><span id="ele_c_max" class="max"></span>
-						</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td>
-							<span class="label">Elite</span>
-						</td>
-						<td>
-							<span id="eli_min" class="min"></span></td><td>-</td><td><span id="eli_max" class="max"></span>
-						</td>
-						<td>
-							<span id="eli_c_min" class="min"></span></td><td>-</td><td><span id="eli_c_max" class="max"></span>
-						</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td>
-							<span class="label">Elemental Elite</span>
-						</td>
-						<td>
-							<span id="ele_eli_min" class="min"></span></td><td>-</td><td><span id="ele_eli_max" class="max"></span>
-						</td>
-						<td>
-							<span id="ele_eli_c_min" class="min"></span></td><td>-</td><td><span id="ele_eli_c_max" class="max"></span>
-						</td>
-					</tr>
-				</table>
+						<tr>
+							<td class="damage_table">
+								<table>
+									<tr>
+										<td>
+
+										</td>
+										<th colspan="3" class="header">
+											<span class="label header">Damage</span>
+										</th>
+										<th colspan="3" class="header">
+											<span class="label header">Crit Damage</span>
+										</th>
+									</tr>
+									<tr>
+										<td>
+											<span class="label"></span>
+										</td>
+										<td>
+											<span class="ele_min min"></span></td><td>-</td><td><span class="ele_max max"></span>
+										</td>
+										<td>
+											<span class="ele_c_min min"></span></td><td>-</td><td><span class="ele_c_max max"></span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<span class="label">Elite</span>
+										</td>
+										<td>
+											<span class="ele_eli_min min"></span></td><td>-</td><td><span class="ele_eli_max max"></span>
+										</td>
+										<td>
+											<span class="ele_eli_c_min min"></span></td><td>-</td><td><span class="ele_eli_c_max max"></span>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div id="skill_damage_1">
+					<table>
+						<tr>
+							<td style="width:200px; padding-right: 20px;">
+								<select id="active-1" class="skill active"></select><br/>
+								<select id="rune-1" class="skill rune"></select>
+							</td>
+							<td rowspan="2"  class="data_table">
+							</td>
+						</tr>
+						<tr>
+							<td class="damage_table">
+								<table>
+									<tr>
+										<td>
+
+										</td>
+										<th colspan="3" class="header">
+											<span class="label header">Damage</span>
+										</th>
+										<th colspan="3" class="header">
+											<span class="label header">Crit Damage</span>
+										</th>
+									</tr>
+									<tr>
+										<td>
+											<span class="label"></span>
+										</td>
+										<td>
+											<span class="ele_min min"></span></td><td>-</td><td><span class="ele_max max"></span>
+										</td>
+										<td>
+											<span class="ele_c_min min"></span></td><td>-</td><td><span class="ele_c_max max"></span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<span class="label">Elite</span>
+										</td>
+										<td>
+											<span class="ele_eli_min min"></span></td><td>-</td><td><span class="ele_eli_max max"></span>
+										</td>
+										<td>
+											<span class="ele_eli_c_min min"></span></td><td>-</td><td><span class="ele_eli_c_max max"></span>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div id="skill_damage_2">
+					<table>
+						<tr>
+							<td style="width:200px; padding-right: 20px;">
+								<select id="active-2" class="skill active"></select><br/>
+								<select id="rune-2" class="skill rune"></select>
+							</td>
+							<td rowspan="2"  class="data_table">
+							</td>
+						</tr>
+						<tr>
+							<td class="damage_table">
+								<table>
+									<tr>
+										<td>
+
+										</td>
+										<th colspan="3" class="header">
+											<span class="label header">Damage</span>
+										</th>
+										<th colspan="3" class="header">
+											<span class="label header">Crit Damage</span>
+										</th>
+									</tr>
+									<tr>
+										<td>
+											<span class="label"></span>
+										</td>
+										<td>
+											<span class="ele_min min"></span></td><td>-</td><td><span class="ele_max max"></span>
+										</td>
+										<td>
+											<span class="ele_c_min min"></span></td><td>-</td><td><span class="ele_c_max max"></span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<span class="label">Elite</span>
+										</td>
+										<td>
+											<span class="ele_eli_min min"></span></td><td>-</td><td><span class="ele_eli_max max"></span>
+										</td>
+										<td>
+											<span class="ele_eli_c_min min"></span></td><td>-</td><td><span class="ele_eli_c_max max"></span>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div id="skill_damage_3">
+					<table>
+						<tr>
+							<td style="width:200px; padding-right: 20px;">
+								<select id="active-3" class="skill active"></select><br/>
+								<select id="rune-3" class="skill rune"></select>
+							</td>
+							<td rowspan="2"  class="data_table">
+							</td>
+						</tr>
+						<tr>
+							<td class="damage_table">
+								<table>
+									<tr>
+										<td>
+
+										</td>
+										<th colspan="3" class="header">
+											<span class="label header">Damage</span>
+										</th>
+										<th colspan="3" class="header">
+											<span class="label header">Crit Damage</span>
+										</th>
+									</tr>
+									<tr>
+										<td>
+											<span class="label"></span>
+										</td>
+										<td>
+											<span class="ele_min min"></span></td><td>-</td><td><span class="ele_max max"></span>
+										</td>
+										<td>
+											<span class="ele_c_min min"></span></td><td>-</td><td><span class="ele_c_max max"></span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<span class="label">Elite</span>
+										</td>
+										<td>
+											<span class="ele_eli_min min"></span></td><td>-</td><td><span class="ele_eli_max max"></span>
+										</td>
+										<td>
+											<span class="ele_eli_c_min min"></span></td><td>-</td><td><span class="ele_eli_c_max max"></span>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div id="skill_damage_4">
+					<table>
+						<tr>
+							<td style="width:200px; padding-right: 20px;">
+								<select id="active-4" class="skill active"></select><br/>
+								<select id="rune-4" class="skill rune"></select>
+							</td>
+							<td rowspan="2"  class="data_table">
+							</td>
+						</tr>
+						<tr>
+							<td class="damage_table">
+								<table>
+									<tr>
+										<td>
+
+										</td>
+										<th colspan="3" class="header">
+											<span class="label header">Damage</span>
+										</th>
+										<th colspan="3" class="header">
+											<span class="label header">Crit Damage</span>
+										</th>
+									</tr>
+									<tr>
+										<td>
+											<span class="label"></span>
+										</td>
+										<td>
+											<span class="ele_min min"></span></td><td>-</td><td><span class="ele_max max"></span>
+										</td>
+										<td>
+											<span class="ele_c_min min"></span></td><td>-</td><td><span class="ele_c_max max"></span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<span class="label">Elite</span>
+										</td>
+										<td>
+											<span class="ele_eli_min min"></span></td><td>-</td><td><span class="ele_eli_max max"></span>
+										</td>
+										<td>
+											<span class="ele_eli_c_min min"></span></td><td>-</td><td><span class="ele_eli_c_max max"></span>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div id="skill_damage_5">
+					<table>
+						<tr>
+							<td style="width:200px; padding-right: 20px;">
+								<select id="active-5" class="skill active"></select><br/>
+								<select id="rune-5" class="skill rune"></select>
+							</td>
+							<td rowspan="2"  class="data_table">
+							</td>
+						</tr>
+						<tr>
+							<td class="damage_table">
+								<table>
+									<tr>
+										<td>
+
+										</td>
+										<th colspan="3" class="header">
+											<span class="label header">Damage</span>
+										</th>
+										<th colspan="3" class="header">
+											<span class="label header">Crit Damage</span>
+										</th>
+										<th colspan="3" class="header">
+											<span class="label header">Mean Damage</span>
+										</th>
+										<th class="header">
+											<span class="label header">DPS</span>
+										</th>
+									</tr>
+									<tr>
+										<td>
+											<span class="label"></span>
+										</td>
+										<td>
+											<span class="ele_min min"></span></td><td>-</td><td><span class="ele_max max"></span>
+										</td>
+										<td>
+											<span class="ele_c_min min"></span></td><td>-</td><td><span class="ele_c_max max"></span>
+										</td>
+										<td>
+											<span class="ele_m_min min"></span></td><td>-</td><td><span class="ele_m_max max"></span>
+										</td>
+										<td>
+											<span class="ele_dps max"></span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<span class="label">Elite</span>
+										</td>
+										<td>
+											<span class="ele_eli_min min"></span></td><td>-</td><td><span class="ele_eli_max max"></span>
+										</td>
+										<td>
+											<span class="ele_eli_c_min min"></span></td><td>-</td><td><span class="ele_eli_c_max max"></span>
+										</td>
+										<td>
+											<span class="ele_eli_m_min min"></span></td><td>-</td><td><span class="ele_eli_m_max max"></span>
+										</td>
+										<td>
+											<span class="ele_eli_dps max"></span>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</div>
 			</div>
 		</td>
 	</tr>

@@ -56,46 +56,46 @@ function percent_to_color(percent){
     return "#"+R+G+B;
 }
 
-function calculate_base_damage(values, defaults, damage){
-    if (defaults && values){
+function calculate_base_damage(values, damage){
+    if (values){
         if (!damage)
-            damage = ((values.max_damage || defaults.max_damage)+(values.min_damage || defaults.min_damage))/2;
+            damage = (values.max_damage+values.min_damage)/2;
 
-        ms = values.main_stat || defaults.main_stat;
+        ms = values.main_stat;
 
         return damage*(1+ms/100);
     }
 }
-function calculate_crit_damage(values, defaults, base_damage){
-    if (defaults && values){
+function calculate_crit_damage(values, base_damage){
+    if (values){
         if (!base_damage)
-            base_damage = calculate_base_damage(values,defaults);
+            base_damage = calculate_base_damage(values);
 
-        chd = 1+((values.critical_hit_damage || defaults.critical_hit_chance)/100);
+        chd = 1+(values.critical_hit_damage/100);
 
         return base_damage*chd
     }
 }
-function calculate_mean_damage(values, defaults, crit_damage){
-    if (defaults && values){
-        if (!crit_damage)
-            base_damage = calculate_base_damage(values,defaults);
+function calculate_mean_damage(values, base_damage){
+    if (values){
+        if (!base_damage)
+            base_damage = calculate_base_damage(values);
 
-        chd = values.critical_hit_damage || defaults.critical_hit_damage;
-        chc = values.critical_hit_chance || defaults.critical_hit_chance;
+        chd = values.critical_hit_damage;
+        chc = values.critical_hit_chance;
 
         return base_damage*(1+chc/100*chd/100);
     }
 }
-function calculate_dps(values, defaults, mean_damage){
-    if (defaults && values){
+function calculate_dps(values, mean_damage, aps){
+    if (values){
         if (!mean_damage)
-            mean_damage = calculate_mean_damage(values,defaults);
+            mean_damage = calculate_mean_damage(values);
 
-        as = values.attack_speed || defaults.attack_speed;
-        aps = values.attacks_per_second || defaults.attacks_per_second;
+		if(!aps)
+			aps =(1+ values.attack_speed/100)*(values.attacks_per_second);
 
-        return mean_damage*(1+as/100)*(aps);
+        return mean_damage*aps;
     }
 }
 

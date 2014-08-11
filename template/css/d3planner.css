@@ -62,18 +62,18 @@ td {padding: 0;}
 .damage table { width:100%; }
 .label { text-align: left; }
 .value { text-align: right; float: right; }
-table thead td { font-weight: bold; padding: 10px 0 0 0;}
+table th { font-weight: bold; padding: 10px 0 0 0;}
 .legendary_affix, .set_affix {padding: 5px 0 0 0;}
 .set {border-color:#71e12d;}
 .legendary {border-color:#BF642F;}
 
 
 /* skill damage */
-#skill_damage thead td { text-align: center; }
-#skill_damage td { padding: 3px 10px 0 0; text-align: right;}
-#skill_damage .min, #skill_damage .max { }
-#skill_damage .min { font-size: 14px; }
-#skill_damage .max { font-weight: 600; }
+.damage_table thead td { text-align: center; }
+.damage_table td { padding: 3px 10px 0 0; text-align: right;}
+.damage_table .min, #skill_damage .max { }
+.damage_table .min { font-size: 14px; }
+.damage_table .max { font-weight: 600; }
 
 /* import */
 .import { width: 100%; height: 25px; display: none; }
@@ -83,5 +83,11 @@ table thead td { font-weight: bold; padding: 10px 0 0 0;}
 .skills tr { width: 100%; }
 .skills select{ width: 100%; }
 .skills.passives>td>div {width: 24%; display: inline-block;}
-.skills.actives>td>div {width: 16%; display: inline-block;}
-.skills.actives>td>div.selected {border-width: 2px 2px 0 2px; border-style: solid;}
+.actives .edit {display: none;}
+.skills .save_button {float: left;}
+.skills .cancel_button {float: right;}
+#active_tabs>ol>li { width: 16.2%; }
+#active_tabs a { outline: 0; width:100%; }
+.data_table { vertical-align: top;}
+.data_table .label { float:left;}
+.data_table span.data { width: auto; padding-left: 20px; text-align: right; float: right;}

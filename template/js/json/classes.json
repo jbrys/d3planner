@@ -2,6 +2,10 @@
 	"barbarian":{
 		"main_stat": "strength",
 		"class_specific_slots":{
+		},
+		"skills":{
+			"active":{},
+			"passive":{}
 		}
 	},
 	"crusader":{
@@ -76,23 +80,43 @@
 	"demon_hunter":{
 		"main_stat": "dexterity",
 		"class_specific_slots":{
+		},
+		"skills":{
+			"active":{},
+			"passive":{}
+		},
+		"skills":{
+			"active":{},
+			"passive":{}
 		}
 	},
 	"monk":{
 		"main_stat": "dexterity",
 		"class_specific_slots":{
+		},
+		"skills":{
+			"active":{},
+			"passive":{}
 		}
 	},
 	"witch_doctor":{
 		"main_stat": "intelligence",
 		"class_specific_slots":{
 			"offhand":["mojo"]
+		},
+		"skills":{
+			"active":{},
+			"passive":{}
 		}
 	},
 	"wizard":{
 		"main_stat": "intelligence",
 		"class_specific_slots":{
 			"offhand":["source"]
+		},
+		"skills":{
+			"active":{},
+			"passive":{}
 		}
 	}
 }
