@@ -1,55 +1,67 @@
-﻿{
-   "reapers_wraps_leg":{
+﻿{  
+   "reapers_wraps_leg":{  
       "template":"Health globes restore {0}% of your primary resource.",
       "display":"Health globes restore your primary resource."
    },
-   "fate_of_the_fell_leg":{
+   "fate_of_the_fell_leg":{  
       "display":"Gain two additional rays of Heaven’s Fury."
    },
-   "holy_damage":{
+   "holy_damage":{  
       "template":"Holy skills deal {0}% more damage",
       "display":"Holy skills deal more damage",
-      "dropdown": "Holy"
+      "dropdown":"Holy"
    },
-   "lightning_damage":{
+   "lightning_damage":{  
       "template":"Lightning skills deal {0}% more damage.",
       "display":"Lightning skills deal more damage.",
-      "dropdown": "Lightning"
+      "dropdown":"Lightning"
    },
-   "cold_damage":{
+   "cold_damage":{  
       "template":"Cold skills deal {0}% more damage.",
       "display":"Cold skills deal more damage.",
-      "dropdown": "Cold"
+      "dropdown":"Cold"
    },
-   "fire_damage":{
+   "fire_damage":{  
       "template":"Fire skills deal {0}% more damage.",
       "display":"Fire skills deal more damage.",
-      "dropdown": "Fire"
+      "dropdown":"Fire"
    },
-   "arcane_damage":{
+   "poison_damage":{  
+      "template":"Poison skills deal {0}% more damage.",
+      "display":"Poison skills deal more damage.",
+      "dropdown":"Poison"
+   },
+   "fire_damage_taken":{  
+      "template":"{0}% more Fire damage taken.",
+      "display":"more Fire damage taken."
+   },
+   "arcane_damage":{  
       "template":"Arcane skills deal {0}% more damage.",
       "display":"Arcane skills deal more damage.",
-      "dropdown": "Arcane"
+      "dropdown":"Arcane"
    },
-   "physical_damage":{
+   "physical_damage":{  
       "template":"Physical skills deal {0}% more damage.",
-      "display":"Physical skills deal more damage.",
-      "dropdown": "Physical"
+      "display":"Physical skills deal more damage."
    },
-   "ring_of_royal_grandeur_leg":{
+   "block_chance":{  
+      "template":"+{0}% Chance to Block",
+      "display":"Chance to Block"
+   },
+   "ring_of_royal_grandeur_leg":{  
       "display":"Reduces the number of items needed for set bonuses by 1 (to a minimum of 2)."
    },
-   "shi_mizus_haori_leg":{
+   "shi_mizus_haori_leg":{  
       "template":"While below {0}% life, all attacks are guaranteed Critical Hits.",
-      "display": "While below life, all attacks are guaranteed Critical Hits."
+      "display":"While below life, all attacks are guaranteed Critical Hits."
    },
-   "goldskin_leg":{
+   "goldskin_leg":{  
       "display":"Chance for enemies to drop gold when you hit them."
    },
-   "the_cloak_of_the_garwulf_leg":{
+   "the_cloak_of_the_garwulf_leg":{  
       "display":"Companion - Wolf Companion now summons 3 wolves."
    },
-   "chaingmail_leg":{
+   "chaingmail_leg":{  
       "display":"After earning a survivial bonus, quickly heal to full Life."
    },
    "cloak_of_deception_leg":{

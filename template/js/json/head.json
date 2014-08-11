@@ -1,24 +1,652 @@
 {
-    "items": {
-        "Andariel's Visage": {
-            "primary": {
-                "elemental_damage": {
-                    "min": 15,
-                    "max": 20
-                },
-                "attack_speed": {
-                    "min": 5,
-                    "max": 7
-                }
-            },
-            "secondary": {},
-            "legendary": {}
-        },
-        "Helm of Akkhan": {
-            "primary": {},
-            "secondary": {},
-            "legendary": {},
-            "set":"akkhan"
-        }
-    }
+"items":{
+	   "Eyes of the Earth":{
+	      "set":"might",
+	      "primary":{
+
+	      },
+	      "legendary":{
+
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Dark Mage's Shade":{
+	      "primary":{
+
+	      },
+	      "legendary":{
+	         "dark_mages_shade_leg":{
+	            "max":20,
+	            "min":15
+	         }
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Tal Rasha's Guise of Wisdom":{
+	      "set":"tal_rasha",
+	      "primary":{
+
+	      },
+	      "legendary":{
+
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Sage's Orbit":{
+	      "set":"sage_p",
+	      "primary":{
+
+	      },
+	      "legendary":{
+	         
+	      },
+	      "secondary":{
+	      	"reduced_control_impairing":{
+	            "max":20,
+	            "min":10
+	         }
+	      }
+	   },
+	   "The Eye Of The Storm":{
+	      "primary":{
+	      	"lightning_damage":{
+	            "max":30,
+	            "min":15
+	        }
+
+	      },
+	      "legendary":{
+	         
+	         
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Mempo of Twilight":{
+	      "primary":{
+	      	"attack_speed":{
+	            "max":7,
+	            "min":5
+	         }
+
+	      },
+	      "legendary":{
+	         
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Sunwuko's Crown":{
+	      "set":"monkey_king",
+	      "primary":{
+
+	      },
+	      "legendary":{
+
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Mask of the Searing Sky":{
+	      "set":"thousand_storms",
+	      "primary":{
+
+	      },
+	      "legendary":{
+
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Velvet Camaral":{
+	      "primary":{
+
+	      },
+	      "legendary":{
+	         "velvet_camaral_leg":false
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Eye of Peshkov":{
+	      "primary":{
+
+	      },
+	      "legendary":{
+	         "eye_of_peshkov_leg":{
+	            "max":50,
+	            "min":38
+	         }
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "The Mind's Eye":{
+	      "primary":{
+
+	      },
+	      "legendary":{
+	         "the_minds_eye_leg":{
+	            "max":15,
+	            "min":10
+	         }
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Sage's Apogee":{
+	      "set":"sage_j",
+	      "primary":{
+
+	      },
+	      "legendary":{
+
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Cain's Memory":{
+	      "set":"cain_f",
+	      "primary":{
+
+	      },
+	      "legendary":{
+
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Crown of the Invoker":{
+	      "set":"invoker",
+	      "primary":{
+
+	      },
+	      "legendary":{
+
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Jade Harvester's Wisdom":{
+	      "set":"jade_harvester",
+	      "primary":{
+
+	      },
+	      "legendary":{
+
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Quetzalcoatl":{
+	      "primary":{
+
+	      },
+	      "legendary":{
+	         "quetzalcoatl_leg":false
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Tiklandian Visage":{
+	      "primary":{
+
+	      },
+	      "legendary":{
+	         "tiklandian_visage_leg":{
+	            "max":8,
+	            "min":6
+	         }
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Guardian's Gaze":{
+	      "set":"guardian_j",
+	      "primary":{
+	      	"movement_speed":{
+	            "max":12,
+	            "min":10
+	         }
+
+	      },
+	      "legendary":{
+	         
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Andariel's Visage":{
+	      "primary":{
+	      	"fire_damage_taken":{
+	      		"max": 5,
+	      		"min": 10
+	      	},
+	      	"cold_damage":{
+	      		"max": 20,
+	      		"min": 15
+	      	},
+	      	"lightning_damage":{
+	      		"max": 20,
+	      		"min": 15
+	      	},
+	      	"holy_damage":{
+	      		"max": 20,
+	      		"min": 15
+	      	},
+	      	"poison_damage":{
+	      		"max": 20,
+	      		"min": 15
+	      	},
+	      	"physical_damage":{
+	      		"max": 20,
+	      		"min": 15
+	      	},
+	      	"fire_damage":{
+	      		"max": 20,
+	      		"min": 15
+	      	},
+	      	"arcane_damage":{
+	      		"max": 20,
+	      		"min": 15
+	      	}
+
+	      },
+	      "legendary":{
+	         "andariels_visage_leg":{
+	            "max":130,
+	            "min":100
+	         }
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Cain's Insight":{
+	      "set":"cain_d",
+	      "primary":{
+
+	      },
+	      "legendary":{
+
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "The Grin Reaper":{
+	      "primary":{
+
+	      },
+	      "legendary":{
+	         "the_grin_reaper_leg":false
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Deathseer's Cowl":{
+	      "primary":{
+
+	      },
+	      "legendary":{
+	         "deathseers_cowl_leg":{
+	            "max":20,
+	            "min":15
+	         }
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Kekegi's Unbreakable Spirit":{
+	      "primary":{
+
+	      },
+	      "legendary":{
+	         "kekegis_unbreakable_spirit_leg":{
+	            "max":4,
+	            "min":2
+	         }
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Guardian's Foresight":{
+	      "set":"guardian_c",
+	      "primary":{
+
+	      },
+	      "legendary":{
+
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Skull of Resonance":{
+	      "primary":{
+
+	      },
+	      "legendary":{
+	         "skull_of_resonance_leg":false
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Carnevil":{
+	      "primary":{
+
+	      },
+	      "legendary":{
+	         "carnevil_leg":false
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Aughild's Spike":{
+	      "set":"aughild_a",
+	      "primary":{
+
+	      },
+	      "legendary":{
+
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Firebird's Plume":{
+	      "set":"firebird",
+	      "primary":{
+
+	      },
+	      "legendary":{
+
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Natalya's Sight":{
+	      "set":"natalya",
+	      "primary":{
+
+	      },
+	      "legendary":{
+
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Immortal King's Triumph":{
+	      "set":"immortal_king",
+	      "primary":{
+
+	      },
+	      "legendary":{
+
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "The Laws of Seph":{
+	      "primary":{
+
+	      },
+	      "legendary":{
+	         "the_laws_of_seph_leg":{
+	            "max":100,
+	            "min":75
+	         }
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Marauder's Visage":{
+	      "set":"marauder",
+	      "primary":{
+
+	      },
+	      "legendary":{
+
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Mask of Jeram":{
+	      "primary":{
+
+	      },
+	      "legendary":{
+	         "mask_of_jeram_leg":false
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Inna's Radiance":{
+	      "set":"inna",
+	      "primary":{
+
+	      },
+	      "legendary":{
+
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Aughild's Peak":{
+	      "set":"aughild_v",
+	      "primary":{
+	      	"magic_find":{
+	            "max":12,
+	            "min":11
+	         }
+	      },
+	      "legendary":{
+	         
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Gyana Na Kashu":{
+	      "primary":{
+
+	      },
+	      "legendary":{
+	         "gyana_na_kashu_leg":{
+	            "max":400,
+	            "min":300
+	         }
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Visage of Giyua":{
+	      "primary":{
+
+	      },
+	      "legendary":{
+	         "visage_of_giyua_leg": false
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Pride's Fall":{
+	      "primary":{
+
+	      },
+	      "legendary":{
+	         "prides_fall_leg": false
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Blind Faith":{
+	      "primary":{
+	      	"blind_chance":{
+	            "max":40,
+	            "min":20
+	         }
+
+	      },
+	      "legendary":{
+	         
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Archmage's Vicalyke":{
+	      "primary":{
+
+	      },
+	      "legendary":{
+	         "archmages_vicalyke_leg":false
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Broken Crown":{
+	      "primary":{
+	      	"attack_speed":{
+	            "max":7,
+	            "min":2
+	         }
+
+	      },
+	      "legendary":{
+	         
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "The Helm of Rule":{
+	      "primary":{
+	      	"block_chance": {
+	      		"max":11,
+	      		"min":11
+	      	}
+	      },
+	      "legendary":{
+	        
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "The Magistrate":{
+	      "primary":{
+
+	      },
+	      "legendary":{
+	         "the_magistrate_leg":false
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "The Helm of Command":{
+	      "primary":{
+	      	"block_chance":{
+	      		"min": 8,
+	      		"max": 8
+	      	}
+
+	      },
+	      "legendary":{
+	         
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Helm of Akkhan":{
+	      "set":"akkhan",
+	      "primary":{
+
+	      },
+	      "legendary":{
+
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Storm Crow":{
+	      "primary":{
+	      	"lightning_damage":{
+	      		"max":20,
+	      		"min": 15
+	      	}
+	      },
+	      "legendary":{
+	         "storm_crow_leg":{
+	            "max":40,
+	            "min":20
+	         }
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Tzo Krin's Gaze":{
+	      "primary":{
+
+	      },
+	      "legendary":{
+	         "tzo_krins_gaze_leg":false
+	      },
+	      "secondary":{
+
+	      }
+	   },
+	   "Raekor's Will":{
+	      "set":"raekor",
+	      "primary":{
+
+	      },
+	      "legendary":{
+
+	      },
+	      "secondary":{
+
+	      }
+	   }
+	}
 }
