@@ -1,0 +1,7 @@
+{
+	"base":"twohand",
+	"attacks_per_second":115,
+	"type":"weapon",
+    "items": {
+    }
+}

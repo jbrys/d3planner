@@ -1,6 +1,6 @@
 {
 	"base":"onehand",
-	"attacks_per_second":140,
+	"attacks_per_second":130,
 	"type":"weapon",
     "items": {}
 }

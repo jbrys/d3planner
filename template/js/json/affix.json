@@ -573,12 +573,6 @@
          "socket":{
             "min":1,
             "max":1
-         },
-         "attacks_per_second":{
-            "min":100,
-            "max":160,
-            "step":1,
-            "scale":2
          }
       },
       "onehand":{
@@ -612,12 +606,6 @@
          "socket":{
             "min":1,
             "max":1
-         },
-         "attacks_per_second":{
-            "min":100,
-            "max":160,
-            "step":1,
-            "scale":2
          }
       },
       "legs":{

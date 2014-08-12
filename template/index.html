@@ -56,12 +56,16 @@
 			});
 			var sets = {};
 			var rorg_bonus = false;
+			var weapon_found = false;
+			var dual_weild = false;
 
 			$(".legendary_affixes .affixes").empty();
 			$(".set_bonuses .affixes").empty();
 
 			$.each(_char, function(slot, item){
 				var slot_div = $("#"+slot);
+				var subname_div = slot_div.find(".subname");
+				subname_div.empty();
 				if(item.name){
 					var item_blob = _slots[slot].items[item.name];
 
@@ -70,6 +74,16 @@
 						return;
 					}
 					slot_div.find(".name").html(item.name || "");
+					if(item_blob.type === "weapon" && item_blob.attacks_per_second){
+						subname_div.html(get_template("attacks_per_second",item_blob.attacks_per_second));
+						if(weapon_found){
+							dual_weild = true;
+						}
+						else{
+							weapon_found = true;
+							totals["attacks_per_second"] = item_blob.attacks_per_second;
+						}
+					}
 
 					slot_div.addClass("legendary");
 					if(item_blob.set){
@@ -430,7 +444,7 @@
 
         $(".slot .edit_button").click(slot_edit);
         $(".slot .cancel_button").click(slot_cancel);
-        $(".slot save_button").click(slot_save);
+        $(".slot .save_button").click(slot_save);
         $("#import_begin").click(import_begin);
         $("#import_end").click(import_end);
         $(".rune").change(rune_change);
@@ -822,8 +836,12 @@
 	</div>
 	<div class="view">
 		<div>
-			<div class="name">${id}</div>
 			<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span>
+			<div>
+				<div class="name">${id}</div>
+				<div style="clear: both;"></div>
+				<div class="subname"></div>
+			</div>
 		</div>
 		<div style="clear: both;"></div>
 		<div class="affixes"></div>

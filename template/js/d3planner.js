@@ -167,6 +167,8 @@ function load_slot(cat, item_ddl, group){
         $.each(data.items, function(key, item) {
             item.cat = cat;
             item.base = data.base || cat;
+            item.type = data.type;
+            item.attacks_per_second = data.attacks_per_second;
             parent_item.append($("<option></option>").html(key));
         });
 

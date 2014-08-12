@@ -43,6 +43,7 @@ td {padding: 0;}
 .slot .buttons {display:inline-block;}
 .slot .buttons, .item, .affix select {max-width: 300px; min-width: 200px;}
 .view .name{font-weight: bold; display: inline-block;}
+.view .subname {display: inline-block;}
 
 /* affixes */
 .affix .value{float: right;}
