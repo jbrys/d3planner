@@ -166,7 +166,37 @@
    "spaulders_of_zakara_leg":{
       "display":"Your items become indestructible."
    },
-
+   "sanguinary_vambraces_leg":{
+      "display":"Chance on being hit to deal 1000% of your Thorns damage to nearby enemies."
+   },
+   "nemesis_braces_leg":{
+      "display":"Shrines will spawn an enemy champion."
+   },
+   "custerian_wristguards_leg":{
+      "display":"Picking up gold grants experience."
+   },
+   "krelms_buff_bracers_leg":{
+      "display":"Grant you immunity to Knockback and Stun effects"
+   },
+   "warzechian_armguards_leg":{
+      "display":"Every time you destroy a wreckable object, you gain a short burst of speed."
+   },
+   "ancient_parthan_defenders_leg":{
+      "template":"Enemies hit by knockbacks suffer {0}% more damage for 5 seconds when they land.",
+      "display":"Enemies hit by knockbacks suffer more damage for 5 seconds when they land."
+   },
+   "strongarm_bracers_leg":{
+      "template":"Each stunned enemy within 25 yards reduces your damage taken by {0}%.",
+      "display":"Each stunned enemy within 25 yards reduces your damage taken."
+   },
+   "promise_of_glory_leg":{
+      "template":"{0}% chance to spawn a Nephalem Glory Globe when you Blind an enemy.",
+      "display":"chance to spawn a Nephalem Glory Globe when you Blind an enemy."
+   },
+   "tragoul_coils_leg":{
+      "template":"Healing wells replenish all resources and reduce cooldowns by {0} seconds.",
+      "display":"Healing wells replenish all resources and reduce cooldowns."
+   },
    "main_stat":{
       "display":"Main Stat"
    },
