@@ -204,16 +204,19 @@
     }
 
 	function calculate_totals(){
-		$(".elemental_damage").hide();
-		$("#"+_values.element).show();
         $(".totals tr").each(function(i,tr){
             tr = $(tr);
             var affix = tr.attr("id");
             if(affix){
 				var value = _char.totals[affix] || 0;
 				var scale = _translate[affix].scale || 0;
-
-				tr.children().html(get_template(affix, value));
+				if (value > 0){
+					tr.children().html(get_template(affix, value));
+					tr.show();
+				}
+				else{
+					tr.hide();
+				}
             }
         });
 	}
@@ -389,7 +392,13 @@
     $(document).ready(function(){
         $.cookie.json = true;
         _debug = $.cookie('d3planner_debug');
-        $("#debug").click(function(){_debug=!_debug;$.cookie('d3planner_debug',_debug);});
+        $("#debug").click(function(){
+        	debug("debug: "+(!_debug ? "enabled" : "disabled"));
+        	_debug=!_debug;
+        	debug("debug: "+(_debug ? "enabled" : "disabled"));
+        	$.cookie('d3planner_debug',_debug);
+        	return false;
+        });
         $.ajaxSetup({
             async: false
         });
@@ -428,6 +437,9 @@
         $(".passive").change(passive_change);
         $(".active").change(active_change);
         $("#fetch").click(fetch);
+        $("#shrink").click(shrink_slots);
+        $("#expand").click(expand_slots);
+        $(".slot").click(expand_slot);
         $(".active_skill input").click(activated_change);
 		$.each(_groups.byGroup["elemental_damage"], function(i, element){
 			$("#skill_element").append("<option value='{0}'>{1}</option>".format(element,_translate[element].dropdown));
@@ -442,6 +454,7 @@
 		$("#class_list").change(class_change);
 		$("#class_list").chosen({disable_search:true});
 		$("#active_tabs").tabs();
+
 		load_from_cookie(_char);
 		update_char();
     });
@@ -482,16 +495,19 @@
     }
     function calculate_damage(){
         if (_char && _char.totals){
-			//var eled = 1+(_values.element_damage || _defaults.element_damage)/100);
+			var eled = 0;
 			var elid = 1+(_values.elite_damage/100);
-
+			$.each(_groups.byGroup["elemental_damage"], function(i, element){
+				if (eled < _values[element])
+					eled = _values[element];
+			});
+			eled = 1+(eled/100);
             var sheet_dps = calculate_dps(_values);
-            //var sheet_dps = ((max+min)/2)*(1+ms/100)*(1+as/100)*(aps)*(1+chc/100*chd/100);
 
             $("#sheet_dps .value").html(format_number(sheet_dps,0,true));
-            //$("#elemental_dps .value").html(format_number(sheet_dps*eled,0,true));
+            $("#elemental_dps .value").html(format_number(sheet_dps*eled,0,true));
             $("#elite_dps .value").html(format_number(sheet_dps*elid,0,true));
-            //$("#elemental_elite_dps .value").html(format_number(sheet_dps*eled*elid,0,true));
+            $("#elemental_elite_dps .value").html(format_number(sheet_dps*eled*elid,0,true));
 
             $("#sheet_dps .label").html(get_template("sheet_dps"));
             $("#elemental_dps .label").html(get_template("elemental_dps"));
@@ -553,7 +569,7 @@
 					.text(get_template(rune));
 		}
 		else{
-			$("#active_skills ."+rune).remove();
+			$(".active_skill[index="+index+"]").remove();
 		}
 	}
 
@@ -573,20 +589,27 @@
 		var previous_rune = _char.skills.rune[index];
 		_char.skills.rune[index] = rune;
 
-		activator_change(previous_rune, index, false);
+		activator_change(previous_rune || skill, index, false);
 		$("#skill_tab_"+index+" .rune").html("&nbsp;");
+
+
+		var skill_blob = _classes[_char.settings.class].skills.active[skill];
+		var active_blob;
+		if(skill_blob){
+			 if (skill_blob.runes[rune] && skill_blob.runes[rune].active)
+				active_blob = skill_blob.runes[rune].active;
+			 else
+				active_blob = skill_blob.active;
+		}
 
 		if(rune){
 			$("#skill_tab_"+index+" .rune").html(get_template(rune));
-			var skill_blob = _classes[_char.settings.class].skills.active[skill];
-			var active_blob = _classes[_char.settings.class].skills.active[skill].active
-						|| _classes[_char.settings.class].skills.active[skill].runes[rune].active;
-			if (active_blob)
-				activator_change(rune, index, true);
 		}
 		else{
 			_char.skills.rune[index] = null;
 		}
+		if (active_blob)
+			activator_change(rune || skill, index, true);
 		save_to_cookie(_char);
 		update_char();
 		update_skill_panel(index);
@@ -730,6 +753,26 @@
 
 		return skill_values;
 	}
+
+	function shrink_slots(){
+		$(".slot").each(function(i, slot_div){
+			slot_div = $(slot_div);
+			//.attr("id");
+			slot_div.find(".edit").hide();
+			slot_div.find(".view").show();
+			slot_div.find(".affixes").hide();
+		});
+		$(".set_bonuses").hide();
+		$(".legendary_affixes").hide();
+	}
+	function expand_slot(){
+		$(this).find(".affixes").show();
+	}
+	function expand_slots(){
+		$(".slot .affixes").show();
+		$(".set_bonuses").show();
+		$(".legendary_affixes").show();
+	}
 </script>
 
 <div id="templates" style="display:none;">
@@ -754,7 +797,7 @@
 	</div>
 	<div class="active_skill">
 		<span class="label"></span>
-		<input type="checkbox" />
+		<input type="checkbox" checked="checked"/>
 	</div>
 	<div class="skill_info">
 		<span class="label"></span>
@@ -764,8 +807,6 @@
 
 <%def name="create_slot(id, pieces)">
 <div class="slot" id="${id}">
-	${id}
-	<br>
 	<div class="edit">
 		<select class="item ${' '.join(pieces)} chosen-select"></select>
 		<div class="affix">
@@ -780,8 +821,9 @@
 	</div>
 	<div class="view">
 		<div>
-			<div class="name"></div>
-			<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
+			<div class="name">${id}</div>
+			<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span>
+		</div>
 		<div style="clear: both;"></div>
 		<div class="affixes"></div>
 	</div>
@@ -846,23 +888,25 @@
 			</div>
 		</td>
 		<td>
+			<div><a id="shrink" href="#">shrink</a><a id="expand" href="#">expand</a></div>
 			<div class="center_contents">
 				<%
-					slots = [{"shoulders":["shoulders"],"head":["head"],"neck":["neck"]},
-							 {"hands":["hands"],"chest":["chest"],"wrists":["wrists"]},
-							 {"lfinger":["finger"],"waist":["waist"],"rfinger":["finger"]},
-							 {"mainhand":["onehand","twohand"],"legs":["legs"],"offhand":["shield"]}]
+					slots = [
+							 [("shoulders",["shoulders"]),("head",["head"]),("neck",["neck"])],
+							 [("hands",["hands"]),("chest",["chest"]),("wrists",["wrists"])],
+							 [("lfinger",["finger"]),("waist",["waist"]),("rfinger",["finger"])],
+							 [("mainhand",["onehand","twohand"]),("legs",["legs"]),("offhand",["shield"])]
+							]
 				%>
 				<div class="paperdoll">
 					% for row in slots:
 					<div class="equipment_row">
-						% for slot in row:
-						${create_slot(slot, row[slot])}
+						% for slot,pieces in row:
+						${create_slot(slot, pieces)}
 						%endfor
 					</div>
 					<div style="clear: both;"></div>
 					%endfor
-					<div style="clear: both;"></div>
 					<div class="equipment_row">
 						<div class="set_bonuses set"></div>
 						${create_slot("feet", ["feet"])}
