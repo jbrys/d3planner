@@ -58,7 +58,7 @@ td {padding: 0;}
 }
 
 /* set and legendary boxes */
-.set .name {font-weight: bold;}
+.legendary_affixes .header, .set_bonuses .header, .set .name {font-weight: bold;}
 .damage table { width:100%; }
 .label { text-align: left; }
 .value { text-align: right; float: right; }

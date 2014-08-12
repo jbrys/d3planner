@@ -57,8 +57,8 @@
 			var sets = {};
 			var rorg_bonus = false;
 
-			$(".legendary_affixes").empty();
-			$(".set_bonuses").empty();
+			$(".legendary_affixes .affixes").empty();
+			$(".set_bonuses .affixes").empty();
 
 			$.each(_char, function(slot, item){
 				var slot_div = $("#"+slot);
@@ -119,7 +119,7 @@
 						if(index == "ring_of_royal_grandeur_leg")
 							rorg_bonus = true;
 						var legendary_div = $("#templates .legendary_affix").clone(true);
-						$(".legendary_affixes").append(legendary_div);
+						$(".legendary_affixes .affixes").append(legendary_div);
 						legendary_div.html(get_template(index));
 					});
 				}
@@ -131,7 +131,7 @@
 					count++;
 				var append = false;
 				var set_div = $("#templates .set").clone(true);
-				$(".set_bonuses").append(set_div);
+				$(".set_bonuses .affixes").append(set_div);
 				for(var i = 2; i <= count; i++){
 					set_div.find(".name").text(get_template(set_name));
 					var set_bonus = _sets[set_name][i];
@@ -762,16 +762,17 @@
 			slot_div.find(".view").show();
 			slot_div.find(".affixes").hide();
 		});
-		$(".set_bonuses").hide();
-		$(".legendary_affixes").hide();
+		$(".set_bonuses .header").show().siblings().hide();
+		$(".legendary_affixes .header").show().siblings().hide();
 	}
 	function expand_slot(){
 		$(this).find(".affixes").show();
+		$(this).find(".header").hide();
 	}
 	function expand_slots(){
 		$(".slot .affixes").show();
-		$(".set_bonuses").show();
-		$(".legendary_affixes").show();
+		$(".set_bonuses .header").hide().siblings().show();
+		$(".legendary_affixes .header").hide().siblings().show();
 	}
 </script>
 
@@ -908,9 +909,15 @@
 					<div style="clear: both;"></div>
 					%endfor
 					<div class="equipment_row">
-						<div class="set_bonuses set"></div>
+						<div class="set_bonuses set">
+							<div class="header">Set Bonuses</div>
+							<div class="affixes"></div>
+						</div>
 						${create_slot("feet", ["feet"])}
-						<div class="legendary_affixes legendary"></div>
+						<div class="legendary_affixes legendary">
+							<div class="header">Legendary Affixes</div>
+							<div class="affixes"></div>
+						</div>
 					</div>
 				</div>
 			</div>
