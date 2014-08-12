@@ -1,14 +1,306 @@
-{
-    "items": {
-        "Mara's Kaleidoscope": {
-            "primary": {},
-            "secondary": {},
-            "legendary": {
-                "maras_kaleidoscope_leg": {
-                    "min": 10,
-                    "max": 15
-                }
+{  
+   "items":{  
+      "The Star of Azkaranth":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+            "star_of_azkaranth_leg":{  
+               "max":15,
+               "min":10
             }
-        }
-    }
+         },
+         "secondary":{  
+
+         }
+      },
+      "Countess Julia's Cameo":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+            "countess_julias_cameo_leg":{  
+               "max":25,
+               "min":20
+            }
+         },
+         "secondary":{  
+
+         }
+      },
+      "The Flavor of Time":{  
+         "primary":{  
+            "movement_speed":{  
+               "max":12,
+               "min":10
+            },
+            "legendary":{  
+
+            }
+         },
+         "secondary":{  
+
+         }
+      },
+      "Overwhelming Desire":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+            "overwhelming_desire_leg":false
+         },
+         "secondary":{  
+
+         }
+      },
+      "Golden Gorget of Leoric":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+            "golden_gorget_of_leoric_leg":{  
+               "max":6,
+               "min":4
+            }
+         },
+         "secondary":{  
+
+         }
+      },
+      "Tal Rasha's Allegiance":{  
+         "set":"tal_rasha",
+         "primary":{  
+
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "The Murlocket":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+            "murlocket_leg":false
+         },
+         "secondary":{  
+
+         }
+      },
+      "Holy Beacon":{  
+         "primary":{  
+            "spirit_regen":{  
+               "max":3,
+               "min":1
+            }
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "Halcyon's Ascent":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+            "halcyons_ascent_leg":{  
+               "max":8,
+               "min":6
+            }
+         },
+         "secondary":{  
+
+         }
+      },
+      "Sunwuko's Shines":{  
+         "set":"monkey_king",
+         "primary":{  
+
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "Ancestors' Grace":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+            "ancestors_grace_leg":false
+         },
+         "secondary":{  
+
+         }
+      },
+      "The Ess of Johan":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+            "ess_of_johan_leg":{  
+               "max":80,
+               "min":60
+            }
+         },
+         "secondary":{  
+
+         }
+      },
+      "Squirt's Necklace":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+            "gold_find":{  
+               "max":80,
+               "min":70
+            }
+         }
+      },
+      "Eye of Etlich":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "Mara's Kaleidoscope":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+            "maras_kaleidoscope_leg":{  
+               "max":15,
+               "min":10
+            }
+         },
+         "secondary":{  
+
+         }
+      },
+      "Dovu Energy Trap":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+            "dovu_energy_trap_leg":{  
+               "max":25,
+               "min":20
+            }
+         },
+         "secondary":{  
+
+         }
+      },
+      "Blackthorne's Duncraig Cross":{  
+         "set":"blackthorne",
+         "primary":{  
+            "life_on_hit":{  
+               "max":2971,
+               "min":2276
+            }
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "Talisman of Aranoch":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+            "talisman_of_aranoch_leg":{  
+               "max":15,
+               "min":10
+            }
+         },
+         "secondary":{  
+
+         }
+      },
+      "Kymbo's Gold":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+            "gold_find":{  
+               "max":100,
+               "min":75
+            }
+         }
+      },
+      "Haunt of Vaxo":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+            "haunt_of_vaxo_leg":false
+         },
+         "secondary":{  
+
+         }
+      },
+      "Rakoff's Glass of Life":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+            "rakoffs_glass_of_life_leg":{  
+               "max":4,
+               "min":3
+            }
+         },
+         "secondary":{  
+
+         }
+      },
+      "The Traveler's Pledge":{  
+         "set":"endless_walk",
+         "primary":{  
+
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "Moonlight Ward":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+            "moonlight_ward_leg":{  
+               "max":320,
+               "min":240
+            }
+         },
+         "secondary":{  
+
+         }
+      }
+   }
 }
