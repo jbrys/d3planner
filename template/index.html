@@ -518,18 +518,18 @@
 
 		values["ele_min"] = base_min*eled;
 		values["ele_max"] = base_max*eled;
-		values["ele_c_min"] = crit_min*eled;
-		values["ele_c_max"] = crit_max*eled;
-		values["ele_m_min"] = mean_min*eled;
-		values["ele_m_max"] = mean_max*eled;
+		values["ele_crit_min"] = crit_min*eled;
+		values["ele_crit_max"] = crit_max*eled;
+		values["ele_mean_min"] = mean_min*eled;
+		values["ele_mean_max"] = mean_max*eled;
 		values["ele_dps"] = dps*eled;
 
 		values["ele_eli_min"] = base_min*eled*elid;
 		values["ele_eli_max"] = base_max*eled*elid;
-		values["ele_eli_c_min"] = crit_min*eled*elid;
-		values["ele_eli_c_max"] = crit_max*eled*elid;
-		values["ele_eli_m_min"] = mean_min*eled*elid;
-		values["ele_eli_m_max"] = mean_max*eled*elid;
+		values["ele_eli_crit_min"] = crit_min*eled*elid;
+		values["ele_eli_crit_max"] = crit_max*eled*elid;
+		values["ele_eli_mean_min"] = mean_min*eled*elid;
+		values["ele_eli_mean_max"] = mean_max*eled*elid;
 		values["ele_eli_dps"] = dps*eled*elid;
 
 		return values;
@@ -710,10 +710,12 @@
 			var skill_damage_values = calculate_skill_damage(skill_damage, elite_damage, elemental_damage, skill_values.duration);
 
 			$.each(skill_damage_values, function(key, value){
+				debug(key);
+				debug(key.replace(/_/g,"."));
 				if(value > 0)
-					damage_table.find("."+key).show().html(format_number(value,0,true));
+					damage_table.find("."+key.replace(/_/g,".")).show().html(format_number(value,0,true));
 				else
-					damage_table.find("."+key).hide().html("");
+					damage_table.find("."+key.replace(/_/g,".")).hide().html("");
 			});
 		}
 
@@ -813,61 +815,12 @@
 					<thead><tr><th>
 						Offensive Stats
 					</th></tr></thead>
-					<tr id="strength">
-						<td>
-
-						</td>
-					</tr>
-					<tr id="dexterity">
-						<td>
-
-						</td>
-					</tr>
-					<tr id="intelligence">
-						<td>
-
-						</td>
-					</tr>
-					<tr id="vitality">
-						<td>
-
-						</td>
-					</tr>
-					<tr id="attack_speed">
-						<td>
-
-						</td>
-					</tr>
-					<tr id="critical_hit_chance">
-						<td>
-
-						</td>
-					</tr>
-					<tr id="critical_hit_damage">
-						<td>
-
-						</td>
-					</tr>
-					<tr id="fire_damage" class="elemental_damage">
-						<td>
-
-						</td>
-					</tr>
-					<tr id="holy_damage" class="elemental_damage">
-						<td>
-
-						</td>
-					</tr>
-					<tr id="elemental_damage"  class="elemental_damage">
-						<td>
-
-						</td>
-					</tr>
-					<tr id="elite_damage">
-						<td>
-
-						</td>
-					</tr>
+					<%o_stats = [("strength",""),("dexterity",""),("intelligence",""),("vitality",""),
+								("attack_speed",""),("critical_hit_chance",""),("critical_hit_damage",""),
+								("fire_damage","elemental_damage"),("holy_damage","elemental_damage"), ("elite_damage","")]%>
+					% for o_stat, css_class in o_stats:
+					<tr id="${o_stat}" class="${css_class}"><td></td></tr>
+					% endfor
 				</table>
 			</div>
 			<div class="damage">
@@ -875,26 +828,10 @@
 					<thead><tr><th>
 						Damage Stats
 					</th></tr></thead>
-					<tr id="sheet_dps">
-						<td>
-							<span class="label"></span><span class="value"></span>
-						</td>
-					</tr>
-					<tr id="elemental_dps">
-						<td>
-							<span class="label"></span><span class="value"></span>
-						</td>
-					</tr>
-					<tr id="elite_dps">
-						<td>
-							<span class="label"></span><span class="value"></span>
-						</td>
-					</tr>
-					<tr id="elemental_elite_dps">
-						<td>
-							<span class="label"></span><span class="value"></span>
-						</td>
-					</tr>
+					<%dps_stats = ["sheet_dps","elemental_dps","elite_dps","elemental_elite_dps"]%>
+					% for dps_stat in dps_stats:
+					<tr id="${dps_stat}"><td><span class="label"></span><span class="value"></span></td></tr>
+					% endfor
 				</table>
 			</div>
 			<div class="stat_amounts">
@@ -910,28 +847,28 @@
 		</td>
 		<td>
 			<div class="center_contents">
-			<%
-				slots = [{"shoulders":["shoulders"],"head":["head"],"neck":["neck"]},
-						 {"hands":["hands"],"chest":["chest"],"wrists":["wrists"]},
-						 {"lfinger":["finger"],"waist":["waist"],"rfinger":["finger"]},
-						 {"mainhand":["onehand","twohand"],"legs":["legs"],"offhand":["shield"]}]
-			%>
-			<div class="paperdoll">
-			% for row in slots:
-			<div class="equipment_row">
-				% for slot in row:
-				${create_slot(slot, row[slot])}
-				%endfor
-			</div>
-			<div style="clear: both;"></div>
-			%endfor
-			<div style="clear: both;"></div>
-				<div class="equipment_row">
-					<div class="set_bonuses set"></div>
-					${create_slot("feet", ["feet"])}
-					<div class="legendary_affixes legendary"></div>
+				<%
+					slots = [{"shoulders":["shoulders"],"head":["head"],"neck":["neck"]},
+							 {"hands":["hands"],"chest":["chest"],"wrists":["wrists"]},
+							 {"lfinger":["finger"],"waist":["waist"],"rfinger":["finger"]},
+							 {"mainhand":["onehand","twohand"],"legs":["legs"],"offhand":["shield"]}]
+				%>
+				<div class="paperdoll">
+					% for row in slots:
+					<div class="equipment_row">
+						% for slot in row:
+						${create_slot(slot, row[slot])}
+						%endfor
+					</div>
+					<div style="clear: both;"></div>
+					%endfor
+					<div style="clear: both;"></div>
+					<div class="equipment_row">
+						<div class="set_bonuses set"></div>
+						${create_slot("feet", ["feet"])}
+						<div class="legendary_affixes legendary"></div>
+					</div>
 				</div>
-			</div>
 			</div>
 		</td>
 	</tr>
@@ -982,56 +919,24 @@
 							<td class="damage_table">
 								<table>
 									<tr>
-										<td>
+										% for header,colspan in [("",1),("Damage",3),("Crit Damage",3),("Mean Damage",3),("DPS",1)]:
+										<th colspan="${colspan}" class="header">
+											<span class="label header">${header}</span>
+										</th>
+										% endfor
+									</tr>
 
-										</td>
-										<th colspan="3" class="header">
-											<span class="label header">Damage</span>
-										</th>
-										<th colspan="3" class="header">
-											<span class="label header">Crit Damage</span>
-										</th>
-										<th colspan="3" class="header">
-											<span class="label header">Mean Damage</span>
-										</th>
-										<th class="header">
-											<span class="label header">DPS</span>
-										</th>
-									</tr>
+									% for label,first in [("",""),("Elite","eli")]:
 									<tr>
-										<td>
-											<span class="label"></span>
-										</td>
-										<td>
-											<span class="ele_min min"></span></td><td>-</td><td><span class="ele_max max"></span>
-										</td>
-										<td>
-											<span class="ele_c_min min"></span></td><td>-</td><td><span class="ele_c_max max"></span>
-										</td>
-										<td>
-											<span class="ele_m_min min"></span></td><td>-</td><td><span class="ele_m_max max"></span>
-										</td>
-										<td>
-											<span class="ele_dps max"></span>
-										</td>
+										<td><span class="label">${label}</span></td>
+										% for second in ["ele"]:
+										% for type in ["","crit","mean"]:
+										<td><span class="${' '.join([first,second,type])} min"></span></td><td>-</td><td><span class="${' '.join([first,second,type])} max"></span></td>
+										% endfor
+										<td><span class="${' '.join([first,second])} dps max"></span></td>
+										% endfor
 									</tr>
-									<tr>
-										<td>
-											<span class="label">Elite</span>
-										</td>
-										<td>
-											<span class="ele_eli_min min"></span></td><td>-</td><td><span class="ele_eli_max max"></span>
-										</td>
-										<td>
-											<span class="ele_eli_c_min min"></span></td><td>-</td><td><span class="ele_eli_c_max max"></span>
-										</td>
-										<td>
-											<span class="ele_eli_m_min min"></span></td><td>-</td><td><span class="ele_eli_m_max max"></span>
-										</td>
-										<td>
-											<span class="ele_eli_dps max"></span>
-										</td>
-									</tr>
+									%endfor
 								</table>
 							</td>
 						</tr>
