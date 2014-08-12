@@ -204,16 +204,19 @@
     }
 
 	function calculate_totals(){
-		$(".elemental_damage").hide();
-		$("#"+_values.element).show();
         $(".totals tr").each(function(i,tr){
             tr = $(tr);
             var affix = tr.attr("id");
             if(affix){
 				var value = _char.totals[affix] || 0;
 				var scale = _translate[affix].scale || 0;
-
-				tr.children().html(get_template(affix, value));
+				if (value > 0){
+					tr.children().html(get_template(affix, value));
+					tr.show();
+				}
+				else{
+					tr.hide();
+				}
             }
         });
 	}
@@ -389,7 +392,13 @@
     $(document).ready(function(){
         $.cookie.json = true;
         _debug = $.cookie('d3planner_debug');
-        $("#debug").click(function(){_debug=!_debug;$.cookie('d3planner_debug',_debug);});
+        $("#debug").click(function(){
+        	debug("debug: "+(!_debug ? "enabled" : "disabled"));
+        	_debug=!_debug;
+        	debug("debug: "+(_debug ? "enabled" : "disabled"));
+        	$.cookie('d3planner_debug',_debug);
+        	return false;
+        });
         $.ajaxSetup({
             async: false
         });
@@ -482,16 +491,19 @@
     }
     function calculate_damage(){
         if (_char && _char.totals){
-			//var eled = 1+(_values.element_damage || _defaults.element_damage)/100);
+			var eled = 0;
 			var elid = 1+(_values.elite_damage/100);
-
+			$.each(_groups.byGroup["elemental_damage"], function(i, element){
+				if (eled < _values[element])
+					eled = _values[element];
+			});
+			eled = 1+(eled/100);
             var sheet_dps = calculate_dps(_values);
-            //var sheet_dps = ((max+min)/2)*(1+ms/100)*(1+as/100)*(aps)*(1+chc/100*chd/100);
 
             $("#sheet_dps .value").html(format_number(sheet_dps,0,true));
-            //$("#elemental_dps .value").html(format_number(sheet_dps*eled,0,true));
+            $("#elemental_dps .value").html(format_number(sheet_dps*eled,0,true));
             $("#elite_dps .value").html(format_number(sheet_dps*elid,0,true));
-            //$("#elemental_elite_dps .value").html(format_number(sheet_dps*eled*elid,0,true));
+            $("#elemental_elite_dps .value").html(format_number(sheet_dps*eled*elid,0,true));
 
             $("#sheet_dps .label").html(get_template("sheet_dps"));
             $("#elemental_dps .label").html(get_template("elemental_dps"));
@@ -846,6 +858,7 @@
 			</div>
 		</td>
 		<td>
+			<div><a id="shrink" href="#">shrink</a><a id="expand" href="#">expand</a></div>
 			<div class="center_contents">
 				<%
 					slots = [{"shoulders":["shoulders"],"head":["head"],"neck":["neck"]},
