@@ -140,7 +140,17 @@
       "template":"Hitting an enemy within 15 yards has a chance to ward you with shards of Arcane energy that explode when enemies get close, dealing {0}% weapon damage as Arcane to enemies within 15 yards",
       "display":"Hitting an enemy within 15 yards has a chance to ward you with shards of Arcane energy that explode when enemies get close, dealing weapon damage as Arcane to enemies within 15 yards"
    },
-
+   "death_watch_mantle_leg":{
+      "template":"{0}% chance to explode in a fan of knives for 200% weapon damage when hit.",
+      "display":"Chance to explode in a fan of knives for 200% weapon damage when hit."
+   },
+   "homing_pads_leg":{
+      "template":"Your Town Portal is no longer interrupted by taking damage. While casting Town Portal you gain a protective bubble that reduces damage taken by {0}%.",
+      "display":"Your Town Portal is no longer interrupted by taking damage. While casting Town Portal you gain a protective bubble that reduces damage taken"
+   },
+   "pauldrons_of_the_skeleton_king_leg":{
+      "display":"When receiving fatal damage, there is a chance that you are instead restored to 25% of maximum Life and cause nearby enemies to flee in fear."
+   },
    "overwhelming_desire_leg":{
       "display":"Chance on hit to charm the enemy. While charmed, the enemy takes 35% more damage"
    },
@@ -153,6 +163,10 @@
    "haunt_of_vaxo_leg":{
       "display":"Summons shadow clones to your aid when you Stun an enemy. This effect may occur once every 30 seconds."
    },
+   "spaulders_of_zakara_leg":{
+      "display":"Your items become indestructible."
+   },
+
    "main_stat":{
       "display":"Main Stat"
    },
