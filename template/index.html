@@ -437,6 +437,9 @@
         $(".passive").change(passive_change);
         $(".active").change(active_change);
         $("#fetch").click(fetch);
+        $("#shrink").click(shrink_slots);
+        $("#expand").click(expand_slots);
+        $(".slot").click(expand_slot);
         $(".active_skill input").click(activated_change);
 		$.each(_groups.byGroup["elemental_damage"], function(i, element){
 			$("#skill_element").append("<option value='{0}'>{1}</option>".format(element,_translate[element].dropdown));
@@ -451,6 +454,7 @@
 		$("#class_list").change(class_change);
 		$("#class_list").chosen({disable_search:true});
 		$("#active_tabs").tabs();
+
 		load_from_cookie(_char);
 		update_char();
     });
@@ -742,6 +746,26 @@
 
 		return skill_values;
 	}
+
+	function shrink_slots(){
+		$(".slot").each(function(i, slot_div){
+			slot_div = $(slot_div);
+			//.attr("id");
+			slot_div.find(".edit").hide();
+			slot_div.find(".view").show();
+			slot_div.find(".affixes").hide();
+		});
+		$(".set_bonuses").hide();
+		$(".legendary_affixes").hide();
+	}
+	function expand_slot(){
+		$(this).find(".affixes").show();
+	}
+	function expand_slots(){
+		$(".slot .affixes").show();
+		$(".set_bonuses").show();
+		$(".legendary_affixes").show();
+	}
 </script>
 
 <div id="templates" style="display:none;">
@@ -776,8 +800,6 @@
 
 <%def name="create_slot(id, pieces)">
 <div class="slot" id="${id}">
-	${id}
-	<br>
 	<div class="edit">
 		<select class="item ${' '.join(pieces)} chosen-select"></select>
 		<div class="affix">
@@ -792,8 +814,9 @@
 	</div>
 	<div class="view">
 		<div>
-			<div class="name"></div>
-			<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span></div>
+			<div class="name">${id}</div>
+			<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span>
+		</div>
 		<div style="clear: both;"></div>
 		<div class="affixes"></div>
 	</div>
