@@ -569,7 +569,7 @@
 					.text(get_template(rune));
 		}
 		else{
-			$("#active_skills ."+rune).remove();
+			$(".active_skill[index="+index+"]").remove();
 		}
 	}
 
@@ -589,20 +589,27 @@
 		var previous_rune = _char.skills.rune[index];
 		_char.skills.rune[index] = rune;
 
-		activator_change(previous_rune, index, false);
+		activator_change(previous_rune || skill, index, false);
 		$("#skill_tab_"+index+" .rune").html("&nbsp;");
+
+
+		var skill_blob = _classes[_char.settings.class].skills.active[skill];
+		var active_blob;
+		if(skill_blob){
+			 if (skill_blob.runes[rune] && skill_blob.runes[rune].active)
+				active_blob = skill_blob.runes[rune].active;
+			 else
+				active_blob = skill_blob.active;
+		}
 
 		if(rune){
 			$("#skill_tab_"+index+" .rune").html(get_template(rune));
-			var skill_blob = _classes[_char.settings.class].skills.active[skill];
-			var active_blob = _classes[_char.settings.class].skills.active[skill].active
-						|| _classes[_char.settings.class].skills.active[skill].runes[rune].active;
-			if (active_blob)
-				activator_change(rune, index, true);
 		}
 		else{
 			_char.skills.rune[index] = null;
 		}
+		if (active_blob)
+			activator_change(rune || skill, index, true);
 		save_to_cookie(_char);
 		update_char();
 		update_skill_panel(index);
@@ -790,7 +797,7 @@
 	</div>
 	<div class="active_skill">
 		<span class="label"></span>
-		<input type="checkbox" />
+		<input type="checkbox" checked="checked"/>
 	</div>
 	<div class="skill_info">
 		<span class="label"></span>
@@ -884,21 +891,22 @@
 			<div><a id="shrink" href="#">shrink</a><a id="expand" href="#">expand</a></div>
 			<div class="center_contents">
 				<%
-					slots = [{"shoulders":["shoulders"],"head":["head"],"neck":["neck"]},
-							 {"hands":["hands"],"chest":["chest"],"wrists":["wrists"]},
-							 {"lfinger":["finger"],"waist":["waist"],"rfinger":["finger"]},
-							 {"mainhand":["onehand","twohand"],"legs":["legs"],"offhand":["shield"]}]
+					slots = [
+							 [("shoulders",["shoulders"]),("head",["head"]),("neck",["neck"])],
+							 [("hands",["hands"]),("chest",["chest"]),("wrists",["wrists"])],
+							 [("lfinger",["finger"]),("waist",["waist"]),("rfinger",["finger"])],
+							 [("mainhand",["onehand","twohand"]),("legs",["legs"]),("offhand",["shield"])]
+							]
 				%>
 				<div class="paperdoll">
 					% for row in slots:
 					<div class="equipment_row">
-						% for slot in row:
-						${create_slot(slot, row[slot])}
+						% for slot,pieces in row:
+						${create_slot(slot, pieces)}
 						%endfor
 					</div>
 					<div style="clear: both;"></div>
 					%endfor
-					<div style="clear: both;"></div>
 					<div class="equipment_row">
 						<div class="set_bonuses set"></div>
 						${create_slot("feet", ["feet"])}
