@@ -84,6 +84,10 @@
       "template": "Dodging or getting hit by a ranged attack automatically shoots a homing rocket back at the attacker for {0}% weapon damage as Physical.",
       "display": "Dodging or getting hit by a ranged attack automatically shoots a homing rocket back at the attacker for weapon damage as Physical."
    },
+    "halcyons_ascent_leg":{
+      "template": "When you use {1}, you mesmerize nearby enemies with your skill, causing them to jump uncontrollably for {0} seconds.",
+      "display": "When you use [Class Skill], you mesmerize nearby enemies with your skill, causing them to jump uncontrollably."
+   },
    "elite_damage":{
       "template":"Increases damage against elites by {0}%",
       "display":"Increases damage against elites"
@@ -103,6 +107,51 @@
    "maras_kaleidoscope_leg":{
       "template":"Prevent all Poison damage taken and heal yourself for {0}% of the amount prevented.",
       "display":"Prevent all Poison damage taken and heal yourself for the amount prevented."
+   },
+   "star_of_azkaranth_leg":{
+      "template":"Prevent all Fire damage taken and heal yourself for {0}% of the amount prevented.",
+      "display":"Prevent all Fire damage taken and heal yourself for the amount prevented."
+   },
+   "countess_julias_cameo_leg":{
+      "template":"Prevent all Arcane damage taken and heal yourself for {0}% of the amount prevented.",
+      "display":"Prevent all Arcane damage taken and heal yourself for the amount prevented."
+   },
+   "talisman_of_aranoch_leg":{
+      "template":"Prevent all Cold damage taken and heal yourself for {0}% of the amount prevented.",
+      "display":"Prevent all Cold damage taken and heal yourself for the amount prevented."
+   },
+   "golden_gorget_of_leoric_leg":{
+      "template":"After earning a massacre bonus, {0} Skeletons are summoned to fight by your side for 10 seconds.",
+      "display":"After earning a massacre bonus, Skeletons are summoned to fight by your side for 10 seconds."
+   },
+   "ess_of_johan_leg":{
+      "template":"Chance on hit to pull in enemies toward your target and Slow them by {0}%.",
+      "display":"Chance on hit to pull in enemies toward your target and Slow them"
+   },
+   "dovu_energy_trap_leg":{
+      "template":"Increases duration of Stun effects by {0}%",
+      "display":"Increases duration of Stun effects"
+   },
+   "rakoffs_glass_of_life_leg":{
+      "template":"Enemies you kill have a {0}% additional chance to drop a health globe.",
+      "display":"Enemies you kill have a additional chance to drop a health globe."
+   },
+   "moonlight_ward_leg":{
+      "template":"Hitting an enemy within 15 yards has a chance to ward you with shards of Arcane energy that explode when enemies get close, dealing {0}% weapon damage as Arcane to enemies within 15 yards",
+      "display":"Hitting an enemy within 15 yards has a chance to ward you with shards of Arcane energy that explode when enemies get close, dealing weapon damage as Arcane to enemies within 15 yards"
+   },
+
+   "overwhelming_desire_leg":{
+      "display":"Chance on hit to charm the enemy. While charmed, the enemy takes 35% more damage"
+   },
+   "murlocket_leg":{
+      "display":"Call forth a creature from the depths."
+   },
+   "acestors_grace_leg":{
+      "display":"When receiving fatal damage, you are instead restored to 100% of maximum Life and resources. This item is destroyed in the process."
+   },
+   "haunt_of_vaxo_leg":{
+      "display":"Summons shadow clones to your aid when you Stun an enemy. This effect may occur once every 30 seconds."
    },
    "main_stat":{
       "display":"Main Stat"
@@ -222,6 +271,10 @@
    "life_per_hit":{
          "template":"{0} Life per Hit",
          "display":"Life per Hit"  
+   },
+   "spirit_regen":{
+         "template":"Increases Spirit Regeneration by {0} per Second (Monk Only)",
+         "display":"Increases Spirit Regeneration per Second (Monk Only)"  
    },
    "mana_per_kill":{
          "template":"Grants {0} Mana per Kill (Witch Doctor Only)",
