@@ -30,7 +30,28 @@
 					"min_damage":{
 						"multiply" : ["min_damage", 1.1]
 					}
-				}
+				},
+				"fervor":{
+					"attack_speed":{
+						"add": ["attack_speed", 15]
+					}
+				},
+				"vigilant":{},
+				"righteousness":{},
+				"fanatacism":{},
+				"indestructable":{},
+				"wrathful":{},
+				"divine_fortress":{},
+				"lord_commander":{},
+				"hold_your_ground":{
+					"block_chance":{
+						"add": ["block_chance", 15]
+					}
+				},
+				"iron_maiden":{},
+				"renewel":{},
+				"blunt":{},
+				"towering_shield":{}
 			},
 			"active":{
 				"laws_of_valor":{
@@ -47,7 +68,17 @@
 						}
 					},
 					"runes":{
-						"laws_of_valor_unstoppable_force":{},
+						"laws_of_valor_invincible":{
+							"active":{
+								"life_on_hit":{
+									"add" : ["life_on_hit", 16505]
+								},
+								"attack_speed":{
+									"add" : ["attack_speed", 15]
+								}
+							}
+						},
+						"laws_of_valor_frozen_in_terror":{},
 						"laws_of_valor_critical":{
 							"active":{
 								"critical_hit_damage":{
@@ -57,7 +88,18 @@
 									"add" : ["attack_speed", 15]
 								}
 							}
-						}
+						},						
+						"laws_of_valor_unstoppable_force":{
+							"active":{
+								"reduced_cooldown":{
+									"add" : ["reduced_cooldown", 50]
+								},
+								"attack_speed":{
+									"add" : ["attack_speed", 15]
+								}
+							}
+						},
+						"laws_of_valor_answered_prayer":{}
 					}
 				},
 				"heavens_fury":{

@@ -458,7 +458,7 @@
 		$.each(_groups.byGroup["elemental_damage"], function(i, element){
 			$("#skill_element").append("<option value='{0}'>{1}</option>".format(element,_translate[element].dropdown));
 		});
-		$(".skills select").append(createOption("")).chosen({disable_search:true, allow_single_deselect:true});
+		$("#skills select").append(createOption("")).chosen({disable_search:true, allow_single_deselect:true});
 
 		$("#class_list").append("<option value='{0}'>{1}</option>".format("", ""));
 		$.each(_classes, function(class_name, details){
@@ -468,6 +468,9 @@
 		$("#class_list").change(class_change);
 		$("#class_list").chosen({disable_search:true});
 		$("#active_tabs").tabs();
+		$("#content_tabs").tabs();
+		$("#data_tabs").tabs();
+		$("#skill_tabs").tabs();
 
 		load_from_cookie(_char);
 		update_char();
@@ -778,6 +781,7 @@
 		});
 		$(".set_bonuses .header").show().siblings().hide();
 		$(".legendary_affixes .header").show().siblings().hide();
+		return false;
 	}
 	function expand_slot(){
 		$(this).find(".affixes").show();
@@ -787,6 +791,7 @@
 		$(".slot .affixes").show();
 		$(".set_bonuses .header").hide().siblings().show();
 		$(".legendary_affixes .header").hide().siblings().show();
+		return false;
 	}
 </script>
 
@@ -853,6 +858,8 @@
 </div>
 </%def>
 
+
+
 <table style="width:100%;">
 	<tr>
 		<td colspan="2">
@@ -871,32 +878,49 @@
 	</tr>
 	<tr>
 		<td class="data">
-			<div class="totals">
-				<table>
-					<thead><tr><th>
-						Offensive Stats
-					</th></tr></thead>
-					<%o_stats = [("strength",""),("dexterity",""),("intelligence",""),("vitality",""),
-								("attack_speed",""),("critical_hit_chance",""),("critical_hit_damage",""),
-								("fire_damage","elemental_damage"),("holy_damage","elemental_damage"), ("elite_damage","")]%>
-					% for o_stat, css_class in o_stats:
-					<tr id="${o_stat}" class="${css_class}"><td></td></tr>
+			<div id="data_tabs">
+				<ol>
+					% for tab in ["offensive","defensive","utility"]:
+					<li>
+						<a id="${tab}_tab" href="#${tab}">
+							${tab}
+						</a>
+					</li>
 					% endfor
-				</table>
-			</div>
-			<div class="damage">
-				<table>
-					<thead><tr><th>
-						Damage Stats
-					</th></tr></thead>
-					<%dps_stats = ["sheet_dps","elemental_dps","elite_dps","elemental_elite_dps"]%>
-					% for dps_stat in dps_stats:
-					<tr id="${dps_stat}"><td><span class="label"></span><span class="value"></span></td></tr>
-					% endfor
-				</table>
-			</div>
-			<div class="stat_amounts">
+				</ol>
+				<div id="offensive">
+					<div class="totals">
+						<table>
+							<thead><tr><th>
+								Offensive Stats
+							</th></tr></thead>
+							<%o_stats = [("strength",""),("dexterity",""),("intelligence",""),("vitality",""),
+										("attack_speed",""),("critical_hit_chance",""),("critical_hit_damage",""),
+										("fire_damage","elemental_damage"),("holy_damage","elemental_damage"), ("elite_damage","")]%>
+							% for o_stat, css_class in o_stats:
+							<tr id="${o_stat}" class="${css_class}"><td></td></tr>
+							% endfor
+						</table>
+					</div>
+					<div class="damage">
+						<table>
+							<thead><tr><th>
+								Damage Stats
+							</th></tr></thead>
+							<%dps_stats = ["sheet_dps","elemental_dps","elite_dps","elemental_elite_dps"]%>
+							% for dps_stat in dps_stats:
+							<tr id="${dps_stat}"><td><span class="label"></span><span class="value"></span></td></tr>
+							% endfor
+						</table>
+					</div>
+					<div class="stat_amounts">
 
+					</div>
+				</div>
+				<div id="defensive">
+				</div>
+				<div id="utility">
+				</div>
 			</div>
 			<div id="active_skills">
 				<table>
@@ -906,113 +930,133 @@
 				</table>
 			</div>
 		</td>
-		<td>
-			<div><a id="shrink" href="#">shrink</a><a id="expand" href="#">expand</a></div>
-			<div class="center_contents">
-				<%
-					slots = [
-							 [("shoulders",["shoulders"]),("head",["head"]),("neck",["neck"])],
-							 [("hands",["hands"]),("chest",["chest"]),("wrists",["wrists"])],
-							 [("lfinger",["finger"]),("waist",["waist"]),("rfinger",["finger"])],
-							 [("mainhand",["onehand","twohand"]),("legs",["legs"]),("offhand",["shield"])]
-							]
-				%>
-				<div class="paperdoll">
-					% for row in slots:
-					<div class="equipment_row">
-						% for slot,pieces in row:
-						${create_slot(slot, pieces)}
-						%endfor
-					</div>
-					<div style="clear: both;"></div>
-					%endfor
-					<div class="equipment_row">
-						<div class="set_bonuses set">
-							<div class="header">Set Bonuses</div>
-							<div class="affixes"></div>
-						</div>
-						${create_slot("feet", ["feet"])}
-						<div class="legendary_affixes legendary">
-							<div class="header">Legendary Affixes</div>
-							<div class="affixes"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</td>
-	</tr>
-	<tr class="skills">
-		<td colspan="2">
-			Passives
-		</td>
-	</tr>
-	<tr class="skills passives">
-		<td colspan="2">
-			% for i in range(0,4):
-			<div>
-			<select id="passive-${i}" class="skill passive"></select>
-			</div>
-			% endfor
-		</td>
-	</tr>
-	<tr class="skills">
-		<td colspan="2">
-			Skills
-		</td>
-	</tr>
-	<tr  class="skills actives">
-		<td colspan="2">
-			<div id="active_tabs">
+		<td style="vertical-align: top;">
+			<div id="content_tabs">
 				<ol>
-					% for i in range(0,6):
+					% for tab in ["items","skills","paragon"]:
 					<li>
-						<a id="skill_tab_${i}" href="#skill_damage_${i}">
-							<div class="skill">(none)</div>
-							<div class="rune">(none)</div>
+						<a id="${tab}_tab" href="#${tab}">
+							${tab}
 						</a>
 					</li>
 					% endfor
 				</ol>
-				% for i in range(0,6):
-				<div id="skill_damage_${i}">
-					<table>
-						<tr>
-							<td style="width:200px; padding-right: 20px;">
-								<select id="active-${i}" class="skill active"></select><br/>
-								<select id="rune-${i}" class="skill rune"></select>
-							</td>
-							<td rowspan="2"  class="data_table">
-							</td>
-						</tr>
-						<tr>
-							<td class="damage_table">
-								<table>
-									<tr>
-										% for header,colspan in [("",1),("Damage",3),("Crit Damage",3),("Mean Damage",3),("DPS",1)]:
-										<th colspan="${colspan}" class="header">
-											<span class="label header">${header}</span>
-										</th>
-										% endfor
-									</tr>
-
-									% for label,first in [("",""),("Elite","eli")]:
-									<tr>
-										<td><span class="label">${label}</span></td>
-										% for second in ["ele"]:
-										% for type in ["","crit","mean"]:
-										<td><span class="${' '.join([first,second,type])} min"></span></td><td>-</td><td><span class="${' '.join([first,second,type])} max"></span></td>
-										% endfor
-										<td><span class="${' '.join([first,second])} dps max"></span></td>
-										% endfor
-									</tr>
-									%endfor
-								</table>
-							</td>
-						</tr>
-					</table>
+				<div id="items">
+					<div><a id="shrink" href="#">shrink</a><a id="expand" href="#">expand</a></div>
+					<div class="center_contents">
+					<%
+						slots = [
+								 [("shoulders",["shoulders"]),("head",["head"]),("neck",["neck"])],
+								 [("hands",["hands"]),("chest",["chest"]),("wrists",["wrists"])],
+								 [("lfinger",["finger"]),("waist",["waist"]),("rfinger",["finger"])],
+								 [("mainhand",["onehand","twohand"]),("legs",["legs"]),("offhand",["shield"])]
+								]
+					%>
+					<div class="paperdoll">
+						% for row in slots:
+						<div class="equipment_row">
+							% for slot,pieces in row:
+							${create_slot(slot, pieces)}
+							%endfor
+						</div>
+						<div style="clear: both;"></div>
+						%endfor
+						<div class="equipment_row">
+							<div class="set_bonuses set">
+								<div class="header">Set Bonuses</div>
+								<div class="affixes"></div>
+							</div>
+							${create_slot("feet", ["feet"])}
+							<div class="legendary_affixes legendary">
+								<div class="header">Legendary Affixes</div>
+								<div class="affixes"></div>
+							</div>
+						</div>
+					</div>
 				</div>
-				% endfor
+				</div>
+				<div id="skills">
+					<div id="skill_tabs">
+						<ol>
+							% for tab in ["passives","actives"]:
+							<li>
+								<a id="${tab}_tab" href="#${tab}">
+									${tab}
+								</a>
+							</li>
+							% endfor
+						</ol>
+						<div id="passives">
+							% for i in range(0,4):
+							<div>
+							<select id="passive-${i}" class="skill passive"></select>
+							</div>
+							% endfor
+						</div>
+						<div id="actives">
+							<div id="active_tabs">
+
+								<ol>
+									% for i in range(0,6):
+									<li>
+										<a id="skill_tab_${i}" href="#skill_damage_${i}">
+											<div class="skill">(none)</div>
+											<div class="rune">(none)</div>
+										</a>
+									</li>
+									% endfor
+								</ol>
+								% for i in range(0,6):
+								<div id="skill_damage_${i}">
+									<table>
+										<tr>
+											<td style="width:200px; padding-right: 20px;">
+												<select id="active-${i}" class="skill active"></select><br/>
+												<select id="rune-${i}" class="skill rune"></select>
+											</td>
+											<td rowspan="2"  class="data_table">
+											</td>
+										</tr>
+										<tr>
+											<td class="damage_table">
+												<table>
+													<tr>
+														% for header,colspan in [("",1),("Damage",3),("Crit Damage",3),("Mean Damage",3),("DPS",1)]:
+														<th colspan="${colspan}" class="header">
+															<span class="label header">${header}</span>
+														</th>
+														% endfor
+													</tr>
+
+													% for label,first in [("",""),("Elite","eli")]:
+													<tr>
+														<td><span class="label">${label}</span></td>
+														% for second in ["ele"]:
+														% for type in ["","crit","mean"]:
+														<td><span class="${' '.join([first,second,type])} min"></span></td><td>-</td><td><span class="${' '.join([first,second,type])} max"></span></td>
+														% endfor
+														<td><span class="${' '.join([first,second])} dps max"></span></td>
+														% endfor
+													</tr>
+													%endfor
+												</table>
+											</td>
+										</tr>
+									</table>
+								</div>
+								% endfor
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="paragon">
+					paragon
+				</div>
 			</div>
+		</td>
+	</tr>
+	<tr  class="skills actives">
+		<td colspan="2">
 		</td>
 	</tr>
 </table>
