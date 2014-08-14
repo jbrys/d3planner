@@ -56,12 +56,16 @@
 			});
 			var sets = {};
 			var rorg_bonus = false;
+			var weapon_found = false;
+			var dual_weild = false;
 
 			$(".legendary_affixes .affixes").empty();
 			$(".set_bonuses .affixes").empty();
 
 			$.each(_char, function(slot, item){
 				var slot_div = $("#"+slot);
+				var subname_div = slot_div.find(".subname");
+				subname_div.empty();
 				if(item.name){
 					var item_blob = _slots[slot].items[item.name];
 
@@ -70,6 +74,16 @@
 						return;
 					}
 					slot_div.find(".name").html(item.name || "");
+					if(item_blob.type === "weapon" && item_blob.attacks_per_second){
+						subname_div.html(get_template("attacks_per_second",item_blob.attacks_per_second));
+						if(weapon_found){
+							dual_weild = true;
+						}
+						else{
+							weapon_found = true;
+							totals["attacks_per_second"] = item_blob.attacks_per_second;
+						}
+					}
 
 					slot_div.addClass("legendary");
 					if(item_blob.set){
@@ -430,7 +444,7 @@
 
         $(".slot .edit_button").click(slot_edit);
         $(".slot .cancel_button").click(slot_cancel);
-        $(".slot save_button").click(slot_save);
+        $(".slot .save_button").click(slot_save);
         $("#import_begin").click(import_begin);
         $("#import_end").click(import_end);
         $(".rune").change(rune_change);
@@ -441,10 +455,7 @@
         $("#expand").click(expand_slots);
         $(".slot").click(expand_slot);
         $(".active_skill input").click(activated_change);
-		$.each(_groups.byGroup["elemental_damage"], function(i, element){
-			$("#skill_element").append("<option value='{0}'>{1}</option>".format(element,_translate[element].dropdown));
-		});
-		$(".skills select").append(createOption("")).chosen({disable_search:true, allow_single_deselect:true});
+		$("#skills select").append(createOption("")).chosen({disable_search:true, allow_single_deselect:true});
 
 		$("#class_list").append("<option value='{0}'>{1}</option>".format("", ""));
 		$.each(_classes, function(class_name, details){
@@ -453,7 +464,10 @@
 
 		$("#class_list").change(class_change);
 		$("#class_list").chosen({disable_search:true});
-		$("#active_tabs").tabs();
+		$(".tab_container").tabs();
+		$(".get_template").each(function(){
+			$(this).html(get_template($(this).html().replace(/\s/g,"")));
+		}).removeClass("get_template");
 
 		load_from_cookie(_char);
 		update_char();
@@ -616,14 +630,15 @@
 	}
 	function passive_change(){
 		var passive_ddl = $(this);
-		var index = parseInt(passive_ddl.attr("id").replace("passive-",""));
+		var index = parseInt(passive_ddl.attr("id").replace("passive_select_",""));
 		var previous_passive = _char.skills.passive[index];
 		var current_passive = passive_ddl.val();
 		_char.skills.passive[index] = current_passive;
+		$("#passive_tab_"+index+" .skill").html(get_template(current_passive || "&nbsp;"));
 
-		$(".passives option[value='"+previous_passive+"']").attr("disabled",false);
+		$("#passive_tabs option[value='"+previous_passive+"']").attr("disabled",false);
 		if(current_passive)
-			$(".passives").find("option[value='"+current_passive+"']:not(:selected)").attr("disabled",true);
+			$("#passive_tabs").find("option[value='"+current_passive+"']:not(:selected)").attr("disabled",true);
 		else
 			_char.skills.passive[index] = null;
 
@@ -640,7 +655,7 @@
 		_char.skills.active[index] = current_active;
 
 		rune_ddl.empty();
-		$("#skill_tab_"+index+" .skill").html(get_template("none"));
+		$("#skill_tab_"+index+" .skill").html(get_template("no_skill"));
 		$("#active_tabs option[value='"+previous_active+"']").attr("disabled",false);
 		if(current_active){
 			$("#skill_tab_"+index+" .skill").html(get_template(current_active))
@@ -649,7 +664,7 @@
 			$.each(_classes[_char.settings.class].skills.active[current_active].runes, function(rune, data){
 				rune_ddl
 					.append(createOption(
-						rune,
+						get_template(rune),
 						rune,
 						_char.skills.rune[index] == rune));
 			});
@@ -672,15 +687,15 @@
 
 			$.each(_classes[_char.settings.class].skills.passive, function(skill, skill_data){
 				$(".skill.passive")
-					.append(createOption(skill,get_template(skill)));
+					.append(createOption(get_template(skill),skill));
 			});
 			$(".skill.passive").each(function(){
-				$(this).val(_char.skills.passive[$(this).attr("id").replace("passive-","")]);
+				$(this).val(_char.skills.passive[$(this).attr("id").replace("passive_select_","")]);
 			}).change();
 
 			$.each(_classes[_char.settings.class].skills.active, function(skill, skill_data){
 				$(".skill.active")
-					.append(createOption(skill,get_template(skill)));
+					.append(createOption(get_template(skill),skill));
 			});
 			$(".skill.active").each(function(){
 				$(this).val(_char.skills.active[$(this).attr("id").replace("active-","")]);
@@ -764,6 +779,7 @@
 		});
 		$(".set_bonuses .header").show().siblings().hide();
 		$(".legendary_affixes .header").show().siblings().hide();
+		return false;
 	}
 	function expand_slot(){
 		$(this).find(".affixes").show();
@@ -773,6 +789,7 @@
 		$(".slot .affixes").show();
 		$(".set_bonuses .header").hide().siblings().show();
 		$(".legendary_affixes .header").hide().siblings().show();
+		return false;
 	}
 </script>
 
@@ -822,8 +839,12 @@
 	</div>
 	<div class="view">
 		<div>
-			<div class="name">${id}</div>
 			<span style="float:right;" class="ui-icon ui-icon-gear edit_button"></span>
+			<div>
+				<div class="name">${id}</div>
+				<div style="clear: both;"></div>
+				<div class="subname"></div>
+			</div>
 		</div>
 		<div style="clear: both;"></div>
 		<div class="affixes"></div>
@@ -852,148 +873,216 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="data">
-			<div class="totals">
-				<table>
-					<thead><tr><th>
-						Offensive Stats
-					</th></tr></thead>
-					<%o_stats = [("strength",""),("dexterity",""),("intelligence",""),("vitality",""),
-								("attack_speed",""),("critical_hit_chance",""),("critical_hit_damage",""),
-								("fire_damage","elemental_damage"),("holy_damage","elemental_damage"), ("elite_damage","")]%>
-					% for o_stat, css_class in o_stats:
-					<tr id="${o_stat}" class="${css_class}"><td></td></tr>
-					% endfor
-				</table>
-			</div>
-			<div class="damage">
-				<table>
-					<thead><tr><th>
-						Damage Stats
-					</th></tr></thead>
-					<%dps_stats = ["sheet_dps","elemental_dps","elite_dps","elemental_elite_dps"]%>
-					% for dps_stat in dps_stats:
-					<tr id="${dps_stat}"><td><span class="label"></span><span class="value"></span></td></tr>
-					% endfor
-				</table>
-			</div>
-			<div class="stat_amounts">
-
-			</div>
-			<div id="active_skills">
-				<table>
-					<thead><tr><th>
-						Active Skills
-					</th></tr></thead>
-				</table>
-			</div>
-		</td>
-		<td>
-			<div><a id="shrink" href="#">shrink</a><a id="expand" href="#">expand</a></div>
-			<div class="center_contents">
-				<%
-					slots = [
-							 [("shoulders",["shoulders"]),("head",["head"]),("neck",["neck"])],
-							 [("hands",["hands"]),("chest",["chest"]),("wrists",["wrists"])],
-							 [("lfinger",["finger"]),("waist",["waist"]),("rfinger",["finger"])],
-							 [("mainhand",["onehand","twohand"]),("legs",["legs"]),("offhand",["shield"])]
-							]
-				%>
-				<div class="paperdoll">
-					% for row in slots:
-					<div class="equipment_row">
-						% for slot,pieces in row:
-						${create_slot(slot, pieces)}
-						%endfor
-					</div>
-					<div style="clear: both;"></div>
-					%endfor
-					<div class="equipment_row">
-						<div class="set_bonuses set">
-							<div class="header">Set Bonuses</div>
-							<div class="affixes"></div>
-						</div>
-						${create_slot("feet", ["feet"])}
-						<div class="legendary_affixes legendary">
-							<div class="header">Legendary Affixes</div>
-							<div class="affixes"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</td>
-	</tr>
-	<tr class="skills">
-		<td colspan="2">
-			Passives
-		</td>
-	</tr>
-	<tr class="skills passives">
-		<td colspan="2">
-			% for i in range(0,4):
-			<div>
-			<select id="passive-${i}" class="skill passive"></select>
-			</div>
-			% endfor
-		</td>
-	</tr>
-	<tr class="skills">
-		<td colspan="2">
-			Skills
-		</td>
-	</tr>
-	<tr  class="skills actives">
-		<td colspan="2">
-			<div id="active_tabs">
+		<td class="data" style="height: 1px;">
+			<div id="data_tabs" class="tab_container">
 				<ol>
-					% for i in range(0,6):
+					% for tab in ["offensive","defensive","utility"]:
 					<li>
-						<a id="skill_tab_${i}" href="#skill_damage_${i}">
-							<div class="skill">(none)</div>
-							<div class="rune">(none)</div>
+						<a id="${tab}_tab" href="#${tab}" class="get_template">
+							${tab}_tab
 						</a>
 					</li>
 					% endfor
 				</ol>
-				% for i in range(0,6):
-				<div id="skill_damage_${i}">
-					<table>
-						<tr>
-							<td style="width:200px; padding-right: 20px;">
-								<select id="active-${i}" class="skill active"></select><br/>
-								<select id="rune-${i}" class="skill rune"></select>
-							</td>
-							<td rowspan="2"  class="data_table">
-							</td>
-						</tr>
-						<tr>
-							<td class="damage_table">
-								<table>
-									<tr>
-										% for header,colspan in [("",1),("Damage",3),("Crit Damage",3),("Mean Damage",3),("DPS",1)]:
-										<th colspan="${colspan}" class="header">
-											<span class="label header">${header}</span>
-										</th>
-										% endfor
-									</tr>
+				<div id="offensive" class="rounded_top_5">
+					<div class="totals">
+						<table>
+							<thead><tr><th>
+								Offensive Stats
+							</th></tr></thead>
+							<%o_stats = [("strength",""),("dexterity",""),("intelligence",""),("vitality",""),
+										("attack_speed",""),("critical_hit_chance",""),("critical_hit_damage",""),
+										("fire_damage","elemental_damage"),("holy_damage","elemental_damage"), ("elite_damage","")]%>
+							% for o_stat, css_class in o_stats:
+							<tr id="${o_stat}" class="${css_class}"><td></td></tr>
+							% endfor
+						</table>
+					</div>
+					<div class="damage">
+						<table>
+							<thead><tr><th>
+								Damage Stats
+							</th></tr></thead>
+							<%dps_stats = ["sheet_dps","elemental_dps","elite_dps","elemental_elite_dps"]%>
+							% for dps_stat in dps_stats:
+							<tr id="${dps_stat}"><td><span class="label"></span><span class="value"></span></td></tr>
+							% endfor
+						</table>
+					</div>
+					<div class="stat_amounts">
 
-									% for label,first in [("",""),("Elite","eli")]:
-									<tr>
-										<td><span class="label">${label}</span></td>
-										% for second in ["ele"]:
-										% for type in ["","crit","mean"]:
-										<td><span class="${' '.join([first,second,type])} min"></span></td><td>-</td><td><span class="${' '.join([first,second,type])} max"></span></td>
-										% endfor
-										<td><span class="${' '.join([first,second])} dps max"></span></td>
-										% endfor
-									</tr>
-									%endfor
-								</table>
-							</td>
-						</tr>
-					</table>
+					</div>
 				</div>
-				% endfor
+				<div id="defensive" class="rounded_top_5">
+					defensive
+				</div>
+				<div id="utility" class="rounded_top_5">
+					utility
+				</div>
+			</div>
+			<div id="active_skills">
+						<table>
+							<thead><tr><th>
+								Active Skills
+							</th></tr></thead>
+						</table>
+				</div>
+		</td>
+		<td style="vertical-align: top; height: 1px;">
+			<div id="content_tabs" class="tab_container">
+				<ol>
+					% for tab in ["items","skills","paragon"]:
+					<li>
+						<a id="${tab}_tab" href="#${tab}" class="get_template">
+							${tab}_tab
+						</a>
+					</li>
+					% endfor
+				</ol>
+				<div id="items" class="rounded_top_5" >
+					<div><a id="shrink" href="#">shrink</a><a id="expand" href="#">expand</a></div>
+					<div class="center_contents">
+					<%
+						slots = [
+								 [("shoulders",["shoulders"]),("head",["head"]),("neck",["neck"])],
+								 [("hands",["hands"]),("chest",["chest"]),("wrists",["wrists"])],
+								 [("lfinger",["finger"]),("waist",["waist"]),("rfinger",["finger"])],
+								 [("mainhand",["onehand","twohand"]),("legs",["legs"]),("offhand",["shield"])]
+								]
+					%>
+					<div class="paperdoll">
+						% for row in slots:
+						<div class="equipment_row">
+							% for slot,pieces in row:
+							${create_slot(slot, pieces)}
+							%endfor
+						</div>
+						<div style="clear: both;"></div>
+						%endfor
+						<div class="equipment_row">
+							<div class="set_bonuses set">
+								<div class="header">Set Bonuses</div>
+								<div class="affixes"></div>
+							</div>
+							${create_slot("feet", ["feet"])}
+							<div class="legendary_affixes legendary">
+								<div class="header">Legendary Affixes</div>
+								<div class="affixes"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				</div>
+				<div id="skills" class="rounded_top_5">
+					<div id="skill_tabs"  class="tab_container">
+						<ol>
+							% for tab in ["passives","actives"]:
+							<li>
+								<a id="${tab}_tab" href="#${tab}" class="get_template">
+									${tab}_tab
+								</a>
+							</li>
+							% endfor
+						</ol>
+						<div id="passives">
+							<div id="passive_tabs" class="tab_container">
+								<ol>
+									% for i in range(0,4):
+									<li>
+										<a id="passive_tab_${i}" href="#passive_${i}">
+											<div class="skill"></div>
+										</a>
+									</li>
+									% endfor
+								</ol>
+								% for i in range(0,4):
+								<div id="passive_${i}">
+									<table>
+										<tr>
+											<td class="skill_dropdown">
+												<select id="passive_select_${i}" class="skill passive"></select>
+											</td>
+											<td>
+												<div class="description">
+													Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis neque
+													tincidunt, convallis arcu at, varius libero. Vivamus ultrices vulputate elit,
+													non rutrum purus accumsan.
+												</div>
+											</td>
+										</tr>
+									</table>
+								</div>
+								% endfor
+							</div>
+						</div>
+						<div id="actives">
+							<div id="active_tabs" class="tab_container">
+								<ol>
+									% for i in range(0,6):
+									<li>
+										<a id="skill_tab_${i}" href="#skill_damage_${i}">
+											<div class="skill"></div>
+											<div class="rune"></div>
+										</a>
+									</li>
+									% endfor
+								</ol>
+								% for i in range(0,6):
+								<div id="skill_damage_${i}">
+									<table>
+										<tr>
+											<td colspan="2">
+												<table><tr><td>
+													<div class="skill_dropdown">
+														<select id="active-${i}" class="skill active"></select><br/>
+														<select id="rune-${i}" class="skill rune"></select>
+													</div>
+													</td>
+													<td>
+													<div class="description">
+														Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis neque
+														tincidunt, convallis arcu at, varius libero. Vivamus ultrices vulputate elit,
+														non rutrum purus accumsan.
+													</div>
+												</td></tr></table>
+											</td>
+										</tr>
+										<tr>
+											<td class="data_table" ></td>
+											<td class="damage_table">
+												<table>
+													<tr>
+														% for header,colspan in [("",1),("Damage",3),("Crit Damage",3),("Mean Damage",3),("DPS",1)]:
+														<th colspan="${colspan}" class="header">
+															<span class="label header">${header}</span>
+														</th>
+														% endfor
+													</tr>
+
+													% for label,first in [("",""),("Elite","eli")]:
+													<tr>
+														<td><span class="label">${label}</span></td>
+														% for second in ["ele"]:
+														% for type in ["","crit","mean"]:
+														<td><span class="${' '.join([first,second,type])} min"></span></td><td>-</td><td><span class="${' '.join([first,second,type])} max"></span></td>
+														% endfor
+														<td><span class="${' '.join([first,second])} dps max"></span></td>
+														% endfor
+													</tr>
+													%endfor
+												</table>
+											</td>
+										</tr>
+									</table>
+								</div>
+								% endfor
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="paragon" class="rounded_top_5">
+					paragon
+				</div>
 			</div>
 		</td>
 	</tr>

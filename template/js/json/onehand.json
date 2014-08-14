@@ -1,9 +1,4 @@
 {
-    "items": {
-        "One hand placeholder": {
-            "primary": {},
-            "secondary": {},
-            "legendary": {}
-        }
-    }
+	"type":"weapon",
+    "items": {}
 }

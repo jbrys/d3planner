@@ -1,3 +1,18 @@
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    padding: 0;
+}
+
+body {
+	background-color: black;
+}
+.tab_container>div, #active_skills {
+	background-color: darkgray !important;
+}
+
+.ui-tabs .ui-tabs-nav li a { width: 100%; height: 100% }
+#debug_output{color: green;}
 .paperdoll {
     min-width: 324px;
     max-width: 966px;
@@ -43,6 +58,7 @@ td {padding: 0;}
 .slot .buttons {display:inline-block;}
 .slot .buttons, .item, .affix select {max-width: 300px; min-width: 200px;}
 .view .name{font-weight: bold; display: inline-block;}
+.view .subname {display: inline-block;}
 
 /* affixes */
 .affix .value{float: right;}
@@ -51,10 +67,16 @@ td {padding: 0;}
 @viewport {
 	width: 1280px;
 }
+
+/* data */
 .data {
     vertical-align: top;
     white-space: nowrap;
     width: 270px;
+}
+#data_tabs .ui-tabs-panel, #active_skills  {
+	margin-right: 3px;
+	padding: 0 2px 0 2px;
 }
 
 /* set and legendary boxes */
@@ -80,14 +102,24 @@ table th { font-weight: bold; padding: 10px 0 0 0;}
 .import #character_list, .import #import_end { display: none; }
 
 /* skills */
-.skills tr { width: 100%; }
-.skills select{ width: 100%; }
-.skills.passives>td>div {width: 24%; display: inline-block;}
+#skills tr { width: 100%; }
+#skills select{ width: 100%; }
 .actives .edit {display: none;}
-.skills .save_button {float: left;}
-.skills .cancel_button {float: right;}
-#active_tabs>ol>li { width: 16.2%; }
+#skills .save_button {float: left;}
+#skills .cancel_button {float: right;}
+#active_tabs>ol>li { width: 16%; }
+#passive_tabs>ol>li { width: 24%; }
 #active_tabs a { outline: 0; width:100%; }
 .data_table { vertical-align: top;}
-.data_table .label { float:left;}
 .data_table span.data { width: auto; padding-left: 20px; text-align: right; float: right;}
+.skill_dropdown {width:200px; padding-right: 20px; display: inline-block;}
+.skill_info {width: 200px;}
+
+/* other */
+.rounded_5 { border-radius: 5px; }
+.rounded_15 { border-radius: 15px; }
+.rounded_25 { border-radius: 25px; }
+
+.rounded_top_5 { border-radius: 5px 5px 0 0; }
+.rounded_top_15 { border-radius: 15px 15px 0 0; }
+.rounded_top_25 { border-radius: 25px 25px 0 0; }
