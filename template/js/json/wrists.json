@@ -1,17 +1,280 @@
 {
    "items":{
-      "Reaper's Wraps":{
+      "Aughild's Search":{
+         "set":"aughild_a",
          "primary":{
+
+         },
+         "legendary":{
 
          },
          "secondary":{
 
+         }
+      },
+      "Sanguinary Vambraces":{
+         "primary":{
+
+         },
+         "legendary":{
+            "sanguinary_vambraces_leg":false
+         },
+         "secondary":{
+
+         }
+      },
+      "Kethryes' Splint":{
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Lacuni Prowlers":{
+         "primary":{
+            "attack_speed":{
+               "max":7,
+               "min":5
+            },
+            "movement_speed":{
+               "max":12,
+               "min":10
+            }
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Ancient Parthan Defenders":{
+         "primary":{
+
+         },
+         "legendary":{
+            "ancient_parthan_defenders_leg":{
+               "max":12,
+               "min":9
+            }
+         },
+         "secondary":{
+
+         }
+      },
+      "Steady Strikers":{
+         "primary":{
+            "attack_speed":{
+               "max":7,
+               "min":2
+            }
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Nemesis Bracers":{
+         "primary":{
+
+         },
+         "legendary":{
+            "nemesis_bracers_leg":false
+         },
+         "secondary":{
+
+         }
+      },
+      "Strongarm Bracers":{
+         "primary":{
+
+         },
+         "legendary":{
+            "strongarm_bracers_leg":{
+               "max":30,
+               "min":20
+            }
+         },
+         "secondary":{
+
+         }
+      },
+      "Guardian's Deflector":{
+         "set":"guardian_c",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Custerian Wristguards":{
+         "primary":{
+
+         },
+         "legendary":{
+            "custerian_wristguards_leg":false
+         },
+         "secondary":{
+
+         }
+      },
+      "Promise of Glory":{
+         "primary":{
+
+         },
+         "legendary":{
+            "promise_of_glory_leg":{
+               "max":6,
+               "min":4
+            }
+         },
+         "secondary":{
+
+         }
+      },
+      "Slave Bonds":{
+         "primary":{
+            "movement_speed":{
+               "max":12,
+               "min":10
+            }
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Shackles of the Invoker":{
+         "set":"invoker",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Demon's Animus":{
+         "set":"demon_hide",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Trag'oul Coils":{
+         "primary":{
+
+         },
+         "legendary":{
+            "tragoul_coils_leg":{
+               "max":60,
+               "min":45
+            }
+         },
+         "secondary":{
+
+         }
+      },
+      "Demon's Revenge":{
+         "set":"demon_skin",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Guardian's Aversion":{
+         "set":"guardian_j",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Krelm's Buff Bracers":{
+         "primary":{
+
+         },
+         "legendary":{
+            "krelms_buff_bracers_leg":false
+         },
+         "secondary":{
+
+         }
+      },
+      "Reaper's Wraps":{
+         "primary":{
+
          },
          "legendary":{
             "reapers_wraps_leg":{
-               "min":25,
-               "max":30
+               "max":30,
+               "min":25
             }
+         },
+         "secondary":{
+
+         }
+      },
+      "Aughild's Ultimatum":{
+         "set":"aughild_v",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Warzechian Armguards":{
+         "primary":{
+
+         },
+         "legendary":{
+            "warzechian_armguards_leg":false
+         },
+         "secondary":{
+
+         }
+      },
+      "Wondrous Deflectors":{
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
          }
       }
    }

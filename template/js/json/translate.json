@@ -140,7 +140,17 @@
       "template":"Hitting an enemy within 15 yards has a chance to ward you with shards of Arcane energy that explode when enemies get close, dealing {0}% weapon damage as Arcane to enemies within 15 yards",
       "display":"Hitting an enemy within 15 yards has a chance to ward you with shards of Arcane energy that explode when enemies get close, dealing weapon damage as Arcane to enemies within 15 yards"
    },
-
+   "death_watch_mantle_leg":{
+      "template":"{0}% chance to explode in a fan of knives for 200% weapon damage when hit.",
+      "display":"Chance to explode in a fan of knives for 200% weapon damage when hit."
+   },
+   "homing_pads_leg":{
+      "template":"Your Town Portal is no longer interrupted by taking damage. While casting Town Portal you gain a protective bubble that reduces damage taken by {0}%.",
+      "display":"Your Town Portal is no longer interrupted by taking damage. While casting Town Portal you gain a protective bubble that reduces damage taken"
+   },
+   "pauldrons_of_the_skeleton_king_leg":{
+      "display":"When receiving fatal damage, there is a chance that you are instead restored to 25% of maximum Life and cause nearby enemies to flee in fear."
+   },
    "overwhelming_desire_leg":{
       "display":"Chance on hit to charm the enemy. While charmed, the enemy takes 35% more damage"
    },
@@ -152,6 +162,62 @@
    },
    "haunt_of_vaxo_leg":{
       "display":"Summons shadow clones to your aid when you Stun an enemy. This effect may occur once every 30 seconds."
+   },
+   "spaulders_of_zakara_leg":{
+      "display":"Your items become indestructible."
+   },
+   "sanguinary_vambraces_leg":{
+      "display":"Chance on being hit to deal 1000% of your Thorns damage to nearby enemies."
+   },
+   "nemesis_braces_leg":{
+      "display":"Shrines will spawn an enemy champion."
+   },
+   "custerian_wristguards_leg":{
+      "display":"Picking up gold grants experience."
+   },
+   "krelms_buff_bracers_leg":{
+      "display":"Grant you immunity to Knockback and Stun effects"
+   },
+   "warzechian_armguards_leg":{
+      "display":"Every time you destroy a wreckable object, you gain a short burst of speed."
+   },
+   "gladiator_gauntlets_leg":{
+      "display":"After earning a massacre bonus, gold rains from the sky."
+   },
+   "gloves_of_worship_leg":{
+      "display":"Shrine effects last for 10 minutes."
+   },
+   "ancient_parthan_defenders_leg":{
+      "template":"Enemies hit by knockbacks suffer {0}% more damage for 5 seconds when they land.",
+      "display":"Enemies hit by knockbacks suffer more damage for 5 seconds when they land."
+   },
+   "strongarm_bracers_leg":{
+      "template":"Each stunned enemy within 25 yards reduces your damage taken by {0}%.",
+      "display":"Each stunned enemy within 25 yards reduces your damage taken."
+   },
+   "promise_of_glory_leg":{
+      "template":"{0}% chance to spawn a Nephalem Glory Globe when you Blind an enemy.",
+      "display":"chance to spawn a Nephalem Glory Globe when you Blind an enemy."
+   },
+   "tragoul_coils_leg":{
+      "template":"Healing wells replenish all resources and reduce cooldowns by {0} seconds.",
+      "display":"Healing wells replenish all resources and reduce cooldowns."
+   },
+   "stone_gauntlets_leg":{
+      "template":"When there are 5 enemies within 12 yards of you, gain an absorb shield for {0}% of your maximum Life for 6 seconds. This effect may occur once every 30 seconds.",
+      "display":"When there are 5 enemies within 12 yards of you, gain an absorb shield for for 6 seconds. This effect may occur once every 30 seconds."
+   },
+   "st_archews_gage_leg":{
+      "template":"{0}% Chance to Immobilize on Hit",
+      "display":"Chance to Immobilize on Hit"
+   },
+   "tasker_and_theo_leg":{
+      "template":"Increase attack speed of your pets by {0}%.",
+      "display":"Increase attack speed of your pets."
+   },
+   "frostburn_leg":{
+      "template":"Your Chill effects have up to a {0}% chance to Freeze instead of Slow.",
+      "display":"Your Chill effects have a chance to Freeze instead of Slow."
    },
    "main_stat":{
       "display":"Main Stat"
@@ -236,10 +302,11 @@
          "template":"Reduces damage from ranged attacks by {0}%",
          "display":"Reduces damage from ranged attacks"
    },
-   "reduced_damage_elite":{
-         "template":"Reduces damage from elites by {0}%",
-         "display":"Reduces damage from elites"
+   "reduce_control_impairing":{
+         "template":"Reduces duration of control impairing effects by {0}%",
+         "display":"Reduces duration of control impairing effects"
    },
+
    "extra_gold":{
          "template":"{0}% Extra Gold from Monsters",
          "display":"Extra Gold from Monsters"

@@ -1,10 +1,294 @@
-{
-    "items": {
-        "Pauldrons of Akkhan": {
-            "primary": {},
-            "secondary": {},
-            "legendary": {},
-            "set":"akkhan"
-        }
-    }
+{  
+   "items":{  
+      "Jade Harvester's Joy":{  
+         "set":"jade_harvester",
+         "primary":{  
+
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "Demon's Flight":{  
+         "set":"demon_skin",
+         "primary":{  
+
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "Helltooth Mantle":{  
+         "set":"helltooth",
+         "primary":{  
+
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "Spires of the Earth":{  
+         "set":"might",
+         "primary":{  
+
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "Corruption":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "Death Watch Mantle":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+            "death_watch_mantle_leg":{  
+               "max":35,
+               "min":15
+            }
+         },
+         "secondary":{  
+
+         }
+      },
+      "Asheara's Guard":{  
+         "set":"asheara_u",
+         "primary":{  
+
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+            "gold_find":{  
+               "max":25,
+               "min":15
+            }
+         }
+      },
+      "Demon's Aileron":{  
+         "set":"demon_hide",
+         "primary":{  
+
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "Pauldrons of the Skeleton King":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+            "pauldrons_of_the_skeleton_king_leg":false
+         },
+         "secondary":{  
+
+         }
+      },
+      "Marauder's Spines":{  
+         "set":"marauder",
+         "primary":{  
+
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "Burden of the Invoker":{  
+         "set":"invoker",
+         "primary":{  
+
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "Aughild's Reign":{  
+         "set":"aughild_v",
+         "primary":{  
+
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "Pauldrons of Akkhan":{  
+         "set":"akkhan",
+         "primary":{  
+
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "Homing Pads":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+            "homing_pads_leg":{  
+               "max":65,
+               "min":50
+            }
+         },
+         "secondary":{  
+
+         }
+      },
+      "Born's Privilege":{  
+         "set":"born_c",
+         "primary":{  
+
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "Aughild's Power":{  
+         "set":"aughild_a",
+         "primary":{  
+
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "Born's Impunity":{  
+         "set":"born_d",
+         "primary":{  
+
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "Firebird's Pinions":{  
+         "set":"firebird",
+         "primary":{  
+
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "Asheara's Custodian":{  
+         "set":"asheara_v",
+         "primary":{  
+
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "Sunwuko's Balance":{  
+         "set":"monkey_king",
+         "primary":{  
+
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "Mantle of the Upside-Down Sinners":{  
+         "set":"thousand_storms",
+         "primary":{  
+
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "Spaulders of Zakara":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+            "spaulders_of_zakara_leg":false
+         },
+         "secondary":{  
+
+         }
+      },
+      "Profane Pauldrons":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "Vile Ward":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      }
+   }
 }
