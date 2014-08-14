@@ -1,10 +1,452 @@
 {
-    "items": {
-        "Captain Crimson's Silk Girdle": {
-            "primary": {},
-            "secondary": {},
-            "legendary": {},
-            "set":"captain_crimson_t"
-        }
-    }
+   "items":{
+      "Demon's Restraint":{
+         "set":"demon_hide",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Captain Crimson's Satin Sash":{
+         "set":"captain_crimson_f",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Chilanik's Chain":{
+         "primary":{
+
+         },
+         "legendary":{
+            "chilaniks_chain_leg":{
+               "max":40,
+               "min":30
+            }
+         },
+         "secondary":{
+
+         }
+      },
+      "The Witching Hour":{
+         "primary":{
+            "attack_speed":{
+               "max":7,
+               "min":5
+            },
+            "critical_hit_damage":{
+               "max":26,
+               "min":50
+            }
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Inna's Favor":{
+         "set":"inna",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Girdle of Giants":{
+         "primary":{
+            "attack_speed":{
+               "max":7,
+               "min":2
+            }
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Captain Crimson's Silk Girdle":{
+         "set":"captain_crimson_t",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "String of Ears":{
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+            "reduced_melee_damage":{
+               "max":30,
+               "min":25
+            }
+         }
+      },
+      "Hwoj Wrap":{
+         "primary":{
+
+         },
+         "legendary":{
+            "hwoj_wrap_leg":{
+               "max":80,
+               "min":60
+            }
+         },
+         "secondary":{
+
+         }
+      },
+      "Demon's Lock":{
+         "set":"demon_skin",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Tal Rasha's Brace":{
+         "set":"tal_rasha",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Immortal King's Tribal Binding":{
+         "set":"immortal_king",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Kotuur's Brace":{
+         "primary":{
+            "block_chance":{
+               "max":11,
+               "min":4
+            }
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Lamentation":{
+         "primary":{
+            "critical_hit_chance":{
+               "max":2,
+               "min":1
+            }
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Hellcat Waistguard":{
+         "primary":{
+            "attack_speed":{
+               "max":6,
+               "min":5
+            }
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Ageless Might":{
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+            "reduced_melee_damage":{
+               "max":7,
+               "min":3
+            }
+         }
+      },
+      "Quick Draw Belt":{
+         "primary":{
+            "attack_speed":{
+               "max":3,
+               "min":2
+            }
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Sash of Knives":{
+         "primary":{
+
+         },
+         "legendary":{
+            "sash_of_knives_leg":{
+               "max":40,
+               "min":30
+            }
+         },
+         "secondary":{
+
+         }
+      },
+      "Insatiable Belt":{
+         "primary":{
+
+         },
+         "legendary":{
+            "insatiable_belt_leg":false
+         },
+         "secondary":{
+
+         }
+      },
+      "Sebor's Nightmare":{
+         "primary":{
+
+         },
+         "legendary":{
+            "sebors_nightmare_leg":false
+         },
+         "secondary":{
+
+         }
+      },
+      "Guardian's Case":{
+         "set":"guardian_j",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Dread Iron":{
+         "primary":{
+            "move_speed":{
+               "max":12,
+               "min":12
+            }
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Harrington Waistguard":{
+         "primary":{
+
+         },
+         "legendary":{
+            "harrington_waistguard_leg":{
+               "max":135,
+               "min":100
+            }
+         },
+         "secondary":{
+
+         }
+      },
+      "Razor Strop":{
+         "primary":{
+
+         },
+         "legendary":{
+            "razor_strop_leg":{
+               "max":400,
+               "min":300
+            }
+         },
+         "secondary":{
+
+         }
+      },
+      "Jang's Envelopment":{
+         "primary":{
+
+         },
+         "legendary":{
+            "jangs_envelopment_leg":{
+               "max":80,
+               "min":60
+            }
+         },
+         "secondary":{
+
+         }
+      },
+      "Pride of Cassius":{
+         "primary":{
+
+         },
+         "legendary":{
+            "pride_of_cassius_leg":{
+               "max":6,
+               "min":4
+            }
+         },
+         "secondary":{
+
+         }
+      },
+      "Cord of the Sherma":{
+         "primary":{
+
+         },
+         "legendary":{
+            "cord_of_the_sherma_leg":{
+               "max":4,
+               "min":2
+            }
+         },
+         "secondary":{
+
+         }
+      },
+      "Goldwrap":{
+         "primary":{
+
+         },
+         "legendary":{
+            "goldwrap_leg":false
+         },
+         "secondary":{
+
+         }
+      },
+      "Saffron Wrap":{
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+            "reduce_control_impairing":{
+               "max":40,
+               "min":20
+            }
+         }
+      },
+      "Krelm's Buff Belt":{
+         "primary":{
+
+         },
+         "legendary":{
+            "krelms_buff_belt_leg":false
+         },
+         "secondary":{
+
+         }
+      },
+      "Blackthorne's Notched Belt":{
+         "set":"blackthrone",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Fleeting Strap":{
+         "primary":{
+            "attack_speed":{
+               "max":7,
+               "min":5
+            }
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Guardian's Sheath":{
+         "set":"guardian_c",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Thunder God's Vigor":{
+         "primary":{
+
+         },
+         "legendary":{
+            "thunder_gods_vigor_leg":{
+               "max":130,
+               "min":100
+            }
+         },
+         "secondary":{
+
+         }
+      }
+   }
 }

@@ -187,6 +187,18 @@
    "gloves_of_worship_leg":{
       "display":"Shrine effects last for 10 minutes."
    },
+   "insatiable_belt_leg":{
+      "display":"Picking up a Health Globe increases your maximum Life by 5% for 15 seconds, stacking up to 5 times."
+   },
+   "sebors_nightmare_leg":{
+      "display":"Haunt is cast on 5 nearby enemies when you open a chest."
+   },
+   "goldwrap_leg":{
+      "display":"On gold pickup: Gain armor for 5 seconds equal to the amount picked up."
+   },
+   "krelms_buff_belt_leg":{
+      "display":"Grants a 20% Movement Speed bonus. Taking damage causes you to lose this effect for 15 seconds."
+   },
    "ancient_parthan_defenders_leg":{
       "template":"Enemies hit by knockbacks suffer {0}% more damage for 5 seconds when they land.",
       "display":"Enemies hit by knockbacks suffer more damage for 5 seconds when they land."
@@ -218,6 +230,42 @@
    "frostburn_leg":{
       "template":"Your Chill effects have up to a {0}% chance to Freeze instead of Slow.",
       "display":"Your Chill effects have a chance to Freeze instead of Slow."
+   },
+   "chilaniks_chain_leg":{
+      "template":"Warcry increases you and your allies' run speed by {0}% for 10 seconds.",
+      "display":"Warcry increases you and your allies' run speed for 10 seconds."
+   },
+   "hwoj_wrap_leg":{
+      "template":"Locust Swarm also Slows enemies by {0}%.",
+      "display":"Locust Swarm also Slows enemies."
+   },
+   "sash_of_knives_leg":{
+      "template":"Increases Fan of Knives Damage by {0}%",
+      "display":"Increases Fan of Knives Damage"
+   },
+   "harrington_waistguard_leg":{
+      "template":"Opening a chest grants {0}% increased damage for 10 seconds.",
+      "display":"Opening a chest grants increased damage for 10 seconds."
+   },
+   "razor_strop_leg":{
+      "template":"Picking up a Health Globe releases an explosion that deals {0}% weapon damage as Fire to enemies within 20 yards.",
+      "display":"Picking up a Health Globe releases an explosion that deals weapon damage as Fire to enemies within 20 yards."
+   },
+   "jangs_envelopment_leg":{
+      "template":"Enemies damaged by Black Hole are also slowed by {0}% for 3 seconds.",
+      "display":"Enemies damaged by Black Hole are also slowed for 3 seconds."
+   },
+   "pride_of_cassius_leg":{
+      "template":"Increases the duration of Ignore Pain by {0} seconds.",
+      "display":"Increases the duration of Ignore Pain."
+   },
+   "cord_of_the_sherma_leg":{
+      "template":"Chance on hit to create a chaos field that Blinds and Slows enemies inside for {0} seconds.",
+      "display":"Chance on hit to create a chaos field that Blinds and Slows enemies inside."
+   },
+   "thunder_gods_vigor_leg":{
+      "template":"Blocking, dodging or being hit causes you to discharge bolts of electricity that deal {0}% weapon damage as Lightning.",
+      "display":"Blocking, dodging or being hit causes you to discharge bolts of electricity that deal weapon damage as Lightning."
    },
    "main_stat":{
       "display":"Main Stat"
