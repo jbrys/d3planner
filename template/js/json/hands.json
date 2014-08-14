@@ -1,10 +1,355 @@
 {
-    "items": {
-        "Gauntlets of Akkhan": {
-            "primary": {},
-            "secondary": {},
-            "legendary": {},
-            "set":"akkhan"
-        }
-    }
+   "items":{
+      "Marauder's Gloves":{
+         "set":"marauder",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Vyr's Grasping Gauntlets":{
+         "set":"vyr",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Stone Gauntlets":{
+         "primary":{
+
+         },
+         "legendary":{
+            "stone_gauntlets_leg":{
+               "max":20,
+               "min":10
+            }
+         },
+         "secondary":{
+
+         }
+      },
+      "Pendergrasps":{
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+            "reduce_control_impairing":{
+               "max":10,
+               "min":5
+            }
+         }
+      },
+      "Sage's Gesture":{
+         "set":"sage_p",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "St. Archew's Gage":{
+         "primary":{
+
+         },
+         "legendary":{
+            "st_archews_gage_leg":{
+               "max":25,
+               "min":20
+            }
+         },
+         "secondary":{
+
+         }
+      },
+      "Magefist":{
+         "primary":{
+            "fire_damage":{
+               "max":20,
+               "min":15
+            }
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Gladiator Gauntlets":{
+         "primary":{
+
+         },
+         "legendary":{
+            "gladiator_gauntlets_leg":false
+         },
+         "secondary":{
+
+         }
+      },
+      "Fists of Thunder":{
+         "set":"thousand_storms",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Asheara's Iron Fist":{
+         "set":"asheara_u",
+         "primary":{
+            "magic_find":{
+               "max":20,
+               "min":13
+            }
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Tasker And Theo":{
+         "primary":{
+
+         },
+         "legendary":{
+            "tasker_and_theo_leg":{
+               "max":50,
+               "min":40
+            }
+         },
+         "secondary":{
+
+         }
+      },
+      "Cain's Scribe":{
+         "set":"cain_f",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Immortal King's Irons":{
+         "set":"immortal_king",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Raekor's Wraps":{
+         "set":"raekor",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Sage's Purchase":{
+         "set":"sage_j",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Cain's Scrivener":{
+         "set":"cain_d",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Gauntlets of Akkhan":{
+         "set":"akkhan",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Pull of the Earth":{
+         "set":"might",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Firebird's Talons":{
+         "set":"firebird",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "The Shadow's Grasp":{
+         "set":"shadow_mantle",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Frostburn":{
+         "primary":{
+            "cold_damage":{
+               "max":20,
+               "min":15
+            }
+         },
+         "legendary":{
+            "frostburn_leg":{
+               "max":45,
+               "min":34
+            }
+         },
+         "secondary":{
+
+         }
+      },
+      "Penders Purchase":{
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Helltooth Gauntlets":{
+         "set":"helltooth",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Sunwuko's Paws":{
+         "set":"monkey_king",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Jade Harvester's Mercy":{
+         "set":"jade_harvester",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Asheara's Ward":{
+         "set":"asheara_v",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Pride of the Invoker":{
+         "set":"invoker",
+         "primary":{
+
+         },
+         "legendary":{
+
+         },
+         "secondary":{
+
+         }
+      },
+      "Gloves of Worship":{
+         "primary":{
+
+         },
+         "legendary":{
+            "gloves_of_worship_leg":false
+         },
+         "secondary":{
+
+         }
+      }
+   }
 }
