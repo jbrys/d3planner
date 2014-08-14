@@ -677,5 +677,9 @@
     "fanatacism":{"display":"Fanatacism"},
     "righteousness":{"display":"Righteousness"},
     "vigilant":{"display":"Vigilant"},
-    "fervor":{"display":"Fervor"}
+    "fervor":{"display":"Fervor"},
+    "laws_of_valor_invincible":{"display":"Invincible"},
+    "laws_of_valor_frozen_in_terror":{"display":"Frozen in Terror"},
+    "laws_of_valor_unstoppable_force":{"display":"Unstoppable Force"},
+    "laws_of_valor_answered_prayer":{"display":"Answered Prayer"}
 }
