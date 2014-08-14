@@ -614,5 +614,68 @@
    "dexterity":{
       "template":"+{0} Dexterity",
       "display":"Dexterity"
-    }
+    },
+   "offensive_tab":{
+      "display":"Offensive"
+    },
+   "defensive_tab":{
+      "display":"Defensive"
+    },
+   "utility_tab":{
+      "display":"Utility"
+    },
+   "items_tab":{
+      "display":"Equipment"
+    },
+   "skills_tab":{
+      "display":"Skills"
+    },
+   "paragon_tab":{
+      "display":"Paragon",
+      "template":"Paragon ({0})"
+    },
+   "actives_tab":{
+      "display":"Active Skills"
+    },
+   "passives_tab":{
+      "display":"Passive Skills"
+    },
+   "no_skill":{
+      "display": "&nbsp;"
+    },
+    "heavens_fury_fires_of_heaven":{
+    	"display": "Fires of Heaven"
+    },
+    "laws_of_valor_critical":{
+    	"display": "Critical"
+    },
+    "laws_of_valor":{
+    	"display": "Laws of Valor"
+    },
+    "heavens_fury":{
+    	"display": "Heaven's Fury"
+    },
+    "holy_cause":{
+    	"display":"Holy Cause"
+    },
+    "long_arm_of_the_law":{
+    	"display":"Long Arm of the Law"
+    },
+    "heavenly_strength":{
+    	"display":"Heavenly Strength"
+    },
+    "finery":{"display":"Finery"},
+    "towering_shield":{"display":"Towering Shield"},
+    "blunt":{"display":"Blunt"},
+    "renewel":{"display":"Renewal"},
+    "iron_maiden":{"display":"Iron Maiden"},
+    "hold_your_ground":{"display":"Hold Your Ground"},
+    "lord_commander":{"display":"Lord Commander"},
+    "divine_fortress":{"display":"Divine Fortress"},
+    "wrathful":{"display":"Wrathful"},
+    "indestructable":{"display":"Indestructable"},
+    "fanatacism":{"display":"Fanatacism"},
+    "righteousness":{"display":"Righteousness"},
+    "vigilant":{"display":"Vigilant"},
+    "fervor":{"display":"Fervor"}
 }

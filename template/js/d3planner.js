@@ -130,17 +130,19 @@ function get_display_value(val, scale){
 }
 
 function get_template(affix, value){
-    affix_stuff = _translate[affix] || {};
+    var affix_blob = _translate[affix] || {};
     var output;
     if (value){
-        output = (affix_stuff.template || affix_stuff.display || affix + " {0}").replace("{0}", get_display_value(value, affix_stuff.scale || 0));
+        output = (affix_blob.template || affix_blob.display || affix + " {0}").replace("{0}", get_display_value(value, affix_blob.scale || 0));
     }
     else{
-        output = (affix_stuff.display || affix);
+        output = (affix_blob.display || affix);
     }
-    if(affix_stuff.tooltip){
-    	output = _translate.tooltip.template.format(output,affix_stuff.tooltip);
+    if(affix_blob.tooltip){
+    	output = _translate.tooltip.template.format(output,affix_blob.tooltip);
     }
+    if (affix === output)
+    	debug("template not found {0}".format(affix));
     return output;
 }
 

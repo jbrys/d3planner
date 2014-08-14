@@ -16,6 +16,29 @@
 .ui-tabs, .ui-tabs .ui-tabs-panel {
 	padding: 0;
 }
+
+.ui-tabs .ui-tabs-nav li, .ui-tabs .ui-tabs-panel {
+	border-top: 1px;
+	border-color: black;
+	border-style: solid;
+}
+
+.ui-tabs .ui-tabs-nav li,
+ .ui-tabs .ui-tabs-nav li a,
+ .ui-tabs .ui-tabs-nav li a:visited,
+ .ui-tabs .ui-tabs-nav li a:link,
+ .ui-tabs .ui-tabs-nav li a:hover {
+	border-width: 1px 1px 0 1px;
+    border-radius: 5px 5px 0 0;
+    color: black;
+	text-decoration: none;
+	outline: 0;
+}
+
+.ui-tabs-panel {
+	padding-top: 3px;
+}
+
 /* Component containers
 ----------------------------------*/
 .ui-widget {
@@ -46,6 +69,7 @@
 .ui-state-default a,
 .ui-state-default a:link,
 .ui-state-default a:visited {
+	text-decoration: none;
 }
 .ui-state-hover,
 .ui-widget-content .ui-state-hover,
@@ -67,7 +91,7 @@
 .ui-state-active,
 .ui-widget-content .ui-state-active,
 .ui-widget-header .ui-state-active {
-	background-color: white;
+	background-color: darkgray;
 }
 .ui-state-active a,
 .ui-state-active a:link,
@@ -84,6 +108,7 @@
 .ui-state-highlight a,
 .ui-widget-content .ui-state-highlight a,
 .ui-widget-header .ui-state-highlight a {
+	text-decoration: none;
 }
 .ui-state-error,
 .ui-widget-content .ui-state-error,
@@ -92,6 +117,7 @@
 .ui-state-error a,
 .ui-widget-content .ui-state-error a,
 .ui-widget-header .ui-state-error a {
+	text-decoration: none;
 }
 .ui-state-error-text,
 .ui-widget-content .ui-state-error-text,
