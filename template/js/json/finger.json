@@ -118,7 +118,7 @@
 
          },
          "legendary":{  
-            "bul-kathoss_wedding_band_leg":false
+            "bul_kathoss_wedding_band_leg":false
          },
          "secondary":{  
 
@@ -374,6 +374,18 @@
                "max":12,
                "min":10
             }
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "Zunimassa's Pox":{  
+         "set":"zunimassa",
+         "primary":{  
+            
          },
          "legendary":{  
 
