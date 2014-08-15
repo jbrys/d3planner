@@ -1,4 +1,4 @@
-﻿{  
+{  
    "reapers_wraps_leg":{  
       "template":"Health globes restore {0}% of your primary resource.",
       "display":"Health globes restore your primary resource."
@@ -199,6 +199,30 @@
    "krelms_buff_belt_leg":{
       "display":"Grants a 20% Movement Speed bonus. Taking damage causes you to lose this effect for 15 seconds."
    },
+   "band_of_hollow_whispers_leg":{
+      "display":"This ring occasionally haunts nearby enemies."
+   },
+   "unity_leg":{
+      "display":"All damage taken is split between wearers of this item."
+   },
+   "avarice_band_leg":{
+      "display":"Each time you pick up gold, increase your Gold and Health Pickup radius by 1 yard for 10 seconds, stacking up to 30 times."
+   },
+   "kredes_flame_leg":{
+      "display":"Taking Fire damage restores your primary resource."
+   },
+   "bul-kathoss_wedding_band_leg":{
+      "display":"You drain life from enemies around you."
+   },
+   "tall_mans_finger_leg":{
+      "display":"Zombie Dogs instead summons a single gargantuan dog with more damage and health than all other dogs combined."
+   },
+   "pandemonium_loop_leg":{
+      "display":"Enemies slain while Feared die in a bloody explosion and cause other nearby enemies to flee in Fear."
+   },
+   "hellfire_ring_leg":{
+      "display":"Chance on hit to engulf the ground in lava, dealing 200% weapon damage per second for 6 seconds."
+   },
    "ancient_parthan_defenders_leg":{
       "template":"Enemies hit by knockbacks suffer {0}% more damage for 5 seconds when they land.",
       "display":"Enemies hit by knockbacks suffer more damage for 5 seconds when they land."
@@ -266,6 +290,26 @@
    "thunder_gods_vigor_leg":{
       "template":"Blocking, dodging or being hit causes you to discharge bolts of electricity that deal {0}% weapon damage as Lightning.",
       "display":"Blocking, dodging or being hit causes you to discharge bolts of electricity that deal weapon damage as Lightning."
+   },
+   "band_of_the_rue_chambers_leg":{
+      "template":"Your Spirit Generators generate {0}% more Spirit.",
+      "display":"Your Spirit Generators generate more Spirit."
+   },
+   "rogars_huge_stone_leg":{
+      "template":"Increase your Life per Second by up to {0}% based on your missing Life.",
+      "display":"Increase your Life per Second based on your missing Life."
+   },
+   "wyrdward_leg":{
+      "template":"Lightning damage has a {0}% chance to Stun for 1.5 seconds.",
+      "display":"Lightning damage has a chance to Stun for 1.5 seconds."
+   },
+   "rechels_ring_of_larceny_leg":{
+      "template":"Gain {0}% increased movement speed for 4 seconds after Fearing an enemy.",
+      "display":"Gain increased movement speed for 4 seconds after Fearing an enemy."
+   },
+   "puzzle_ring_leg":{
+      "template":"Summon a Treasure Goblin who picks up normal-quality items for you. After picking up {0} items, he drops a rare item with a chance for a legendary.",
+      "display":"Summon a Treasure Goblin who picks up normal-quality items for you. After picking up items, he drops a rare item with a chance for a legendary"
    },
    "main_stat":{
       "display":"Main Stat"

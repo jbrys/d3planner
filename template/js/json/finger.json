@@ -1,48 +1,386 @@
-{
-    "items": {
-        "Ring of Royal Grandeur": {
-            "primary": {},
-            "secondary": {},
-            "legendary": {
-                "ring_of_royal_grandeur_leg": {
-                    "min" : 0,
-                    "max" : 0
-                }
+{  
+   "items":{  
+      "Band of Hollow Whispers":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+            "band_of_hollow_whispers_leg":false
+         },
+         "secondary":{  
+
+         }
+      },
+      "Band of the Rue Chambers":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+            "band_of_the_rue_chambers_leg":{  
+               "max":50,
+               "min":40
             }
-        },
-        "Stone of Jordan": {
-            "primary": {
-                "elite_damage":{
-                    "min" : 25,
-                    "max" : 30
-                },
-				 "holy_damage":{
-					"min":15,
-					"max":20
-				 },
-				 "lightning_damage":{
-					"min":15,
-					"max":20
-				 },
-				 "cold_damage":{
-					"min":15,
-					"max":20
-				 },
-				 "fire_damage":{
-					"min":15,
-					"max":20
-				 },
-				 "arcane_damage":{
-					"min":15,
-					"max":20
-				 },
-				 "physical_damage":{
-					"min":15,
-					"max":20
-				 }
+         },
+         "secondary":{  
+
+         }
+      },
+      "Ring of Royal Grandeur":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+            "ring_of_royal_grandeur_leg":false
+         },
+         "secondary":{  
+
+         }
+      },
+      "Justice Lantern":{  
+         "primary":{  
+            "block_chance":{  
+               "max":16,
+               "min":11
+            }
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+            "reduce_control_impairing":{  
+               "max":70,
+               "min":35
+            }
+         }
+      },
+      "Unity":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+            "unity_leg":false
+         },
+         "secondary":{  
+
+         }
+      },
+      "Avarice Band":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+            "avarice_band_leg":false
+         },
+         "secondary":{  
+
+         }
+      },
+      "Restraint":{  
+         "set":"bastions",
+         "primary":{  
+
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "Krede's Flame":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+            "kredes_flame_leg":false
+         },
+         "secondary":{  
+
+         }
+      },
+      "Litany of the Undaunted":{  
+         "set":"legacy",
+         "primary":{  
+            "reduce_elite_damage":{  
+               "max":11,
+               "min":6
+            }
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "Bul-Kathos's Wedding Band":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+            "bul-kathoss_wedding_band_leg":false
+         },
+         "secondary":{  
+
+         }
+      },
+      "Natalya's Reflection":{  
+         "set":"natalya",
+         "primary":{  
+
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "The Tall Man's Finger":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+            "tall_mans_finger_leg":false
+         },
+         "secondary":{  
+
+         }
+      },
+      "Stone of Jordan":{  
+         "primary":{  
+            "elite_damage":{  
+               "min":25,
+               "max":30
             },
-            "secondary": {},
-            "legendary": {}
-        }
-    }
+            "holy_damage":{  
+               "min":15,
+               "max":20
+            },
+            "lightning_damage":{  
+               "min":15,
+               "max":20
+            },
+            "cold_damage":{  
+               "min":15,
+               "max":20
+            },
+            "fire_damage":{  
+               "min":15,
+               "max":20
+            },
+            "arcane_damage":{  
+               "min":15,
+               "max":20
+            },
+            "physical_damage":{  
+               "min":15,
+               "max":20
+            }
+         },
+         "secondary":{  
+
+         },
+         "legendary":{  
+
+         }
+      },
+      "Rogar's Huge Stone":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+            "rogars_huge_stone_leg":{  
+               "max":100,
+               "min":75
+            }
+         },
+         "secondary":{  
+
+         }
+      },
+      "Wyrdward":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+            "wyrdward_leg":{  
+               "max":17,
+               "min":13
+            }
+         },
+         "secondary":{  
+
+         }
+      },
+      "Rechel's Ring of Larceny":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+            "rechels_ring_of_larceny_leg":{  
+               "max":60,
+               "min":45
+            }
+         },
+         "secondary":{  
+
+         }
+      },
+      "Oculus Ring":{  
+         "primary":{  
+            "attack_speed":{  
+               "max":9,
+               "min":7
+            },
+            "reduce_elite_damage":{  
+               "max":16,
+               "min":12
+            }
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "Pandemonium Loop":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+            "pandemonium_loop_leg":false
+         },
+         "secondary":{  
+
+         }
+      },
+      "Nagelring":{  
+         "primary":{  
+            "magic_find":{  
+               "max":50,
+               "min":25
+            }
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "Leoric's Signet":{  
+         "primary":{  
+            "bonus_exp":{  
+               "max":30,
+               "min":20
+            }
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "Hellfire Ring":{  
+         "primary":{  
+            "bonus_exp":{  
+               "max":45,
+               "min":45
+            }
+         },
+         "legendary":{  
+            "hellfire_ring_leg":false
+         },
+         "secondary":{  
+
+         }
+      },
+      "Puzzle Ring":{  
+         "primary":{  
+
+         },
+         "legendary":{  
+            "puzzle_ring_leg":{  
+               "max":16,
+               "min":12
+            }
+         },
+         "secondary":{  
+
+         }
+      },
+      "Band of Untold Secrets":{  
+         "primary":{  
+            "move_speed":{  
+               "max":12,
+               "min":10
+            }
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "Focus":{  
+         "set":"bastions",
+         "primary":{  
+
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "The Wailing Host":{  
+         "set":"legacy",
+         "primary":{  
+
+         },
+         "legendary":{  
+            "elite_damage":{  
+               "max":5,
+               "min":3
+            }
+         },
+         "secondary":{  
+
+         }
+      },
+      "Eternal Union":{  
+         "primary":{  
+            "percent_life":{  
+               "max":20,
+               "min":15
+            }
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      },
+      "The Compass Rose":{  
+         "set":"endless_walk",
+         "primary":{  
+            "movement_speed":{  
+               "max":12,
+               "min":10
+            }
+         },
+         "legendary":{  
+
+         },
+         "secondary":{  
+
+         }
+      }
+   }
 }
